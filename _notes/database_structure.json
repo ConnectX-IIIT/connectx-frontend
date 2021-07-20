@@ -1,0 +1,68 @@
+{
+  "user ": {
+    "_id": {
+      "$oid": "60f6867a7e4fdb95c36eb07d"
+    },
+    "name": "Harshil",
+    "email": "harshil@gmail.com",
+    "mobile": "9979045810",
+    "batch": "IMT",
+    "passing_year": 2025,
+    "is_alumni": false,
+    "is_admin": false,
+    "questions": [
+      "60f67d687e4fdb95c36eb079",
+      "60f67d687e4fdb95c36eb079",
+      "60f67d687e4fdb95c36eb079"
+    ],
+    "post": [
+      "60f67d687e4fdb95c36eb079",
+      "60f67d687e4fdb95c36eb079",
+      "60f67d687e4fdb95c36eb079"
+    ],
+    "chats": [
+      "60f67d687e4fdb95c36eb079",
+      "60f67d687e4fdb95c36eb079",
+      "60f67d687e4fdb95c36eb079"
+    ]
+  },
+
+  "answer": {
+    "_id": {
+      "$oid": "60f6867a7e4fdb95c36eb07d"
+    },
+    "answer": "I am doing well.",
+    "user": "60f67d687e4fdb95c36eb079",
+    "timestamp": {
+      "$numberLong": "1626768841451"
+    },
+    "reference": "60f67d687e4fdb95c36eb079",
+    "upvotes": {
+      "$numberInt": "4"
+    },
+    "last_update": {
+      "$numberLong": "1626768841451"
+    },
+    "is_reported": false
+  },
+  "question": {
+    "_id": { "$oid": "60f685087e4fdb95c36eb07c" },
+    "question": "How are you doing?",
+    "user": "60f67d687e4fdb95c36eb079",
+    "answers": ["60f67d687e4fdb95c36eb079"],
+    "upvotes": { "$numberInt": "1" },
+    "timestamp": { "$numberLong": "1626768841451" }
+  },
+  "post": {
+    "_id": { "$oid": "60f68ade7e4fdb95c36eb07f" },
+    "title": "This is title!",
+    "description": "This is description for your kind information!",
+    "job": null,
+    "is_project": false,
+    "user": "60f67d687e4fdb95c36eb079",
+    "reactions": { "$numberInt": "96" },
+    "discussion": ["60f67d687e4fdb95c36eb079", "60f67d687e4fdb95c36eb079"],
+    "reports": ["60f67d687e4fdb95c36eb079"]
+  },
+  "": {}
+}
