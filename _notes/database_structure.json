@@ -12,6 +12,7 @@
     "is_alumni": false,
     "is_admin": false,
     "is_verified": false,
+    "reports": ["60f67d687e4fdb95c36eb079"],
     "questions": [
       "60f67d687e4fdb95c36eb079",
       "60f67d687e4fdb95c36eb079",
@@ -70,6 +71,7 @@
     "description": "This is description for your kind information!",
     "job_link": null,
     "is_project": false,
+    "timestamp": { "$numberLong": "1626768841451" },
     "user": "60f67d687e4fdb95c36eb079",
     "reactions": { "$numberInt": "96" },
     "discussion": ["60f67d687e4fdb95c36eb079", "60f67d687e4fdb95c36eb079"],
@@ -88,6 +90,14 @@
     "upvotes": { "$numberInt": "1" },
     "reports": ["60f67d687e4fdb95c36eb079"],
     "reference": "60f67d687e4fdb95c36eb079"
+  },
+  "report": {
+    "_id": { "$oid": "60f68ade7e4fdb95c36eb07f" },
+    "type": "2",
+    "reference": "60f67d687e4fdb95c36eb079",
+    "user": "60f67d687e4fdb95c36eb079",
+    "timestamp": { "$numberLong": "1626768841451" },
+    "isResolved": false
   },
   "group": {
     "_id": { "$oid": "60f68ade7e4fdb95c36eb07f" },
