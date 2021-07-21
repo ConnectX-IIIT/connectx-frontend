@@ -111,7 +111,9 @@
       "60f68ade7e4fdb95c36eb07f",
       "60f68ade7e4fdb95c36eb07f"
     ],
-    "profile_picture": "60f67d687e4fdb95c36eb07960f67d687e4fdb95c36eb07960f67d687e4fdb95c36eb07960f67d687e4fdb95c36eb079"
+    "profile_picture": "60f67d687e4fdb95c36eb07960f67d687e4fdb95c36eb07960f67d687e4fdb95c36eb07960f67d687e4fdb95c36eb079",
+    "name" : "2020 Batch",
+    "description": "This is a group for 2020 batch"
   },
   "chat": {
     "_id": { "$oid": "60f68ade7e4fdb95c36eb07f" },
