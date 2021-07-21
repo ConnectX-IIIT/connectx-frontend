@@ -17,3 +17,14 @@
     >> Admin Panel and report answer
     >> Admin can delete/edit the answer and question asked
     >> discussion in place of comments
+
+
+
+
+>> Landing page
+    >> Welcome to your professional community
+    >> Find open projects and connect to your alumnis 
+    >> Post your job and find the people you need
+    >> Ask your question and get the answers
+    >> Let the right people know you’re open to work
+    
