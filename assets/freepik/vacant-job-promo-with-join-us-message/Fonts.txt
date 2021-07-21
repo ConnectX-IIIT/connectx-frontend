@@ -1,0 +1,9 @@
+Fonts used in this design:
+
+Font: Dela Gothic One
+Author: aratakana
+Url: https://fonts.google.com/specimen/Dela+Gothic+One
+
+Font: Work Sans
+Author: Wei Huang
+Url: https://fonts.google.com/specimen/Work+Sans
