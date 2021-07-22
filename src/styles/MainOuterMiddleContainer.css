@@ -7,7 +7,7 @@
   color: #263238;
   width: 54vw;
   margin: auto;
-  padding-top: 6.35vw;
+  padding-top: 5.35vw;
 }
 .Middle_container_para {
   font-family: "Roboto", sans-serif;
@@ -19,6 +19,7 @@
   margin: auto;
   color: rgba(0, 0, 0, 0.87);
   margin-top: 3.38vw;
+  margin-bottom: 3.69vw;
   width: 70vw;
 }
 .image_container_middle {
@@ -34,8 +35,9 @@
 }
 .MiddleContainerBoy {
   left: 8.22%;
+  top: 2vw;
   width: 26.7vw;
-  max-width: 415x;
+  max-width: 415px;
 }
 .MiddleContainerGirl {
   width: 34.17vw;
@@ -48,7 +50,11 @@
   max-width: 522px;
 }
 .MiddleContainerBlocks {
-  width: 21.14vw;
-  left: 11.3%;
-  max-width: 326px;
+  width: 77vw;
+  left: 10%;
+  height: 20vw;
+  top: 3vw;
+  mix-blend-mode: difference;
+  opacity: 0.2;
+  max-width: 1185px;
 }
