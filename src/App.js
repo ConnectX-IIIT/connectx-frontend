@@ -2,6 +2,7 @@ import React from "react";
 import "./styles/App.css";
 import Navbar from "./components/Navbar";
 import MainOuterContainer from "./components/Main_outer_container";
+import MainOuterMiddleContainer from "./components/MainOuterMiddleContainer";
 import data_array from "./data/Landing_details.json";
 import poster1 from "./assets/landing_page/container_one/container_one.svg";
 import poster2 from "./assets/landing_page/container_two/container_two.svg";
@@ -34,6 +35,11 @@ function App() {
         Background_color="#EFFFFE"
         data={data_array[3]}
         photo={poster4}
+      />
+
+      <MainOuterMiddleContainer
+        data={data_array[4]}
+        Background_color="#FFFBEE"
       />
     </div>
   );
