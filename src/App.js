@@ -9,6 +9,7 @@ function App() {
         <MainOuterContainer
           Background_color="#FFEFF1"
           isNavbar
+          isLeft
         ></MainOuterContainer>
         <MainOuterContainer Background_color="#FFFBF2" />
       </>
