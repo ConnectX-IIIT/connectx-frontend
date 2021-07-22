@@ -33,7 +33,7 @@ function MainOuterContainer({ Background_color, isLeft, data, photo }) {
           />
           <Heading
             Heading_content={data.heading}
-            headingWidth="41vw"
+            headingWidth="43vw"
             Heading_para={data.description}
             isRight
           />
