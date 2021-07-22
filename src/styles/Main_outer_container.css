@@ -1,9 +1,16 @@
 .Main_outer_container {
-  height: 100vh;
+  height: 49.348958333333336vw;
   width: 100%;
 }
 
 .ContentContainer {
   padding-left: 6vw;
-  padding-top: 6vw;
+  padding-top: 15vw;
+  display: flex;
+}
+
+.img_landing_page {
+  width: 38vw;
+  margin-top: -2vw;
+  height: auto;
 }

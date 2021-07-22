@@ -1,11 +1,15 @@
 import React from "react";
+import ContentPara from "./ContentPara";
 import "../styles/Heading.css";
 
-function Heading({ Heading_content, headingWidth }) {
+function Heading({ Heading_content, headingWidth, Heading_para, isRight }) {
   return (
-    <h2 className="Heading" style={{ width: headingWidth }}>
-      {Heading_content}
-    </h2>
+    <div style={isRight ? { paddingLeft: "8vw" } : null}>
+      <h2 className="Heading" style={{ width: headingWidth }}>
+        {Heading_content}
+      </h2>
+      <ContentPara Content={Heading_para} />
+    </div>
   );
 }
 

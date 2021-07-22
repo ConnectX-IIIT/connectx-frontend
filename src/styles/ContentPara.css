@@ -1,0 +1,10 @@
+.ContentPara {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.4vw;
+  line-height: 1.7vw;
+  width: 31vw;
+  padding-top: 3.07vw;
+  color: rgba(18, 30, 53, 0.87);
+}

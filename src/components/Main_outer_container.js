@@ -1,23 +1,43 @@
 import React from "react";
-import Navbar from "./Navbar";
 import Heading from "./Heading";
 import "../styles/Main_outer_container.css";
 
-function MainOuterContainer({ Background_color, isNavbar, isLeft }) {
+function MainOuterContainer({ Background_color, isLeft, data, photo }) {
   return (
     <div
       className="Main_outer_container"
       style={{ backgroundColor: Background_color }}
     >
-      {isNavbar ? <Navbar /> : null}
-      <div className="ContentContainer">
-        {isLeft ? (
+      {/* {isNavbar ? <Navbar /> : null} */}
+      {isLeft ? (
+        <div className="ContentContainer">
           <Heading
-            Heading_content="We're delighted to have you here. "
+            Heading_content={data.heading}
             headingWidth="41vw"
+            Heading_para={data.description}
           />
-        ) : null}
-      </div>
+          <img
+            src={photo}
+            alt="Container_1_img"
+            className="img_landing_page"
+            style={{ paddingLeft: "2vw" }}
+          />
+        </div>
+      ) : (
+        <div className="ContentContainer">
+          <img
+            src={`${photo}`}
+            alt="Container_1_img"
+            className="img_landing_page"
+          />
+          <Heading
+            Heading_content={data.heading}
+            headingWidth="43vw"
+            Heading_para={data.description}
+            isRight
+          />
+        </div>
+      )}
     </div>
   );
 }

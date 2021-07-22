@@ -1,7 +1,11 @@
 .navbar {
+  position: absolute;
+  width: 100%;
+  top: 0;
   display: flex;
   justify-content: space-between;
   padding: 3vw 6vw;
+  padding-bottom: 0;
 }
 .connectxlogo {
   object-fit: contain;
