@@ -1,0 +1,54 @@
+.Middle_container_heading {
+  font-family: "Manrope", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 3.2vw;
+  text-align: center;
+  color: #263238;
+  width: 54vw;
+  margin: auto;
+  padding-top: 6.35vw;
+}
+.Middle_container_para {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.5625vw;
+  line-height: 1.875vw;
+  text-align: center;
+  margin: auto;
+  color: rgba(0, 0, 0, 0.87);
+  margin-top: 3.38vw;
+  width: 70vw;
+}
+.image_container_middle {
+  position: relative;
+}
+.MiddleContainerBlocks,
+.MiddleContainerGirl,
+.MiddleContainerBoy,
+.MiddleContainerLine {
+  object-fit: contain;
+  position: absolute;
+  top: 0;
+}
+.MiddleContainerBoy {
+  left: 8.22%;
+  width: 26.7vw;
+  max-width: 415x;
+}
+.MiddleContainerGirl {
+  width: 34.17vw;
+  left: 55.72%;
+  max-width: 526px;
+}
+.MiddleContainerLine {
+  width: 33.85vw;
+  left: 31.5%;
+  max-width: 522px;
+}
+.MiddleContainerBlocks {
+  width: 21.14vw;
+  left: 11.3%;
+  max-width: 326px;
+}
