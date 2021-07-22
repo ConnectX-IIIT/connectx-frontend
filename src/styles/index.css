@@ -6,5 +6,8 @@
   box-sizing: border-box;
 }
 
+body {
+  position: relative;
+}
 /* font-family: 'Manrope', sans-serif; */
 /* font-family: 'Roboto', sans-serif; */
