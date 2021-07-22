@@ -12,30 +12,29 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <>
-        <MainOuterContainer
-          Background_color="#FFEFF1"
-          data={data_array[0]}
-          isLeft
-          photo={poster1}
-        />
-        <MainOuterContainer
-          Background_color="#FFFBF2"
-          data={data_array[1]}
-          photo={poster2}
-        />
-        <MainOuterContainer
-          Background_color="#EBF2FF"
-          data={data_array[2]}
-          isLeft
-          photo={poster3}
-        />
-        <MainOuterContainer
-          Background_color="#EFFFFE"
-          data={data_array[3]}
-          photo={poster4}
-        />
-      </>
+
+      <MainOuterContainer
+        Background_color="#FFEFF1"
+        data={data_array[0]}
+        isLeft
+        photo={poster1}
+      />
+      <MainOuterContainer
+        Background_color="#FFFBF2"
+        data={data_array[1]}
+        photo={poster2}
+      />
+      <MainOuterContainer
+        Background_color="#EBF2FF"
+        data={data_array[2]}
+        isLeft
+        photo={poster3}
+      />
+      <MainOuterContainer
+        Background_color="#EFFFFE"
+        data={data_array[3]}
+        photo={poster4}
+      />
     </div>
   );
 }
