@@ -22,9 +22,19 @@
 
 
 >> Landing page
-    >> Welcome to your professional community
-    >> Find open projects and connect to your alumnis 
-    >> Post your job and find the people you need
-    >> Ask your question and get the answers
+    >> We're delighted to have you here. 
+        >>Create your own connections with us. We give you the opportunity to strengthen your bond with alumni.
+        With Alumni’s help, you may improve your abilities and build a better future.
+
+    >> Find a project that interests you and connect with your alumni.
+        >> You can take suggestions from Alumni’s. It is critical to be up to date on the latest technology. Which can only be obtained through alumni.
+
+    >> Post your project idea and find the people you need
+        >> You may post some project ideas and make your team in the discussion box. You may communicate with your colleagues in a private group on our web.
+
+    >> Post your queries and have some great responses
+        >> You may ask questions on anything, and alumni will respond based on their own experiences (which no books or tutorials can give you). You can also upvote answers to assist your classmates in choosing the greatest answer.
+
+
     >> Let the right people know you’re open to work
     
