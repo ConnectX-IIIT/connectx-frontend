@@ -1,0 +1,27 @@
+[
+  {
+    "heading": "We're Delighted To Have You Here. ",
+    "description": "Create your own connections with us. We give you the opportunity to strengthen your bond with alumni.With Alumni’s help, you may improve your abilities and build a better future.",
+    "image_src": "../assets/landing_page/container_one/container_one.svg"
+  },
+  {
+    "heading": "Find a Project that Interests you and Connect with your Alumni.",
+    "description": "You can take suggestions from Alumni’s. It is critical to be up to date on the latest technology. Which can only be obtained through alumni.",
+    "image_src": "../assets/landing_page/container_two/container_two.svg"
+  },
+  {
+    "heading": "Post your Project Idea and Find the People you Need",
+    "description": "You may post some project ideas and make your team in the discussion box. You may communicate with your colleagues in a private group on our web.",
+    "image_src": "../assets/landing_page/container_three/container_three.svg"
+  },
+  {
+    "heading": "Post your Queries and Have Some Great Responses",
+    "description": "You may ask questions on anything, and alumni will respond based on their own experiences (which no books or tutorials can give you). You can also upvote answers to assist your classmates in choosing the greatest answer.",
+    "image_src": "../assets/landing_page/container_four/container_four.svg"
+  },
+  {
+    "heading": "know how to work on a job and on a project",
+    "description": "You may read alumn's writings to have a better grasp of any work or project. At the same time, you may discuss this in a similar post with batchmates.",
+    "image_src": "../assets/landing_page/container_five/container_five.svg"
+  }
+]
