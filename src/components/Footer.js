@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+import ImgStack from "./ImgStack";
 import Connectxlogo from "../assets/_logo/svg/logo_2.0.svg";
 import Instituelogo from "../assets/_institute_logo/insitute_logo.svg";
 import linkedInIcon from "../assets/footer/ic_linkedin.svg";
 import linkedInIconHover from "../assets/footer/h_ic_linkedin.svg";
 import githubIcon from "../assets/footer/ic_github.svg";
+import githubIconHover from "../assets/footer/h_ic_github.svg";
 import mailIcon from "../assets/footer/ic_mail.svg";
+import mailIconHover from "../assets/footer/h_ic_mail.svg";
 import "../styles/Footer.css";
 
 const General = ["Login", "Sign-Up", "About", "Home", "Admin"];
@@ -78,15 +81,24 @@ function Footer() {
         </div>
         <div className="footerRightIcons">
           <div className="footerIcons">
+            <ImgStack
+              normalDisplay={linkedInIcon}
+              hoverDisplay={linkedInIconHover}
+            />
+            <ImgStack
+              normalDisplay={githubIcon}
+              hoverDisplay={githubIconHover}
+            />{" "}
+            <ImgStack normalDisplay={mailIcon} hoverDisplay={mailIconHover} />
             {/* <img
               src={footerImage}
               onMouseOver={() => setFooterImage(linkedInIconHover)}
               onMouseOut={() => setFooterImage(linkedInIcon)}
               alt="Linkedin icon"
             /> */}
-            <img src={footerImage} alt="Linkedin icon" />
+            {/* <img src={footerImage} alt="Linkedin icon" />
             <img src={githubIcon} alt="github icon" />
-            <img src={mailIcon} alt="mail icon" />
+            <img src={mailIcon} alt="mail icon" /> */}
           </div>
           <p>
             <a href="#"> Privacy Policy</a>
