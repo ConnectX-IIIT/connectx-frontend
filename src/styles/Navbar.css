@@ -27,9 +27,23 @@
   border: 0;
   cursor: pointer;
 }
+.login_button {
+  transition: transform 0.15s ease-in-out, opacity 0.15s ease-in-out;
+}
+.login_button:hover {
+  transform: scale(1.05);
+  opacity: 0.8;
+}
 .sign_up_button {
-  background: #121e35;
+  background-color: #121e35;
   border-radius: 1.87vw;
   width: 10.88vw;
   color: #fff7f7;
+  transition: transform 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    color 0.15s ease-in-out;
+}
+.sign_up_button:hover {
+  transform: scale(1.02);
+  background-color: #26364d;
+  color: #ffebeb;
 }
