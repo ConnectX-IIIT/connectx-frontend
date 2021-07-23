@@ -75,10 +75,16 @@ function Footer() {
         </div>
         <div className="footerRightIcons">
           <div className="footerIcons">
-            <img src={linkedInIcon} alt="" />
-            <img src={githubIcon} alt="" />
-            <img src={mailIcon} alt="" />
+            <img src={linkedInIcon} alt="Linkedin icon" />
+            <img src={githubIcon} alt="github icon" />
+            <img src={mailIcon} alt="mail icon" />
           </div>
+          <p>
+            <a href="#"> Privacy Policy</a>
+            <span style={{ color: "#929292", padding: "0 0.5vw" }}>|</span>
+            <a href="#">Terms of Use</a>
+          </p>
+          <div className="copyright">Copyright (c) 2021</div>
         </div>
       </div>
     </footer>
