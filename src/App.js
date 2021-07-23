@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import MainOuterContainer from "./components/Main_outer_container";
 import MainOuterMiddleContainer from "./components/MainOuterMiddleContainer";
 import MainOuterBottomContainer from "./components/MainOuterBottomContainer";
+import Footer from "./components/Footer";
 import data_array from "./data/Landing_details.json";
 import poster1 from "./assets/landing_page/container_one/container_one.svg";
 import poster2 from "./assets/landing_page/container_two/container_two.svg";
@@ -61,6 +62,8 @@ function App() {
         BottomContainerPadding="10vw"
         isLogo
       />
+
+      <Footer />
     </div>
   );
 }
