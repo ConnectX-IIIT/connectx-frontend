@@ -38,6 +38,7 @@
   background-color: #121e35;
   border-radius: 1.87vw;
   width: 10.88vw;
+  height: 6.67vh;
   color: #fff7f7;
   transition: transform 0.15s ease-in-out, background-color 0.15s ease-in-out,
     color 0.15s ease-in-out;
