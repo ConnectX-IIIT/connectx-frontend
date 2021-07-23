@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../styles/ImgStack.css";
+import "../../styles/ImgStack.css";
 
 function ImgStack(props) {
   const [displayClass, setDisplayClass] = useState("normalDisplay commonImg");

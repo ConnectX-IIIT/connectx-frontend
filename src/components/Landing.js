@@ -1,24 +1,21 @@
 import React from "react";
-import Landing from "./components/Landing";
-// import "./styles/App.css";
-// import Navbar from "./components/Navbar";
-// import MainOuterContainer from "./components/Main_outer_container";
-// import MainOuterMiddleContainer from "./components/MainOuterMiddleContainer";
-// import MainOuterBottomContainer from "./components/MainOuterBottomContainer";
-// import Footer from "./components/Footer";
-// import data_array from "./data/Landing_details.json";
-// import poster1 from "./assets/landing_page/container_one/container_one.svg";
-// import poster2 from "./assets/landing_page/container_two/container_two.svg";
-// import poster3 from "./assets/landing_page/container_three/container_three.svg";
-// import poster4 from "./assets/landing_page/container_four/container_four.svg";
-// import poster5 from "./assets/landing_page/bottom_community/bottom_community_2.svg";
-// import poster6 from "./assets/landing_page/bottom_community/bottom_community.svg";
+import Navbar from "./Landing_Components/Navbar";
+import MainOuterContainer from "./Landing_Components/Main_outer_container";
+import MainOuterMiddleContainer from "./Landing_Components/MainOuterMiddleContainer";
+import MainOuterBottomContainer from "./Landing_Components/MainOuterBottomContainer";
+import Footer from "./Landing_Components/Footer";
+import data_array from "../data/Landing_details.json";
+import poster1 from "../assets/landing_page/container_one/container_one.svg";
+import poster2 from "../assets/landing_page/container_two/container_two.svg";
+import poster3 from "../assets/landing_page/container_three/container_three.svg";
+import poster4 from "../assets/landing_page/container_four/container_four.svg";
+import poster5 from "../assets/landing_page/bottom_community/bottom_community_2.svg";
+import poster6 from "../assets/landing_page/bottom_community/bottom_community.svg";
 
-function App() {
+function Landing() {
   return (
     <div className="App">
-      <Landing />
-      {/* <Navbar />
+      <Navbar />
 
       <MainOuterContainer
         Background_color="#FFEFF1"
@@ -65,9 +62,9 @@ function App() {
         isLogo
       />
 
-      <Footer /> */}
+      <Footer />
     </div>
   );
 }
 
-export default App;
+export default Landing;

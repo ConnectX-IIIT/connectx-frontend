@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "./Button";
-import connextxLogo from "../assets/_logo/svg/logo_2.0.svg";
-import "../styles/MainOuterBottomContainer.css";
+import connextxLogo from "../../assets/_logo/svg/logo_2.0.svg";
+import "../../styles/MainOuterBottomContainer.css";
 
 function MainOuterBottomContainer(props) {
   return (
