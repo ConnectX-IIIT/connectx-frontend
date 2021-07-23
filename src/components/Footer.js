@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import Connectxlogo from "../assets/_logo/svg/logo_2.0.svg";
 import Instituelogo from "../assets/_institute_logo/insitute_logo.svg";
 import linkedInIcon from "../assets/footer/ic_linkedin.svg";
+import linkedInIconHover from "../assets/footer/h_ic_linkedin.svg";
 import githubIcon from "../assets/footer/ic_github.svg";
 import mailIcon from "../assets/footer/ic_mail.svg";
 import "../styles/Footer.css";
@@ -41,6 +42,8 @@ const SupportList = Support.map((Support, index) => {
 });
 
 function Footer() {
+  const [footerImage, setFooterImage] = useState(linkedInIcon);
+
   return (
     <footer className="LandingPageFooter">
       <div className="footerUpperContainer">
@@ -75,7 +78,13 @@ function Footer() {
         </div>
         <div className="footerRightIcons">
           <div className="footerIcons">
-            <img src={linkedInIcon} alt="Linkedin icon" />
+            {/* <img
+              src={footerImage}
+              onMouseOver={() => setFooterImage(linkedInIconHover)}
+              onMouseOut={() => setFooterImage(linkedInIcon)}
+              alt="Linkedin icon"
+            /> */}
+            <img src={footerImage} alt="Linkedin icon" />
             <img src={githubIcon} alt="github icon" />
             <img src={mailIcon} alt="mail icon" />
           </div>

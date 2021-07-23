@@ -1,7 +1,7 @@
 .Join_us_button {
   width: 13vw;
   height: 4vw;
-  background: #381905;
+  background-color: #182645;
   border-radius: 0.416vw;
   font-family: "Manrope", sans-serif;
   font-style: normal;
@@ -13,5 +13,13 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
+  border: none;
   cursor: pointer;
+  transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out,
+    color 0.2s ease-in-out;
+}
+.Join_us_button:hover {
+  background-color: #3b4355;
+  color: #faf3fd;
+  transform: scale(1.02);
 }

@@ -102,7 +102,9 @@
 .footerIcons img {
   width: 3vw;
   margin-left: 0.7vw;
+  cursor: pointer;
 }
+
 .copyright {
   font-family: "Manrope", sans-serif;
   font-style: normal;
