@@ -1,0 +1,17 @@
+.Join_us_button {
+  width: 13vw;
+  height: 4vw;
+  background: #381905;
+  border-radius: 0.416vw;
+  font-family: "Manrope", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.75vw;
+  text-align: center;
+  color: #ffffff;
+  margin-top: 4vw;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  cursor: pointer;
+}
