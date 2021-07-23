@@ -99,12 +99,14 @@
   text-decoration: none;
   color: #2e2e46;
 }
-.footerIcons img {
+/* .footerIcons img {
   width: 3vw;
   margin-left: 0.7vw;
   cursor: pointer;
+} */
+.footerIcons {
+  display: flex;
 }
-
 .copyright {
   font-family: "Manrope", sans-serif;
   font-style: normal;
