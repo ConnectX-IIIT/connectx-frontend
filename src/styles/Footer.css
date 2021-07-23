@@ -80,4 +80,34 @@
   padding-top: 6vw;
   padding-left: 5vw;
   padding-right: 5vw;
+  display: flex;
+}
+.footerRightIcons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 45vw;
+}
+.footerRightIcons p {
+  font-family: "Manrope", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.5vw;
+  line-height: 2.13vw;
+}
+.footerRightIcons a {
+  text-decoration: none;
+  color: #2e2e46;
+}
+.footerIcons img {
+  width: 3vw;
+  margin-left: 0.7vw;
+}
+.copyright {
+  font-family: "Manrope", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.04vw;
+  line-height: 1.4vw;
+  color: rgba(18, 30, 53, 0.31);
 }
