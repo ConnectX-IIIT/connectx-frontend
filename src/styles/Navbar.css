@@ -27,6 +27,10 @@
   border: 0;
   cursor: pointer;
 }
+.NavbarLink {
+  display: flex;
+  text-decoration: none;
+}
 .login_button {
   transition: transform 0.15s ease-in-out, opacity 0.15s ease-in-out;
 }
@@ -38,7 +42,7 @@
   background-color: #121e35;
   border-radius: 1.87vw;
   width: 10.88vw;
-  height: 6.67vh;
+  height: 100%;
   color: #fff7f7;
   transition: transform 0.15s ease-in-out, background-color 0.15s ease-in-out,
     color 0.15s ease-in-out;
