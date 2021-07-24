@@ -7,6 +7,8 @@ import "../styles/Signup/SignUp.css";
 import emailValidator from "email-validator";
 import { passwordValidate } from "../helper/password_validator";
 import Cookies from "js-cookie";
+import axios from "axios";
+import instance from "../helper/axios";
 
 function SignUp() {
   const [userRegistration, setUserRegistration] = useState({
@@ -16,8 +18,6 @@ function SignUp() {
     cPassword: "",
     userId: "",
   });
-
-  const apiURL = "https://obscure-ridge-13663.herokuapp.com";
 
   const handleInput = (e) => {
     const name = e.target.name;
@@ -53,22 +53,23 @@ function SignUp() {
       return alert(`${passwordValidation[1]}`);
     }
 
-    const signupRes = await fetch(`${apiURL}/auth/signup`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ name, email, password, cPassword }),
-    });
+    try {
+      const signupRes = await instance.post(`/auth/signup`,
+        { name, email, password, cPassword }
+      )
 
-    const signupData = await signupRes.json();
+      const signupData = signupRes.data;
 
-    if (signupRes.status !== 200) {
-      return alert(`${signupData.error}`);
+      if (signupRes.status !== 200) {
+        return alert(`${signupData.error}`);
+      }
+
+      userRegistration.userId = signupData.userId;
+      Cookies.set("token", signupData.token, { expires: 1, secure: true });
+
+    } catch (error) {
+      console.log(error);
     }
-
-    userRegistration.userId = signupData.userId;
-    Cookies.set("token", signupData.token, { expires: 1, secure: true });
   };
 
   return (
