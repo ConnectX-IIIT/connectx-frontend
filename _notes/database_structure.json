@@ -16,6 +16,7 @@
     "is_alumni": false,
     "is_admin": false,
     "is_verified": false,
+    "is_mail_verified": false,
     "reports": ["60f67d687e4fdb95c36eb079"],
     "questions": [
       "60f67d687e4fdb95c36eb079",
