@@ -58,10 +58,10 @@
         >> We are the students of Atal-Bihari Vajpayee Indian Institute of Information Technology and Management, Gwalior.
     
     >> The team consists of four members
-    Akash Gupta()
-    Mendpara Harshill()
-    Ujjawal Gupta()
-    Varsani Rajkumar()
+    Akash Gupta
+    Harshill Mendpara
+    Ujjawal Gupta
+    Raj Varsani
     
     We discovered that many of our group members are unaware of the Alumni ties and are unwilling to accept any advice or ideas from them. So, with the help of our successful alumni, we've created this platform for the development of juniors.
     
