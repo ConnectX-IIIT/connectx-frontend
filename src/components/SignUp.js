@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Button from "./signUpCompontents/Button";
 import FormInput from "./signUpCompontents/FormInput";
 import "../styles/Signup/SignUp.css";
 import emailValidator from "email-validator";
@@ -31,17 +32,17 @@ function SignUp() {
     let cPassword = userRegistration.cPassword;
 
     if (!name || !email || !password || !cPassword) {
-      return alert('Please fill all details properly!');
+      return alert("Please fill all details properly!");
     }
 
     if (password !== cPassword) {
-      return alert('Password not matched!');
+      return alert("Password not matched!");
     }
 
     let emailValidation = emailValidator.validate(email);
 
     if (!emailValidation) {
-      return alert('Enter a valid email');
+      return alert("Enter a valid email");
     }
 
     let passwordValidation = passwordValidate(password);
@@ -61,11 +62,11 @@ function SignUp() {
     const signupData = await signupRes.json();
 
     if (signupRes.status !== 200) {
-      return alert(`${signupData.error}`)
+      return alert(`${signupData.error}`);
     }
 
     userRegistration.userId = signupData.userId;
-    Cookies.set('token', signupData.token, { expires: 1, secure: true });
+    Cookies.set("token", signupData.token, { expires: 1, secure: true });
   };
 
   return (
@@ -100,7 +101,7 @@ function SignUp() {
           lableContent="Confirm Password"
           onChangeFunction={handleInput}
         />
-        <button type="submit">submit</button>
+        <Button />
       </form>
     </div>
   );
