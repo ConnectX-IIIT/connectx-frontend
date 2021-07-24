@@ -3,14 +3,18 @@ import FormInput from "./signUpCompontents/FormInput";
 import "../styles/Signup/SignUp.css";
 import emailValidator from "email-validator";
 import { passwordValidate } from "../helper/password_validator";
+import Cookies from "js-cookie";
 
 function SignUp() {
   const [userRegistration, setUserRegistration] = useState({
     name: "",
     email: "",
     password: "",
-    confirmPassword: "",
+    cPassword: "",
+    userId: "",
   });
+
+  const apiURL = "https://obscure-ridge-13663.herokuapp.com";
 
   const handleInput = (e) => {
     const name = e.target.name;
@@ -18,19 +22,19 @@ function SignUp() {
     setUserRegistration({ ...userRegistration, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     let name = userRegistration.name;
     let email = userRegistration.email;
     let password = userRegistration.password;
-    let confirmPassword = userRegistration.confirmPassword;
+    let cPassword = userRegistration.cPassword;
 
-    if (!name || !email || !password || !confirmPassword) {
+    if (!name || !email || !password || !cPassword) {
       return alert('Please fill all details properly!');
     }
 
-    if (password !== confirmPassword) {
+    if (password !== cPassword) {
       return alert('Password not matched!');
     }
 
@@ -46,7 +50,22 @@ function SignUp() {
       return alert(`${passwordValidation[1]}`);
     }
 
-    console.log(userRegistration);
+    const signupRes = await fetch(`${apiURL}/auth/signup`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name, email, password, cPassword }),
+    });
+
+    const signupData = await signupRes.json();
+
+    if (signupRes.status !== 200) {
+      return alert(`${signupData.error}`)
+    }
+
+    userRegistration.userId = signupData.userId;
+    Cookies.set('token', signupData.token, { expires: 1, secure: true });
   };
 
   return (
@@ -76,8 +95,8 @@ function SignUp() {
         />
         <FormInput
           inputType="password"
-          inputName="confirmPassword"
-          inputValue={userRegistration.confirmPassword}
+          inputName="cPassword"
+          inputValue={userRegistration.cPassword}
           lableContent="Confirm Password"
           onChangeFunction={handleInput}
         />
