@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Button from "./signUpCompontents/Button";
 import FormInput from "./signUpCompontents/FormInput";
+import SignUpFormBottom from "./signUpCompontents/SignUpFormBottom";
+import FooterCopyRight from "./signUpCompontents/FooterCopyRight";
 import "../styles/Signup/SignUp.css";
 import emailValidator from "email-validator";
 import { passwordValidate } from "../helper/password_validator";
@@ -102,7 +104,15 @@ function SignUp() {
           onChangeFunction={handleInput}
         />
         <Button />
+        <SignUpFormBottom />
       </form>
+      <div id="bottomElement">
+        <div>
+          Already Have an account? <a href="#">SignUp</a>
+        </div>
+        <a href="#">Get Support</a>
+      </div>
+      <FooterCopyRight />
     </div>
   );
 }
