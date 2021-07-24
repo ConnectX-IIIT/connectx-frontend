@@ -23,7 +23,7 @@ function SignIn() {
   return (
     <div className="SignInMainPage">
       <form action="" onSubmit={handleSubmit} className="SignInPageForm">
-        <p id="signinpagepara">Sign Up</p>
+        <p id="signinpagepara">Sign In</p>
         <FormInput
           inputType="email"
           inputName="email"
