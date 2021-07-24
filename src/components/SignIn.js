@@ -43,7 +43,7 @@ function SignIn() {
       </form>
       <div id="bottomElement">
         <div>
-          Already Have an account? <a href="#">SignUp</a>
+          Already Have an account? <a href="/signup">SignUp</a>
         </div>
         <a href="#">Get Support</a>
       </div>

@@ -108,7 +108,7 @@ function SignUp() {
       </form>
       <div id="bottomElement">
         <div>
-          Already Have an account? <a href="#">SignIn</a>
+          Already Have an account? <a href="/signin">SignIn</a>
         </div>
         <a href="#">Get Support</a>
       </div>
