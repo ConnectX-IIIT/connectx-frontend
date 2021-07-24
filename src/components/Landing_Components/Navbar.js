@@ -12,7 +12,9 @@ function Navbar() {
         alt="Connectx_logo"
       />
       <div className="navbar_buttons">
-        <button className="login_button"> Login </button>
+        <Link to="/signin" className="NavbarLink">
+          <button className="login_button"> Login </button>
+        </Link>
         <Link to="/signup">
           <button className="sign_up_button">Sign Up</button>
         </Link>
