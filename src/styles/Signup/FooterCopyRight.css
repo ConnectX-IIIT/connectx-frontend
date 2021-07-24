@@ -6,5 +6,8 @@
   line-height: 1.4vw;
   color: rgba(18, 30, 53, 0.31);
   text-align: center;
-  margin-top: 1vw;
+  position: absolute;
+  bottom: 0;
+  left: 45.833vw;
+  bottom: 1vw;
 }
