@@ -10,13 +10,16 @@ function FormInput({
 }) {
   return (
     <div>
-      <label htmlFor={inputName}>{lableContent}</label>
+      <label htmlFor={inputName} className="FormLabel">
+        {lableContent}
+      </label>
       <input
         type={inputType}
         name={inputName}
         id={inputName}
         value={inputValue}
         onChange={onChangeFunction}
+        className="FormInput"
       />
     </div>
   );
