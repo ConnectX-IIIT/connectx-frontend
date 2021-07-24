@@ -1,0 +1,29 @@
+.SignUpformBottom {
+  margin-top: 1vw;
+}
+#SignUpformBottomPara,
+#SignUpformBottomAnchor {
+  font-family: "Manrope", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1vw;
+  line-height: 1.4vw;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.5);
+  margin: 0;
+}
+#SignUpformBottomAnchor {
+  text-decoration: none;
+  display: block;
+}
+.SignUpBottomImageContainer img {
+  object-fit: contain;
+  margin: 0.5vw;
+  width: 3.256vw;
+  cursor: pointer;
+}
+.SignUpBottomImageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
