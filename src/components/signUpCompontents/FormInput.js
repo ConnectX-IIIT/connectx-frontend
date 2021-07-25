@@ -13,7 +13,7 @@ function FormInput({
   function handleTextChange(e) {
     onChangeFunction(e);
 
-    if (e.target.value != "") {
+    if (e.target.value !== "") {
       setActive(true);
     } else {
       setActive(false);
