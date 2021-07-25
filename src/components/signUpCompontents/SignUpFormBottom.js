@@ -7,24 +7,22 @@ import instance from "../../helper/axios";
 import "../../styles/Signup/SignUpFormBottom.css";
 
 function SignUpFormBottom() {
-
   const responseSuccessGoogle = async (response) => {
     try {
-      const googleLoginRes = await instance.post(`/auth/googlelogin`,
-        { tokenId: response.tokenId }
-      )
+      const googleLoginRes = await instance.post(`/auth/googlelogin`, {
+        tokenId: response.tokenId,
+      });
       const googleLoginData = googleLoginRes.data;
 
       Cookies.set("token", googleLoginData.token, { expires: 1, secure: true });
-
     } catch (error) {
       return alert(`Server error occured!`);
     }
-  }
+  };
 
   const responseErrorGoogle = (response) => {
     alert(`Google login error!`);
-  }
+  };
 
   return (
     <div className="SignUpformBottom">
@@ -36,10 +34,12 @@ function SignUpFormBottom() {
           buttonText="Login with google"
           onSuccess={responseSuccessGoogle}
           onFailure={responseErrorGoogle}
-          cookiePolicy={'single_host_origin'}
+          cookiePolicy={"single_host_origin"}
         />
       </div>
-      <Link to="/" id="SignUpformBottomAnchor">Forgot Password?</Link>
+      <Link to="/" id="SignUpformBottomAnchor">
+        Forgot Password?
+      </Link>
     </div>
   );
 }

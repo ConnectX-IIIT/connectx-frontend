@@ -7,6 +7,7 @@ function FormInput({
   inputValue,
   lableContent,
   onChangeFunction,
+  style,
 }) {
   const [isActive, setActive] = useState(false);
 
@@ -30,6 +31,7 @@ function FormInput({
         onChange={handleTextChange}
         className="FormInput"
         autoComplete="Off"
+        style={style}
       />
       <label
         htmlFor={inputName}
@@ -40,19 +42,18 @@ function FormInput({
                 transform: "translateY(-72%)",
                 fontSize: "0.9vw",
                 transition:
-                "transform 0.2s ease-out , font-size 0.15s ease-out , background-color 0.15s ease-out",
+                  "transform 0.2s ease-out , font-size 0.15s ease-out , background-color 0.15s ease-out",
                 paddingLeft: "0.5vw",
                 paddingRight: "0.5vw",
                 left: "12%",
-                backgroundColor:"#fcfdff"
+                backgroundColor: "#fcfdff",
               }
             : {
                 transform: "translateY(0)",
                 fontSize: "1.25vw",
                 transition:
-                "transform 0.2s ease-out , font-size 0.15s ease-out , background-color 0.15s ease-out",
-                backgroundColor:"transparent",
-               
+                  "transform 0.2s ease-out , font-size 0.15s ease-out , background-color 0.15s ease-out",
+                backgroundColor: "transparent",
               }
         }
       >

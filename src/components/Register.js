@@ -1,11 +1,16 @@
 import React, { useState } from "react";
-import FormInput from "./signUpCompontents/FormInput";
+import Button from "./signUpCompontents/Button";
+import FooterCopyRight from "./signUpCompontents/FooterCopyRight";
 import "../styles/Register/Register.css";
 
 function Register() {
   const [userRegistration, setUserRegistration] = useState({
-    email: "",
-    password: "",
+    mobile: "",
+    about: "",
+    passingYear: "",
+    joiningYear: "",
+    currentrole: "",
+    gender: "",
   });
   const handleInput = (e) => {
     const name = e.target.name;
@@ -14,18 +19,14 @@ function Register() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(userRegistration);
   };
   return (
     <div className="RegisterMainPage">
       <form action="" onSubmit={handleSubmit} className="RegisterPageForm">
-        <FormInput
-          inputType="email"
-          inputName="email"
-          inputValue={userRegistration.email}
-          lableContent="Email"
-          onChangeFunction={handleInput}
-        />
+        <Button />
       </form>
+      <FooterCopyRight />
     </div>
   );
 }

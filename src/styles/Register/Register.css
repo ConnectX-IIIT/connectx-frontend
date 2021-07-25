@@ -14,4 +14,10 @@
   border-radius: 0.78vw;
   margin: auto;
   margin-bottom: 0.5vw;
+  padding-top: 4.19vw;
+}
+#registerFormMobile {
+  padding-left: 4.85vw;
+  width: 10vw;
+  padding-top: 4.19vw;
 }
