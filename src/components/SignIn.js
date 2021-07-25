@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import FormInput from "./signUpCompontents/FormInput";
 import Button from "./signUpCompontents/Button";
 import SignUpFormBottom from "./signUpCompontents/SignUpFormBottom";
@@ -43,7 +44,7 @@ function SignIn() {
       </form>
       <div id="bottomElement">
         <div>
-          Already Have an account? <a href="/signup">SignUp</a>
+          Already Have an account? <Link to="/signup">SignUp </Link>
         </div>
         <a href="#">Get Support</a>
       </div>
