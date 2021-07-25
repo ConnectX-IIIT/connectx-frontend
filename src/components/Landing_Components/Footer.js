@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import ImgStack from "./ImgStack";
 import Connectxlogo from "../../assets/_logo/svg/logo_2.0.svg";
@@ -46,7 +46,7 @@ const SupportList = Support.map((Support, index) => {
 });
 
 function Footer() {
-  const [footerImage, setFooterImage] = useState(linkedInIcon);
+  // const [footerImage, setFooterImage] = useState(linkedInIcon);
 
   return (
     <footer className="LandingPageFooter">
