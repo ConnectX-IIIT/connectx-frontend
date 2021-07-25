@@ -1,15 +1,24 @@
 export const initialState = {
-    userDetails: {
-        "name": "",
-        "email": "",
-        "mobile": "",
-        "joiningYear": "",
-        "passingYear": "",
-        "gender": "",
-        "id": "",
-        "isAlumni": "",
-        "isMailVerified": "",
-        "isVerified": "",
-        "batch": ""
+    userDetails: {}
+};
+
+const reducer = (state, action) => {
+    switch (action.type) {
+        case 'UPDATE_DETAILS':
+            return {
+                ...state,
+                userDetails: action.userData
+            }
+
+        case 'SET_USER':
+            return state;
+
+        case 'EMPTY_BASKET':
+            return state;
+
+        default:
+            return state;
     }
 };
+
+export default reducer;
