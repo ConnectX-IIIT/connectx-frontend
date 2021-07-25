@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import GoogleIcon from "../../assets/signinup_page/ic_google.svg";
 import "../../styles/Signup/SignUpFormBottom.css";
 
@@ -12,11 +13,9 @@ function SignUpFormBottom() {
     <div className="SignUpformBottom">
       <p id="SignUpformBottomPara"> Or continue with</p>
       <div className="SignUpBottomImageContainer">
-        <img onClick={handleSubmit} src={GoogleIcon} alt="Google Image" />
+        <img onClick={handleSubmit} src={GoogleIcon} alt="Google" />
       </div>
-      <a href="#" id="SignUpformBottomAnchor">
-        Forgot Password?
-      </a>
+      <Link to="/">Forgot Password?</Link>
     </div>
   );
 }
