@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import Button from "./signUpCompontents/Button";
 import FooterCopyRight from "./signUpCompontents/FooterCopyRight";
-import UserProfile from "../assets/profile/user_profile_default_icon.svg";
 import "../styles/Register/Register.css";
 
-const Batch = ["Batch", "IPG-MTech", "IPG-MBA", "BCS", "MTech", "PhD"];
+const Batch = ["IPG-MTech", "IPG-MBA", "BCS", "MTech", "PhD"];
 const BatchList = Batch.map((batch) => {
   return (
     <option key={batch} value={batch} className="SelectOptionRegister">
@@ -13,7 +12,7 @@ const BatchList = Batch.map((batch) => {
   );
 });
 
-const passingYear = ["Passing Year"];
+const passingYear = [];
 for (let i = 0; i < 20; i++) {
   passingYear.push(i + 2001);
 }
@@ -25,7 +24,7 @@ const passingyearList = passingYear.map((year) => {
   );
 });
 
-const joiningYear = ["Joining Year"];
+const joiningYear = [];
 for (let i = 0; i < 24; i++) {
   joiningYear.push(i + 1997);
 }
@@ -46,6 +45,7 @@ function Register() {
     about: "",
     passingYear: "",
     joiningYear: "",
+    batch: "",
     currentrole: "",
     gender: "",
   });
@@ -76,15 +76,21 @@ function Register() {
       } else {
         setActiveAbout(false);
       }
+    } else if (e.target.name === "batch") {
+      let Batch = document.getElementsByClassName("SelectRegister")[0];
+      Batch.style.color = "#717171";
+    } else if (e.target.name === "passingYear") {
+      let Batch = document.getElementsByClassName("SelectRegister")[1];
+      Batch.style.color = "#717171";
+    } else if (e.target.name === "joiningYear") {
+      let Batch = document.getElementsByClassName("SelectRegister")[2];
+      Batch.style.color = "#717171";
     }
   }
 
   const currentroleList = currentrole.map((role) => {
     return (
       <>
-        <label htmlFor={role} key={role} className="radioLabel">
-          {role}
-        </label>
         <input
           type="radio"
           id={`Registerrole` + role}
@@ -94,6 +100,13 @@ function Register() {
           key={`Registerrole` + role}
           className="radioInput"
         />
+        <label
+          htmlFor={`Registerrole` + role}
+          key={role}
+          className="radioLabel"
+        >
+          {role}
+        </label>
          
       </>
     );
@@ -102,9 +115,6 @@ function Register() {
   const genderList = gender.map((role) => {
     return (
       <>
-        <label htmlFor={role} key={role} className="radioLabel">
-          {role}
-        </label>
         <input
           type="radio"
           id={`Registergender` + role}
@@ -114,6 +124,13 @@ function Register() {
           key={`Registergender` + role}
           className="radioInput"
         />
+        <label
+          htmlFor={`Registergender` + role}
+          key={role}
+          className="radioLabel"
+        >
+          {role}
+        </label>
          
       </>
     );
@@ -122,18 +139,6 @@ function Register() {
   return (
     <div className="RegisterMainPage">
       <form action="" onSubmit={handleSubmit} className="RegisterPageForm">
-        <img
-          src={UserProfile}
-          className="CoverPhoto"
-          alt="UserProfile"
-          style={{
-            position: "absolute",
-            top: "0",
-            left: "0",
-            objectFit: "contain",
-            width: "8vw",
-          }}
-        />
         <div className="registerFromInput">
           <input
             type="number"
@@ -224,11 +229,18 @@ function Register() {
             <div className="arrowSelectRegister" id="arrowBatch"></div>
             <select
               id="RegistrationCurrentRole"
-              name="currentrole"
-              value={userRegistration.currentrole}
+              name="batch"
+              value={userRegistration.batch}
               onChange={handleTextChange}
+              // onFocus={ChangeColorBatch}
               className="SelectRegister"
+              style={{
+                color: "#d1d1d1",
+              }}
             >
+              <option hidden selected value className="SelectOptionRegister">
+                Batch
+              </option>
               {BatchList}
             </select>
 
@@ -239,7 +251,13 @@ function Register() {
               value={userRegistration.passingYear}
               onChange={handleTextChange}
               className="SelectRegister"
+              style={{
+                color: "#d1d1d1",
+              }}
             >
+              <option hidden selected value className="SelectOptionRegister">
+                Passing Year
+              </option>
               {passingyearList}
             </select>
           </div>
@@ -259,7 +277,13 @@ function Register() {
             value={userRegistration.joiningYear}
             onChange={handleTextChange}
             className="SelectRegister"
+            style={{
+              color: "#d1d1d1",
+            }}
           >
+            <option hidden selected value className="SelectOptionRegister">
+              Joining Year
+            </option>
             {joiningyearList}
           </select>
         </div>
