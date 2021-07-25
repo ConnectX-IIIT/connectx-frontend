@@ -7,7 +7,6 @@ import "../styles/Signup/SignUp.css";
 import emailValidator from "email-validator";
 import { passwordValidate } from "../helper/password_validator";
 import Cookies from "js-cookie";
-import axios from "axios";
 import instance from "../helper/axios";
 
 function SignUp() {
@@ -60,15 +59,11 @@ function SignUp() {
 
       const signupData = signupRes.data;
 
-      if (signupRes.status !== 200) {
-        return alert(`${signupData.error}`);
-      }
-
       userRegistration.userId = signupData.userId;
       Cookies.set("token", signupData.token, { expires: 1, secure: true });
 
     } catch (error) {
-      console.log(error);
+      return alert(`${error.response.data.error}`);
     }
   };
 
