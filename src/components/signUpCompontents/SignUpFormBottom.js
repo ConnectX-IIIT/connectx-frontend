@@ -15,7 +15,7 @@ function SignUpFormBottom() {
       <div className="SignUpBottomImageContainer">
         <img onClick={handleSubmit} src={GoogleIcon} alt="Google" />
       </div>
-      <Link to="/">Forgot Password?</Link>
+      <Link to="/" id="SignUpformBottomAnchor">Forgot Password?</Link>
     </div>
   );
 }
