@@ -46,7 +46,7 @@ function SignIn() {
         <div>
           Already Have an account? <Link to="/signup">SignUp </Link>
         </div>
-        <a href="#">Get Support</a>
+        <Link to="/">Get Support</Link>
       </div>
       <FooterCopyRight />
     </div>
