@@ -30,7 +30,6 @@ function FormInput({
         value={inputValue}
         onChange={handleTextChange}
         className="FormInput"
-        autoComplete="Off"
         style={style}
       />
       <label
