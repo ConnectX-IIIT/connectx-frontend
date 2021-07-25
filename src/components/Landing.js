@@ -11,8 +11,17 @@ import poster3 from "../assets/landing_page/container_three/container_three.svg"
 import poster4 from "../assets/landing_page/container_four/container_four.svg";
 import poster5 from "../assets/landing_page/bottom_community/bottom_community_2.svg";
 import poster6 from "../assets/landing_page/bottom_community/bottom_community.svg";
+import { useHistory } from "react-router-dom";
+import Cookies from "js-cookie";
 
 function Landing() {
+  const history = useHistory();
+
+  const token = Cookies.get('token');
+  if (token) {
+    history.push('/register')
+  }
+
   return (
     <div className="App">
       <Navbar />

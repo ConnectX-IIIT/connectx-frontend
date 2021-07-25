@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Button from "./signUpCompontents/Button";
 import FormInput from "./signUpCompontents/FormInput";
 import SignUpFormBottom from "./signUpCompontents/SignUpFormBottom";
@@ -11,6 +11,8 @@ import Cookies from "js-cookie";
 import instance from "../helper/axios";
 
 function SignUp() {
+
+  const history = useHistory();
   const [userRegistration, setUserRegistration] = useState({
     name: "",
     email: "",
@@ -62,6 +64,8 @@ function SignUp() {
 
       userRegistration.userId = signupData.userId;
       Cookies.set("token", signupData.token, { expires: 1, secure: true });
+
+      history.push('/register');
 
     } catch (error) {
       return alert(`${error.response.data.error}`);
