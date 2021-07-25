@@ -19,7 +19,7 @@ function ImgStack(props) {
     >
       <img
         src={props.normalDisplay}
-        alt="normal Image"
+        alt="normal state"
         className={displayClass}
       />
       <img

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 import ImgStack from "./ImgStack";
 import Connectxlogo from "../../assets/_logo/svg/logo_2.0.svg";
 import Instituelogo from "../../assets/_institute_logo/insitute_logo.svg";
@@ -25,27 +26,27 @@ const Support = ["help.connectx@gmail.com", "(+91) 9113742865"];
 const GeneralList = General.map((General, index) => {
   return (
     <li key={index}>
-      <a href="#">{General}</a>
+       <Link to="/">{General}</Link>
     </li>
   );
 });
 const BrowseList = Browse.map((Browse, index) => {
   return (
     <li key={index}>
-      <a href="#">{Browse}</a>
+  <Link to="/">{Browse}</Link>
     </li>
   );
 });
 const SupportList = Support.map((Support, index) => {
   return (
     <li key={index}>
-      <a href="#">{Support}</a>
+     <Link to="/">{Support}</Link>
     </li>
   );
 });
 
 function Footer() {
-  const [footerImage, setFooterImage] = useState(linkedInIcon);
+  // const [footerImage, setFooterImage] = useState(linkedInIcon);
 
   return (
     <footer className="LandingPageFooter">
@@ -101,9 +102,9 @@ function Footer() {
             <img src={mailIcon} alt="mail icon" /> */}
           </div>
           <p>
-            <a href="#"> Privacy Policy</a>
+          <Link to="/">Privacy Policy</Link>
             <span style={{ color: "#929292", padding: "0 0.5vw" }}>|</span>
-            <a href="#">Terms of Use</a>
+            <Link to="/">Terms of Use</Link>
           </p>
           <div className="copyright">Copyright (c) 2021</div>
         </div>

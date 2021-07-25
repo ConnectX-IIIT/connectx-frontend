@@ -29,6 +29,7 @@ function MainOuterBottomContainer(props) {
               marginRight: "0.5vw",
             }}
             src={connextxLogo}
+            alt="connextxLogo"
           />
         ) : null}{" "}
         {props.BottomParaContent}

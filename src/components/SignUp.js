@@ -107,7 +107,7 @@ function SignUp() {
         <div>
           Already Have an account? <Link to="/signin">SignIn </Link>
         </div>
-        <a href="#">Get Support</a>
+        <Link to="/">Get Support</Link>
       </div>
       <FooterCopyRight />
     </div>
