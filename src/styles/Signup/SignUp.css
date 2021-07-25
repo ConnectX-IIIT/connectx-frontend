@@ -1,0 +1,45 @@
+.SignUpMainPage {
+  width: 100%;
+  height: 100vh;
+  background-color: #f6f8ff;
+  padding-top: 6.5vw;
+  position: relative;
+}
+.SignupPageForm {
+  width: 28.5vw;
+  height: 36.1vw;
+  background: #fcfdff;
+  border: 2px solid #a6a6a6;
+  box-sizing: border-box;
+  border-radius: 0.78vw;
+  margin: auto;
+  margin-bottom: 0.5vw;
+}
+.SignupPageForm p {
+  font-family: "Manrope", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 2.34vw;
+  line-height: 3.177vw;
+  text-align: center;
+  color: #1792dd;
+  margin-top: 1.614vw;
+  margin-bottom: 1.927vw;
+}
+#bottomElement {
+  font-family: "Manrope", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1vw;
+  line-height: 1.4vw;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+#bottomElement a {
+  text-decoration: none;
+  color: #1792dd;
+}
+#bottomElement div {
+  margin-bottom: 0.2vw;
+}

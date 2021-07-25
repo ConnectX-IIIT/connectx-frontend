@@ -1,0 +1,35 @@
+.FormInputDiv {
+  position: relative;
+}
+.FormLabel {
+  position: absolute;
+  top: 14%;
+  left: 14%;
+  font-family: "Manrope", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.25vw;
+  line-height: 2.13vw;
+  color: #d1d1d1;
+  pointer-events: none;
+  background-color: #fcfdff;
+  text-align: center;
+}
+.FormInput {
+  display: block;
+  border: 2px solid #a6a6a6;
+  box-sizing: border-box;
+  border-radius: 0.52vw;
+  width: 22.9vw;
+  height: 3vw;
+  margin: auto;
+  margin-bottom: 1.2vw;
+  padding-left: 1vw;
+  font-family: "Manrope", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.25vw;
+  line-height: 2.13vw;
+  color: #3b3a3a;
+  outline: none;
+}

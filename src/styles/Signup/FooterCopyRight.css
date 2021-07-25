@@ -1,0 +1,11 @@
+.FooterCopyRight {
+  font-family: "Manrope", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1vw;
+  line-height: 1.4vw;
+  color: rgba(18, 30, 53, 0.31);
+  text-align: center;
+  left: 45.833vw;
+  margin-top: 1vw;
+}
