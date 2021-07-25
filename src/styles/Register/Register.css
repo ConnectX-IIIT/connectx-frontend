@@ -16,8 +16,123 @@
   margin-bottom: 0.5vw;
   padding-top: 4.19vw;
 }
-#registerFormMobile {
-  padding-left: 4.85vw;
-  width: 10vw;
-  padding-top: 4.19vw;
+.registerFromInput {
+  position: relative;
+  width: 22.9vw;
+  margin-left: 4.8vw;
+}
+.RegisterFormInput {
+  display: block;
+  border: 2px solid #a6a6a6;
+  box-sizing: border-box;
+  border-radius: 0.52vw;
+  width: fit-content;
+  height: 3vw;
+  margin-bottom: 1vw;
+  padding-left: 1vw;
+  font-family: "Manrope", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.25vw;
+  line-height: 2.13vw;
+  color: #3b3a3a;
+  outline: none;
+  background-color: #fcfdff;
+}
+.RegisterFormLabel {
+  position: absolute;
+  top: 14%;
+  left: 5%;
+  font-family: "Manrope", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.25vw;
+  line-height: 2.13vw;
+  color: #d1d1d1;
+  pointer-events: none;
+  text-align: center;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+#Registerabout {
+  width: 31.8vw;
+  height: 5.06vw;
+  padding-top: 0.7vw;
+}
+.SelectRegister {
+  width: 9.375vw;
+  height: 3.05vw;
+  border: 2px solid #a6a6a6;
+  box-sizing: border-box;
+  border-radius: 0.49vw;
+  outline: none;
+  appearance: none;
+  font-family: "Manrope", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.25vw;
+  line-height: 1.97vw;
+  color: #717171;
+  /* color: #d1d1d1; */
+  padding-left: 1vw;
+}
+.SelectLabel {
+  position: absolute;
+  font-family: "Manrope", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.25vw;
+  line-height: 1.97vw;
+  color: #d1d1d1;
+  left: 15%;
+  top: 16.5%;
+  pointer-events: none;
+}
+.arrowSelectRegister {
+  position: absolute;
+  top: 34%;
+  right: 8%;
+  width: 10px;
+  height: 10px;
+  border: 3.5px solid #d1d1d1;
+  border-top: 0;
+  border-left: 0;
+  transform: rotate(45deg);
+  pointer-events: none;
+}
+.SelectOptionRegister {
+  font-family: "Manrope", sans-serif;
+  margin-left: 1vw;
+}
+#RegistrationPassingYear {
+  width: 15vw;
+  margin-left: 0.72vw;
+}
+#RegistrationjoiningYear {
+  width: 15vw;
+  margin-top: 0.72vw;
+}
+#arrowBatch {
+  right: 70%;
+}
+#arrowJoiningYear {
+  top: 46%;
+  right: 12.5%;
+}
+.radioLabel {
+  font-family: "Manrope", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.3vw;
+  line-height: 1.97vw;
+  color: #d1d1d1;
+  margin-right: 0.5vw;
+}
+.radioInput {
+  margin-right: 1vw;
+  width: 1.09vw;
+  height: 1.09vw;
 }
