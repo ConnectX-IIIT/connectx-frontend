@@ -4,6 +4,10 @@ import FormInput from "./signUpCompontents/FormInput";
 import Button from "./signUpCompontents/Button";
 import SignUpFormBottom from "./signUpCompontents/SignUpFormBottom";
 import FooterCopyRight from "./signUpCompontents/FooterCopyRight";
+import emailValidator from "email-validator";
+import { passwordValidate } from "../helper/password_validator";
+import Cookies from "js-cookie";
+import instance from "../helper/axios";
 
 import "../styles/SignIn/SignIn.css";
 
@@ -12,13 +16,47 @@ function SignIn() {
     email: "",
     password: "",
   });
+
   const handleInput = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     setUserRegistration({ ...userRegistration, [name]: value });
   };
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    let email = userRegistration.email;
+    let password = userRegistration.password;
+
+    if (!email || !password) {
+      return alert("Please fill all details properly!");
+    }
+
+    let emailValidation = emailValidator.validate(email);
+
+    if (!emailValidation) {
+      return alert("Enter a valid email");
+    }
+
+    let passwordValidation = passwordValidate(password);
+
+    if (!passwordValidation[0]) {
+      return alert(`${passwordValidation[1]}`);
+    }
+
+    try {
+      const signinRes = await instance.post(`/auth/signin`,
+        { email, password }
+      )
+
+      const signinData = signinRes.data;
+
+      Cookies.set("token", signinData.token, { expires: 1, secure: true });
+
+    } catch (error) {
+      return alert(`${error.response.data.error}`);
+    }
   };
 
   return (
