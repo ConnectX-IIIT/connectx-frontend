@@ -1,16 +1,10 @@
 import React from "react";
 import "../../styles/About/AboutPagePara.css";
 
-function AboutPagePara({ content, paraColor, paraWidth }) {
+function AboutPagePara({ content, paraStyle }) {
   return (
     <div>
-      <p
-        style={{
-          color: paraColor,
-          width: paraWidth,
-        }}
-        className="AboutPagePara"
-      >
+      <p style={paraStyle} className="AboutPagePara">
         {content}
       </p>
     </div>
