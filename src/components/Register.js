@@ -106,7 +106,7 @@ function Register() {
         >
           {role}
         </label>
-         
+
       </>
     );
   });
@@ -119,7 +119,7 @@ function Register() {
           id={`Registergender` + role}
           name="gender"
           onChange={handleTextChange}
-          value={role}
+          value={role[0]}
           key={`Registergender` + role}
           className="radioInput"
         />
@@ -130,7 +130,7 @@ function Register() {
         >
           {role}
         </label>
-         
+
       </>
     );
   });
@@ -154,22 +154,22 @@ function Register() {
             style={
               isActive
                 ? {
-                    transform: "translateY(-75%)",
-                    fontSize: "0.9vw",
-                    transition:
-                      "transform 0.2s ease-out , font-size 0.15s ease-out , background-color 0.15s ease-out",
-                    paddingLeft: "0.5vw",
-                    paddingRight: "0.5vw",
-                    left: "4%",
-                    backgroundColor: "#fcfdff",
-                  }
+                  transform: "translateY(-75%)",
+                  fontSize: "0.9vw",
+                  transition:
+                    "transform 0.2s ease-out , font-size 0.15s ease-out , background-color 0.15s ease-out",
+                  paddingLeft: "0.5vw",
+                  paddingRight: "0.5vw",
+                  left: "4%",
+                  backgroundColor: "#fcfdff",
+                }
                 : {
-                    transform: "translateY(0)",
-                    fontSize: "1.25vw",
-                    transition:
-                      "transform 0.2s ease-out , font-size 0.15s ease-out , background-color 0.15s ease-out",
-                    backgroundColor: "transparent",
-                  }
+                  transform: "translateY(0)",
+                  fontSize: "1.25vw",
+                  transition:
+                    "transform 0.2s ease-out , font-size 0.15s ease-out , background-color 0.15s ease-out",
+                  backgroundColor: "transparent",
+                }
             }
           >
             Mobile Number
@@ -191,23 +191,23 @@ function Register() {
             style={
               isActiveAbout
                 ? {
-                    transform: "translateY(-75%)",
-                    fontSize: "0.9vw",
-                    transition:
-                      "transform 0.2s ease-out , font-size 0.15s ease-out , background-color 0.15s ease-out",
-                    paddingLeft: "0.5vw",
-                    paddingRight: "0.5vw",
-                    left: "4%",
-                    backgroundColor: "#fcfdff",
-                  }
+                  transform: "translateY(-75%)",
+                  fontSize: "0.9vw",
+                  transition:
+                    "transform 0.2s ease-out , font-size 0.15s ease-out , background-color 0.15s ease-out",
+                  paddingLeft: "0.5vw",
+                  paddingRight: "0.5vw",
+                  left: "4%",
+                  backgroundColor: "#fcfdff",
+                }
                 : {
-                    transform: "translateY(0)",
-                    fontSize: "1.25vw",
-                    transition:
-                      "transform 0.2s ease-out , font-size 0.15s ease-out , background-color 0.15s ease-out",
-                    backgroundColor: "transparent",
-                    top: "9%",
-                  }
+                  transform: "translateY(0)",
+                  fontSize: "1.25vw",
+                  transition:
+                    "transform 0.2s ease-out , font-size 0.15s ease-out , background-color 0.15s ease-out",
+                  backgroundColor: "transparent",
+                  top: "9%",
+                }
             }
           >
             About
