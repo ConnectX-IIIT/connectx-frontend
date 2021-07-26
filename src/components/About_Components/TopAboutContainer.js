@@ -9,8 +9,10 @@ function TopAboutContainer() {
       <h1 className="TopAboutContainerHeading">About Connect-X</h1>
       <AboutPagePara
         content={ContentArray[0].AboutPageContent}
-        paraColor="#000000"
-        paraWidth="33vw"
+        paraStyle={{
+          color: "#000000",
+          width: "33vw",
+        }}
       />
     </div>
   );
