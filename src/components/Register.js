@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import Button from "./signUpCompontents/Button";
 import FooterCopyRight from "./signUpCompontents/FooterCopyRight";
 import "../styles/Register/Register.css";
+import { useStateValue } from "../helper/state_provider";
+import instance from "../helper/axios";
+import { useHistory } from "react-router-dom";
 
 const Batch = ["IPG-MTech", "IPG-MBA", "BCS", "MTech", "PhD"];
 const BatchList = Batch.map((batch) => {
@@ -13,7 +16,7 @@ const BatchList = Batch.map((batch) => {
 });
 
 const passingYear = [];
-for (let i = 0; i < 20; i++) {
+for (let i = 0; i < 25; i++) {
   passingYear.push(i + 2001);
 }
 const passingyearList = passingYear.map((year) => {
@@ -25,7 +28,7 @@ const passingyearList = passingYear.map((year) => {
 });
 
 const joiningYear = [];
-for (let i = 0; i < 24; i++) {
+for (let i = 0; i < 25; i++) {
   joiningYear.push(i + 1997);
 }
 const joiningyearList = joiningYear.map((year) => {
@@ -37,6 +40,10 @@ const joiningyearList = joiningYear.map((year) => {
 });
 
 function Register() {
+
+  const history = useHistory();
+  const [{ userDetails }] = useStateValue();
+
   const currentrole = ["Student", "Alumni"];
   const gender = ["Male", "Female", "Other"];
   const [userRegistration, setUserRegistration] = useState({
@@ -53,9 +60,42 @@ function Register() {
     const value = e.target.value;
     setUserRegistration({ ...userRegistration, [name]: value });
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(userRegistration);
+
+    let mobile = userRegistration.mobileNumber;
+    let description = userRegistration.about;
+    let PassingYear = userRegistration.passingYear;
+    let JoiningYear = userRegistration.joiningYear;
+    let batch = userRegistration.batch;
+    let currentRole = userRegistration.currentrole;
+    let Gender = userRegistration.gender;
+    let userId = userDetails._id;
+    let isAlumni;
+
+    if (!mobile || !description || !JoiningYear || !PassingYear || !batch || !currentrole || !gender) {
+      return alert("Please fill all details properly!");
+    }
+
+    if (mobile.length !== 10) {
+      return alert("Mobile should be of length 10!");
+    }
+
+    if (currentRole === "Alumni") {
+      isAlumni = true;
+    } else {
+      isAlumni = false;
+    }
+
+    try {
+      await instance.post(`/auth/register`,
+        { mobile, description, passingYear: PassingYear, joiningYear: JoiningYear, batch, isAlumni, gender: Gender, userId }
+      )
+      history.replace('/');
+
+    } catch (error) {
+      return alert(`${error.response.data.error}`);
+    }
   };
   const [isActive, setActive] = useState(false);
   const [isActiveAbout, setActiveAbout] = useState(false);

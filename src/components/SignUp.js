@@ -17,8 +17,7 @@ function SignUp() {
     name: "",
     email: "",
     password: "",
-    cPassword: "",
-    userId: "",
+    cPassword: ""
   });
 
   const handleInput = (e) => {
@@ -62,7 +61,6 @@ function SignUp() {
 
       const signupData = signupRes.data;
 
-      userRegistration.userId = signupData.userId;
       Cookies.set("token", signupData.token, { expires: 1, secure: true });
 
       history.push('/register');
