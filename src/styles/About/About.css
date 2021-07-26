@@ -2,26 +2,27 @@
   height: 40vw;
   width: 100%;
   background-color: #f1f3ff;
-  padding-top: 10.116536458333332vw;
+  padding-top: 9.5vw;
 }
 .AboutUsGroup {
   width: 46.2vw;
   object-fit: contain;
   z-index: 2;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 .AboutUsShadow {
   object-fit: contain;
   width: 62.5vw;
   position: absolute;
-  top: 0;
-  left: 0;
-  top: 86%;
+  top: 91%;
   left: -7%;
 }
 .AboutUsShadow2 {
   object-fit: contain;
   width: 61.2vw;
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 98%;
+  left: -16%;
 }
