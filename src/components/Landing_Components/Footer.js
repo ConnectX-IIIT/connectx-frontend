@@ -26,21 +26,21 @@ const Support = ["help.connectx@gmail.com", "(+91) 9113742865"];
 const GeneralList = General.map((General, index) => {
   return (
     <li key={index}>
-       <Link to="/">{General}</Link>
+      <Link to="/">{General}</Link>
     </li>
   );
 });
 const BrowseList = Browse.map((Browse, index) => {
   return (
     <li key={index}>
-  <Link to="/">{Browse}</Link>
+      <Link to="/">{Browse}</Link>
     </li>
   );
 });
 const SupportList = Support.map((Support, index) => {
   return (
     <li key={index}>
-     <Link to="/">{Support}</Link>
+      <Link to="/">{Support}</Link>
     </li>
   );
 });
@@ -81,7 +81,11 @@ function Footer() {
           </p>
         </div>
         <div className="footerRightIcons">
-          <div className="footerIcons">
+          <div
+            style={{
+              display: "flex",
+            }}
+          >
             <ImgStack
               normalDisplay={linkedInIcon}
               hoverDisplay={linkedInIconHover}
@@ -89,20 +93,11 @@ function Footer() {
             <ImgStack
               normalDisplay={githubIcon}
               hoverDisplay={githubIconHover}
-            />{" "}
+            />
             <ImgStack normalDisplay={mailIcon} hoverDisplay={mailIconHover} />
-            {/* <img
-              src={footerImage}
-              onMouseOver={() => setFooterImage(linkedInIconHover)}
-              onMouseOut={() => setFooterImage(linkedInIcon)}
-              alt="Linkedin icon"
-            /> */}
-            {/* <img src={footerImage} alt="Linkedin icon" />
-            <img src={githubIcon} alt="github icon" />
-            <img src={mailIcon} alt="mail icon" /> */}
           </div>
           <p>
-          <Link to="/">Privacy Policy</Link>
+            <Link to="/">Privacy Policy</Link>
             <span style={{ color: "#929292", padding: "0 0.5vw" }}>|</span>
             <Link to="/">Terms of Use</Link>
           </p>
