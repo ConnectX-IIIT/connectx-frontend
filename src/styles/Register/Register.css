@@ -148,6 +148,7 @@ input[type="number"]::-webkit-outer-spin-button {
   display: inline-block;
   vertical-align: middle;
   margin: 0.26vw;
+  margin-right: 1.3vw;
   cursor: pointer;
 }
 
@@ -160,7 +161,7 @@ input[type="number"]::-webkit-outer-spin-button {
   left: 0;
   content: "";
   background: #fff;
-  border: 2px solid #ddd;
+  border: 3px solid #d1d1d1;
   display: inline-block;
   vertical-align: middle;
   width: 1vw;
@@ -174,7 +175,13 @@ input[type="number"]::-webkit-outer-spin-button {
   border-radius: 0;
 }
 
-.radioInput:checked + .radioLabel:before {
+.radioInput:checked + .radioLabel::after {
   content: "\2713";
-  color: green;
+  color: #1dc002;
+  font-family: "Manrope", sans-serif;
+  font-weight: bolder;
+  font-size: 2.1vw;
+  position: absolute;
+  top: -6px;
+  left: 5%;
 }
