@@ -40,7 +40,6 @@ const joiningyearList = joiningYear.map((year) => {
 });
 
 function Register() {
-
   const history = useHistory();
   const [{ userDetails }] = useStateValue();
 
@@ -73,7 +72,15 @@ function Register() {
     let userId = userDetails._id;
     let isAlumni;
 
-    if (!mobile || !description || !JoiningYear || !PassingYear || !batch || !currentrole || !gender) {
+    if (
+      !mobile ||
+      !description ||
+      !JoiningYear ||
+      !PassingYear ||
+      !batch ||
+      !currentrole ||
+      !gender
+    ) {
       return alert("Please fill all details properly!");
     }
 
@@ -88,11 +95,17 @@ function Register() {
     }
 
     try {
-      await instance.post(`/auth/register`,
-        { mobile, description, passingYear: PassingYear, joiningYear: JoiningYear, batch, isAlumni, gender: Gender, userId }
-      )
-      history.replace('/');
-
+      await instance.post(`/auth/register`, {
+        mobile,
+        description,
+        passingYear: PassingYear,
+        joiningYear: JoiningYear,
+        batch,
+        isAlumni,
+        gender: Gender,
+        userId,
+      });
+      history.replace("/");
     } catch (error) {
       return alert(`${error.response.data.error}`);
     }
@@ -119,11 +132,11 @@ function Register() {
       let Batch = document.getElementsByClassName("SelectRegister")[0];
       Batch.style.color = "#717171";
     } else if (e.target.name === "passingYear") {
-      let Batch = document.getElementsByClassName("SelectRegister")[1];
-      Batch.style.color = "#717171";
+      let passingyear = document.getElementsByClassName("SelectRegister")[1];
+      passingyear.style.color = "#717171";
     } else if (e.target.name === "joiningYear") {
-      let Batch = document.getElementsByClassName("SelectRegister")[2];
-      Batch.style.color = "#717171";
+      let joiningyear = document.getElementsByClassName("SelectRegister")[2];
+      joiningyear.style.color = "#717171";
     }
   }
 
@@ -146,7 +159,6 @@ function Register() {
         >
           {role}
         </label>
-
       </>
     );
   });
@@ -170,7 +182,6 @@ function Register() {
         >
           {role}
         </label>
-
       </>
     );
   });
@@ -194,22 +205,22 @@ function Register() {
             style={
               isActive
                 ? {
-                  transform: "translateY(-75%)",
-                  fontSize: "0.9vw",
-                  transition:
-                    "transform 0.2s ease-out , font-size 0.15s ease-out , background-color 0.15s ease-out",
-                  paddingLeft: "0.5vw",
-                  paddingRight: "0.5vw",
-                  left: "4%",
-                  backgroundColor: "#fcfdff",
-                }
+                    transform: "translateY(-75%)",
+                    fontSize: "0.9vw",
+                    transition:
+                      "transform 0.2s ease-out , font-size 0.15s ease-out , background-color 0.15s ease-out",
+                    paddingLeft: "0.5vw",
+                    paddingRight: "0.5vw",
+                    left: "4%",
+                    backgroundColor: "#fcfdff",
+                  }
                 : {
-                  transform: "translateY(0)",
-                  fontSize: "1.25vw",
-                  transition:
-                    "transform 0.2s ease-out , font-size 0.15s ease-out , background-color 0.15s ease-out",
-                  backgroundColor: "transparent",
-                }
+                    transform: "translateY(0)",
+                    fontSize: "1.25vw",
+                    transition:
+                      "transform 0.2s ease-out , font-size 0.15s ease-out , background-color 0.15s ease-out",
+                    backgroundColor: "transparent",
+                  }
             }
           >
             Mobile Number
@@ -231,23 +242,23 @@ function Register() {
             style={
               isActiveAbout
                 ? {
-                  transform: "translateY(-75%)",
-                  fontSize: "0.9vw",
-                  transition:
-                    "transform 0.2s ease-out , font-size 0.15s ease-out , background-color 0.15s ease-out",
-                  paddingLeft: "0.5vw",
-                  paddingRight: "0.5vw",
-                  left: "4%",
-                  backgroundColor: "#fcfdff",
-                }
+                    transform: "translateY(-75%)",
+                    fontSize: "0.9vw",
+                    transition:
+                      "transform 0.2s ease-out , font-size 0.15s ease-out , background-color 0.15s ease-out",
+                    paddingLeft: "0.5vw",
+                    paddingRight: "0.5vw",
+                    left: "4%",
+                    backgroundColor: "#fcfdff",
+                  }
                 : {
-                  transform: "translateY(0)",
-                  fontSize: "1.25vw",
-                  transition:
-                    "transform 0.2s ease-out , font-size 0.15s ease-out , background-color 0.15s ease-out",
-                  backgroundColor: "transparent",
-                  top: "9%",
-                }
+                    transform: "translateY(0)",
+                    fontSize: "1.25vw",
+                    transition:
+                      "transform 0.2s ease-out , font-size 0.15s ease-out , background-color 0.15s ease-out",
+                    backgroundColor: "transparent",
+                    top: "9%",
+                  }
             }
           >
             About
