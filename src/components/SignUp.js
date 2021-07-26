@@ -9,10 +9,12 @@ import emailValidator from "email-validator";
 import { passwordValidate } from "../helper/password_validator";
 import Cookies from "js-cookie";
 import instance from "../helper/axios";
+import { useStateValue } from "../helper/state_provider";
 
 function SignUp() {
 
   const history = useHistory();
+  const [{ userDetails }, dispatch] = useStateValue();
   const [userRegistration, setUserRegistration] = useState({
     name: "",
     email: "",
@@ -60,6 +62,13 @@ function SignUp() {
       )
 
       const signupData = signupRes.data;
+
+      const userData = signupData.userData;
+
+      dispatch({
+        type: 'UPDATE_DETAILS',
+        userData: userData
+      })
 
       Cookies.set("token", signupData.token, { expires: 1, secure: true });
 

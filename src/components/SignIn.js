@@ -8,12 +8,13 @@ import emailValidator from "email-validator";
 import { passwordValidate } from "../helper/password_validator";
 import Cookies from "js-cookie";
 import instance from "../helper/axios";
-
 import "../styles/SignIn/SignIn.css";
+import { useStateValue } from "../helper/state_provider";
 
 function SignIn() {
 
   const history = useHistory();
+  const [{ userDetails }, dispatch] = useStateValue();
   const [userRegistration, setUserRegistration] = useState({
     email: "",
     password: "",
@@ -53,6 +54,13 @@ function SignIn() {
       )
 
       const signinData = signinRes.data;
+
+      const userData = signinData.userData;
+
+      dispatch({
+        type: 'UPDATE_DETAILS',
+        userData: userData
+      })
 
       Cookies.set("token", signinData.token, { expires: 1, secure: true });
 
