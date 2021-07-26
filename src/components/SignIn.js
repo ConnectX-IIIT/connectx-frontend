@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import FormInput from "./signUpCompontents/FormInput";
 import Button from "./signUpCompontents/Button";
 import SignUpFormBottom from "./signUpCompontents/SignUpFormBottom";
@@ -12,6 +12,8 @@ import instance from "../helper/axios";
 import "../styles/SignIn/SignIn.css";
 
 function SignIn() {
+
+  const history = useHistory();
   const [userRegistration, setUserRegistration] = useState({
     email: "",
     password: "",
@@ -53,6 +55,8 @@ function SignIn() {
       const signinData = signinRes.data;
 
       Cookies.set("token", signinData.token, { expires: 1, secure: true });
+
+      history.push('/home');
 
     } catch (error) {
       return alert(`${error.response.data.error}`);
