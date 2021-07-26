@@ -19,12 +19,17 @@ const passingYear = [];
 for (let i = 0; i < 25; i++) {
   passingYear.push(i + 2001);
 }
-const passingyearList = passingYear.map((year) => {
+
+function optionGenerator(year) {
   return (
     <option key={year} value={year} className="SelectOptionRegister">
       {year}
     </option>
   );
+}
+
+const passingyearList = passingYear.map((year) => {
+  return optionGenerator(year);
 });
 
 const joiningYear = [];
@@ -32,11 +37,7 @@ for (let i = 0; i < 25; i++) {
   joiningYear.push(i + 1997);
 }
 const joiningyearList = joiningYear.map((year) => {
-  return (
-    <option key={year} value={year} className="SelectOptionRegister">
-      {year}
-    </option>
-  );
+  return optionGenerator(year);
 });
 
 function Register() {
@@ -156,6 +157,9 @@ function Register() {
           htmlFor={`Registercurrent` + role}
           key={role}
           className="radioLabel"
+          style={{
+            color: "#717171",
+          }}
         >
           {role}
         </label>
@@ -179,6 +183,9 @@ function Register() {
           htmlFor={`Registergender` + role}
           key={role}
           className="radioLabel"
+          style={{
+            color: "#717171",
+          }}
         >
           {role}
         </label>
