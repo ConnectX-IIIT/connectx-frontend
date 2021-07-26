@@ -36,10 +36,9 @@ const joiningyearList = joiningYear.map((year) => {
   );
 });
 
-const currentrole = ["Student", "Alumni"];
-const gender = ["Male", "Female", "Other"];
-
 function Register() {
+  const currentrole = ["Student", "Alumni"];
+  const gender = ["Male", "Female", "Other"];
   const [userRegistration, setUserRegistration] = useState({
     mobileNumber: "",
     about: "",
@@ -93,7 +92,7 @@ function Register() {
       <>
         <input
           type="radio"
-          id={`Registerrole` + role}
+          id={`Registercurrent` + role}
           name="currentrole"
           onChange={handleTextChange}
           value={role}
@@ -101,7 +100,7 @@ function Register() {
           className="radioInput"
         />
         <label
-          htmlFor={`Registerrole` + role}
+          htmlFor={`Registercurrent` + role}
           key={role}
           className="radioLabel"
         >
@@ -118,7 +117,7 @@ function Register() {
         <input
           type="radio"
           id={`Registergender` + role}
-          name="currentrole"
+          name="gender"
           onChange={handleTextChange}
           value={role}
           key={`Registergender` + role}
