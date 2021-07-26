@@ -26,7 +26,7 @@ const Support = ["help.connectx@gmail.com", "(+91) 9113742865"];
 const GeneralList = General.map((General, index) => {
   return (
     <li key={index}>
-      <Link to="/">{General}</Link>
+      <Link to={`${General}`}>{General}</Link>
     </li>
   );
 });
