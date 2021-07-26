@@ -5,6 +5,7 @@ import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
 import Register from "./components/Register";
 import About from "./components/About";
+import Home from "./components/home_Components/home"
 import Cookies from "js-cookie";
 import instance from "./helper/axios";
 import { useStateValue } from "./helper/state_provider";
@@ -49,6 +50,7 @@ function App() {
         <Route exact path="/signin" component={SignIn} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/about" component={About} />
+        <Route exact path="/home" component={Home} />
       </Switch>
     </Router>
   );
