@@ -3,35 +3,64 @@ import React from "react";
 import GoogleLogin from "react-google-login";
 import { Link, useHistory } from "react-router-dom";
 import instance from "../../helper/axios";
+import { useStateValue } from "../../helper/state_provider";
 // import GoogleIcon from "../../assets/signinup_page/ic_google.svg";
 import "../../styles/Signup/SignUpFormBottom.css";
 
 function SignUpFormBottom() {
 
   const history = useHistory();
+  const [{ userDetails }, dispatch] = useStateValue();
 
   const responseSuccessGoogle = async (response) => {
-    try {
-      const googleLoginRes = await instance.post(`/auth/googlelogin`, {
-        tokenId: response.tokenId,
-      });
-      const googleLoginData = googleLoginRes.data;
 
-      Cookies.set("token", googleLoginData.token, { expires: 1, secure: true });
-      let pageType = window.location.pathname.split('/')[1];
+    let pageType = window.location.pathname.split('/')[1];
+    try {
 
       if (pageType === "signin") {
+
+        const googleSigninRes = await instance.post(`/auth/googlesignin`, {
+          tokenId: response.tokenId,
+        });
+        const googleSigninData = googleSigninRes.data;
+
+        const userData = googleSigninData.userData;
+
+        dispatch({
+          type: 'UPDATE_DETAILS',
+          userData: userData
+        })
+
+        Cookies.set("token", googleSigninData.token, { expires: 1, secure: true });
+
         history.push('/home');
+
       } else {
+
+        const googleSignupRes = await instance.post(`/auth/googlesignup`, {
+          tokenId: response.tokenId,
+        });
+        const googleSignupData = googleSignupRes.data;
+
+        const userData = googleSignupData.userData;
+
+        dispatch({
+          type: 'UPDATE_DETAILS',
+          userData: userData
+        })
+
+        Cookies.set("token", googleSignupData.token, { expires: 1, secure: true });
+
         history.push('/register');
       }
+
     } catch (error) {
-      return alert(`Server error occured!`);
+      return alert(`${error.response.data.error}`);
     }
   };
 
-  const responseErrorGoogle = (response) => {
-    alert(`Google login error!`);
+  const responseErrorGoogle = () => {
+    alert(`Google login failed!`);
   };
 
   return (
