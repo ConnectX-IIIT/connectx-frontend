@@ -164,10 +164,10 @@ input[type="number"]::-webkit-outer-spin-button {
   border: 3px solid #d1d1d1;
   display: inline-block;
   vertical-align: middle;
-  width: 1vw;
-  height: 1vw;
+  width: 0.8vw;
+  height: 0.8vw;
   padding: 0.14vw;
-  margin-right: 0.5vw;
+  margin-right: 1vw;
   text-align: center;
 }
 
@@ -176,12 +176,15 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .radioInput:checked + .radioLabel::after {
-  content: "\2713";
+  content: "";
   color: #1dc002;
-  font-family: "Manrope", sans-serif;
-  font-weight: bolder;
-  font-size: 2.1vw;
   position: absolute;
-  top: -0.395vw;
-  left: 5%;
+  top: -0.2vw;
+  left: 14%;
+  width: 0.576923077vw;
+  height: 1.34615385vw;
+  border: 3.5px solid #1dc002;
+  border-top: 0;
+  border-left: 0;
+  transform: rotate(45deg);
 }
