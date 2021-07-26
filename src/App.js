@@ -4,6 +4,7 @@ import Landing from "./components/Landing";
 import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
 import Register from "./components/Register";
+import About from "./components/About";
 import Cookies from "js-cookie";
 import instance from "./helper/axios";
 import { useStateValue } from "./helper/state_provider";
@@ -47,6 +48,7 @@ function App() {
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/signin" component={SignIn} />
         <Route exact path="/register" component={Register} />
+        <Route exact path="/about" component={About} />
       </Switch>
     </Router>
   );
