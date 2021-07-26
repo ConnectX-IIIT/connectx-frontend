@@ -7,7 +7,7 @@
 }
 .RegisterPageForm {
   width: 66.5vw;
-  height: 35.319vw;
+  /* height: 35.319vw; */
   background: #fcfdff;
   border: 2px solid #a6a6a6;
   box-sizing: border-box;
@@ -15,6 +15,7 @@
   margin: auto;
   margin-bottom: 0.5vw;
   padding-top: 4.19vw;
+  padding-bottom: 2.7vw;
 }
 .registerFromInput {
   position: relative;
