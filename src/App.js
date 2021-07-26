@@ -5,7 +5,7 @@ import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
 import Register from "./components/Register";
 import About from "./components/About";
-import Home from "./components/home_Components/home"
+import Home from "./components/Home";
 import Cookies from "js-cookie";
 import instance from "./helper/axios";
 import { useStateValue } from "./helper/state_provider";
