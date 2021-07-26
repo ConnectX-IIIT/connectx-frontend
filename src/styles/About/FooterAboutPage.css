@@ -1,0 +1,22 @@
+.FooterAboutPage {
+  background-color: #f1f3ff;
+  width: 100%;
+  height: 5.5vw;
+  padding: 1.5vw 3.57vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.AboutPageParaFooter {
+  font-family: "Manrope", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.25vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.AboutPageParaFooter a {
+  text-decoration: none;
+  color: #2e2e46;
+}
