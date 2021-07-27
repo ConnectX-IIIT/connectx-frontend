@@ -20,6 +20,16 @@ function FormInput({
       setActive(false);
     }
   }
+  function handleFocus(e) {
+    setActive(true);
+  }
+  const handleBlur = (e) => {
+    if (e.target.value !== "") {
+      setActive(true);
+    } else {
+      setActive(false);
+    }
+  };
 
   return (
     <div className="FormInputDiv">
@@ -29,6 +39,8 @@ function FormInput({
         id={inputName}
         value={inputValue}
         onChange={handleTextChange}
+        onSelectCapture={handleFocus}
+        onBlur={handleBlur}
         className="FormInput"
         style={style}
       />

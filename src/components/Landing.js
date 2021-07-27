@@ -19,7 +19,7 @@ function Landing() {
 
   const token = Cookies.get('token');
   if (token) {
-    history.push('/register')
+    history.push('/home')
   }
 
   return (

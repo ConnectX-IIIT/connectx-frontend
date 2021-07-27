@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import Button from "./signUpCompontents/Button";
 import FooterCopyRight from "./signUpCompontents/FooterCopyRight";
 import "../styles/Register/Register.css";
+import { useStateValue } from "../helper/state_provider";
+import instance from "../helper/axios";
+import { useHistory } from "react-router-dom";
 
 const Batch = ["IPG-MTech", "IPG-MBA", "BCS", "MTech", "PhD"];
 const BatchList = Batch.map((batch) => {
@@ -13,30 +16,34 @@ const BatchList = Batch.map((batch) => {
 });
 
 const passingYear = [];
-for (let i = 0; i < 20; i++) {
+for (let i = 0; i < 25; i++) {
   passingYear.push(i + 2001);
 }
-const passingyearList = passingYear.map((year) => {
+
+function optionGenerator(year) {
   return (
     <option key={year} value={year} className="SelectOptionRegister">
       {year}
     </option>
   );
+}
+
+const passingyearList = passingYear.map((year) => {
+  return optionGenerator(year);
 });
 
 const joiningYear = [];
-for (let i = 0; i < 24; i++) {
+for (let i = 0; i < 25; i++) {
   joiningYear.push(i + 1997);
 }
 const joiningyearList = joiningYear.map((year) => {
-  return (
-    <option key={year} value={year} className="SelectOptionRegister">
-      {year}
-    </option>
-  );
+  return optionGenerator(year);
 });
 
 function Register() {
+  const history = useHistory();
+  const [{ userDetails }] = useStateValue();
+
   const currentrole = ["Student", "Alumni"];
   const gender = ["Male", "Female", "Other"];
   const [userRegistration, setUserRegistration] = useState({
@@ -53,9 +60,56 @@ function Register() {
     const value = e.target.value;
     setUserRegistration({ ...userRegistration, [name]: value });
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(userRegistration);
+
+    let mobile = userRegistration.mobileNumber;
+    let description = userRegistration.about;
+    let PassingYear = userRegistration.passingYear;
+    let JoiningYear = userRegistration.joiningYear;
+    let batch = userRegistration.batch;
+    let currentRole = userRegistration.currentrole;
+    let Gender = userRegistration.gender;
+    let userId = userDetails._id;
+    let isAlumni;
+
+    if (
+      !mobile ||
+      !description ||
+      !JoiningYear ||
+      !PassingYear ||
+      !batch ||
+      !currentrole ||
+      !gender
+    ) {
+      return alert("Please fill all details properly!");
+    }
+
+    if (mobile.length !== 10) {
+      return alert("Mobile should be of length 10!");
+    }
+
+    if (currentRole === "Alumni") {
+      isAlumni = true;
+    } else {
+      isAlumni = false;
+    }
+
+    try {
+      await instance.post(`/auth/register`, {
+        mobile,
+        description,
+        passingYear: PassingYear,
+        joiningYear: JoiningYear,
+        batch,
+        isAlumni,
+        gender: Gender,
+        userId,
+      });
+      history.replace("/");
+    } catch (error) {
+      return alert(`${error.response.data.error}`);
+    }
   };
   const [isActive, setActive] = useState(false);
   const [isActiveAbout, setActiveAbout] = useState(false);
@@ -79,11 +133,11 @@ function Register() {
       let Batch = document.getElementsByClassName("SelectRegister")[0];
       Batch.style.color = "#717171";
     } else if (e.target.name === "passingYear") {
-      let Batch = document.getElementsByClassName("SelectRegister")[1];
-      Batch.style.color = "#717171";
+      let passingyear = document.getElementsByClassName("SelectRegister")[1];
+      passingyear.style.color = "#717171";
     } else if (e.target.name === "joiningYear") {
-      let Batch = document.getElementsByClassName("SelectRegister")[2];
-      Batch.style.color = "#717171";
+      let joiningyear = document.getElementsByClassName("SelectRegister")[2];
+      joiningyear.style.color = "#717171";
     }
   }
 
@@ -103,10 +157,12 @@ function Register() {
           htmlFor={`Registercurrent` + role}
           key={role}
           className="radioLabel"
+          style={{
+            color: "#717171",
+          }}
         >
           {role}
         </label>
-         
       </>
     );
   });
@@ -119,7 +175,7 @@ function Register() {
           id={`Registergender` + role}
           name="gender"
           onChange={handleTextChange}
-          value={role}
+          value={role[0]}
           key={`Registergender` + role}
           className="radioInput"
         />
@@ -127,10 +183,12 @@ function Register() {
           htmlFor={`Registergender` + role}
           key={role}
           className="radioLabel"
+          style={{
+            color: "#717171",
+          }}
         >
           {role}
         </label>
-         
       </>
     );
   });
