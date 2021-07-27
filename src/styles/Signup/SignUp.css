@@ -1,5 +1,7 @@
 .SignUpMainPage {
   width: 100%;
+  height: auto;
+  min-height: 100vh;
   background-color: #f6f8ff;
   padding-top: 6.5vw;
   position: relative;
