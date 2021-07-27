@@ -4,8 +4,15 @@ import DefaultUserProfile from "../assets/profile/user_profile_default_icon.svg"
 import DefaultUserCover from "../assets/profile/user_profile_default_cover.svg";
 import ChangePhotoIcon from "../assets/profile/change_photo_icon.svg";
 import "../styles/ExtraDetailsPage/PhotoUpload.css";
+import axios from "axios";
+import { useStateValue } from "../helper/state_provider";
+import { useHistory } from "react-router-dom";
+import Cookies from "js-cookie";
 
 function PhotoUpload() {
+
+  const history = useHistory();
+  const [{ userDetails }, dispatch] = useStateValue();
   const [userRegistration, setUserRegistration] = useState({
     photo: "",
     coverPhoto: "",
@@ -44,22 +51,25 @@ function PhotoUpload() {
     let userId = userDetails._id;
     let photo = userRegistration.photo;
 
+    const token = Cookies.get('token');
+
     if (!photo) {
       return alert("Please fill all details properly!");
     }
 
     try {
-      await instance.post(`/`, {
-        mobile,
-        description,
-        passingYear: PassingYear,
-        joiningYear: JoiningYear,
-        batch,
-        isAlumni,
-        gender: Gender,
-        userId,
+      const res = await axios.post(`http://localhost:5000/user/uploadprofile`, {
+        headers: {
+          Authorization: `${token}`,
+        },
+        body: {
+          photo,
+          userId
+        }
       });
-      history.replace("/");
+
+      console.log(res);
+
     } catch (error) {
       return alert(`${error.response.data.error}`);
     }
