@@ -4,21 +4,17 @@ import GoogleLogin from "react-google-login";
 import { Link, useHistory } from "react-router-dom";
 import instance from "../../helper/axios";
 import { useStateValue } from "../../helper/state_provider";
-// import GoogleIcon from "../../assets/signinup_page/ic_google.svg";
+import GoogleIcon from "../../assets/signinup_page/ic_google.svg";
 import "../../styles/Signup/SignUpFormBottom.css";
 
 function SignUpFormBottom() {
-
   const history = useHistory();
   const [{ userDetails }, dispatch] = useStateValue();
 
   const responseSuccessGoogle = async (response) => {
-
-    let pageType = window.location.pathname.split('/')[1];
+    let pageType = window.location.pathname.split("/")[1];
     try {
-
       if (pageType === "signin") {
-
         const googleSigninRes = await instance.post(`/auth/googlesignin`, {
           tokenId: response.tokenId,
         });
@@ -27,16 +23,17 @@ function SignUpFormBottom() {
         const userData = googleSigninData.userData;
 
         dispatch({
-          type: 'UPDATE_DETAILS',
-          userData: userData
-        })
+          type: "UPDATE_DETAILS",
+          userData: userData,
+        });
 
-        Cookies.set("token", googleSigninData.token, { expires: 1, secure: true });
+        Cookies.set("token", googleSigninData.token, {
+          expires: 1,
+          secure: true,
+        });
 
-        history.push('/home');
-
+        history.push("/home");
       } else {
-
         const googleSignupRes = await instance.post(`/auth/googlesignup`, {
           tokenId: response.tokenId,
         });
@@ -45,15 +42,17 @@ function SignUpFormBottom() {
         const userData = googleSignupData.userData;
 
         dispatch({
-          type: 'UPDATE_DETAILS',
-          userData: userData
-        })
+          type: "UPDATE_DETAILS",
+          userData: userData,
+        });
 
-        Cookies.set("token", googleSignupData.token, { expires: 1, secure: true });
+        Cookies.set("token", googleSignupData.token, {
+          expires: 1,
+          secure: true,
+        });
 
-        history.push('/register');
+        history.push("/register");
       }
-
     } catch (error) {
       return alert(`${error.response.data.error}`);
     }
@@ -70,10 +69,14 @@ function SignUpFormBottom() {
         {/* <img onClick={handleSubmit} src={GoogleIcon} alt="Google" /> */}
         <GoogleLogin
           clientId="983656845468-hlvmorv2emsk7l94rmmfi98i4qs0828p.apps.googleusercontent.com"
-          buttonText="Login with google"
+          // buttonText={""}
+          render={(renderProps) => (
+            <img src={GoogleIcon} alt="Google" onClick={renderProps.onClick} />
+          )}
           onSuccess={responseSuccessGoogle}
           onFailure={responseErrorGoogle}
           cookiePolicy={"single_host_origin"}
+          style={{}}
         />
       </div>
       <Link to="/" id="SignUpformBottomAnchor">

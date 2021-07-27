@@ -6,7 +6,7 @@
   position: relative;
 }
 .RegisterPageForm {
-  width: 66.5vw;
+  width: 52.5vw;
   /* height: 35.319vw; */
   background: #fcfdff;
   border: 2px solid #a6a6a6;
@@ -20,7 +20,7 @@
 .registerFromInput {
   position: relative;
   width: 22.9vw;
-  margin-left: 4.8vw;
+  margin-left: 3.8vw;
 }
 .RegisterFormInput {
   display: block;
