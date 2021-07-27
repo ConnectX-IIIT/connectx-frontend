@@ -1,9 +1,11 @@
 .SignInMainPage {
   width: 100%;
-  height: 100vh;
+  height: auto;
+  min-height: 100vh;
   background-color: #f6f8ff;
   padding-top: 8.68vw;
   position: relative;
+  padding-bottom: 1vw;
 }
 .SignInPageForm {
   width: 28.5vw;
