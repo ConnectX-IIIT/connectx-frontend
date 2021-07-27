@@ -33,3 +33,9 @@
   position: relative;
   top: -4vw;
 }
+#photoUploadContent {
+  font-family: "Manrope", sans-serif;
+  font-style: normal;
+  text-align: center;
+  margin-bottom: 7vw;
+}
