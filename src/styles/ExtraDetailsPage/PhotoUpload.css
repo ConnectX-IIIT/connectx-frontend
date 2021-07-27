@@ -1,0 +1,35 @@
+.PhotoUpload {
+  width: 100%;
+  height: 100vh;
+  background-color: #f6f8ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.PhotoUplaodForm {
+  max-width: 384px;
+  width: 90vw;
+  height: 70vh;
+  max-height: 526px;
+  margin: auto;
+  background: #fcfdff;
+  border: 2px solid #a6a6a6;
+  box-sizing: border-box;
+  border-radius: 1.3vw;
+  padding-top: min(48px, 5.55vh);
+}
+.UserProfileImage {
+  object-fit: cover;
+}
+#UserProfileCover {
+  width: 290px;
+  height: 128px;
+  border-radius: min(4vw, 18px);
+}
+#UserProfilePhoto {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  position: relative;
+  top: -4vw;
+}
