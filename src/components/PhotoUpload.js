@@ -10,7 +10,6 @@ import { useHistory } from "react-router-dom";
 import Cookies from "js-cookie";
 
 function PhotoUpload() {
-
   const history = useHistory();
   const [{ userDetails }, dispatch] = useStateValue();
   const [userRegistration, setUserRegistration] = useState({
@@ -51,7 +50,7 @@ function PhotoUpload() {
     let userId = userDetails._id;
     let photo = userRegistration.photo;
 
-    const token = Cookies.get('token');
+    const token = Cookies.get("token");
 
     if (!photo) {
       return alert("Please fill all details properly!");
@@ -64,12 +63,11 @@ function PhotoUpload() {
         },
         body: {
           photo,
-          userId
-        }
+          userId,
+        },
       });
 
       console.log(res);
-
     } catch (error) {
       return alert(`${error.response.data.error}`);
     }
@@ -139,9 +137,11 @@ function PhotoUpload() {
             alt="change_profile"
             style={{
               position: "absolute",
-              bottom: "-15%",
-              right: "8%",
+              bottom: "54%",
+              right: "34%",
               cursor: "pointer",
+              width: "33px",
+              zIndex: "1",
             }}
             onClick={() => {
               document.getElementsByClassName("PhotoUploadInput")[1].click();
@@ -162,33 +162,30 @@ function PhotoUpload() {
             id="UserProfilePhoto"
           />
         </div>
-
+        <div id="photoUploadContent">
+          <p
+            style={{
+              fontWeight: "600",
+              fontSize: "20px",
+              color: "#383838",
+            }}
+          >
+            Akash Gupta
+          </p>
+          <p
+            style={{
+              fontWeight: "500",
+              fontSize: "15px",
+              color: "#BDBFC4",
+            }}
+          >
+            abcdefgh@xyz.com
+          </p>
+        </div>
         <Button />
       </form>
     </div>
   );
-}
-
-// function previewFile() {
-//   var preview = document.querySelector('img');
-//   var file    = document.querySelector('input[type=file]').files[0];
-//   var reader  = new FileReader();
-
-//   reader.onloadend = function () {
-//     preview.src = reader.result;
-//   }
-
-//   if (file) {1
-//     reader.readAsDataURL(file);
-//   } else {
-//     preview.src = "";
-//   }
-// }<input
-{
-  /* type="file" onchange="previewFile()"><br> */
-}
-{
-  /* <img src="" height="200" alt="Image preview..."></img> */
 }
 
 export default PhotoUpload;
