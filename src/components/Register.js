@@ -275,7 +275,7 @@ function Register() {
         <div
           style={{
             position: "relative",
-            marginLeft: "4.8vw",
+            marginLeft: "3.8vw",
             width: "fit-content",
           }}
         >
@@ -323,7 +323,7 @@ function Register() {
         <div
           style={{
             position: "relative",
-            marginLeft: "4.8vw",
+            marginLeft: "3.8vw",
             width: "fit-content",
           }}
         >
@@ -348,7 +348,7 @@ function Register() {
         <div
           style={{
             position: "relative",
-            marginLeft: "4.8vw",
+            marginLeft: "3.8vw",
             marginTop: "1.5vw",
             width: "fit-content",
             marginBottom: "2.5vw",
