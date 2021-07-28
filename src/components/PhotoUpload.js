@@ -4,15 +4,16 @@ import DefaultUserProfile from "../assets/profile/user_profile_default_icon.svg"
 import DefaultUserCover from "../assets/profile/user_profile_default_cover.svg";
 import ChangePhotoIcon from "../assets/profile/change_photo_icon.svg";
 import "../styles/ExtraDetailsPage/PhotoUpload.css";
-import axios from "axios";
 import { useStateValue } from "../helper/state_provider";
 import { useHistory } from "react-router-dom";
 import Cookies from "js-cookie";
 import instance from "../helper/axios";
 
 function PhotoUpload() {
+
   const history = useHistory();
   const [{ userDetails }, dispatch] = useStateValue();
+
   const [userRegistration, setUserRegistration] = useState({
     photo: "",
     coverPhoto: "",
@@ -23,6 +24,7 @@ function PhotoUpload() {
   //   const value = e.target.value;
   //   setUserRegistration({ ...userRegistration, [name]: value });
   // };
+
   const previewFile = (index) => (e) => {
     let preview = document.getElementsByClassName("UserProfileImage")[index];
 
