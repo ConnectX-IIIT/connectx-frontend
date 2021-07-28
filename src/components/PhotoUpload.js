@@ -8,6 +8,7 @@ import axios from "axios";
 import { useStateValue } from "../helper/state_provider";
 import { useHistory } from "react-router-dom";
 import Cookies from "js-cookie";
+import instance from "../helper/axios";
 
 function PhotoUpload() {
   const history = useHistory();
@@ -43,33 +44,47 @@ function PhotoUpload() {
       [e.target.name]: e.target.files[0],
     });
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(userRegistration);
 
-    let userId = userDetails._id;
-    let photo = userRegistration.photo;
+    const formDataForProfile = new FormData();
+    const formDataForCover = new FormData();
+    formDataForProfile.append('photo', userRegistration.photo);
+    formDataForCover.append('coverPhoto', userRegistration.coverPhoto);
+    formDataForCover.append('userId', userDetails._id);
+    formDataForProfile.append('userId', userDetails._id);
 
     const token = Cookies.get("token");
 
-    if (!photo) {
-      return alert("Please fill all details properly!");
+    if (!userRegistration.photo && !userRegistration.coverPhoto) {
+      return;
     }
 
     try {
-      const res = await axios.post(`http://localhost:5000/user/uploadprofile`, {
-        headers: {
-          Authorization: `${token}`,
-        },
-        body: {
-          photo,
-          userId,
-        },
-      });
 
-      console.log(res);
+      if (userRegistration.photo) {
+
+        await instance.post(`/user/uploadprofile`, formDataForProfile
+          , {
+            headers: {
+              Authorization: `${token}`,
+            }
+          });
+      }
+
+      if (userRegistration.coverPhoto) {
+
+        await instance.post(`/user/uploadbackground`, formDataForCover
+          , {
+            headers: {
+              Authorization: `${token}`,
+            }
+          });
+      }
+
     } catch (error) {
-      return alert(`${error.response.data.error}`);
+      return alert(`${error}`);
     }
   };
 
@@ -83,6 +98,7 @@ function PhotoUpload() {
     <div className="PhotoUpload">
       <form
         action=""
+        method="post"
         encType="multipart/form-data"
         onSubmit={handleSubmit}
         className="PhotoUplaodForm"
@@ -110,7 +126,7 @@ function PhotoUpload() {
           />
           <input
             type="file"
-            name="photo"
+            name="coverPhoto"
             onChange={previewFile(0)}
             className="PhotoUploadInput"
             style={{ display: "none" }}
