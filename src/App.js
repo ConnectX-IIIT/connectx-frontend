@@ -48,7 +48,7 @@ function App() {
         <Route exact path="/signin" component={SignIn} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/about" component={About} />
-        <Route exact path="/home" component={Home} />
+        <Route path="/home" component={Home} />
         <Route exact path="/photoupload" component={PhotoUpload} />
       </Switch>
     </Router>
