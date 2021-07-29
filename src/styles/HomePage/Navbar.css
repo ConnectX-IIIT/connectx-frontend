@@ -1,0 +1,29 @@
+.Navbar {
+  width: 100%;
+  height: 81px;
+  border-bottom: 2px solid #c4c4c4;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.HomeNavLeft {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ConnectxLogo {
+  width: 10.67vw;
+  object-fit: contain;
+}
+.NavbarSearchIcon {
+  position: absolute;
+  top: 20%;
+  right: 1%;
+  object-fit: contain;
+  width: 1.85vw;
+}
+.HomeNavRight {
+  display: flex;
+  align-items: center;
+}
