@@ -1,0 +1,20 @@
+.ImgStackHomeContainer {
+  width: 3vw;
+  height: 3vw;
+  position: relative;
+}
+.ImgStackPhoto {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3vw;
+  height: 3vw;
+  cursor: pointer;
+  transition: opacity 0.4s ease-in-out;
+}
+.ImgStackVisible {
+  opacity: 1;
+}
+.ImgStackHidden {
+  opacity: 0;
+}
