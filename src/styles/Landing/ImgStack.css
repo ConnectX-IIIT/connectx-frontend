@@ -5,7 +5,7 @@
   margin-left: 0.7vw;
   margin-bottom: 0.7vw;
 }
-.commonImg {
+.commonImgHome {
   position: absolute;
   top: 0;
   left: 0;
@@ -16,12 +16,6 @@
 .normalDisplay {
   opacity: 1;
 }
-/* .normalDisplay:hover {
-  opacity: 0;
-} */
 .hoverDisplay {
   opacity: 0;
 }
-/* .hoverDisplay:hover {
-  opacity: 1;
-} */
