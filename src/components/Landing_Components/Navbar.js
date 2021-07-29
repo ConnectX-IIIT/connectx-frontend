@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../../styles/Navbar.css";
+import "../../styles/Landing/Navbar.css";
 import ConnectxLogo from "../../assets/_logo/svg/logo_2.0.svg";
 
 function Navbar() {

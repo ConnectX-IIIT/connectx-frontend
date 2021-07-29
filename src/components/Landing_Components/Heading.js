@@ -1,6 +1,6 @@
 import React from "react";
 import ContentPara from "./ContentPara";
-import "../../styles/Heading.css";
+import "../../styles/Landing/Heading.css";
 
 function Heading({ Heading_content, headingWidth, Heading_para, isRight }) {
   return (

@@ -1,6 +1,6 @@
 import React from "react";
 import Heading from "./Heading";
-import "../../styles/Main_outer_container.css";
+import "../../styles/Landing/Main_outer_container.css";
 
 function MainOuterContainer({ Background_color, isLeft, data, photo }) {
   return (

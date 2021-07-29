@@ -1,5 +1,5 @@
 import React from "react";
-import "../../styles/ContentPara.css";
+import "../../styles/Landing/ContentPara.css";
 
 function ContentPara({ Content }) {
   return (
