@@ -9,7 +9,7 @@ import githubIcon from "../../assets/footer/ic_github.svg";
 import githubIconHover from "../../assets/footer/h_ic_github.svg";
 import mailIcon from "../../assets/footer/ic_mail.svg";
 import mailIconHover from "../../assets/footer/h_ic_mail.svg";
-import "../../styles/Footer.css";
+import "../../styles/Landing/Footer.css";
 
 const General = ["Login", "Sign-Up", "About", "Home", "Admin"];
 const Browse = [

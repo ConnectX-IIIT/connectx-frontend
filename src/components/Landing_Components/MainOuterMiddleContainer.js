@@ -1,5 +1,5 @@
 import React from "react";
-import "../../styles/MainOuterMiddleContainer.css";
+import "../../styles/Landing/MainOuterMiddleContainer.css";
 import MiddleContainerPhoto1 from "../../assets/landing_page/container_five/container_fivecontainer_five_2.svg";
 import MiddleContainerPhoto2 from "../../assets/landing_page/container_five/container_fivecontainer_five_1.svg";
 import MiddleContainerPhoto3 from "../../assets/landing_page/container_five/container_five_3.svg";
