@@ -47,17 +47,22 @@ function PhotoUpload() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log(
-    //   document.getElementsByClassName("UserProfileImage")[1].naturalHeight,
-    //   "hello"
-    // );
+
+    const photoHeight = document.getElementsByClassName("UserProfileImage")[1].naturalHeight;
+    const photoWidth = document.getElementsByClassName("UserProfileImage")[1].naturalWidth;
+    const coverPhotoHeight = document.getElementsByClassName("UserProfileImage")[0].naturalHeight;
+    const coverPhotoWidth = document.getElementsByClassName("UserProfileImage")[0].naturalWidth;
 
     const formDataForProfile = new FormData();
     const formDataForCover = new FormData();
     formDataForProfile.append("photo", userRegistration.photo);
     formDataForCover.append("coverPhoto", userRegistration.coverPhoto);
     formDataForCover.append("userId", userDetails._id);
+    formDataForCover.append("height", coverPhotoHeight);
+    formDataForCover.append("width", coverPhotoWidth);
     formDataForProfile.append("userId", userDetails._id);
+    formDataForProfile.append("height", photoHeight);
+    formDataForProfile.append("width", photoWidth);
 
     const token = Cookies.get("token");
 
