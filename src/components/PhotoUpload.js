@@ -10,7 +10,6 @@ import Cookies from "js-cookie";
 import instance from "../helper/axios";
 
 function PhotoUpload() {
-
   const history = useHistory();
   const [{ userDetails }, dispatch] = useStateValue();
 
@@ -35,7 +34,6 @@ function PhotoUpload() {
     reader.onloadend = function () {
       preview.src = reader.result;
     };
-
     if (file) {
       reader.readAsDataURL(file);
     } else {
@@ -50,12 +48,21 @@ function PhotoUpload() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const photoHeight = document.getElementsByClassName("UserProfileImage")[1].naturalHeight;
+    const photoWidth = document.getElementsByClassName("UserProfileImage")[1].naturalWidth;
+    const coverPhotoHeight = document.getElementsByClassName("UserProfileImage")[0].naturalHeight;
+    const coverPhotoWidth = document.getElementsByClassName("UserProfileImage")[0].naturalWidth;
+
     const formDataForProfile = new FormData();
     const formDataForCover = new FormData();
-    formDataForProfile.append('photo', userRegistration.photo);
-    formDataForCover.append('coverPhoto', userRegistration.coverPhoto);
-    formDataForCover.append('userId', userDetails._id);
-    formDataForProfile.append('userId', userDetails._id);
+    formDataForProfile.append("photo", userRegistration.photo);
+    formDataForCover.append("coverPhoto", userRegistration.coverPhoto);
+    formDataForCover.append("userId", userDetails._id);
+    formDataForCover.append("height", coverPhotoHeight);
+    formDataForCover.append("width", coverPhotoWidth);
+    formDataForProfile.append("userId", userDetails._id);
+    formDataForProfile.append("height", photoHeight);
+    formDataForProfile.append("width", photoWidth);
 
     const token = Cookies.get("token");
 
@@ -64,27 +71,21 @@ function PhotoUpload() {
     }
 
     try {
-
       if (userRegistration.photo) {
-
-        await instance.post(`/user/uploadprofile`, formDataForProfile
-          , {
-            headers: {
-              Authorization: `${token}`,
-            }
-          });
+        await instance.post(`/user/uploadprofile`, formDataForProfile, {
+          headers: {
+            Authorization: `${token}`,
+          },
+        });
       }
 
       if (userRegistration.coverPhoto) {
-
-        await instance.post(`/user/uploadbackground`, formDataForCover
-          , {
-            headers: {
-              Authorization: `${token}`,
-            }
-          });
+        await instance.post(`/user/uploadbackground`, formDataForCover, {
+          headers: {
+            Authorization: `${token}`,
+          },
+        });
       }
-
     } catch (error) {
       return alert(`${error}`);
     }
