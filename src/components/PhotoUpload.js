@@ -87,7 +87,7 @@ function PhotoUpload() {
         });
       }
     } catch (error) {
-      return alert(`${error}`);
+      return alert(`${error.response.data.error}`);
     }
   };
 
