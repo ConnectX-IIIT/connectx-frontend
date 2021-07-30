@@ -1,18 +1,17 @@
 import React, { useState } from "react";
 import {
   BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useParams,
   useRouteMatch,
   NavLink,
 } from "react-router-dom";
+
+import "../../styles/HomePage/Navbar.css";
+
 import FormInput from "../signUpCompontents/FormInput";
 import ImgStackHome from "./ImgStackHome";
 import connectxlogo from "../../assets/_logo/svg/logo.svg";
 import searchIcon from "../../assets/home/top_navbar/ic_search_icon.svg";
-import "../../styles/HomePage/Navbar.css";
+
 import homeImage from "../../assets/home/top_navbar/ic_home.svg";
 import hoverHomeImage from "../../assets/home/top_navbar/h_ic_home.svg";
 import activeHomeImage from "../../assets/home/top_navbar/a_ic_home.svg";
@@ -29,8 +28,10 @@ import messageImage from "../../assets/home/top_navbar/ic_messages.svg";
 import hoverMessageImage from "../../assets/home/top_navbar/h_ic_messages.svg";
 import activeMessageImage from "../../assets/home/top_navbar/a_ic_messages.svg";
 
+import UserProfileDefaultIcon from "../../assets/profile/user_profile_default_icon.svg";
+
 function Navbar() {
-  let { path, url } = useRouteMatch();
+  let { url } = useRouteMatch();
   const [userInput, setUserInput] = useState({
     searchedText: "",
   });
@@ -43,22 +44,6 @@ function Navbar() {
 
   const [navLocation, setNavLocation] = useState("home");
 
-  const [isNavActive, setIsNavActive] = useState([true, false, false, false]);
-  const isNavActiveFunction = (index) => {
-    console.log(index);
-    if (isNavActive[index]) {
-      return;
-    } else {
-      let temparr = [...isNavActive];
-      for (let i = 0; i < temparr.length; i++) {
-        if (temparr[i]) {
-          temparr[i] = false;
-        }
-      }
-      temparr[index] = true;
-      setIsNavActive(temparr);
-    }
-  };
   return (
     <nav className="Navbar">
       <div className="HomeNavLeft">
@@ -116,14 +101,17 @@ function Navbar() {
             isActive={navLocation === "/home/message" ? true : false}
           />
         </NavLink>
+
+        <div className="NavbarUserProfile">
+          <img
+            src={UserProfileDefaultIcon}
+            alt="user profile icon"
+            className="NavbarUserProfile"
+          />
+        </div>
       </div>
     </nav>
   );
 }
-// normalImageSrc,
-// hoverImageSrc,
-// activeImageSrc,
-// isActive,
-// urlPath,
 
 export default Navbar;
