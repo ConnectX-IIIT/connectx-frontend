@@ -11,6 +11,7 @@ import PhotoUpload from "./components/PhotoUpload";
 import Cookies from "js-cookie";
 import instance from "./helper/axios";
 import { useStateValue } from "./helper/state_provider";
+import ResetPassword from "./components/ResetPassword";
 
 function App() {
   const [{ userDetails }, dispatch] = useStateValue();
@@ -48,6 +49,7 @@ function App() {
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/signin" component={SignIn} />
         <Route exact path="/setpassword" component={SetPassword} />
+        <Route exact path="/resetpassword/:key" component={ResetPassword} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/about" component={About} />
         <Route path="/home" component={Home} />
