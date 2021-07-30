@@ -40,8 +40,12 @@ function Navbar() {
     const value = e.target.value;
     setUserInput({ ...userInput, [name]: value });
   };
+
+  const [navLocation, setNavLocation] = useState("home");
+
   const [isNavActive, setIsNavActive] = useState([true, false, false, false]);
   const isNavActiveFunction = (index) => {
+    console.log(index);
     if (isNavActive[index]) {
       return;
     } else {
@@ -75,32 +79,43 @@ function Navbar() {
         <img src={searchIcon} alt="searchicon" className="NavbarSearchIcon" />
       </div>
       <div className="HomeNavRight">
-        <NavLink to={`${url}`} onClick={isNavActiveFunction(0)}>
+        <NavLink
+          to={`${url}`}
+          isActive={(match, location) => {
+            setNavLocation(location.pathname);
+          }}
+        >
           <ImgStackHome
             normalImageSrc={homeImage}
             hoverImageSrc={hoverHomeImage}
             activeImageSrc={activeHomeImage}
-            isActive={isNavActive[0]}
+            isActive={navLocation === "/home" ? true : false}
           />
         </NavLink>
-        <NavLink to={`${url}/queries`} onClick={isNavActiveFunction(1)}>
+        <NavLink to={`${url}/queries`}>
           <ImgStackHome
             normalImageSrc={queriesImage}
             hoverImageSrc={hoverQueriesImage}
             activeImageSrc={activeQueriesImage}
-            isActive={isNavActive[1]}
+            isActive={navLocation === "/home/queries" ? true : false}
           />
         </NavLink>
-        <ImgStackHome
-          normalImageSrc={connectionImage}
-          hoverImageSrc={hoverConnectionImage}
-          activeImageSrc={activeConnectionImage}
-        />
-        <ImgStackHome
-          normalImageSrc={messageImage}
-          hoverImageSrc={hoverMessageImage}
-          activeImageSrc={activeMessageImage}
-        />
+        <NavLink to={`${url}/connection`}>
+          <ImgStackHome
+            normalImageSrc={connectionImage}
+            hoverImageSrc={hoverConnectionImage}
+            activeImageSrc={activeConnectionImage}
+            isActive={navLocation === "/home/connection" ? true : false}
+          />
+        </NavLink>
+        <NavLink to={`${url}/message`}>
+          <ImgStackHome
+            normalImageSrc={messageImage}
+            hoverImageSrc={hoverMessageImage}
+            activeImageSrc={activeMessageImage}
+            isActive={navLocation === "/home/message" ? true : false}
+          />
+        </NavLink>
       </div>
     </nav>
   );
