@@ -1,0 +1,15 @@
+.ButtonHome {
+  /* width: 10.5vw; */
+  /* height: 3.3vw; */
+  background: #1792dd;
+  border-radius: 0.3vw;
+  font-family: "Manrope", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  /* font-size: 1.25vw; */
+  color: #ffffff;
+  display: block;
+  margin: auto;
+  cursor: pointer;
+  border: none;
+}
