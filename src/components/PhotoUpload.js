@@ -57,10 +57,8 @@ function PhotoUpload() {
     const formDataForCover = new FormData();
     formDataForProfile.append("photo", userRegistration.photo);
     formDataForCover.append("coverPhoto", userRegistration.coverPhoto);
-    formDataForCover.append("userId", userDetails._id);
     formDataForCover.append("height", coverPhotoHeight);
     formDataForCover.append("width", coverPhotoWidth);
-    formDataForProfile.append("userId", userDetails._id);
     formDataForProfile.append("height", photoHeight);
     formDataForProfile.append("width", photoWidth);
 
@@ -96,6 +94,8 @@ function PhotoUpload() {
           },
         });
       }
+
+      history.replace('/home');
     } catch (error) {
       return alert(`${error.response.data.error}`);
     }
@@ -199,7 +199,7 @@ function PhotoUpload() {
               color: "#383838",
             }}
           >
-            Akash Gupta
+            {userDetails.name}
           </p>
           <p
             style={{
@@ -208,7 +208,7 @@ function PhotoUpload() {
               color: "#BDBFC4",
             }}
           >
-            abcdefgh@xyz.com
+            {userDetails.email}
           </p>
         </div>
         <Button />
