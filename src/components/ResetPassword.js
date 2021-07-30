@@ -46,14 +46,9 @@ function ResetPassword() {
         try {
             await instance.post(`/auth/resetpassword`, {
                 password,
-                cPassword
-            },
-                {
-                    headers: {
-                        Authorization: `${token}`
-                    },
-
-                })
+                cPassword,
+                token
+            })
 
             history.push('/');
 
