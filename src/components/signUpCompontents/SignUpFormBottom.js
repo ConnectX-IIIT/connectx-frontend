@@ -51,7 +51,7 @@ function SignUpFormBottom() {
           secure: true,
         });
 
-        history.push("/register");
+        history.push("/setpassword");
       }
     } catch (error) {
       return alert(`${error.response.data.error}`);
