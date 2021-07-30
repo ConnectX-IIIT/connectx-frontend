@@ -6,6 +6,7 @@ import {
   Link,
   useParams,
   useRouteMatch,
+  NavLink,
 } from "react-router-dom";
 import FormInput from "../signUpCompontents/FormInput";
 import ImgStackHome from "./ImgStackHome";
@@ -39,7 +40,21 @@ function Navbar() {
     const value = e.target.value;
     setUserInput({ ...userInput, [name]: value });
   };
-
+  const [isNavActive, setIsNavActive] = useState([true, false, false, false]);
+  const isNavActiveFunction = (index) => {
+    if (isNavActive[index]) {
+      return;
+    } else {
+      let temparr = [...isNavActive];
+      for (let i = 0; i < temparr.length; i++) {
+        if (temparr[i]) {
+          temparr[i] = false;
+        }
+      }
+      temparr[index] = true;
+      setIsNavActive(temparr);
+    }
+  };
   return (
     <nav className="Navbar">
       <div className="HomeNavLeft">
@@ -60,20 +75,22 @@ function Navbar() {
         <img src={searchIcon} alt="searchicon" className="NavbarSearchIcon" />
       </div>
       <div className="HomeNavRight">
-        <Link to={`${url}/main`}>
+        <NavLink to={`${url}`} onClick={isNavActiveFunction(0)}>
           <ImgStackHome
             normalImageSrc={homeImage}
             hoverImageSrc={hoverHomeImage}
             activeImageSrc={activeHomeImage}
+            isActive={isNavActive[0]}
           />
-        </Link>
-        <Link to={`${url}/queries`}>
+        </NavLink>
+        <NavLink to={`${url}/queries`} onClick={isNavActiveFunction(1)}>
           <ImgStackHome
             normalImageSrc={queriesImage}
             hoverImageSrc={hoverQueriesImage}
             activeImageSrc={activeQueriesImage}
+            isActive={isNavActive[1]}
           />
-        </Link>
+        </NavLink>
         <ImgStackHome
           normalImageSrc={connectionImage}
           hoverImageSrc={hoverConnectionImage}
