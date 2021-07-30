@@ -24,3 +24,95 @@
   position: relative;
   top: -2.5vw;
 }
+#UserDetailsContent {
+  font-family: "Manrope", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  text-align: center;
+  border-bottom: 2px solid #c4c4c4;
+}
+#UserDetailsContent h2 {
+  color: #383838;
+  font-size: 1.25vw;
+  line-height: 1.4vw;
+  padding-bottom: 1vw;
+}
+#UserDetailsContent p {
+  color: #a7a7a7;
+  font-size: 0.8vw;
+  line-height: 1vw;
+}
+#UserDetailsContent a {
+  font-weight: 500;
+  font-size: 1vw;
+  color: #1792dd;
+  text-decoration: none;
+  margin: 1vw 0;
+  display: block;
+}
+.ProfileOptions {
+  display: flex;
+  align-items: center;
+  font-family: "Manrope", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.1vw;
+  line-height: 1.25vw;
+  color: #5a5a5a;
+  border-bottom: 2px solid #c4c4c4;
+  padding: 0.5vw 1vw;
+  cursor: pointer;
+}
+.ProfileOptions img {
+  margin-right: 0.5vw;
+}
+
+.form-group {
+  display: block;
+  height: 35px;
+  display: flex;
+  align-items: center;
+}
+
+.form-group input {
+  display: none;
+  cursor: pointer;
+}
+
+.form-group label {
+  position: relative;
+  cursor: pointer;
+  font-family: "Manrope", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1vw;
+  line-height: 1.2vw;
+  color: #787878;
+  margin-left: 1.5vw;
+}
+
+.form-group label:after {
+  content: "";
+  -webkit-appearance: none;
+  border: 2px solid #d1d1d1;
+  padding: 0.6vw;
+  display: inline-block;
+  position: absolute;
+  top: -1px;
+  cursor: pointer;
+  left: 13.5vw;
+}
+
+.form-group input:checked + label:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: -3px;
+  left: 14.5vw;
+  width: 7px;
+  z-index: 1;
+  height: 16px;
+  border: solid #1dc002;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
