@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Landing from "./components/Landing";
 import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
+import SetPassword from "./components/SetPassword";
 import Register from "./components/Register";
 import About from "./components/About";
 import Home from "./components/Home";
@@ -46,6 +47,7 @@ function App() {
         <Route exact path="/" component={Landing} />
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/signin" component={SignIn} />
+        <Route exact path="/setpassword" component={SetPassword} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/about" component={About} />
         <Route path="/home" component={Home} />
