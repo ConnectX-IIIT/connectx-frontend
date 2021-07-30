@@ -60,11 +60,12 @@
   line-height: 1.25vw;
   color: #5a5a5a;
   border-bottom: 2px solid #c4c4c4;
-  padding: 0.5vw 1vw;
+  padding: 0.6vw 1vw;
   cursor: pointer;
 }
 .ProfileOptions img {
-  margin-right: 0.5vw;
+  margin-right: 1vw;
+  height: 19px;
 }
 
 .form-group {
@@ -95,10 +96,11 @@
   content: "";
   -webkit-appearance: none;
   border: 2px solid #d1d1d1;
-  padding: 0.6vw;
+  height: 0.9vw;
+  width: 0.9vw;
   display: inline-block;
   position: absolute;
-  top: -1px;
+  top: 0px;
   cursor: pointer;
   left: 13.5vw;
 }
@@ -107,12 +109,12 @@
   content: "";
   display: block;
   position: absolute;
-  top: -3px;
-  left: 14.5vw;
-  width: 7px;
+  top: -4px;
+  left: 14.15vw;
+  width: 6px;
   z-index: 1;
-  height: 16px;
+  height: 14px;
   border: solid #1dc002;
-  border-width: 0 3px 3px 0;
+  border-width: 0 2.5px 2.5px 0;
   transform: rotate(45deg);
 }
