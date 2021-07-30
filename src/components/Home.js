@@ -1,4 +1,5 @@
 import React from "react";
+import { Switch, Route } from "react-router-dom";
 import Navbar from "./HomePageComponents/Navbar";
 import HomeMainContainer from "../components/HomePageComponents/HomeMainContainer";
 import QueriesMainConatiner from "../components/HomePageComponents/QueriesMainConatiner";
@@ -9,8 +10,11 @@ export const Home = () => {
   return (
     <div>
       <Navbar />
-      <HomeMainContainer />
-      <QueriesMainConatiner />
+
+      <Switch>
+        <Route exact path="/home" component={HomeMainContainer} />
+        <Route exact path="/home/queries" component={QueriesMainConatiner} />
+      </Switch>
     </div>
   );
 };
