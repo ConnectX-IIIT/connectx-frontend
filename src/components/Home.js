@@ -5,6 +5,8 @@ import HomeMainContainer from "../components/HomePageComponents/HomeMainContaine
 import QueriesMainConatiner from "../components/HomePageComponents/QueriesMainConatiner";
 
 import "../styles/HomePage/HomePage.css";
+import ConnectionMainContainer from "./HomePageComponents/ConnectionMainContainer";
+import MessageMainContainer from "./HomePageComponents/MessageMainContainer";
 
 export const Home = () => {
   return (
@@ -14,6 +16,12 @@ export const Home = () => {
       <Switch>
         <Route exact path="/home" component={HomeMainContainer} />
         <Route exact path="/home/queries" component={QueriesMainConatiner} />
+        <Route
+          exact
+          path="/home/connection"
+          component={ConnectionMainContainer}
+        />
+        <Route exact path="/home/message" component={MessageMainContainer} />
       </Switch>
     </div>
   );
