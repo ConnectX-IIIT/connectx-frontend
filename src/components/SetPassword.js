@@ -60,7 +60,7 @@ function SetPassword() {
 
         } catch (error) {
             console.log(error);
-            return alert(`${error.response.data.message}`);
+            return alert(`${error.response.data.error}`);
         }
     };
 
