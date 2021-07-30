@@ -17,7 +17,7 @@ function ImgStackHome({
   urlPath,
 }) {
   let { path, url } = useRouteMatch();
-
+  let { topicId } = useParams();
   const displayImage = "commonImgHome ImgStackVisible";
   const hideImage = "commonImgHome ImgStackHidden";
 
@@ -30,6 +30,15 @@ function ImgStackHome({
       setActiveClass(displayImage);
       setHoverClass(hideImage);
       setNormalClass(hideImage);
+    } else {
+      if (!isActive) {
+        setActiveClass(hideImage);
+        setHoverClass(displayImage);
+        setNormalClass(hideImage);
+        setActiveClass(hideImage);
+        setHoverClass(hideImage);
+        setNormalClass(displayImage);
+      }
     }
   }, [isActive]);
   // else {
