@@ -1,0 +1,26 @@
+.HomeUserDetails {
+  width: 18vw;
+  border: 2px solid #c4c4c4;
+  box-sizing: border-box;
+  border-radius: 0.7vw;
+}
+#UpperImageContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#UpperImageContainer img:first-child {
+  width: 100%;
+  height: auto;
+  border-top-left-radius: 0.7vw;
+  border-top-right-radius: 0.7vw;
+  border-bottom: 2px solid #c4c4c4;
+}
+#UpperImageContainer img:last-child {
+  width: 5.4vw;
+  height: 5.4vw;
+  position: relative;
+  top: -2.5vw;
+}
