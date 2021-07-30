@@ -2,6 +2,7 @@
   width: 3vw;
   height: 3vw;
   position: relative;
+  margin-right: 1vw;
 }
 .ImgStackPhoto {
   position: absolute;
