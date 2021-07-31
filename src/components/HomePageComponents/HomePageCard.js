@@ -1,5 +1,6 @@
 import React from "react";
 import ImgStackHome from "./ImgStackHome";
+import CarouselHome from "./CarouselHome";
 
 import homeUpvoteIcon from "../../assets/home/post/upvotes/ic_upvote.svg";
 import homeUpvoteIconHover from "../../assets/home/post/upvotes/h_ic_upvote.svg";
@@ -38,6 +39,10 @@ function HomePageCard() {
           }}
           styleImgContainer={{ margin: "0", width: "2vw", height: "2vw" }}
         />
+      </div>
+
+      <div id="HomePageCardRightContainer">
+        <CarouselHome />
       </div>
     </div>
   );
