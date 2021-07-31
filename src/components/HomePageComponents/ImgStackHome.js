@@ -1,12 +1,4 @@
 import React, { useEffect, useState } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useParams,
-  useRouteMatch,
-} from "react-router-dom";
 import "../../styles/HomePage/ImgStackHome.css";
 
 function ImgStackHome({
@@ -14,12 +6,11 @@ function ImgStackHome({
   hoverImageSrc,
   activeImageSrc,
   isActive,
-  urlPath,
+  styleImgStack,
+  styleImgContainer,
 }) {
-  let { path, url } = useRouteMatch();
-  let { topicId } = useParams();
-  const displayImage = "commonImgHome ImgStackVisible";
-  const hideImage = "commonImgHome ImgStackHidden";
+  const displayImage = "ImgStackPhoto ImgStackVisible";
+  const hideImage = "ImgStackPhoto ImgStackHidden";
 
   const [hoverClass, setHoverClass] = useState(hideImage);
   const [activeClass, setActiveClass] = useState(hideImage);
@@ -41,25 +32,11 @@ function ImgStackHome({
       }
     }
   }, [isActive]);
-  // else {
-  // let imageStackContainer = document.getElementsByClassName(
-  //   "ImgStackHomeContainer"
-  // )[0];
-  // imageStackContainer.addEventListener("mouseover", () => {
-  //   setActiveClass(hideImage);
-  //   setHoverClass(displayImage);
-  //   setNormalClass(hideImage);
-  // });
-  // imageStackContainer.addEventListener("mouseout", () => {
-  //   setActiveClass(hideImage);
-  //   setHoverClass(hideImage);
-  //   setNormalClass(displayImage);
-  // });
-  // }
 
   return (
     <div
       className="ImgStackHomeContainer"
+      style={styleImgContainer}
       onMouseOver={() => {
         if (!isActive) {
           setActiveClass(hideImage);
@@ -75,9 +52,24 @@ function ImgStackHome({
         }
       }}
     >
-      <img src={normalImageSrc} className={normalClass} alt="normal" />
-      <img src={hoverImageSrc} className={hoverClass} alt="hoverImage" />
-      <img src={activeImageSrc} className={activeClass} alt="activeImage" />
+      <img
+        src={normalImageSrc}
+        className={normalClass}
+        alt="normal"
+        style={styleImgStack}
+      />
+      <img
+        src={hoverImageSrc}
+        className={hoverClass}
+        alt="hoverImage"
+        style={styleImgStack}
+      />
+      <img
+        src={activeImageSrc}
+        className={activeClass}
+        alt="activeImage"
+        style={styleImgStack}
+      />
     </div>
   );
 }
