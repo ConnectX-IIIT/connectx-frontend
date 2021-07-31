@@ -1,0 +1,18 @@
+.ImgCarouselHome {
+  object-fit: cover;
+  height: 33vw;
+}
+.carousel-control-next-icon {
+  background-image: url("../../../assets/home/post/body/photos/ic_next.svg");
+}
+.carousel-control-prev-icon {
+  background-image: url("../../../assets/home/post/body/photos/ic_previous.svg");
+}
+.carousel-control-prev,
+.carousel-control-next {
+  opacity: 1;
+}
+.carousel-indicators {
+  margin: 0;
+  background: rgba(0, 0, 0, 0.56);
+}
