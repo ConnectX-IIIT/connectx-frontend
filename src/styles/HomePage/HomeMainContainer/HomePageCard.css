@@ -26,3 +26,10 @@
   line-height: 1.4vw;
   color: #000000;
 }
+#HomePageCardRightContainer {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  padding-left: 1vw;
+  padding-right: 1vw;
+}
