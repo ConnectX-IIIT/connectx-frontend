@@ -50,7 +50,7 @@ function ResetPassword() {
                 token
             })
 
-            history.push('/');
+            history.replace('/signin');
 
         } catch (error) {
             console.log(error);

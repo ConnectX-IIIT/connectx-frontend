@@ -28,7 +28,6 @@ function SignIn() {
 
   const handleForgotPassword = async (e) => {
     e.preventDefault();
-
     let email = userRegistration.email;
 
     if (!email) {
@@ -97,6 +96,7 @@ function SignIn() {
     }
   };
 
+
   return (
     <div className="SignInMainPage">
       <form action="" onSubmit={handleSubmit} className="SignInPageForm">
@@ -117,6 +117,9 @@ function SignIn() {
         />
         <Button />
         <SignUpFormBottom />
+        <Link to='/signin' onClick={handleForgotPassword} id="SignUpformBottomAnchor">
+          Forgot Password?
+        </Link>
       </form>
       <div id="bottomElement">
         <div>
