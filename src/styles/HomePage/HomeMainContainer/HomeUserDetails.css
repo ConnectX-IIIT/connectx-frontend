@@ -3,6 +3,7 @@
   border: 2px solid #c4c4c4;
   box-sizing: border-box;
   border-radius: 0.7vw;
+  height: fit-content;
 }
 #UpperImageContainer {
   position: relative;
