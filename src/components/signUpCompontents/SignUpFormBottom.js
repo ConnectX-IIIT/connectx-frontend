@@ -79,7 +79,7 @@ function SignUpFormBottom() {
           style={{}}
         />
       </div>
-      <Link to="/" id="SignUpformBottomAnchor">
+      <Link to="/signin" id="SignUpformBottomAnchor">
         Forgot Password?
       </Link>
     </div>

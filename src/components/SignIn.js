@@ -26,6 +26,32 @@ function SignIn() {
     setUserRegistration({ ...userRegistration, [name]: value });
   };
 
+  const handleForgotPassword = async (e) => {
+    e.preventDefault();
+
+    let email = userRegistration.email;
+
+    if (!email) {
+      return alert('Please enter your registered email!');
+    }
+
+    let emailValidation = emailValidator.validate(email);
+
+    if (!emailValidation) {
+      return alert("Enter a valid email");
+    }
+
+    try {
+      await instance.post(`/auth/forgotpassword`,
+        { email }
+      )
+      alert('Link to reset your password has been sent to your email!')
+
+    } catch (error) {
+      return alert(`${error.response.data.error}`);
+    }
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
