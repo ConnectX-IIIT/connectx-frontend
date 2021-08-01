@@ -4,6 +4,7 @@
   border-radius: 0.5vw;
   margin-left: 2vw;
   display: flex;
+  margin-bottom: 1.2vw;
 }
 #HomePageCardLeftContainer {
   display: flex;
@@ -30,6 +31,34 @@
   display: flex;
   flex-direction: column;
   width: 90%;
-  padding-left: 1vw;
-  padding-right: 1vw;
+}
+#PostDetailsContainer {
+  display: grid;
+  grid-template-columns: 10% 80% 10%;
+  margin-top: 1vw;
+  margin-bottom: 1.2vw;
+}
+#PostDetailsContainerTitle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: "Manrope", sans-serif;
+  font-style: normal;
+}
+.HomeCardButtonContainer {
+  display: flex;
+  align-items: center;
+  padding-bottom: 1vw;
+  border-bottom: 2px solid #bdbfc4;
+  padding-left: 1.5vw;
+}
+.discussInPersonal {
+  font-family: "Manrope", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 0.9vw;
+  line-height: 1vw;
+  color: #787878;
+  margin-left: 1vw;
+  cursor: pointer;
 }
