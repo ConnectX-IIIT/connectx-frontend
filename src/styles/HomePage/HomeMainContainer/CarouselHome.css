@@ -139,7 +139,7 @@
 .carousel-indicators {
   position: absolute;
   right: 0;
-  bottom: 4px;
+  bottom: 0;
   left: 0;
   z-index: 2;
   display: flex;
@@ -225,8 +225,10 @@
 }
 
 .ImgCarouselHome {
+  display: block;
+  margin: auto;
   object-fit: cover;
-  height: 33vw;
+  height: 29vw;
 }
 .carousel-control-next-icon {
   background-image: url("../../../assets/home/post/body/photos/ic_next.svg");
