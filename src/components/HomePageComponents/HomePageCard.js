@@ -10,6 +10,7 @@ import homeDownvoteIcon from "../../assets/home/post/upvotes/ic_downvote.svg";
 import homeDownvoteIconHover from "../../assets/home/post/upvotes/h_ic_downvote.svg";
 import homeDownvoteIconSelected from "../../assets/home/post/upvotes/s_ic_downvote.svg";
 
+import HomeCardInnerContent from "./HomeCardInnerContent";
 import "../../styles/HomePage/HomeMainContainer/HomePageCard.css";
 
 function HomePageCard() {
@@ -42,6 +43,7 @@ function HomePageCard() {
       </div>
 
       <div id="HomePageCardRightContainer">
+        <HomeCardInnerContent />
         <CarouselHome />
       </div>
     </div>
