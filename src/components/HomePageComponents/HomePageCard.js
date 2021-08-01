@@ -17,6 +17,9 @@ import DotImageHome from "../../assets/home/post/body/info/ic_info_dots.svg";
 import "../../styles/HomePage/HomeMainContainer/HomePageCard.css";
 import ButtonHome from "./ButtonHome";
 
+import textDiscussion from "../../assets/home/post/bottom/ic_dicussion.svg";
+import textDiscussionClick from "../../assets/home/post/bottom/d_ic_dicussion.svg";
+
 function HomePageCard() {
   return (
     <div className="HomePageCard">
@@ -45,7 +48,6 @@ function HomePageCard() {
           styleImgContainer={{ margin: "0", width: "2vw", height: "2vw" }}
         />
       </div>
-
       <div id="HomePageCardRightContainer">
         <div
           style={{
@@ -123,6 +125,17 @@ function HomePageCard() {
             }}
           />
           <div className="discussInPersonal">Discuss in Personal</div>
+        </div>
+
+        <div className="HomeCardDiscussion">
+          <img
+            src={textDiscussion}
+            alt="message"
+            style={{
+              marginRight: "0.5vw",
+            }}
+          />
+          Discussion
         </div>
       </div>
     </div>
