@@ -11,7 +11,11 @@ import homeDownvoteIconHover from "../../assets/home/post/upvotes/h_ic_downvote.
 import homeDownvoteIconSelected from "../../assets/home/post/upvotes/s_ic_downvote.svg";
 
 import HomeCardInnerContent from "./HomeCardInnerContent";
+import UserProfileDefaultIcon from "../../assets/profile/user_profile_default_icon.svg";
+import DotImageHome from "../../assets/home/post/body/info/ic_info_dots.svg";
+
 import "../../styles/HomePage/HomeMainContainer/HomePageCard.css";
+import ButtonHome from "./ButtonHome";
 
 function HomePageCard() {
   return (
@@ -43,8 +47,83 @@ function HomePageCard() {
       </div>
 
       <div id="HomePageCardRightContainer">
-        <HomeCardInnerContent />
-        <CarouselHome />
+        <div
+          style={{
+            paddingLeft: "1.5vw",
+            paddingRight: "1.5vw",
+          }}
+        >
+          <div id="PostDetailsContainer">
+            <img
+              src={UserProfileDefaultIcon}
+              alt="Userprofile"
+              style={{
+                width: "3vw",
+                objectFit: "cover",
+                margin: "auto",
+                marginLeft: "0",
+              }}
+            />
+            <div id="PostDetailsContainerTitle">
+              <div>
+                <div
+                  style={{
+                    display: "inline",
+                    width: "20%",
+                    color: "#000000",
+                    fontWeight: "500",
+                    fontSize: "1.2vw",
+                    marginRight: "10px",
+                  }}
+                >
+                  Lorem Ipsum
+                </div>
+                <div
+                  style={{
+                    display: "inline",
+                    width: "80%",
+                    color: " #A7A7A7",
+                    fontWeight: "500",
+                    fontSize: "0.9vw",
+                  }}
+                >
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                </div>
+              </div>
+              <div
+                style={{
+                  color: " #A7A7A7",
+                  fontWeight: "500",
+                  fontSize: "0.9vw",
+                }}
+              >
+                3:54PM
+              </div>
+            </div>
+            <img
+              src={DotImageHome}
+              alt="dot"
+              style={{
+                margin: "auto",
+              }}
+            />
+          </div>
+
+          <HomeCardInnerContent />
+          <CarouselHome />
+        </div>
+        <div className="HomeCardButtonContainer">
+          <ButtonHome
+            content="APPLY NOW"
+            styleButton={{
+              width: "10vw",
+              height: "3vw",
+              fontSize: "1vw",
+              margin: "0",
+            }}
+          />
+          <div className="discussInPersonal">Discuss in Personal</div>
+        </div>
       </div>
     </div>
   );
