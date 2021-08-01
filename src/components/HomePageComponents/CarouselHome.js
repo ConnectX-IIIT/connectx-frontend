@@ -10,7 +10,11 @@ function CarouselHome() {
   };
 
   return (
-    <div>
+    <div
+      style={{
+        marginBottom: "1vw",
+      }}
+    >
       <Carousel interval={null} activeIndex={index} onSelect={handleSelect}>
         <Carousel.Item>
           <img
