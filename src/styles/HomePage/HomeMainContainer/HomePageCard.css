@@ -62,3 +62,22 @@
   margin-left: 1vw;
   cursor: pointer;
 }
+.HomeCardDiscussion {
+  display: flex;
+  align-items: center;
+  font-family: "Manrope", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.2vw;
+  line-height: 1.25;
+  color: #000000;
+  background: #f5f5f5;
+  border-radius: 1vw;
+  width: 10vw;
+  justify-content: center;
+  margin-top: 0.8vw;
+  margin-bottom: 0.8vw;
+  cursor: pointer;
+  margin-left: 1vw;
+  height: 2.5vw;
+}
