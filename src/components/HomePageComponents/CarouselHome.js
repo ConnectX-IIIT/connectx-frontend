@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../../styles/HomePage/HomeMainContainer/CarouselHome.css";
 import Carousel from "react-bootstrap/Carousel";
+let carouselPhoto = "https://source.unsplash.com/random";
 
 function CarouselHome() {
   const [index, setIndex] = useState(0);
@@ -19,21 +20,21 @@ function CarouselHome() {
         <Carousel.Item>
           <img
             className="d-block w-100 ImgCarouselHome"
-            src="https://source.unsplash.com/random"
+            src={carouselPhoto}
             alt="First slide"
           />
         </Carousel.Item>
         <Carousel.Item>
           <img
             className="d-block w-100 ImgCarouselHome"
-            src="https://source.unsplash.com/random"
+            src={carouselPhoto}
             alt="Second slide"
           />
         </Carousel.Item>
         <Carousel.Item>
           <img
             className="d-block w-100 ImgCarouselHome"
-            src="https://source.unsplash.com/random"
+            src={carouselPhoto}
             alt="Third slide"
           />
         </Carousel.Item>
