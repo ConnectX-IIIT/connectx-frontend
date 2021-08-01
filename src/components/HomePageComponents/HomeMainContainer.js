@@ -7,7 +7,10 @@ function HomeMainContainer() {
   return (
     <div className="HomeMainContainer">
       <HomeUserDetails />
-      <HomePageCard />
+      <div>
+        <HomePageCard />
+        <HomePageCard />
+      </div>
     </div>
   );
 }
