@@ -71,6 +71,7 @@ function HomePageCard({
                 objectFit: "cover",
                 margin: "auto",
                 marginLeft: "0",
+                borderRadius: "50%",
               }}
             />
             <div id="PostDetailsContainerTitle">
