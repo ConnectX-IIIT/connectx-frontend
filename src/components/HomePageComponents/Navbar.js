@@ -29,6 +29,7 @@ import hoverMessageImage from "../../assets/home/top_navbar/h_ic_messages.svg";
 import activeMessageImage from "../../assets/home/top_navbar/a_ic_messages.svg";
 
 import UserProfileDefaultIcon from "../../assets/profile/user_profile_default_icon.svg";
+import HomePageFormInput from "./HomePageFormInput";
 
 function Navbar() {
   let { url } = useRouteMatch();
@@ -48,19 +49,11 @@ function Navbar() {
     <nav className="Navbar">
       <div className="HomeNavLeft">
         <img src={connectxlogo} alt="connectxlogo" className="ConnectxLogo" />
-        <FormInput
-          inputType="text"
-          inputName="searchedText"
+        <HomePageFormInput
           inputValue={userInput.searchedText}
-          lableContent={"Searched Something"}
           onChangeFunction={handleInput}
-          style={{
-            marginBottom: "0",
-            marginLeft: "2vw",
-            paddingLeft: "1.75vw",
-            width: "24.9vw",
-          }}
         />
+
         <img src={searchIcon} alt="searchicon" className="NavbarSearchIcon" />
       </div>
       <div className="HomeNavRight">

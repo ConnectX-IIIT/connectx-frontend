@@ -12,17 +12,18 @@ export const Home = () => {
   return (
     <div>
       <Navbar />
-
-      <Switch>
-        <Route exact path="/home" component={HomeMainContainer} />
-        <Route exact path="/home/queries" component={QueriesMainConatiner} />
-        <Route
-          exact
-          path="/home/connection"
-          component={ConnectionMainContainer}
-        />
-        <Route exact path="/home/message" component={MessageMainContainer} />
-      </Switch>
+      <div>
+        <Switch>
+          <Route exact path="/home" component={HomeMainContainer} />
+          <Route exact path="/home/queries" component={QueriesMainConatiner} />
+          <Route
+            exact
+            path="/home/connection"
+            component={ConnectionMainContainer}
+          />
+          <Route exact path="/home/message" component={MessageMainContainer} />
+        </Switch>
+      </div>
     </div>
   );
 };
