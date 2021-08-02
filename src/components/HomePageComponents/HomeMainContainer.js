@@ -37,26 +37,29 @@ const HomePageCardDetails = [
   },
 ];
 
+const HomePageCardDetailsList = HomePageCardDetails.map((item, index) => {
+  return (
+    <HomePageCard
+      key={index}
+      PostId={item.PostId}
+      UserId={item.UserId}
+      UserProfilePhoto={item.UserProfilePhoto}
+      TimeStamp={item.TimeStamp}
+      PostUserName={item.PostUserName}
+      PostContent={item.PostContent}
+      PostImageUrls={item.PostImageUrls}
+      Upvotes={item.Upvotes}
+    />
+  );
+});
+
 function HomeMainContainer() {
   return (
     <div className="HomeMainContainer">
       <HomeUserDetails />
-      <div>
-        <HomePageCard
-          UserProfilePhoto={HomePageCardDetails[0].UserProfilePhoto}
-          TimeStamp={HomePageCardDetails[0].TimeStamp}
-          PostUserName={HomePageCardDetails[0].PostUserName}
-          PostContent={HomePageCardDetails[0].PostContent}
-          PostImageUrls={HomePageCardDetails[0].PostImageUrls}
-          Upvotes={HomePageCardDetails[0].Upvotes}
-        />
-      </div>
+      <div>{HomePageCardDetailsList}</div>
     </div>
   );
 }
 
 export default HomeMainContainer;
-// UserProfilePhoto
-// TimeStamp
-// Post COntent
-// Post Image url
