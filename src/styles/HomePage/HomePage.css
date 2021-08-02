@@ -1,0 +1,26 @@
+.OnSearchDisplay {
+  background-color: rgba(0, 19, 36, 0.6);
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 81px;
+  right: 0;
+  transition: opacity 0.3s ease-in-out, z-index 0.4s ease-in-out;
+}
+.SearchPopOut {
+  background-color: white;
+  width: 31vw;
+  margin-left: 17.2vw;
+}
+.queriesHeading {
+  font-family: "Manrope", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 0.8vw;
+  line-height: 1vw;
+  color: #bdbfc4;
+  border-bottom: 1px solid #959595;
+  padding-top: 0.5vw;
+  padding-left: 1.5vw;
+  padding-bottom: 0.5vw;
+}
