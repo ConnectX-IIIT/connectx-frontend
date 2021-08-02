@@ -20,7 +20,14 @@ import ButtonHome from "./ButtonHome";
 import textDiscussion from "../../assets/home/post/bottom/ic_dicussion.svg";
 import textDiscussionClick from "../../assets/home/post/bottom/d_ic_dicussion.svg";
 
-function HomePageCard() {
+function HomePageCard({
+  UserProfilePhoto,
+  TimeStamp,
+  PostUserName,
+  PostContent,
+  PostImageUrls,
+  Upvotes,
+}) {
   return (
     <div className="HomePageCard">
       <div id="HomePageCardLeftContainer">
@@ -35,7 +42,7 @@ function HomePageCard() {
           }}
           styleImgContainer={{ margin: "0", width: "2vw", height: "2vw" }}
         />
-        <div id="HomePageCardLeftContainerCount">15</div>
+        <div id="HomePageCardLeftContainerCount">{Upvotes}</div>
         <ImgStackHome
           normalImageSrc={homeDownvoteIcon}
           hoverImageSrc={homeDownvoteIconHover}
@@ -57,7 +64,7 @@ function HomePageCard() {
         >
           <div id="PostDetailsContainer">
             <img
-              src={UserProfileDefaultIcon}
+              src={UserProfilePhoto}
               alt="Userprofile"
               style={{
                 width: "3vw",
@@ -78,18 +85,7 @@ function HomePageCard() {
                     marginRight: "10px",
                   }}
                 >
-                  Lorem Ipsum
-                </div>
-                <div
-                  style={{
-                    display: "inline",
-                    width: "80%",
-                    color: " #A7A7A7",
-                    fontWeight: "500",
-                    fontSize: "0.9vw",
-                  }}
-                >
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  {PostUserName}
                 </div>
               </div>
               <div
@@ -99,7 +95,7 @@ function HomePageCard() {
                   fontSize: "0.9vw",
                 }}
               >
-                3:54PM
+                {TimeStamp}
               </div>
             </div>
             <img
@@ -111,8 +107,8 @@ function HomePageCard() {
             />
           </div>
 
-          <HomeCardInnerContent />
-          <CarouselHome />
+          <HomeCardInnerContent InnerContent={PostContent} />
+          <CarouselHome CarouselImgs={PostImageUrls} />
         </div>
         <div className="HomeCardButtonContainer">
           <ButtonHome
