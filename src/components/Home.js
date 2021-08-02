@@ -31,8 +31,8 @@ export const Home = () => {
         className="OnSearchDisplay"
         style={
           isSearchBarClicked
-            ? { opacity: "1", zIndex: "2" }
-            : { opacity: "0", zIndex: "1" }
+            ? { opacity: "1", zIndex: "2", height: "100%" }
+            : { opacity: "0", zIndex: "1", height: "0" }
         }
       >
         <div className="SearchPopOut">
@@ -44,6 +44,7 @@ export const Home = () => {
           </div>
           <div className="Queries">
             <div className="queriesHeading">Queries</div>
+            <SearchBarPopOutQueries />
             <SearchBarPopOutQueries />
             <SearchBarPopOutQueries />
             <SearchBarPopOutQueries />
