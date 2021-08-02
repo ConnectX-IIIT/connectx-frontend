@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Switch, Route } from "react-router-dom";
 import Navbar from "./HomePageComponents/Navbar";
 import HomeMainContainer from "../components/HomePageComponents/HomeMainContainer";
@@ -7,14 +7,52 @@ import QueriesMainConatiner from "../components/HomePageComponents/QueriesMainCo
 import "../styles/HomePage/HomePage.css";
 import ConnectionMainContainer from "./HomePageComponents/ConnectionMainContainer";
 import MessageMainContainer from "./HomePageComponents/MessageMainContainer";
+import SearchBarPopOutPeople from "./HomePageComponents/SearchBarPopOutPeople";
+import SearchBarPopOutQueries from "./HomePageComponents/SearchBarPopOutQueries";
 
 export const Home = () => {
+  const [isSearchBarClicked, setIsSearchBarClicked] = useState(false);
+
+  function onSearchBarClick() {
+    setIsSearchBarClicked(!isSearchBarClicked);
+  }
+
+  function onSearchBarBlur() {
+    if (isSearchBarClicked) setIsSearchBarClicked(false);
+  }
+
   return (
     <div>
-      <Navbar />
+      <Navbar
+        isSearchBarClicked={onSearchBarClick}
+        onSearchBarBlur={onSearchBarBlur}
+      />
+      <div
+        className="OnSearchDisplay"
+        style={
+          isSearchBarClicked
+            ? { opacity: "1", zIndex: "2" }
+            : { opacity: "0", zIndex: "1" }
+        }
+      >
+        <div className="SearchPopOut">
+          <div className="Queries">
+            <div className="queriesHeading">People</div>
+            <SearchBarPopOutPeople />
+            <SearchBarPopOutPeople />
+            <SearchBarPopOutPeople />
+          </div>
+          <div className="Queries">
+            <div className="queriesHeading">Queries</div>
+            <SearchBarPopOutQueries />
+            <SearchBarPopOutQueries />
+            <SearchBarPopOutQueries />
+          </div>
+        </div>
+      </div>
       <div>
         <Switch>
-          <Route exact path="/home" component={HomeMainContainer} />
+          <Route exact path="/home" component={HomeMainContainer} style />
           <Route exact path="/home/queries" component={QueriesMainConatiner} />
           <Route
             exact
