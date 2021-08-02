@@ -17,17 +17,10 @@ const ReadMore = ({ children }) => {
   );
 };
 
-function HomeCardInnerContent() {
+function HomeCardInnerContent({ InnerContent }) {
   return (
     <div className="HomeCardInnerContentContainer">
-      <ReadMore>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non
-        posuere neque, a tincidunt sem. Proin a diam eu orci ultrices faucibus.
-        Sed luctus imperdiet ipsum eget lobortis. Integer eget ex massa.
-        Suspendisse eget mauris enim. Sed et condimentum ex, et sollicitudin
-        libero. Morbi et diam fermentum, ultrices libero laoreet, mattis orci.
-        Quise commodo..
-      </ReadMore>
+      <ReadMore>{InnerContent}</ReadMore>
     </div>
   );
 }
