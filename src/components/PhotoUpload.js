@@ -71,9 +71,9 @@ function PhotoUpload() {
     try {
       if (userRegistration.photo) {
 
-        if (userDetails.profilePicture) {
-          await instance.get(`/user/remove/${userDetails.profilePicture}`);
-        }
+        // if (userDetails.profilePicture) {
+        //   await instance.get(`/user/remove/${userDetails.profilePicture}`);
+        // }
 
         await instance.post(`/user/uploadprofile`, formDataForProfile, {
           headers: {
@@ -84,9 +84,9 @@ function PhotoUpload() {
 
       if (userRegistration.coverPhoto) {
 
-        if (userDetails.backgroundPicture) {
-          await instance.get(`/user/remove/${userDetails.backgroundPicture}`);
-        }
+        // if (userDetails.backgroundPicture) {
+        //   await instance.get(`/user/remove/${userDetails.backgroundPicture}`);
+        // }
 
         await instance.post(`/user/uploadbackground`, formDataForCover, {
           headers: {
