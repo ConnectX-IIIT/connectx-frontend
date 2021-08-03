@@ -21,8 +21,8 @@ function HomeMainContainer() {
             },
           });
 
-          const Data = getDetailsRes.data.postData;
-          setPostData(Data);
+          const data = getDetailsRes.data.postData;
+          setPostData(data);
 
         }
       } catch (error) {
@@ -30,8 +30,7 @@ function HomeMainContainer() {
       }
     }
     fetchData();
-  });
-
+  }, []);
 
   const HomePageCardDetailsList = postData.map((item, index) => {
     return (
