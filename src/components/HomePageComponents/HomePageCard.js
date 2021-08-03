@@ -20,6 +20,31 @@ import ButtonHome from "./ButtonHome";
 import textDiscussion from "../../assets/home/post/bottom/ic_dicussion.svg";
 import textDiscussionClick from "../../assets/home/post/bottom/d_ic_dicussion.svg";
 
+function isJob() {
+  return (
+    <div className="HomeCardButtonContainer">
+      <ButtonHome
+        content="APPLY NOW"
+        styleButton={{
+          width: "10vw",
+          height: "3vw",
+          fontSize: "1vw",
+          margin: "0",
+        }}
+      />
+      <div className="discussInPersonal">Discuss in Personal</div>
+    </div>
+  );
+}
+
+function isProject() {
+  return (
+    <div className="HomeCardButtonContainer">
+      <div className="discussInPersonal">Discuss in Personal</div>
+    </div>
+  );
+}
+
 function HomePageCard({
   UserProfilePhoto,
   TimeStamp,
@@ -30,30 +55,51 @@ function HomePageCard({
 }) {
   const imgURL = "https://obscure-ridge-13663.herokuapp.com/user/fetch/";
 
-  const handlePhoto = (photo) => {
+  const is_Job = true;
+  const is_Project = false;
 
+  const handlePhoto = (photo) => {
     if (photo) {
-      return imgURL + photo
+      return imgURL + photo;
     }
     return UserProfileDefaultIcon;
-  }
+  };
 
   const handleTimestamp = (timestamp) => {
     let time = new Date(timestamp);
     let today = new Date();
-    let yesterday = new Date((new Date()).valueOf() - 1000 * 60 * 60 * 24);
+    let yesterday = new Date(new Date().valueOf() - 1000 * 60 * 60 * 24);
     let timeString;
 
-    if (today.getDate() === time.getDate() && Date.now() - timestamp < 86400000) {
+    if (
+      today.getDate() === time.getDate() &&
+      Date.now() - timestamp < 86400000
+    ) {
       timeString = "Today";
-    } else if (yesterday.getDate() === time.getDate() && Date.now() - timestamp < 172800000) {
+    } else if (
+      yesterday.getDate() === time.getDate() &&
+      Date.now() - timestamp < 172800000
+    ) {
       timeString = "Yesterday";
     } else {
-      timeString = time.getDate() + " " + time.toLocaleString('default', { month: 'short' }) + " " + time.getFullYear();
+      timeString =
+        time.getDate() +
+        " " +
+        time.toLocaleString("default", { month: "short" }) +
+        " " +
+        time.getFullYear();
     }
 
-    return timeString + " " + time.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
-  }
+    return (
+      timeString +
+      " " +
+      time.toLocaleString("en-US", {
+        hour: "numeric",
+        minute: "numeric",
+        hour12: true,
+      })
+    );
+  };
 
   return (
     <div className="HomePageCard">
@@ -139,28 +185,24 @@ function HomePageCard({
           <HomeCardInnerContent InnerContent={PostContent} />
           <CarouselHome CarouselImgs={PostImageUrls} />
         </div>
-        <div className="HomeCardButtonContainer">
-          <ButtonHome
-            content="APPLY NOW"
-            styleButton={{
-              width: "10vw",
-              height: "3vw",
-              fontSize: "1vw",
-              margin: "0",
-            }}
-          />
-          <div className="discussInPersonal">Discuss in Personal</div>
-        </div>
+        {/* <div className="HomeCardButtonContainer"> */}
+        {is_Job ? isJob() : is_Project ? isProject() : null}
 
-        <div className="HomeCardDiscussion">
-          <img
-            src={textDiscussion}
-            alt="message"
-            style={{
-              marginRight: "0.5vw",
-            }}
-          />
-          Discussion
+        <div
+          style={{
+            borderTop: "2px solid #bdbfc4",
+          }}
+        >
+          <div className="HomeCardDiscussion">
+            <img
+              src={textDiscussion}
+              alt="message"
+              style={{
+                marginRight: "0.5vw",
+              }}
+            />
+            Discussion
+          </div>
         </div>
       </div>
     </div>
