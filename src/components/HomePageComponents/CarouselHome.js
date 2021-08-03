@@ -12,12 +12,12 @@ function CarouselHome({ CarouselImgs }) {
 
   const CarouselList = CarouselImgs.map((img, index) => {
     return (
-      <Carousel.Item>
+      <Carousel.Item key={`carousel ${index}`}>
         <img
+          key={img.toString()}
           className="d-block w-100 ImgCarouselHome"
           src={img}
           alt="slide"
-          key={index}
         />
       </Carousel.Item>
     );
