@@ -6,19 +6,23 @@ import TrendingIcon from "../../assets/home/left_container/ic_trending.svg";
 import filterIcon from "../../assets/home/left_container/ic_filter.svg";
 import "../../styles/HomePage/HomeMainContainer/HomeUserDetails.css";
 import ButtonHome from "../../components/HomePageComponents/ButtonHome";
+import { useStateValue } from "../../helper/state_provider";
 
 function HomeUserDetails() {
+
+  const imgURL = "https://obscure-ridge-13663.herokuapp.com/user/fetch/";
+  const [{ userDetails }, dispatch] = useStateValue();
+
   return (
     <div className="HomeUserDetails">
       <div id="UpperImageContainer">
-        <img src={DefaultCoverPhoto} alt="Cover" />
-        <img src={DefaultProfilePhoto} alt="profile" />
+        <img src={`${imgURL}${userDetails.backgroundPicture}`} alt="Cover" />
+        <img src={`${imgURL}${userDetails.profilePicture}`} alt="profile" />
       </div>
       <div id="UserDetailsContent">
-        <h2>Raj Noobda</h2>
+        <h2>{userDetails.name}</h2>
         <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Enim,
-          consequuntur?
+          {userDetails.description}
         </p>
         <Link to="/">View Profile</Link>
       </div>
