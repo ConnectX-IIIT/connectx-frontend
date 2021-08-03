@@ -10,28 +10,28 @@ function HomeMainContainer() {
   const [postData, setPostData] = useState([]);
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    const fetchData = async (e) => {
+      try {
+        const token = Cookies.get("token");
 
-  const fetchData = async (e) => {
-    try {
-      const token = Cookies.get("token");
+        if (token) {
+          const getDetailsRes = await instance.get(`/home/posts`, {
+            headers: {
+              Authorization: `${token}`,
+            },
+          });
 
-      if (token) {
-        const getDetailsRes = await instance.get(`/home/posts`, {
-          headers: {
-            Authorization: `${token}`,
-          },
-        });
+          const Data = getDetailsRes.data.postData;
+          setPostData(Data);
 
-        const Data = getDetailsRes.data.postData;
-        setPostData(Data);
-
+        }
+      } catch (error) {
+        return alert(`${error.response.data.error}`);
       }
-    } catch (error) {
-      return alert(`${error.response.data.error}`);
     }
-  }
+    fetchData();
+  });
+
 
   const HomePageCardDetailsList = postData.map((item, index) => {
     return (
