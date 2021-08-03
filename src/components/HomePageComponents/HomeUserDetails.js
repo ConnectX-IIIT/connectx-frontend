@@ -13,11 +13,24 @@ function HomeUserDetails() {
   const imgURL = "https://obscure-ridge-13663.herokuapp.com/user/fetch/";
   const [{ userDetails }, dispatch] = useStateValue();
 
+  const handlePhoto = (photo, index) => {
+
+    if (photo) {
+      return imgURL + photo
+    }
+    if (index) {
+      return DefaultProfilePhoto;
+    } else {
+      return DefaultCoverPhoto;
+    }
+
+  }
+
   return (
     <div className="HomeUserDetails">
       <div id="UpperImageContainer">
-        <img src={`${imgURL}${userDetails.backgroundPicture}`} alt="Cover" />
-        <img src={`${imgURL}${userDetails.profilePicture}`} alt="profile" />
+        <img src={handlePhoto(userDetails.backgroundPicture, false)} alt="Cover" />
+        <img src={handlePhoto(userDetails.profilePicture, true)} alt="profile" />
       </div>
       <div id="UserDetailsContent">
         <h2>{userDetails.name}</h2>
