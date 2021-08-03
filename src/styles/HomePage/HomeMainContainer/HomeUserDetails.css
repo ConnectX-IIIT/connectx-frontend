@@ -25,6 +25,7 @@
   position: relative;
   top: -2.5vw;
   border-radius: 50%;
+  object-fit: cover;
 }
 #UserDetailsContent {
   font-family: "Manrope", sans-serif;
