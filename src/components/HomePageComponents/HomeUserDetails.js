@@ -32,17 +32,17 @@ function HomeUserDetails() {
       </div>
       <div>
         <form action="">
-          <div class="form-group">
+          <div className="form-group">
             <input type="checkbox" id="jobs" />
-            <label for="jobs">Jobs</label>
+            <label htmlFor="jobs">Jobs</label>
           </div>
-          <div class="form-group">
+          <div className="form-group">
             <input type="checkbox" id="projects" />
-            <label for="projects">Projects</label>
+            <label htmlFor="projects">Projects</label>
           </div>
-          <div class="form-group">
+          <div className="form-group">
             <input type="checkbox" id="blogs" />
-            <label for="blogs">Blogs</label>
+            <label htmlFor="blogs">Blogs</label>
           </div>
           <ButtonHome
             content="Apply"

@@ -68,6 +68,7 @@ function HomePageCard({
               alt="Userprofile"
               style={{
                 width: "3vw",
+                height: "3vw",
                 objectFit: "cover",
                 margin: "auto",
                 marginLeft: "0",
