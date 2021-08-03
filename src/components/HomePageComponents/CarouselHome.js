@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "../../styles/HomePage/HomeMainContainer/CarouselHome.css";
 import Carousel from "react-bootstrap/Carousel";
-let carouselPhoto = "https://source.unsplash.com/random";
 
 function CarouselHome({ CarouselImgs }) {
   const [index, setIndex] = useState(0);
