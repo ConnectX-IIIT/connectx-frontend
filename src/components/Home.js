@@ -35,7 +35,16 @@ export const Home = () => {
             : { opacity: "0", zIndex: "1", height: "0" }
         }
       >
-        <div className="SearchPopOut">
+        <div
+          className="SearchPopOut"
+          style={
+            isSearchBarClicked
+              ? { display: "block" }
+              : {
+                  display: "none",
+                }
+          }
+        >
           <div className="Queries">
             <div className="queriesHeading">People</div>
             <SearchBarPopOutPeople />
