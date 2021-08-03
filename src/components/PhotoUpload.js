@@ -56,11 +56,13 @@ function PhotoUpload() {
     const formDataForProfile = new FormData();
     const formDataForCover = new FormData();
     formDataForProfile.append("photo", userRegistration.photo);
-    formDataForCover.append("coverPhoto", userRegistration.coverPhoto);
+    formDataForCover.append("photo", userRegistration.coverPhoto);
     formDataForCover.append("height", coverPhotoHeight);
     formDataForCover.append("width", coverPhotoWidth);
+    formDataForCover.append("type", false);
     formDataForProfile.append("height", photoHeight);
     formDataForProfile.append("width", photoWidth);
+    formDataForProfile.append("type", true);
 
     const token = Cookies.get("token");
 
@@ -71,11 +73,19 @@ function PhotoUpload() {
     try {
       if (userRegistration.photo) {
 
-        // if (userDetails.profilePicture) {
-        //   await instance.get(`/user/remove/${userDetails.profilePicture}`);
-        // }
+        if (userDetails.profilePicture) {
+          await instance.post(`/user/remove/${userDetails.profilePicture}`,
+            {
+              "type": true,
+            },
+            {
+              headers: {
+                Authorization: `${token}`,
+              },
+            });
+        }
 
-        await instance.post(`/user/uploadprofile`, formDataForProfile, {
+        await instance.post(`/user/upload`, formDataForProfile, {
           headers: {
             Authorization: `${token}`,
           },
@@ -84,11 +94,19 @@ function PhotoUpload() {
 
       if (userRegistration.coverPhoto) {
 
-        // if (userDetails.backgroundPicture) {
-        //   await instance.get(`/user/remove/${userDetails.backgroundPicture}`);
-        // }
+        if (userDetails.backgroundPicture) {
+          await instance.post(`/user/remove/${userDetails.backgroundPicture}`,
+            {
+              "type": false,
+            },
+            {
+              headers: {
+                Authorization: `${token}`,
+              },
+            });
+        }
 
-        await instance.post(`/user/uploadbackground`, formDataForCover, {
+        await instance.post(`/user/upload`, formDataForCover, {
           headers: {
             Authorization: `${token}`,
           },
