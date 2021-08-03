@@ -3,7 +3,10 @@ import "../../styles/HomePage/HomeMainContainer/CarouselHome.css";
 import Carousel from "react-bootstrap/Carousel";
 
 function CarouselHome({ CarouselImgs }) {
+
   const [index, setIndex] = useState(0);
+
+  const imgURL = "https://obscure-ridge-13663.herokuapp.com/user/fetch/";
 
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
@@ -15,7 +18,7 @@ function CarouselHome({ CarouselImgs }) {
         <img
           key={img.toString()}
           className="d-block w-100 ImgCarouselHome"
-          src={img}
+          src={imgURL + img}
           alt="slide"
         />
       </Carousel.Item>
