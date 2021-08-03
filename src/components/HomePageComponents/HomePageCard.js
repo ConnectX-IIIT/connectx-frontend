@@ -28,6 +28,16 @@ function HomePageCard({
   PostImageUrls,
   Upvotes,
 }) {
+  const imgURL = "https://obscure-ridge-13663.herokuapp.com/user/fetch/";
+
+  const handlePhoto = (photo) => {
+
+    if (photo) {
+      return imgURL + photo
+    }
+    return UserProfileDefaultIcon;
+  }
+
   return (
     <div className="HomePageCard">
       <div id="HomePageCardLeftContainer">
@@ -64,7 +74,7 @@ function HomePageCard({
         >
           <div id="PostDetailsContainer">
             <img
-              src={UserProfilePhoto}
+              src={handlePhoto(UserProfilePhoto)}
               alt="Userprofile"
               style={{
                 width: "3vw",
