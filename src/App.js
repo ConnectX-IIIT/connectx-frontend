@@ -30,6 +30,8 @@ function App() {
 
           const userData = getDetailsRes.data.userData;
 
+          console.log(userData);
+
           dispatch({
             type: "UPDATE_DETAILS",
             userData: userData,
@@ -40,7 +42,7 @@ function App() {
       }
     }
     fetchData();
-  });
+  }, []);
 
   return (
     <Router>
