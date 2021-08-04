@@ -33,7 +33,8 @@
       "60f67d687e4fdb95c36eb079",
       "60f67d687e4fdb95c36eb079",
       "60f67d687e4fdb95c36eb079"
-    ]
+    ],
+    "upvotesPost": ["60f67d687e4fdb95c36eb079", "60f67d687e4fdb95c36eb079"]
   },
 
   "answers": {
@@ -118,7 +119,7 @@
       "60f68ade7e4fdb95c36eb07f"
     ],
     "profile_picture": "60f67d687e4f687e4fdb95c36eb079",
-    "name" : "2020 Batch",
+    "name": "2020 Batch",
     "description": "This is a group for 2020 batch"
   },
   "chats": {
