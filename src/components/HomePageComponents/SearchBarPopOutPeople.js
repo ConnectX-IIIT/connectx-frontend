@@ -19,7 +19,7 @@ function SearchBarPopOutPeople({
       }}
     >
       <img
-        src={UserProfileSrc}
+        src={`https://obscure-ridge-13663.herokuapp.com/user/fetch/${UserProfileSrc}`}
         alt=""
         style={{
           width: "2.1vw",
