@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Switch, Route } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Switch, Route, useHistory } from "react-router-dom";
 import Navbar from "./HomePageComponents/Navbar";
 import HomeMainContainer from "../components/HomePageComponents/HomeMainContainer";
 import QueriesMainConatiner from "../components/HomePageComponents/QueriesMainConatiner";
@@ -9,27 +9,10 @@ import ConnectionMainContainer from "./HomePageComponents/ConnectionMainContaine
 import MessageMainContainer from "./HomePageComponents/MessageMainContainer";
 import SearchBarPopOutPeople from "./HomePageComponents/SearchBarPopOutPeople";
 import SearchBarPopOutQueries from "./HomePageComponents/SearchBarPopOutQueries";
+import instance from "../helper/axios";
+import Cookies from "js-cookie";
 
-const PopoutPeople = [
-  {
-    UserProfileSrc:
-      "https://obscure-ridge-13663.herokuapp.com/user/fetch/82760836477864477ad674944107679d",
-    UserProfileName: "Raj Noobda",
-    UserProfileDescription: "Ujjawal piro harshil piro",
-  },
-  {
-    UserProfileSrc:
-      "https://obscure-ridge-13663.herokuapp.com/user/fetch/82760836477864477ad674944107679d",
-    UserProfileName: "Raj Noobda",
-    UserProfileDescription: "Ujjawal piro harshil piro",
-  },
-  {
-    UserProfileSrc:
-      "https://obscure-ridge-13663.herokuapp.com/user/fetch/82760836477864477ad674944107679d",
-    UserProfileName: "Raj Noobda",
-    UserProfileDescription: "Ujjawal piro harshil piro",
-  },
-];
+let PopoutPeople = [];
 
 const PopoutQueries = [
   {
@@ -43,16 +26,6 @@ const PopoutQueries = [
   },
 ];
 
-const PopoutPeopleList = PopoutPeople.map((item, index) => {
-  return (
-    <SearchBarPopOutPeople
-      UserProfileSrc={item.UserProfileSrc}
-      key={index}
-      UserProfileName={item.UserProfileName}
-      UserProfileDescription={item.UserProfileDescription}
-    />
-  );
-});
 const PopoutQueriesList = PopoutQueries.map((item, index) => {
   return (
     <SearchBarPopOutQueries
@@ -63,14 +36,55 @@ const PopoutQueriesList = PopoutQueries.map((item, index) => {
 });
 
 export const Home = () => {
+
+  const history = useHistory();
+
+  const PopoutPeopleList = PopoutPeople.map((item, index) => {
+    return (
+      <SearchBarPopOutPeople
+        UserProfileSrc={item.profilePicture}
+        key={index}
+        UserProfileName={item.name}
+        UserProfileDescription={item.description}
+      />
+    );
+  });
+
   const [userInput, setUserInput] = useState({
     searchedText: "",
   });
 
-  const handleInput = (e) => {
+  const handleInput = async (e) => {
     const name = e.target.name;
     const value = e.target.value;
     setUserInput({ ...userInput, [name]: value });
+
+    if (value.length === 0) {
+      PopoutPeople = [];
+      return;
+    }
+
+    try {
+      const token = Cookies.get("token");
+
+      if (token) {
+        const getSearchRes = await instance.get(`/home/search/${value}`, {
+          headers: {
+            Authorization: `${token}`,
+          },
+        });
+
+        const userData = getSearchRes.data.userData;
+        PopoutPeople = userData;
+        const queriesData = getSearchRes.data.questionData;
+
+      } else {
+        history.replace('/signin');
+      }
+    } catch (error) {
+      return alert(`${error}`);
+    }
+
   };
   const [isSearchBarClicked, setIsSearchBarClicked] = useState(false);
 
@@ -104,8 +118,8 @@ export const Home = () => {
             isSearchBarClicked
               ? { display: "block" }
               : {
-                  display: "none",
-                }
+                display: "none",
+              }
           }
         >
           <div className="Queries">
