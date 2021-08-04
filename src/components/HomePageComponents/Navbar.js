@@ -31,17 +31,13 @@ import activeMessageImage from "../../assets/home/top_navbar/a_ic_messages.svg";
 import UserProfileDefaultIcon from "../../assets/profile/user_profile_default_icon.svg";
 import HomePageFormInput from "./HomePageFormInput";
 
-function Navbar({ isSearchBarClicked, onSearchBarBlur }) {
+function Navbar({
+  isSearchBarClicked,
+  onSearchBarBlur,
+  onChangeFunction,
+  inputValue,
+}) {
   let { url } = useRouteMatch();
-  const [userInput, setUserInput] = useState({
-    searchedText: "",
-  });
-
-  const handleInput = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setUserInput({ ...userInput, [name]: value });
-  };
 
   const [navLocation, setNavLocation] = useState("home");
 
@@ -51,8 +47,8 @@ function Navbar({ isSearchBarClicked, onSearchBarBlur }) {
         <img src={connectxlogo} alt="connectxlogo" className="ConnectxLogo" />
         <div onClick={isSearchBarClicked}>
           <HomePageFormInput
-            inputValue={userInput.searchedText}
-            onChangeFunction={handleInput}
+            inputValue={inputValue}
+            onChangeFunction={onChangeFunction}
           />
           <img src={searchIcon} alt="searchicon" className="NavbarSearchIcon" />
         </div>
