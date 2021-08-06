@@ -112,7 +112,7 @@
       "60f68ade7e4fdb95c36eb07f",
       "60f68ade7e4fdb95c36eb07f"
     ],
-    "chats": [
+    "chat": [
       "60f68ade7e4fdb95c36eb07f",
       "60f68ade7e4fdb95c36eb07f",
       "60f68ade7e4fdb95c36eb07f"
@@ -121,12 +121,22 @@
     "name" : "2020 Batch",
     "description": "This is a group for 2020 batch"
   },
-  "chats": {
+  "messages": {
     "_id": { "$oid": "60f68ade7e4fdb95c36eb07f" },
     "message": "This is message!",
     "user_id": "60f68ade7e4fdb95c36eb07f",
     "timestamp": { "$numberLong": "1626768841451" },
     "reference": "60f67d687e4fdb95c36eb079",
     "picture": "60f67d687e4fdbd687e4fdb95c36eb079"
+  },
+  "chats": {
+    "_id": { "$oid": "60f68ade7e4fdb95c36eb07f" },
+    "chat": ["60f68ade7e4fdb95c36eb07f", "60f68ade7e4fdb95c36eb07f"],
+    "user1": "60f68ade7e4fdb95c36eb07f",
+    "user1_name": "60f68ade7e4fdb95c36eb07f",
+    "user_profile_1": "60f67d687e4fdbd687e4fdb95c36eb079",
+    "user2": "60f68ade7e4fdb95c36eb07f",
+    "user2_name": "60f68ade7e4fdb95c36eb07f",
+    "user_profile_2": "60f67d687e4fdbd687e4fdb95c36eb079"
   }
 }
