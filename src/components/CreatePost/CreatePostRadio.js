@@ -5,7 +5,6 @@ function CreatePostRadio({
   RadioOptions,
   RadioName,
   onChangeFunction,
-  RadioValue,
 }) {
   const RadioOptionsList = RadioOptions.map((RadioOption) => {
     return (
@@ -15,7 +14,7 @@ function CreatePostRadio({
           id={RadioHeading + RadioOption}
           name={RadioName}
           onChange={onChangeFunction}
-          value={RadioValue}
+          value={RadioOption}
           key={RadioHeading + RadioOption}
           className="radioInput"
         />
