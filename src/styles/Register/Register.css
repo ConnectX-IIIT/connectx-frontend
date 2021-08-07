@@ -165,8 +165,8 @@ input[type="number"]::-webkit-outer-spin-button {
   border: 3px solid #d1d1d1;
   display: inline-block;
   vertical-align: middle;
-  width: 0.8vw;
-  height: 0.8vw;
+  width: 1.3vw;
+  height: 1.3vw;
   padding: 0.14vw;
   margin-right: 1vw;
   text-align: center;
