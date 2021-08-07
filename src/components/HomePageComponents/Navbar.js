@@ -106,7 +106,7 @@ function Navbar({
           <img
             src={handlePhoto(userDetails.profilePicture)}
             alt="user profile icon"
-            className="NavbarUserProfile"
+            className="NavbarUserProfile object-cover"
           />
         </div>
       </div>
