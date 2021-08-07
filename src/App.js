@@ -16,31 +16,30 @@ import ResetPassword from "./components/ResetPassword";
 function App() {
   const [{ userDetails }, dispatch] = useStateValue();
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const token = Cookies.get("token");
+  async function fetchData() {
+    try {
+      const token = Cookies.get("token");
 
-        if (token) {
-          const getDetailsRes = await instance.get(`/user/getdetails`, {
-            headers: {
-              Authorization: `${token}`,
-            },
-          });
+      if (token) {
+        const getDetailsRes = await instance.get(`/user/getdetails`, {
+          headers: {
+            Authorization: `${token}`,
+          },
+        });
 
-          const userData = getDetailsRes.data.userData;
+        const userData = getDetailsRes.data.userData;
 
-          dispatch({
-            type: "UPDATE_DETAILS",
-            userData: userData,
-          });
-        }
-      } catch (error) {
-        return alert(`${error.response.data.error}`);
+        dispatch({
+          type: "UPDATE_DETAILS",
+          userData: userData,
+        });
       }
+    } catch (error) {
+      return alert(`${error.response.data.error}`);
     }
-    fetchData();
-  });
+  }
+
+  useEffect(() => { fetchData() }, []);
 
   return (
     <Router>

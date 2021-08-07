@@ -30,20 +30,26 @@ import activeMessageImage from "../../assets/home/top_navbar/a_ic_messages.svg";
 
 import UserProfileDefaultIcon from "../../assets/profile/user_profile_default_icon.svg";
 import HomePageFormInput from "./HomePageFormInput";
+import { useStateValue } from "../../helper/state_provider";
 
-function Navbar({ isSearchBarClicked, onSearchBarBlur }) {
+function Navbar({
+  isSearchBarClicked,
+  onSearchBarBlur,
+  onChangeFunction,
+  inputValue,
+}) {
   let { url } = useRouteMatch();
-  const [userInput, setUserInput] = useState({
-    searchedText: "",
-  });
-
-  const handleInput = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setUserInput({ ...userInput, [name]: value });
-  };
+  const [{ userDetails }, dispatch] = useStateValue();
 
   const [navLocation, setNavLocation] = useState("home");
+  const imgURL = "https://obscure-ridge-13663.herokuapp.com/user/fetch/";
+
+  const handlePhoto = (photo) => {
+    if (photo) {
+      return imgURL + photo;
+    }
+    return UserProfileDefaultIcon;
+  };
 
   return (
     <nav className="Navbar" onClick={onSearchBarBlur}>
@@ -51,8 +57,8 @@ function Navbar({ isSearchBarClicked, onSearchBarBlur }) {
         <img src={connectxlogo} alt="connectxlogo" className="ConnectxLogo" />
         <div onClick={isSearchBarClicked}>
           <HomePageFormInput
-            inputValue={userInput.searchedText}
-            onChangeFunction={handleInput}
+            inputValue={inputValue}
+            onChangeFunction={onChangeFunction}
           />
           <img src={searchIcon} alt="searchicon" className="NavbarSearchIcon" />
         </div>
@@ -98,7 +104,7 @@ function Navbar({ isSearchBarClicked, onSearchBarBlur }) {
 
         <div className="NavbarUserProfile">
           <img
-            src={UserProfileDefaultIcon}
+            src={handlePhoto(userDetails.profilePicture)}
             alt="user profile icon"
             className="NavbarUserProfile"
           />

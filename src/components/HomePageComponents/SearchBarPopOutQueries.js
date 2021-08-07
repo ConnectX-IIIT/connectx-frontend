@@ -1,6 +1,6 @@
 import React from "react";
 
-function SearchBarPopOutQueries() {
+function SearchBarPopOutQueries({ SearchBarQueries }) {
   return (
     <div
       style={{
@@ -23,7 +23,7 @@ function SearchBarPopOutQueries() {
           marginRight: "0.5vw",
         }}
       >
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum,
+        {SearchBarQueries}
       </div>
     </div>
   );

@@ -1,7 +1,11 @@
 import React from "react";
 import UserProfileDefaultIcon from "../../assets/profile/user_profile_default_icon.svg";
 
-function SearchBarPopOutPeople() {
+function SearchBarPopOutPeople({
+  UserProfileSrc,
+  UserProfileName,
+  UserProfileDescription,
+}) {
   return (
     <div
       style={{
@@ -15,11 +19,14 @@ function SearchBarPopOutPeople() {
       }}
     >
       <img
-        src={UserProfileDefaultIcon}
+        src={`https://obscure-ridge-13663.herokuapp.com/user/fetch/${UserProfileSrc}`}
         alt=""
         style={{
           width: "2.1vw",
           marginRight: "0.5vw",
+          height: "2.1vw",
+          borderRadius: "50%",
+          objectFit: "cover",
         }}
       />
       <div
@@ -32,7 +39,7 @@ function SearchBarPopOutPeople() {
           marginRight: "0.5vw",
         }}
       >
-        ABC XYZ
+        {UserProfileName}
       </div>
       <div
         style={{
@@ -43,7 +50,7 @@ function SearchBarPopOutPeople() {
           color: "#A7A7A7",
         }}
       >
-        Lorem ipsum dolor sit amet.
+        {UserProfileDescription}
       </div>
     </div>
   );
