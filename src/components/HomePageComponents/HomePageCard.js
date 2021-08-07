@@ -52,6 +52,7 @@ function HomePageCard({
   PostContent,
   PostImageUrls,
   Upvotes,
+  PostTitle,
 }) {
   const imgURL = "https://obscure-ridge-13663.herokuapp.com/user/fetch/";
 
@@ -181,7 +182,9 @@ function HomePageCard({
               }}
             />
           </div>
-
+          <div className="font-manrope font-medium text-xl my-3">
+            {PostTitle}
+          </div>
           <HomeCardInnerContent InnerContent={PostContent} />
           <CarouselHome CarouselImgs={PostImageUrls} />
         </div>
