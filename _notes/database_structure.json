@@ -86,7 +86,8 @@
       "60f67d687e4fdb95c360f67d687e4fdb95c36eb079",
       "60f67d687e4fdb95c36eb079b0787e4fdb95c36eb079",
       "60f67d687e4fdb95c36e07960f67d687e495c36eb079"
-    ]
+    ],
+    "image_dimnes": [500, 600, 800, 900, 1000, 1600]
   },
   "discussions": {
     "_id": { "$oid": "60f68ade7e4fdb95c36eb07f" },
@@ -118,7 +119,7 @@
       "60f68ade7e4fdb95c36eb07f"
     ],
     "profile_picture": "60f67d687e4f687e4fdb95c36eb079",
-    "name" : "2020 Batch",
+    "name": "2020 Batch",
     "description": "This is a group for 2020 batch"
   },
   "messages": {
@@ -127,7 +128,9 @@
     "user_id": "60f68ade7e4fdb95c36eb07f",
     "timestamp": { "$numberLong": "1626768841451" },
     "reference": "60f67d687e4fdb95c36eb079",
-    "picture": "60f67d687e4fdbd687e4fdb95c36eb079"
+    "picture": "60f67d687e4fdbd687e4fdb95c36eb079",
+    "image_dimnes": [500, 600]
+
   },
   "chats": {
     "_id": { "$oid": "60f68ade7e4fdb95c36eb07f" },
