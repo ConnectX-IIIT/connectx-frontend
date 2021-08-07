@@ -27,13 +27,14 @@ function CreatePost() {
         [name]: e.target.files,
       });
     } else {
-      setPostDetails({ ...setPostDetails, [name]: value });
+      setPostDetails({ ...postDetails, [name]: value });
     }
     console.log(postDetails);
   };
 
   const handleTextChange = (e) => {
     handleInput(e);
+
     if (e.target.name === "postTitle") {
       if (e.target.value !== "") {
         setActiveTitle(true);
