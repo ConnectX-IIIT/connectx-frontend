@@ -7,7 +7,6 @@ import Cookies from "js-cookie";
 import { useHistory } from "react-router-dom";
 
 function HomeMainContainer() {
-
   const history = useHistory();
   const [postData, setPostData] = useState([]);
 
@@ -24,16 +23,17 @@ function HomeMainContainer() {
 
         const data = getDetailsRes.data.postData;
         setPostData(data);
-
       } else {
-        history.replace('/signin')
+        history.replace("/signin");
       }
     } catch (error) {
       return alert(`${error.response.data.error}`);
     }
-  }
+  };
 
-  useEffect(() => { fetchData() }, []);
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const HomePageCardDetailsList = postData.map((item, index) => {
     return (
@@ -47,6 +47,7 @@ function HomeMainContainer() {
         PostContent={item.description}
         PostImageUrls={item.attachedImages}
         Upvotes={item.reactions}
+        PostTitle={item.title}
       />
     );
   });
