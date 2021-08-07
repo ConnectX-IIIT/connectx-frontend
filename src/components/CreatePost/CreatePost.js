@@ -3,6 +3,8 @@ import "../../styles/CreatePost/CreatePost.css";
 import CreatePostInput from "./CreatePostInput";
 import CreatePostRadio from "./CreatePostRadio";
 import Button from "../signUpCompontents/Button";
+import axios from "axios";
+import Cookies from "js-cookie";
 
 function CreatePost() {
   const TypeOfPostArr = ["Job", "Project", "Blog"];
@@ -29,7 +31,7 @@ function CreatePost() {
     } else {
       setPostDetails({ ...postDetails, [name]: value });
     }
-    console.log(postDetails);
+    // console.log(postDetails);
   };
 
   const handleTextChange = (e) => {
@@ -58,9 +60,49 @@ function CreatePost() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(postDetails);
+    const attachedImgs = postDetails.attachedImgs;
+    let imageHeights = [];
+    let imageWidths;
+
+    if (attachedImgs.length !== 0) {
+      console.log(attachedImgs);
+      Array.prototype.forEach.call(attachedImgs, function (file, index) {
+
+        let reader = new FileReader();
+        reader.readAsDataURL(file);
+
+        imageHeights[index] = 5
+        console.log(reader.readAsDataURL(file));
+      });
+
+    }
+    console.log(imageHeights);
+
+    const postData = new FormData();
+    postData.append("title", postDetails.postTitle);
+    postData.append("description", postDetails.postDescription);
+    postData.append("jobLink", postDetails.jobLink);
+    postData.append("photos", postDetails.attachedImgs);
+    postData.append("imageHeights", imageHeights);
+    postData.append("imageWidths", imageWidths);
+
+    // try {
+    //   const token = Cookies.get("token");
+
+    //   if (token) {
+    //     const getDetailsRes = await axios.post(`/home/addpost`, {
+    //       headers: {
+    //         Authorization: `${token}`,
+    //       },
+    //     });
+
+    //   }
+    // } catch (error) {
+    //   return alert(`${error.response.data.error}`);
+    // }
   };
 
   return (
