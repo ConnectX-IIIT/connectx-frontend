@@ -63,37 +63,46 @@ function CreatePost() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(postDetails);
+
     const attachedImgs = postDetails.attachedImgs;
-    let imageHeights = [];
-    let imageWidths;
+    let isProject = false;
+    // let imageHeights = [];
+    // let imageWidths = [];
 
-    if (attachedImgs.length !== 0) {
-      console.log(attachedImgs);
-      Array.prototype.forEach.call(attachedImgs, function (file, index) {
+    // if (attachedImgs.length !== 0) {
+    //   console.log(attachedImgs);
+    //   Array.prototype.forEach.call(attachedImgs, function (file, index) {
 
-        let reader = new FileReader();
-        reader.readAsDataURL(file);
+    //     let reader = new FileReader();
+    //     reader.readAsDataURL(file);
 
-        imageHeights[index] = 5
-        console.log(reader.readAsDataURL(file));
-      });
+    //     imageHeights[index] = 5
+    //     console.log(reader.readAsDataURL(file));
+    //   });
+    // }
 
+    if (postDetails.typeOfPost === "Project") {
+      isProject = true;
     }
-    console.log(imageHeights);
 
     const postData = new FormData();
     postData.append("title", postDetails.postTitle);
     postData.append("description", postDetails.postDescription);
     postData.append("jobLink", postDetails.jobLink);
-    postData.append("photos", postDetails.attachedImgs);
-    postData.append("imageHeights", imageHeights);
-    postData.append("imageWidths", imageWidths);
+    postData.append("isProject", isProject);
+
+    for (let file of attachedImgs) {
+      postData.append("attachedImgs", file);
+    }
+
+    // postData.append("imageHeights", imageHeights);
+    // postData.append("imageWidths", imageWidths);
 
     // try {
     //   const token = Cookies.get("token");
 
     //   if (token) {
-    //     const getDetailsRes = await axios.post(`/home/addpost`, {
+    //     const addPostRes = await axios.post(`http://localhost:5000/home/addpost`, postData, {
     //       headers: {
     //         Authorization: `${token}`,
     //       },
@@ -101,13 +110,13 @@ function CreatePost() {
 
     //   }
     // } catch (error) {
-    //   return alert(`${error.response.data.error}`);
+    //   return alert(`${error}`);
     // }
   };
 
   return (
     <div className="PostMainContainer">
-      <form action="" onSubmit={handleSubmit}>
+      <form action="" onSubmit={handleSubmit} encType="multipart/form-data" method="post">
         <CreatePostInput
           inputType="text"
           inputName="postTitle"
