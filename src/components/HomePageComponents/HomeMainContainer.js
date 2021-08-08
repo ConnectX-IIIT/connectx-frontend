@@ -41,6 +41,7 @@ function HomeMainContainer() {
         key={index}
         PostId={item._id}
         UserId={item.user}
+        jobLink={item.jobLink}
         UserProfilePhoto={item.userProfile}
         TimeStamp={item.timestamp}
         PostUserName={item.userName}

@@ -20,7 +20,7 @@ import ButtonHome from "./ButtonHome";
 import textDiscussion from "../../assets/home/post/bottom/ic_dicussion.svg";
 import textDiscussionClick from "../../assets/home/post/bottom/d_ic_dicussion.svg";
 
-function isJob() {
+function isJob(jobLink) {
   return (
     <div className="HomeCardButtonContainer">
       <ButtonHome
@@ -31,6 +31,7 @@ function isJob() {
           fontSize: "1vw",
           margin: "0",
         }}
+        jobLink={jobLink}
       />
       <div className="discussInPersonal">Discuss in Personal</div>
     </div>
@@ -53,6 +54,7 @@ function HomePageCard({
   PostImageUrls,
   Upvotes,
   PostTitle,
+  jobLink,
 }) {
   const imgURL = "https://obscure-ridge-13663.herokuapp.com/user/fetch/";
 
@@ -189,7 +191,7 @@ function HomePageCard({
           <CarouselHome CarouselImgs={PostImageUrls} />
         </div>
         {/* <div className="HomeCardButtonContainer"> */}
-        {is_Job ? isJob() : is_Project ? isProject() : null}
+        {is_Job ? isJob(jobLink) : is_Project ? isProject() : null}
 
         <div
           style={{
