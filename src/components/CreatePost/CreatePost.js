@@ -3,10 +3,13 @@ import "../../styles/CreatePost/CreatePost.css";
 import CreatePostInput from "./CreatePostInput";
 import CreatePostRadio from "./CreatePostRadio";
 import Button from "../signUpCompontents/Button";
-import axios from "axios";
 import Cookies from "js-cookie";
+import { useHistory } from "react-router-dom";
+import instance from "../../helper/axios";
 
 function CreatePost() {
+
+  const history = useHistory();
   const TypeOfPostArr = ["Job", "Project", "Blog"];
   const [isActiveTitle, setActiveTitle] = useState(false);
   const [isActiveDescription, setActiveDescription] = useState(false);
@@ -95,23 +98,39 @@ function CreatePost() {
       postData.append("attachedImgs", file);
     }
 
+    if (!postDetails.postDescription || !postDetails.typeOfPost) {
+      return alert("Please fill all the details properly!");
+    }
+
+    if (!postDetails.postTitle && postDetails.typeOfPost !== 'Blog') {
+      return alert("Please add post title!");
+    }
+
+    if (!postDetails.jobLink && postDetails.typeOfPost === 'Job') {
+      return alert("Please add joblink!");
+    }
+
     // postData.append("imageHeights", imageHeights);
     // postData.append("imageWidths", imageWidths);
 
-    // try {
-    //   const token = Cookies.get("token");
+    try {
+      const token = Cookies.get("token");
 
-    //   if (token) {
-    //     const addPostRes = await axios.post(`http://localhost:5000/home/addpost`, postData, {
-    //       headers: {
-    //         Authorization: `${token}`,
-    //       },
-    //     });
+      if (token) {
+        const addPostRes = await instance.post(`/home/addpost`, postData, {
+          headers: {
+            Authorization: `${token}`,
+          },
+        });
 
-    //   }
-    // } catch (error) {
-    //   return alert(`${error}`);
-    // }
+        if (addPostRes.status === 200) {
+          history.replace('/home');
+        }
+
+      }
+    } catch (error) {
+      return alert(`${error.response.data.error}`);
+    }
   };
 
   return (
