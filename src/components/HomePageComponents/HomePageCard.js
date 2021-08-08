@@ -188,7 +188,9 @@ function HomePageCard({
             {PostTitle}
           </div>
           <HomeCardInnerContent InnerContent={PostContent} />
-          <CarouselHome CarouselImgs={PostImageUrls} />
+          {PostImageUrls.length > 0 ? (
+            <CarouselHome CarouselImgs={PostImageUrls} />
+          ) : null}
         </div>
         {/* <div className="HomeCardButtonContainer"> */}
         {is_Job ? isJob(jobLink) : is_Project ? isProject() : null}
