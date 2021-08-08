@@ -7,17 +7,22 @@ const ReadMore = ({ children }) => {
   const toggleReadMore = () => {
     setIsReadMore(!isReadMore);
   };
+  console.log(ReadMoreText);
+
   return (
-    <p className="ReadMoreText">
+    <pre className="ReadMoreText">
       {isReadMore ? ReadMoreText.slice(0, 250) : ReadMoreText}
-      <span onClick={toggleReadMore} className="readOrHide">
-        {isReadMore ? "...Read More" : " Show Less"}
-      </span>
-    </p>
+      {ReadMoreText.length > 250 ? (
+        <span onClick={toggleReadMore} className="readOrHide">
+          {isReadMore ? "...Read More" : " Show Less"}
+        </span>
+      ) : null}
+    </pre>
   );
 };
 
 function HomeCardInnerContent({ InnerContent }) {
+  console.log(InnerContent);
   return (
     <div className="HomeCardInnerContentContainer">
       <ReadMore>{InnerContent}</ReadMore>
