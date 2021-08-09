@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ImgStackHome from "./ImgStackHome";
 import CarouselHome from "./CarouselHome";
 
@@ -57,6 +57,9 @@ function HomePageCard({
   jobLink,
 }) {
   const imgURL = "https://obscure-ridge-13663.herokuapp.com/user/fetch/";
+  const [UpvotesHandle, setUpvotesHandle] = useState(Upvotes);
+  const [UpvoteActive, setUpvoteActive] = useState(false);
+  const [DownvoteActive, setDownvoteActive] = useState(false);
 
   const is_Job = true;
   const is_Project = false;
@@ -104,6 +107,37 @@ function HomePageCard({
     );
   };
 
+  function handleUpvotes() {
+    setUpvoteActive(!UpvoteActive);
+    if (UpvoteActive) {
+      setUpvotesHandle(UpvotesHandle - 1);
+    } else {
+      setUpvotesHandle(UpvotesHandle + 1);
+    }
+  }
+  function handleDownvotes() {
+    setDownvoteActive(!DownvoteActive);
+    if (DownvoteActive) {
+      setUpvotesHandle(UpvotesHandle + 1);
+    } else {
+      setUpvotesHandle(UpvotesHandle - 1);
+    }
+  }
+  const handleReaction = (isUpvoted) => {
+    if (DownvoteActive && isUpvoted) {
+      handleUpvotes();
+      handleDownvotes();
+    } else if (UpvoteActive && !isUpvoted) {
+      handleDownvotes();
+      handleUpvotes();
+    } else {
+      if (isUpvoted) {
+        handleUpvotes();
+      } else {
+        handleDownvotes();
+      }
+    }
+  };
   return (
     <div className="HomePageCard">
       <div id="HomePageCardLeftContainer">
@@ -117,8 +151,12 @@ function HomePageCard({
             height: "2vw",
           }}
           styleImgContainer={{ margin: "0", width: "2vw", height: "2vw" }}
+          onClickFunction={() => {
+            handleReaction(true);
+          }}
+          isActive={UpvoteActive}
         />
-        <div id="HomePageCardLeftContainerCount">{Upvotes}</div>
+        <div id="HomePageCardLeftContainerCount">{UpvotesHandle}</div>
         <ImgStackHome
           normalImageSrc={homeDownvoteIcon}
           hoverImageSrc={homeDownvoteIconHover}
@@ -129,6 +167,10 @@ function HomePageCard({
             height: "2vw",
           }}
           styleImgContainer={{ margin: "0", width: "2vw", height: "2vw" }}
+          onClickFunction={() => {
+            handleReaction(false);
+          }}
+          isActive={DownvoteActive}
         />
       </div>
       <div id="HomePageCardRightContainer">
