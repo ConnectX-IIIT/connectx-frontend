@@ -13,12 +13,13 @@ import homeDownvoteIconSelected from "../../assets/home/post/upvotes/s_ic_downvo
 import HomeCardInnerContent from "./HomeCardInnerContent";
 import UserProfileDefaultIcon from "../../assets/profile/user_profile_default_icon.svg";
 import DotImageHome from "../../assets/home/post/body/info/ic_info_dots.svg";
+import DiscussionSection from "./DiscussionSection";
 
 import "../../styles/HomePage/HomeMainContainer/HomePageCard.css";
 import ButtonHome from "./ButtonHome";
 
 import textDiscussion from "../../assets/home/post/bottom/ic_dicussion.svg";
-import textDiscussionClick from "../../assets/home/post/bottom/d_ic_dicussion.svg";
+import textDiscussionClick from "../../assets/home/post/bottom/h_ic_dicussion.svg";
 
 function isJob(jobLink) {
   return (
@@ -60,6 +61,7 @@ function HomePageCard({
   const [UpvotesHandle, setUpvotesHandle] = useState(Upvotes);
   const [UpvoteActive, setUpvoteActive] = useState(false);
   const [DownvoteActive, setDownvoteActive] = useState(false);
+  const [isDiscussion, setIsDiscussion] = useState(true);
 
   const is_Job = true;
   const is_Project = false;
@@ -242,7 +244,12 @@ function HomePageCard({
             borderTop: "2px solid #bdbfc4",
           }}
         >
-          <div className="HomeCardDiscussion">
+          <div
+            className="HomeCardDiscussion"
+            onClick={() => {
+              setIsDiscussion(!isDiscussion);
+            }}
+          >
             <img
               src={textDiscussion}
               alt="message"
@@ -253,6 +260,8 @@ function HomePageCard({
             Discussion
           </div>
         </div>
+
+        {isDiscussion ? <DiscussionSection /> : null}
       </div>
     </div>
   );
