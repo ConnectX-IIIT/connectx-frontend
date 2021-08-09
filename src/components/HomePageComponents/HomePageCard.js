@@ -261,7 +261,25 @@ function HomePageCard({
           </div>
         </div>
 
-        {isDiscussion ? <DiscussionSection /> : null}
+        {isDiscussion ? (
+          <div
+            style={{
+              borderTop: "2px solid rgb(189, 191, 196)",
+            }}
+          >
+            <div>
+              <DiscussionSection />
+              <p className="font-manrope font-semibold ml-20 pl-1">Reply</p>
+              <DiscussionSection
+                discussionSectionStyle={{ marginLeft: "4vw" }}
+              />
+              <DiscussionSection
+                discussionSectionStyle={{ marginLeft: "4vw" }}
+              />
+            </div>
+            <DiscussionSection />
+          </div>
+        ) : null}
       </div>
     </div>
   );
