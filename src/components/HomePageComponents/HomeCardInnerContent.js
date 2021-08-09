@@ -7,7 +7,6 @@ const ReadMore = ({ children }) => {
   const toggleReadMore = () => {
     setIsReadMore(!isReadMore);
   };
-  console.log(ReadMoreText);
 
   return (
     <pre className="ReadMoreText">
@@ -22,7 +21,6 @@ const ReadMore = ({ children }) => {
 };
 
 function HomeCardInnerContent({ InnerContent }) {
-  console.log(InnerContent);
   return (
     <div className="HomeCardInnerContentContainer">
       <ReadMore>{InnerContent}</ReadMore>
