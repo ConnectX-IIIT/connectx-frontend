@@ -59,7 +59,6 @@ function SetPassword() {
             history.push('/register');
 
         } catch (error) {
-            console.log(error);
             return alert(`${error.response.data.error}`);
         }
     };
