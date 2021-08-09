@@ -61,7 +61,7 @@ function HomePageCard({
   const [UpvotesHandle, setUpvotesHandle] = useState(Upvotes);
   const [UpvoteActive, setUpvoteActive] = useState(false);
   const [DownvoteActive, setDownvoteActive] = useState(false);
-  const [isDiscussion, setIsDiscussion] = useState(true);
+  const [isDiscussion, setIsDiscussion] = useState(false);
 
   const is_Job = true;
   const is_Project = false;
