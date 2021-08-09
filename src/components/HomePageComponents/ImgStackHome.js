@@ -8,6 +8,7 @@ function ImgStackHome({
   isActive,
   styleImgStack,
   styleImgContainer,
+  onClickFunction,
 }) {
   const displayImage = "ImgStackPhoto ImgStackVisible";
   const hideImage = "ImgStackPhoto ImgStackHidden";
@@ -51,6 +52,7 @@ function ImgStackHome({
           setNormalClass(displayImage);
         }
       }}
+      onClick={onClickFunction}
     >
       <img
         src={normalImageSrc}
