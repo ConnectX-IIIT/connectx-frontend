@@ -34,7 +34,11 @@
       "60f67d687e4fdb95c36eb079",
       "60f67d687e4fdb95c36eb079"
     ],
-    "upvotesPost": ["60f67d687e4fdb95c36eb079", "60f67d687e4fdb95c36eb079"]
+    "upvotesPost": ["60f67d687e4fdb95c36eb079", "60f67d687e4fdb95c36eb079"],
+    "downvotesvotesPost": [
+      "60f67d687e4fdb95c36eb079",
+      "60f67d687e4fdb95c36eb079"
+    ]
   },
 
   "answers": {
@@ -50,9 +54,11 @@
       "60f67d687e4fdb95c37d68e4fdb95c36eb079",
       "60f67d687e4fdb95c67d687e4fdb95c36eb079"
     ],
-    "upvotes": {
-      "$numberInt": "4"
-    },
+    "upvotesPost": ["60f67d687e4fdb95c36eb079", "60f67d687e4fdb95c36eb079"],
+    "downvotesvotesPost": [
+      "60f67d687e4fdb95c36eb079",
+      "60f67d687e4fdb95c36eb079"
+    ],
     "last_update": {
       "$numberLong": "1626768841451"
     },
@@ -63,7 +69,11 @@
     "question": "How are you doing?",
     "user": "60f67d687e4fdb95c36eb079",
     "answers": ["60f67d687e4fdb95c36eb079"],
-    "upvotes": { "$numberInt": "1" },
+    "upvotesPost": ["60f67d687e4fdb95c36eb079", "60f67d687e4fdb95c36eb079"],
+    "downvotesvotesPost": [
+      "60f67d687e4fdb95c36eb079",
+      "60f67d687e4fdb95c36eb079"
+    ],
     "timestamp": { "$numberLong": "1626768841451" },
     "reports": ["60f67d687e4fdb95c36eb079"],
     "attached_images": [
@@ -80,7 +90,11 @@
     "is_project": false,
     "timestamp": { "$numberLong": "1626768841451" },
     "user": "60f67d687e4fdb95c36eb079",
-    "reactions": { "$numberInt": "96" },
+    "upvotesPost": ["60f67d687e4fdb95c36eb079", "60f67d687e4fdb95c36eb079"],
+    "downvotesvotesPost": [
+      "60f67d687e4fdb95c36eb079",
+      "60f67d687e4fdb95c36eb079"
+    ],
     "discussions": ["60f67d687e4fdb95c36eb079", "60f67d687e4fdb95c36eb079"],
     "reports": ["60f67d687e4fdb95c36eb079"],
     "attached_images": [
@@ -88,7 +102,7 @@
       "60f67d687e4fdb95c36eb079b0787e4fdb95c36eb079",
       "60f67d687e4fdb95c36e07960f67d687e495c36eb079"
     ],
-    "image_widths": [ 600, 900, 1600],
+    "image_widths": [600, 900, 1600],
     "image_heights": [500, 800, 1000]
   },
   "discussions": {
@@ -96,7 +110,11 @@
     "post_id": "60f68ade7e4fdb95c36eb07f",
     "user": "60f67d687e4fdb95c36eb079",
     "timestamp": { "$numberLong": "1626768841451" },
-    "upvotes": { "$numberInt": "1" },
+    "upvotesPost": ["60f67d687e4fdb95c36eb079", "60f67d687e4fdb95c36eb079"],
+    "downvotesvotesPost": [
+      "60f67d687e4fdb95c36eb079",
+      "60f67d687e4fdb95c36eb079"
+    ],
     "reports": ["60f67d687e4fdb95c36eb079"],
     "reference": "60f67d687e4fdb95c36eb079"
   },
@@ -132,7 +150,6 @@
     "reference": "60f67d687e4fdb95c36eb079",
     "picture": "60f67d687e4fdbd687e4fdb95c36eb079",
     "image_dimnes": [500, 600]
-
   },
   "chats": {
     "_id": { "$oid": "60f68ade7e4fdb95c36eb07f" },
