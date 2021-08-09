@@ -38,6 +38,27 @@
     "downvotesvotesPost": [
       "60f67d687e4fdb95c36eb079",
       "60f67d687e4fdb95c36eb079"
+    ],
+    "upvotesQuestions": [
+      "60f67d687e4fdb95c36eb079",
+      "60f67d687e4fdb95c36eb079"
+    ],
+    "downvotesvotesQuestions": [
+      "60f67d687e4fdb95c36eb079",
+      "60f67d687e4fdb95c36eb079"
+    ],
+    "upvotesAnswers": ["60f67d687e4fdb95c36eb079", "60f67d687e4fdb95c36eb079"],
+    "downvotesvotesAnswers": [
+      "60f67d687e4fdb95c36eb079",
+      "60f67d687e4fdb95c36eb079"
+    ],
+    "upvotesDiscussions": [
+      "60f67d687e4fdb95c36eb079",
+      "60f67d687e4fdb95c36eb079"
+    ],
+    "downvotesvotesDiscussions": [
+      "60f67d687e4fdb95c36eb079",
+      "60f67d687e4fdb95c36eb079"
     ]
   },
 
