@@ -18,8 +18,7 @@ import DiscussionSection from "./DiscussionSection";
 import "../../styles/HomePage/HomeMainContainer/HomePageCard.css";
 import ButtonHome from "./ButtonHome";
 
-import textDiscussion from "../../assets/home/post/bottom/ic_dicussion.svg";
-import textDiscussionClick from "../../assets/home/post/bottom/h_ic_dicussion.svg";
+import { ReactComponent as TextDiscussion } from "../../assets/home/post/bottom/ic_dicussion.svg";
 
 function isJob(jobLink) {
   return (
@@ -250,13 +249,14 @@ function HomePageCard({
               setIsDiscussion(!isDiscussion);
             }}
           >
-            <img
+            {/* <img
               src={textDiscussion}
               alt="message"
               style={{
                 marginRight: "0.5vw",
               }}
-            />
+            /> */}
+            <TextDiscussion className="mr-2 textDiscussion" />
             Discussion
           </div>
         </div>
