@@ -33,6 +33,7 @@ function isJob(jobLink) {
           width: "10vw",
           height: "3vw",
           fontSize: "1vw",
+          marginRight: "1vw",
           margin: "0",
         }}
         jobLink={jobLink}
@@ -45,7 +46,16 @@ function isJob(jobLink) {
 function isProject() {
   return (
     <div className="HomeCardButtonContainer">
-      <div className="discussInPersonal">Discuss in Personal</div>
+      <ButtonHome
+        content="Discuss in Personal"
+        styleButton={{
+          width: "12vw",
+          height: "3vw",
+          fontSize: "1vw",
+          marginRight: "1vw",
+          margin: "0",
+        }}
+      />
     </div>
   );
 }
@@ -59,7 +69,8 @@ function HomePageCard({
   Upvotes,
   PostTitle,
   jobLink,
-  PostId
+  PostId,
+  isPostProject,
 }) {
   const history = useHistory();
   const imgURL = "https://obscure-ridge-13663.herokuapp.com/user/fetch/";
@@ -69,18 +80,24 @@ function HomePageCard({
   const [isDiscussion, setIsDiscussion] = useState(false);
   const [{ userDetails }, dispatch] = useStateValue(false);
 
-  const is_Job = true;
-  const is_Project = false;
+  const is_Job = jobLink;
+  const is_Project = isPostProject;
 
   useEffect(() => {
-    if (userDetails.upvotedPosts && userDetails.upvotedPosts.includes(`${PostId}`)) {
+    if (
+      userDetails.upvotedPosts &&
+      userDetails.upvotedPosts.includes(`${PostId}`)
+    ) {
       setUpvoteActive(true);
     }
 
-    if (userDetails.downvotedPosts && userDetails.downvotedPosts.includes(`${PostId}`)) {
+    if (
+      userDetails.downvotedPosts &&
+      userDetails.downvotedPosts.includes(`${PostId}`)
+    ) {
       setDownvoteActive(true);
     }
-  }, []);
+  }, [userDetails]);
 
   const handlePhoto = (photo) => {
     if (photo) {
@@ -130,16 +147,18 @@ function HomePageCard({
       const token = Cookies.get("token");
 
       if (token) {
-        const voteRes = await instance.post(`/post/vote/${PostId}`, {
-          type
-        },
+        const voteRes = await instance.post(
+          `/post/vote/${PostId}`,
+          {
+            type,
+          },
           {
             headers: {
               Authorization: `${token}`,
             },
-          });
+          }
+        );
         return parseInt(voteRes.data.reactions);
-
       } else {
         history.replace("/signin");
       }
@@ -279,7 +298,7 @@ function HomePageCard({
             <CarouselHome CarouselImgs={PostImageUrls} />
           ) : null}
         </div>
-        {/* <div className="HomeCardButtonContainer"> */}
+
         {is_Job ? isJob(jobLink) : is_Project ? isProject() : null}
 
         <div
@@ -293,13 +312,6 @@ function HomePageCard({
               setIsDiscussion(!isDiscussion);
             }}
           >
-            {/* <img
-              src={textDiscussion}
-              alt="message"
-              style={{
-                marginRight: "0.5vw",
-              }}
-            /> */}
             <TextDiscussion className="mr-2 textDiscussion" />
             Discussion
           </div>
