@@ -20,7 +20,7 @@ function MainOuterContainer({ Background_color, isLeft, data, photo }) {
             src={photo}
             alt="Container_1_img"
             className="img_landing_page"
-            style={{ paddingLeft: "2vw" }}
+            style={{ paddingLeft: "2vw" , webkitUserDrag: "none" }}
           />
         </div>
       ) : (
