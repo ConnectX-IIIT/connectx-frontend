@@ -73,11 +73,11 @@ function HomePageCard({
   const is_Project = false;
 
   useEffect(() => {
-    if (userDetails.upvotedPosts.includes(`${PostId}`)) {
+    if (userDetails.upvotedPosts && userDetails.upvotedPosts.includes(`${PostId}`)) {
       setUpvoteActive(true);
     }
 
-    if (userDetails.downvotedPosts.includes(`${PostId}`)) {
+    if (userDetails.downvotedPosts && userDetails.downvotedPosts.includes(`${PostId}`)) {
       setDownvoteActive(true);
     }
   }, []);
