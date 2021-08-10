@@ -1,6 +1,10 @@
 .Navbar {
   width: 100%;
+  position: fixed;
+  background: white;
   height: 81px;
+  z-index: 500;
+  top: 0;
   border-bottom: 2px solid #c4c4c4;
   display: flex;
   justify-content: space-between;

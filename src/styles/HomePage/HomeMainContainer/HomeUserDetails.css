@@ -3,7 +3,8 @@
   border: 2px solid #c4c4c4;
   box-sizing: border-box;
   border-radius: 0.7vw;
-  height: fit-content;
+  height: fit-content;  position: sticky;
+  top: calc(81px + 1.2vw);
 }
 #UpperImageContainer {
   position: relative;
@@ -14,7 +15,8 @@
 }
 #UpperImageContainer img:first-child {
   width: 100%;
-  height: auto;
+  height: 10vw;
+  object-fit: cover;
   border-top-left-radius: 0.7vw;
   border-top-right-radius: 0.7vw;
   border-bottom: 2px solid #c4c4c4;
