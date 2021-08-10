@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ImgStackHome from "./ImgStackHome";
 import CarouselHome from "./CarouselHome";
 
@@ -19,6 +19,10 @@ import "../../styles/HomePage/HomeMainContainer/HomePageCard.css";
 import ButtonHome from "./ButtonHome";
 
 import { ReactComponent as TextDiscussion } from "../../assets/home/post/bottom/ic_dicussion.svg";
+import Cookies from "js-cookie";
+import { useHistory } from "react-router-dom";
+import { useStateValue } from "../../helper/state_provider";
+import instance from "../../helper/axios";
 
 function isJob(jobLink) {
   return (
@@ -55,15 +59,28 @@ function HomePageCard({
   Upvotes,
   PostTitle,
   jobLink,
+  PostId
 }) {
+  const history = useHistory();
   const imgURL = "https://obscure-ridge-13663.herokuapp.com/user/fetch/";
   const [UpvotesHandle, setUpvotesHandle] = useState(Upvotes);
   const [UpvoteActive, setUpvoteActive] = useState(false);
   const [DownvoteActive, setDownvoteActive] = useState(false);
   const [isDiscussion, setIsDiscussion] = useState(false);
+  const [{ userDetails }, dispatch] = useStateValue(false);
 
   const is_Job = true;
   const is_Project = false;
+
+  useEffect(() => {
+    if (userDetails.upvotedPosts.includes(`${PostId}`)) {
+      setUpvoteActive(true);
+    }
+
+    if (userDetails.downvotedPosts.includes(`${PostId}`)) {
+      setDownvoteActive(true);
+    }
+  }, []);
 
   const handlePhoto = (photo) => {
     if (photo) {
@@ -108,20 +125,47 @@ function HomePageCard({
     );
   };
 
-  function handleUpvotes() {
-    setUpvoteActive(!UpvoteActive);
-    if (UpvoteActive) {
-      setUpvotesHandle(UpvotesHandle - 1);
-    } else {
-      setUpvotesHandle(UpvotesHandle + 1);
+  async function updateReactions(type) {
+    try {
+      const token = Cookies.get("token");
+
+      if (token) {
+        const voteRes = await instance.post(`/post/vote/${PostId}`, {
+          type
+        },
+          {
+            headers: {
+              Authorization: `${token}`,
+            },
+          });
+        return parseInt(voteRes.data.reactions);
+
+      } else {
+        history.replace("/signin");
+      }
+    } catch (error) {
+      return alert(`${error}`);
     }
   }
-  function handleDownvotes() {
+
+  async function handleUpvotes() {
+    setUpvoteActive(!UpvoteActive);
+    if (UpvoteActive) {
+      const upvotes = await updateReactions(2);
+      setUpvotesHandle(upvotes);
+    } else {
+      const upvotes = await updateReactions(1);
+      setUpvotesHandle(upvotes);
+    }
+  }
+  async function handleDownvotes() {
     setDownvoteActive(!DownvoteActive);
     if (DownvoteActive) {
-      setUpvotesHandle(UpvotesHandle + 1);
+      const upvotes = await updateReactions(4);
+      setUpvotesHandle(upvotes);
     } else {
-      setUpvotesHandle(UpvotesHandle - 1);
+      const upvotes = await updateReactions(3);
+      setUpvotesHandle(upvotes);
     }
   }
   const handleReaction = (isUpvoted) => {
