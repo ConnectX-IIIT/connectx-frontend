@@ -17,6 +17,7 @@ import DiscussionSection from "./DiscussionSection";
 
 import "../../styles/HomePage/HomeMainContainer/HomePageCard.css";
 import ButtonHome from "./ButtonHome";
+import UserProfile from "../../assets/profile/user_profile_default_icon.svg";
 
 import { ReactComponent as TextDiscussion } from "../../assets/home/post/bottom/ic_dicussion.svg";
 import Cookies from "js-cookie";
@@ -77,7 +78,21 @@ function HomePageCard({
   const [UpvotesHandle, setUpvotesHandle] = useState(Upvotes);
   const [UpvoteActive, setUpvoteActive] = useState(false);
   const [DownvoteActive, setDownvoteActive] = useState(false);
-  const [isDiscussion, setIsDiscussion] = useState(false);
+  const [isDiscussion, setIsDiscussion] = useState(true);
+  const [DiscussionReply, setDiscussionReply] = useState({
+    postDiscussion: "",
+    postDiscussionReply: "",
+  });
+
+  const handleInput = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setDiscussionReply({ ...DiscussionReply, [name]: value });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(DiscussionReply);
+  };
   const [{ userDetails }, dispatch] = useStateValue(false);
 
   const is_Job = jobLink;
@@ -324,14 +339,61 @@ function HomePageCard({
             }}
           >
             <div>
+              <div className="pt-4 flex">
+                <img
+                  src={UserProfile}
+                  alt="userprofile"
+                  className="object-cover w-10 h-10 mx-5"
+                />
+                <form action="" onSubmit={handleSubmit} className="w-full mr-2">
+                  <div className="h-28">
+                    <textarea
+                      type="text"
+                      name="postDiscussion"
+                      id="postDiscussion"
+                      value={DiscussionReply.postDiscussion}
+                      onChange={handleInput}
+                      className="FormInput m-0 w-full h-full text-base pt-2"
+                      placeholder="Add Something To Discuss"
+                    />
+                  </div>
+                  <button className="ButtonHome m-0 w-20 h-8 mt-4">POST</button>
+                </form>
+              </div>
+
               <DiscussionSection />
-              <p className="font-manrope font-semibold ml-20 pl-1">Reply</p>
-              <DiscussionSection
-                discussionSectionStyle={{ marginLeft: "4vw" }}
-              />
-              <DiscussionSection
-                discussionSectionStyle={{ marginLeft: "4vw" }}
-              />
+              <div style={{ marginLeft: "4vw" }}>
+                <div className="pt-4 flex">
+                  <img
+                    src={UserProfile}
+                    alt="userprofile"
+                    className="object-cover w-10 h-10 mx-5"
+                  />
+                  <form
+                    action=""
+                    onSubmit={handleSubmit}
+                    className="w-full mr-2"
+                  >
+                    <div className="">
+                      <textarea
+                        type="text"
+                        name="postDiscussionReply"
+                        id="postDiscussionReply"
+                        value={DiscussionReply.postDiscussionReply}
+                        onChange={handleInput}
+                        className="FormInput m-0 w-full h-full text-base pt-2"
+                        placeholder="Add Reply"
+                      />
+                    </div>
+                    <button className="ButtonHome m-0 w-20 h-8 mt-4">
+                      REPLY
+                    </button>
+                  </form>
+                </div>
+                <p className="font-manrope font-semibold ml-5">Reply</p>
+                <DiscussionSection />
+                <DiscussionSection />
+              </div>
             </div>
             <DiscussionSection />
           </div>
