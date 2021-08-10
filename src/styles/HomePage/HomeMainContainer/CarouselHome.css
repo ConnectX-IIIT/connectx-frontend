@@ -229,6 +229,7 @@
   margin: auto;
   object-fit: cover;
   height: 29vw;
+  width: 100%;
 }
 .carousel-control-next-icon {
   background-image: url("../../../assets/home/post/body/photos/ic_next.svg");
