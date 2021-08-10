@@ -49,6 +49,7 @@ function HomeMainContainer() {
         PostImageUrls={item.attachedImages}
         Upvotes={item.upvotedUsers.length - item.downvotedUsers.length}
         PostTitle={item.title}
+        isPostProject={item.isProject}
       />
     );
   });
