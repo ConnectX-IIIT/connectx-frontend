@@ -131,13 +131,12 @@
     "post_id": "60f68ade7e4fdb95c36eb07f",
     "user": "60f67d687e4fdb95c36eb079",
     "timestamp": { "$numberLong": "1626768841451" },
-    "upvotesPost": ["60f67d687e4fdb95c36eb079", "60f67d687e4fdb95c36eb079"],
-    "downvotesvotesPost": [
-      "60f67d687e4fdb95c36eb079",
-      "60f67d687e4fdb95c36eb079"
-    ],
+    "upvotedUsers": ["60f67d687e4fdb95c36eb079", "60f67d687e4fdb95c36eb079"],
+    "downvotedUsers": ["60f67d687e4fdb95c36eb079", "60f67d687e4fdb95c36eb079"],
     "reports": ["60f67d687e4fdb95c36eb079"],
-    "reference": "60f67d687e4fdb95c36eb079"
+    "reference": "60f67d687e4fdb95c36eb079",
+    "replies": ["f5df156sd4f8sdf56sdf5ds", "453g56fg465f4sd56f456sdf4"],
+    "content": "This is a discussion"
   },
   "reports": {
     "_id": { "$oid": "60f68ade7e4fdb95c36eb07f" },
