@@ -47,7 +47,7 @@ function HomeMainContainer() {
         PostUserName={item.userName}
         PostContent={item.description}
         PostImageUrls={item.attachedImages}
-        Upvotes={item.reactions}
+        Upvotes={item.upvotedUsers.length - item.downvotedUsers.length}
         PostTitle={item.title}
       />
     );
