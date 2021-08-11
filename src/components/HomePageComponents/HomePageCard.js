@@ -73,14 +73,14 @@ function HomePageCard({
   jobLink,
   PostId,
   isPostProject,
-  discussionsPost,
+  discussionsIds,
 }) {
   const history = useHistory();
   const imgURL = "https://obscure-ridge-13663.herokuapp.com/user/fetch/";
   const [UpvotesHandle, setUpvotesHandle] = useState(Upvotes);
   const [UpvoteActive, setUpvoteActive] = useState(false);
   const [DownvoteActive, setDownvoteActive] = useState(false);
-  const [isDiscussion, setIsDiscussion] = useState(true);
+  const [isDiscussion, setIsDiscussion] = useState(false);
   const [DiscussionReply, setDiscussionReply] = useState({
     postDiscussion: "",
     postDiscussionReply: "",
@@ -219,6 +219,10 @@ function HomePageCard({
       }
     }
   };
+  const handleOnclickDiscussion = (e) => {
+    console.log(discussionsIds);
+  };
+
   return (
     <div className="HomePageCard">
       <div id="HomePageCardLeftContainer">
@@ -328,6 +332,7 @@ function HomePageCard({
             className="HomeCardDiscussion"
             onClick={() => {
               setIsDiscussion(!isDiscussion);
+              handleOnclickDiscussion();
             }}
           >
             <TextDiscussion className="mr-2 textDiscussion" />
