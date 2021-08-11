@@ -12,10 +12,11 @@ import homeDownvoteIconSelected from "../../assets/home/post/upvotes/s_ic_downvo
 import UserProfile from "../../assets/profile/user_profile_default_icon.svg";
 import HomeCardInnerContent from "./HomeCardInnerContent";
 
-function DiscussionSection({ InnerContentDiscussion, UserName }) {
+function DiscussionSection({ InnerContentDiscussion, UserName, userProfile, timestamp }) {
   const [UpvotesHandle, setUpvotesHandle] = useState(0);
   const [UpvoteActive, setUpvoteActive] = useState(false);
   const [DownvoteActive, setDownvoteActive] = useState(false);
+  const imgURL = "https://obscure-ridge-13663.herokuapp.com/user/fetch/";
 
   function handleUpvotes() {
     setUpvoteActive(!UpvoteActive);
@@ -25,6 +26,12 @@ function DiscussionSection({ InnerContentDiscussion, UserName }) {
       setUpvotesHandle(UpvotesHandle + 1);
     }
   }
+  const handlePhoto = (photo) => {
+    if (photo) {
+      return imgURL + photo;
+    }
+    return UserProfile;
+  };
   function handleDownvotes() {
     setDownvoteActive(!DownvoteActive);
     if (DownvoteActive) {
@@ -51,7 +58,7 @@ function DiscussionSection({ InnerContentDiscussion, UserName }) {
   return (
     <div className="flex pt-4">
       <img
-        src={UserProfile}
+        src={handlePhoto(userProfile)}
         alt="userprofile"
         className="object-cover w-10 h-10 mx-5"
       />
@@ -111,7 +118,7 @@ function DiscussionSection({ InnerContentDiscussion, UserName }) {
                 color: "#999999",
               }}
             >
-              15:36
+              {timestamp}
             </p>
           </div>
           <HomeCardInnerContent
