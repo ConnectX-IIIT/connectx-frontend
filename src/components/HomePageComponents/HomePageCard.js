@@ -219,8 +219,30 @@ function HomePageCard({
       }
     }
   };
-  const handleOnclickDiscussion = (e) => {
-    console.log(discussionsIds);
+  const handleOnclickDiscussion = async () => {
+    try {
+      const token = Cookies.get("token");
+
+      if (token) {
+        const discussionRes = await instance.post(`/post/getdiscussions`,
+          {
+            discussionIds: discussionsIds,
+          },
+          {
+            headers: {
+              Authorization: `${token}`,
+            },
+          }
+        );
+
+        console.log(discussionRes.data.discussions);
+
+      } else {
+        history.replace("/signin");
+      }
+    } catch (error) {
+      return alert(`${error}`);
+    }
   };
 
   return (
