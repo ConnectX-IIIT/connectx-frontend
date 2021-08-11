@@ -11,7 +11,6 @@ import homeDownvoteIconHover from "../../assets/home/post/upvotes/h_ic_downvote.
 import homeDownvoteIconSelected from "../../assets/home/post/upvotes/s_ic_downvote.svg";
 
 import HomeCardInnerContent from "./HomeCardInnerContent";
-import UserProfileDefaultIcon from "../../assets/profile/user_profile_default_icon.svg";
 import DotImageHome from "../../assets/home/post/body/info/ic_info_dots.svg";
 import DiscussionSection from "./DiscussionSection";
 
@@ -122,7 +121,7 @@ function HomePageCard({
     if (photo) {
       return imgURL + photo;
     }
-    return UserProfileDefaultIcon;
+    return UserProfile;
   };
 
   const handleTimestamp = (timestamp) => {
@@ -253,7 +252,9 @@ function HomePageCard({
         <DiscussionSection
           InnerContentDiscussion={reply.content}
           key={index}
-          UserName={item.discussion.userName}
+          UserName={item.reply[index].userName}
+          userProfile={item.reply[index].userProfile}
+          timestamp={handleTimestamp(item.reply[index].timestamp)}
         />
       );
     });
@@ -262,6 +263,8 @@ function HomePageCard({
         <DiscussionSection
           InnerContentDiscussion={item.discussion.content}
           UserName={item.discussion.userName}
+          userProfile={item.discussion.userProfile}
+          timestamp={handleTimestamp(item.discussion.timestamp)}
           key={index}
         />
         <div style={{ marginLeft: "4vw" }}>
