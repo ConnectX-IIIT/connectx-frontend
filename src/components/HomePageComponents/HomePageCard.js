@@ -83,6 +83,8 @@ function HomePageCard({
   const [DiscussionReply, setDiscussionReply] = useState({
     postDiscussion: "",
     postDiscussionReply: "",
+    postId: PostId,
+    reference: ""
   });
   const [DiscussionData, setDiscussionData] = useState([]);
   const [isDiscussionReply, setisDiscussionReply] = useState(false);
@@ -272,6 +274,7 @@ function HomePageCard({
             className="font-manrope font-semibold ml-5 cursor-pointer"
             onClick={() => {
               setisDiscussionReply(!isDiscussionReply);
+              setDiscussionReply({ ...DiscussionReply, reference: item.discussion._id });
             }}
           >
             Reply
@@ -279,7 +282,7 @@ function HomePageCard({
           <div className={`${isDiscussionReply && `hidden`}`}>
             <div className="pt-4 flex">
               <img
-                src={UserProfile}
+                src={handlePhoto(userDetails.profilePicture)}
                 alt="userprofile"
                 className="object-cover w-10 h-10 mx-5"
               />
@@ -444,7 +447,7 @@ function HomePageCard({
             <div>
               <div className="pt-4 flex">
                 <img
-                  src={UserProfile}
+                  src={handlePhoto(userDetails.profilePicture)}
                   alt="userprofile"
                   className="object-cover w-10 h-10 mx-5"
                 />
