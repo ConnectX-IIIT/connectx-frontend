@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import HomeUserDetails from "./HomeUserDetails";
+import { Link } from "react-router-dom";
 import HomePageCard from "./HomePageCard";
+import addImage from "../../assets/home/post/add_post/ic_add_post.svg";
 import "../../styles/HomePage/HomeMainContainer/HomeMainContainer.css";
 import instance from "../../helper/axios";
 import Cookies from "js-cookie";
@@ -57,7 +59,22 @@ function HomeMainContainer() {
   return (
     <div className="HomeMainContainer">
       <HomeUserDetails />
-      <div>{HomePageCardDetailsList}</div>
+      <div>
+        <Link to="/createpost">
+          <div className="HomePageCard h-14 items-center">
+            <img src={addImage} alt="Add Post" className="h-6 mx-5" />
+            <p
+              className="font-manrope font-semibold text-lg"
+              style={{
+                color: "#5F5F5F",
+              }}
+            >
+              Create a Post
+            </p>
+          </div>
+        </Link>
+        {HomePageCardDetailsList}
+      </div>
     </div>
   );
 }
