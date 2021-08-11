@@ -81,8 +81,7 @@ function HomePageCard({
   const [DownvoteActive, setDownvoteActive] = useState(false);
   const [isDiscussion, setIsDiscussion] = useState(false);
   const [DiscussionReply, setDiscussionReply] = useState({
-    postDiscussion: "",
-    postDiscussionReply: "",
+    content: "",
     postId: PostId,
     reference: "",
   });
@@ -93,9 +92,40 @@ function HomePageCard({
     const value = e.target.value;
     setDiscussionReply({ ...DiscussionReply, [name]: value });
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(DiscussionReply);
+    const content = DiscussionReply.content;
+    const postId = DiscussionReply.postId;
+    const reference = DiscussionReply.reference;
+
+    if (reference || !content) {
+      return alert("You can't post empty comment!");
+    }
+
+    try {
+      const token = Cookies.get("token");
+
+      if (token) {
+        const addDiscussionRes = await instance.post(
+          `/post/adddiscussion`,
+          {
+            content,
+            postId,
+            reference
+          },
+          {
+            headers: {
+              Authorization: `${token}`,
+            },
+          }
+        );
+        console.log(addDiscussionRes.data);
+      } else {
+        history.replace("/signin");
+      }
+    } catch (error) {
+      return alert(`${error.response.data.error}`);
+    }
   };
   const [{ userDetails }, dispatch] = useStateValue(false);
 
@@ -182,7 +212,7 @@ function HomePageCard({
         history.replace("/signin");
       }
     } catch (error) {
-      return alert(`${error}`);
+      return alert(`${error.response.data.error}`);
     }
   }
 
@@ -242,17 +272,19 @@ function HomePageCard({
         history.replace("/signin");
       }
     } catch (error) {
-      return alert(`${error}`);
+      return alert(`${error.response.data.error}`);
     }
   };
-
-  var obj = {};
 
   function handleDisplay(elementId) {
     document.getElementById(elementId).classList.toggle("hidden");
   }
 
-  const [inputDiscussionReply, setInputDiscussionReply] = useState(obj);
+  const [inputDiscussionReply, setInputDiscussionReply] = useState({
+    content: "",
+    postId: PostId,
+    reference: ""
+  });
   const [isDiscussionReply, setisDiscussionReply] = useState(false);
   function DiscussionSectionData() {
     const handleInputReply = (e) => {
@@ -273,10 +305,6 @@ function HomePageCard({
         );
       });
 
-      for (let i = 0; i < DiscussionData.length; i++) {
-        obj[DiscussionData[i].discussion._id] = "";
-      }
-
       return (
         <>
           <DiscussionSection
@@ -291,8 +319,8 @@ function HomePageCard({
               className="font-manrope font-semibold ml-5 cursor-pointer"
               onClick={() => {
                 setisDiscussionReply(!isDiscussionReply);
-                setDiscussionReply({
-                  ...DiscussionReply,
+                setInputDiscussionReply({
+                  ...inputDiscussionReply,
                   reference: item.discussion._id,
                 });
                 handleDisplay(`${DiscussionData[index].discussion._id}`);
@@ -318,7 +346,7 @@ function HomePageCard({
                   <div>
                     <textarea
                       type="text"
-                      name={`${DiscussionData[index].discussion._id}`}
+                      name="content"
                       value={null}
                       onChange={handleInputReply}
                       className="FormInput m-0 w-full h-full text-base pt-2"
@@ -338,9 +366,40 @@ function HomePageCard({
     });
     return DiscussionDataList;
   }
-  function handleSubmitReply(e) {
+  async function handleSubmitReply(e) {
     e.preventDefault();
-    console.log(inputDiscussionReply);
+    const content = inputDiscussionReply.content;
+    const postId = inputDiscussionReply.postId;
+    const reference = inputDiscussionReply.reference;
+
+    if (!reference || !content) {
+      return alert("You can't post empty comment!");
+    }
+
+    try {
+      const token = Cookies.get("token");
+
+      if (token) {
+        const addDiscussionRes = await instance.post(
+          `/post/adddiscussion`,
+          {
+            content,
+            postId,
+            reference
+          },
+          {
+            headers: {
+              Authorization: `${token}`,
+            },
+          }
+        );
+        console.log(addDiscussionRes.data);
+      } else {
+        history.replace("/signin");
+      }
+    } catch (error) {
+      return alert(`${error.response.data.error}`);
+    }
   }
 
   return (
@@ -490,9 +549,9 @@ function HomePageCard({
                   <div className="h-28">
                     <textarea
                       type="text"
-                      name="postDiscussion"
+                      name="content"
                       id="postDiscussion"
-                      value={DiscussionReply.postDiscussion}
+                      value={DiscussionReply.content}
                       onChange={handleInput}
                       className="FormInput m-0 w-full h-full text-base pt-2"
                       placeholder="Add Something To Discuss"
