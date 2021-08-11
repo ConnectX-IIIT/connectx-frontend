@@ -250,13 +250,18 @@ function HomePageCard({
   const DiscussionDataList = DiscussionData.map((item, index) => {
     const DiscussionDataReplyList = item.reply.map((reply, index) => {
       return (
-        <DiscussionSection InnerContentDiscussion={reply.content} key={index} />
+        <DiscussionSection
+          InnerContentDiscussion={reply.content}
+          key={index}
+          UserName={item.discussion.userName}
+        />
       );
     });
     return (
       <>
         <DiscussionSection
           InnerContentDiscussion={item.discussion.content}
+          UserName={item.discussion.userName}
           key={index}
         />
         <div style={{ marginLeft: "4vw" }}>
