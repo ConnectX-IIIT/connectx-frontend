@@ -12,7 +12,12 @@ import homeDownvoteIconSelected from "../../assets/home/post/upvotes/s_ic_downvo
 import UserProfile from "../../assets/profile/user_profile_default_icon.svg";
 import HomeCardInnerContent from "./HomeCardInnerContent";
 
-function DiscussionSection({ InnerContentDiscussion, UserName, userProfile, timestamp }) {
+function DiscussionSection({
+  InnerContentDiscussion,
+  UserName,
+  userProfile,
+  timestamp,
+}) {
   const [UpvotesHandle, setUpvotesHandle] = useState(0);
   const [UpvoteActive, setUpvoteActive] = useState(false);
   const [DownvoteActive, setDownvoteActive] = useState(false);
@@ -60,7 +65,7 @@ function DiscussionSection({ InnerContentDiscussion, UserName, userProfile, time
       <img
         src={handlePhoto(userProfile)}
         alt="userprofile"
-        className="object-cover w-10 h-10 mx-5"
+        className="object-cover w-10 h-10 mx-5 rounded-full"
       />
       <div className="HomePageCard ml-0 mr-2">
         <div id="HomePageCardLeftContainer">
