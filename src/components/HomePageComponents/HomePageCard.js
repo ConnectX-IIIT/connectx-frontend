@@ -247,7 +247,15 @@ function HomePageCard({
     }
   };
 
+  var obj = {};
+
+  const [inputDiscussionReply, setInputDiscussionReply] = useState(obj);
   function DiscussionSectionData() {
+    const handleInputReply = (e) => {
+      const name = e.target.name;
+      const value = e.target.value;
+      setInputDiscussionReply({ ...inputDiscussionReply, [name]: value });
+    };
     const DiscussionDataList = DiscussionData.map((item, index) => {
       const DiscussionDataReplyList = item.reply.map((reply, index) => {
         return (
@@ -260,6 +268,11 @@ function HomePageCard({
           />
         );
       });
+
+      for (let i = 0; i < DiscussionData.length; i++) {
+        obj[DiscussionData[i].discussion._id] = "";
+      }
+
       return (
         <>
           <DiscussionSection
@@ -289,14 +302,17 @@ function HomePageCard({
                   alt="userprofile"
                   className="object-cover w-10 h-10 mx-5 rounded-full"
                 />
-                <form action="" onSubmit={handleSubmit} className="w-full mr-2">
-                  <div className="">
+                <form
+                  action=""
+                  onSubmit={handleSubmitReply}
+                  className="w-full mr-2"
+                >
+                  <div>
                     <textarea
                       type="text"
-                      name="postDiscussionReply"
-                      id="postDiscussionReply"
-                      value={DiscussionReply.postDiscussionReply}
-                      onChange={handleInput}
+                      name={`${DiscussionData[index].discussion._id}`}
+                      value={null}
+                      onChange={handleInputReply}
                       className="FormInput m-0 w-full h-full text-base pt-2"
                       placeholder="Add Reply"
                     />
@@ -314,6 +330,11 @@ function HomePageCard({
     });
     return DiscussionDataList;
   }
+  function handleSubmitReply(e) {
+    e.preventDefault();
+    console.log(inputDiscussionReply);
+  }
+
   return (
     <div className="HomePageCard">
       <div id="HomePageCardLeftContainer">
@@ -455,7 +476,7 @@ function HomePageCard({
                 <img
                   src={handlePhoto(userDetails.profilePicture)}
                   alt="userprofile"
-                  className="object-cover w-10 h-10 mx-5"
+                  className="object-cover w-10 h-10 mx-5 rounded-full"
                 />
                 <form action="" onSubmit={handleSubmit} className="w-full mr-2">
                   <div className="h-28">
@@ -473,10 +494,8 @@ function HomePageCard({
                 </form>
               </div>
 
-              {/* <DiscussionSection InnerContentDiscussion="hello" /> */}
               {DiscussionSectionData()}
             </div>
-            {/* <DiscussionSection InnerContentDiscussion="hello" /> */}
           </div>
         ) : null}
       </div>
