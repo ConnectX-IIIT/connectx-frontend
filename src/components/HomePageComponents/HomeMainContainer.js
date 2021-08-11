@@ -52,7 +52,7 @@ function HomeMainContainer() {
         Upvotes={item.upvotedUsers.length - item.downvotedUsers.length}
         PostTitle={item.title}
         isPostProject={item.isProject}
-        discussionsPost={item.discussions}
+        discussionsIds={item.discussions}
       />
     );
   });
