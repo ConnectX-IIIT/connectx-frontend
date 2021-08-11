@@ -20,6 +20,7 @@ import ButtonHome from "./ButtonHome";
 import UserProfile from "../../assets/profile/user_profile_default_icon.svg";
 
 import { ReactComponent as TextDiscussion } from "../../assets/home/post/bottom/ic_dicussion.svg";
+import { ReactComponent as ShareIcon } from "../../assets/home/post/bottom/ic_share.svg";
 import Cookies from "js-cookie";
 import { useHistory } from "react-router-dom";
 import { useStateValue } from "../../helper/state_provider";
@@ -317,6 +318,7 @@ function HomePageCard({
         {is_Job ? isJob(jobLink) : is_Project ? isProject() : null}
 
         <div
+          className="flex"
           style={{
             borderTop: "2px solid #bdbfc4",
           }}
@@ -329,6 +331,19 @@ function HomePageCard({
           >
             <TextDiscussion className="mr-2 textDiscussion" />
             Discussion
+          </div>
+          <div
+            className="HomeCardDiscussion"
+            style={{
+              backgroundColor: "#E5F5FF",
+              width: "9vw",
+            }}
+            onClick={() => {
+              setIsDiscussion(!isDiscussion);
+            }}
+          >
+            <ShareIcon className="mr-2 textDiscussion" />
+            Share
           </div>
         </div>
 
