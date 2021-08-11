@@ -12,11 +12,7 @@ import homeDownvoteIconSelected from "../../assets/home/post/upvotes/s_ic_downvo
 import UserProfile from "../../assets/profile/user_profile_default_icon.svg";
 import HomeCardInnerContent from "./HomeCardInnerContent";
 
-function DiscussionSection({ discussionSectionStyle }) {
-  const InnerContent = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Facilisis aliquam bibendum turpis faucibus duis at aliquam. Sed eu turpis nisl morbi vel luctus volutpat turpis. Facilisis velit in rutrum neque,
-   
-sed quis et. Sit pretium nunc arcu enim cras turpis donec tristique. Vulputate rhoncus duis id nulla posuere commodo lacus arcu. Elementum aenean ac scelerisque morbi. Varius odio commodo diam fusce leo. Scelerisque bibendum accumsan, integer orci, massa, ornare mauris id. Diam egestas ege`;
-
+function DiscussionSection({ InnerContentDiscussion, UserName }) {
   const [UpvotesHandle, setUpvotesHandle] = useState(0);
   const [UpvoteActive, setUpvoteActive] = useState(false);
   const [DownvoteActive, setDownvoteActive] = useState(false);
@@ -53,7 +49,7 @@ sed quis et. Sit pretium nunc arcu enim cras turpis donec tristique. Vulputate r
     }
   };
   return (
-    <div className="flex pt-4" style={discussionSectionStyle}>
+    <div className="flex pt-4">
       <img
         src={UserProfile}
         alt="userprofile"
@@ -107,7 +103,7 @@ sed quis et. Sit pretium nunc arcu enim cras turpis donec tristique. Vulputate r
         >
           <div className="mt-4 mb-2">
             <h2 className="font-manrope font-medium inline text-lg mr-3">
-              Raj Noobda
+              {UserName}
             </h2>
             <p
               className="font-manrope inline text-xs font-semibold"
@@ -119,7 +115,7 @@ sed quis et. Sit pretium nunc arcu enim cras turpis donec tristique. Vulputate r
             </p>
           </div>
           <HomeCardInnerContent
-            InnerContent={InnerContent}
+            InnerContent={InnerContentDiscussion}
             styleInnerContent={{ fontSize: "1rem" }}
           />
         </div>

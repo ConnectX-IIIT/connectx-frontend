@@ -20,6 +20,7 @@ import ButtonHome from "./ButtonHome";
 import UserProfile from "../../assets/profile/user_profile_default_icon.svg";
 
 import { ReactComponent as TextDiscussion } from "../../assets/home/post/bottom/ic_dicussion.svg";
+import { ReactComponent as ShareIcon } from "../../assets/home/post/bottom/ic_share.svg";
 import Cookies from "js-cookie";
 import { useHistory } from "react-router-dom";
 import { useStateValue } from "../../helper/state_provider";
@@ -72,17 +73,20 @@ function HomePageCard({
   jobLink,
   PostId,
   isPostProject,
+  discussionsIds,
 }) {
   const history = useHistory();
   const imgURL = "https://obscure-ridge-13663.herokuapp.com/user/fetch/";
   const [UpvotesHandle, setUpvotesHandle] = useState(Upvotes);
   const [UpvoteActive, setUpvoteActive] = useState(false);
   const [DownvoteActive, setDownvoteActive] = useState(false);
-  const [isDiscussion, setIsDiscussion] = useState(true);
+  const [isDiscussion, setIsDiscussion] = useState(false);
   const [DiscussionReply, setDiscussionReply] = useState({
     postDiscussion: "",
     postDiscussionReply: "",
   });
+  const [DiscussionData, setDiscussionData] = useState([]);
+  const [isDiscussionReply, setisDiscussionReply] = useState(false);
 
   const handleInput = (e) => {
     const name = e.target.name;
@@ -217,6 +221,87 @@ function HomePageCard({
       }
     }
   };
+  const handleOnclickDiscussion = async () => {
+    try {
+      const token = Cookies.get("token");
+
+      if (token) {
+        const discussionRes = await instance.post(
+          `/post/getdiscussions`,
+          {
+            discussionIds: discussionsIds,
+          },
+          {
+            headers: {
+              Authorization: `${token}`,
+            },
+          }
+        );
+        setDiscussionData(discussionRes.data.discussions);
+        console.log(discussionRes.data.discussions);
+      } else {
+        history.replace("/signin");
+      }
+    } catch (error) {
+      return alert(`${error}`);
+    }
+  };
+
+  const DiscussionDataList = DiscussionData.map((item, index) => {
+    const DiscussionDataReplyList = item.reply.map((reply, index) => {
+      return (
+        <DiscussionSection
+          InnerContentDiscussion={reply.content}
+          key={index}
+          UserName={item.discussion.userName}
+        />
+      );
+    });
+    return (
+      <>
+        <DiscussionSection
+          InnerContentDiscussion={item.discussion.content}
+          UserName={item.discussion.userName}
+          key={index}
+        />
+        <div style={{ marginLeft: "4vw" }}>
+          <p
+            className="font-manrope font-semibold ml-5 cursor-pointer"
+            onClick={() => {
+              setisDiscussionReply(!isDiscussionReply);
+            }}
+          >
+            Reply
+          </p>
+          <div className={`${isDiscussionReply && `hidden`}`}>
+            <div className="pt-4 flex">
+              <img
+                src={UserProfile}
+                alt="userprofile"
+                className="object-cover w-10 h-10 mx-5"
+              />
+              <form action="" onSubmit={handleSubmit} className="w-full mr-2">
+                <div className="">
+                  <textarea
+                    type="text"
+                    name="postDiscussionReply"
+                    id="postDiscussionReply"
+                    value={DiscussionReply.postDiscussionReply}
+                    onChange={handleInput}
+                    className="FormInput m-0 w-full h-full text-base pt-2"
+                    placeholder="Add Reply"
+                  />
+                </div>
+                <button className="ButtonHome m-0 w-20 h-8 mt-4">REPLY</button>
+              </form>
+            </div>
+            {DiscussionDataReplyList}
+          </div>
+        </div>
+      </>
+    );
+  });
+
   return (
     <div className="HomePageCard">
       <div id="HomePageCardLeftContainer">
@@ -317,6 +402,7 @@ function HomePageCard({
         {is_Job ? isJob(jobLink) : is_Project ? isProject() : null}
 
         <div
+          className="flex"
           style={{
             borderTop: "2px solid #bdbfc4",
           }}
@@ -325,10 +411,24 @@ function HomePageCard({
             className="HomeCardDiscussion"
             onClick={() => {
               setIsDiscussion(!isDiscussion);
+              handleOnclickDiscussion();
             }}
           >
             <TextDiscussion className="mr-2 textDiscussion" />
             Discussion
+          </div>
+          <div
+            className="HomeCardDiscussion"
+            style={{
+              backgroundColor: "#E5F5FF",
+              width: "9vw",
+            }}
+            onClick={() => {
+              setIsDiscussion(!isDiscussion);
+            }}
+          >
+            <ShareIcon className="mr-2 textDiscussion" />
+            Share
           </div>
         </div>
 
@@ -361,41 +461,10 @@ function HomePageCard({
                 </form>
               </div>
 
-              <DiscussionSection />
-              <div style={{ marginLeft: "4vw" }}>
-                <div className="pt-4 flex">
-                  <img
-                    src={UserProfile}
-                    alt="userprofile"
-                    className="object-cover w-10 h-10 mx-5"
-                  />
-                  <form
-                    action=""
-                    onSubmit={handleSubmit}
-                    className="w-full mr-2"
-                  >
-                    <div className="">
-                      <textarea
-                        type="text"
-                        name="postDiscussionReply"
-                        id="postDiscussionReply"
-                        value={DiscussionReply.postDiscussionReply}
-                        onChange={handleInput}
-                        className="FormInput m-0 w-full h-full text-base pt-2"
-                        placeholder="Add Reply"
-                      />
-                    </div>
-                    <button className="ButtonHome m-0 w-20 h-8 mt-4">
-                      REPLY
-                    </button>
-                  </form>
-                </div>
-                <p className="font-manrope font-semibold ml-5">Reply</p>
-                <DiscussionSection />
-                <DiscussionSection />
-              </div>
+              {/* <DiscussionSection InnerContentDiscussion="hello" /> */}
+              {DiscussionDataList}
             </div>
-            <DiscussionSection />
+            {/* <DiscussionSection InnerContentDiscussion="hello" /> */}
           </div>
         ) : null}
       </div>
