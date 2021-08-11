@@ -73,6 +73,7 @@ function HomePageCard({
   jobLink,
   PostId,
   isPostProject,
+  discussionsPost,
 }) {
   const history = useHistory();
   const imgURL = "https://obscure-ridge-13663.herokuapp.com/user/fetch/";
@@ -378,6 +379,7 @@ function HomePageCard({
 
               <DiscussionSection />
               <div style={{ marginLeft: "4vw" }}>
+                <p className="font-manrope font-semibold ml-5">Reply</p>
                 <div className="pt-4 flex">
                   <img
                     src={UserProfile}
@@ -405,7 +407,6 @@ function HomePageCard({
                     </button>
                   </form>
                 </div>
-                <p className="font-manrope font-semibold ml-5">Reply</p>
                 <DiscussionSection />
                 <DiscussionSection />
               </div>
