@@ -15,7 +15,7 @@ function HomeMainContainer() {
       const token = Cookies.get("token");
 
       if (token) {
-        const getDetailsRes = await instance.get(`/post/getposts`, {
+        const getDetailsRes = await instance.get(`/post/getposts/1`, {
           headers: {
             Authorization: `${token}`,
           },
