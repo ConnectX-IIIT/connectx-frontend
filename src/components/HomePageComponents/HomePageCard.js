@@ -84,7 +84,7 @@ function HomePageCard({
     postDiscussion: "",
     postDiscussionReply: "",
     postId: PostId,
-    reference: ""
+    reference: "",
   });
   const [DiscussionData, setDiscussionData] = useState([]);
   const [isDiscussionReply, setisDiscussionReply] = useState(false);
@@ -239,7 +239,6 @@ function HomePageCard({
           }
         );
         setDiscussionData(discussionRes.data.discussions);
-        console.log(discussionRes.data.discussions);
       } else {
         history.replace("/signin");
       }
@@ -248,65 +247,93 @@ function HomePageCard({
     }
   };
 
-  const DiscussionDataList = DiscussionData.map((item, index) => {
-    const DiscussionDataReplyList = item.reply.map((reply, index) => {
+  var obj = {};
+
+  const [inputDiscussionReply, setInputDiscussionReply] = useState(obj);
+  function DiscussionSectionData() {
+    const handleInputReply = (e) => {
+      const name = e.target.name;
+      const value = e.target.value;
+      setInputDiscussionReply({ ...inputDiscussionReply, [name]: value });
+    };
+    const DiscussionDataList = DiscussionData.map((item, index) => {
+      const DiscussionDataReplyList = item.reply.map((reply, index) => {
+        return (
+          <DiscussionSection
+            InnerContentDiscussion={reply.content}
+            key={index}
+            UserName={item.reply[index].userName}
+            userProfile={item.reply[index].userProfile}
+            timestamp={handleTimestamp(item.reply[index].timestamp)}
+          />
+        );
+      });
+
+      for (let i = 0; i < DiscussionData.length; i++) {
+        obj[DiscussionData[i].discussion._id] = "";
+      }
+
       return (
-        <DiscussionSection
-          InnerContentDiscussion={reply.content}
-          key={index}
-          UserName={item.reply[index].userName}
-          userProfile={item.reply[index].userProfile}
-          timestamp={handleTimestamp(item.reply[index].timestamp)}
-        />
+        <>
+          <DiscussionSection
+            InnerContentDiscussion={item.discussion.content}
+            UserName={item.discussion.userName}
+            userProfile={item.discussion.userProfile}
+            timestamp={handleTimestamp(item.discussion.timestamp)}
+            key={index}
+          />
+          <div style={{ marginLeft: "4vw" }}>
+            <p
+              className="font-manrope font-semibold ml-5 cursor-pointer"
+              onClick={() => {
+                setisDiscussionReply(!isDiscussionReply);
+                setDiscussionReply({
+                  ...DiscussionReply,
+                  reference: item.discussion._id,
+                });
+              }}
+            >
+              Reply
+            </p>
+            <div>
+              <div className="pt-4 flex">
+                <img
+                  src={handlePhoto(userDetails.profilePicture)}
+                  alt="userprofile"
+                  className="object-cover w-10 h-10 mx-5 rounded-full"
+                />
+                <form
+                  action=""
+                  onSubmit={handleSubmitReply}
+                  className="w-full mr-2"
+                >
+                  <div>
+                    <textarea
+                      type="text"
+                      name={`${DiscussionData[index].discussion._id}`}
+                      value={null}
+                      onChange={handleInputReply}
+                      className="FormInput m-0 w-full h-full text-base pt-2"
+                      placeholder="Add Reply"
+                    />
+                  </div>
+                  <button className="ButtonHome m-0 w-20 h-8 mt-4">
+                    REPLY
+                  </button>
+                </form>
+              </div>
+              {DiscussionDataReplyList}
+            </div>
+          </div>
+        </>
       );
     });
-    return (
-      <>
-        <DiscussionSection
-          InnerContentDiscussion={item.discussion.content}
-          UserName={item.discussion.userName}
-          userProfile={item.discussion.userProfile}
-          timestamp={handleTimestamp(item.discussion.timestamp)}
-          key={index}
-        />
-        <div style={{ marginLeft: "4vw" }}>
-          <p
-            className="font-manrope font-semibold ml-5 cursor-pointer"
-            onClick={() => {
-              setisDiscussionReply(!isDiscussionReply);
-              setDiscussionReply({ ...DiscussionReply, reference: item.discussion._id });
-            }}
-          >
-            Reply
-          </p>
-          <div className={`${isDiscussionReply && `hidden`}`}>
-            <div className="pt-4 flex">
-              <img
-                src={handlePhoto(userDetails.profilePicture)}
-                alt="userprofile"
-                className="object-cover w-10 h-10 mx-5"
-              />
-              <form action="" onSubmit={handleSubmit} className="w-full mr-2">
-                <div className="">
-                  <textarea
-                    type="text"
-                    name="postDiscussionReply"
-                    id="postDiscussionReply"
-                    value={DiscussionReply.postDiscussionReply}
-                    onChange={handleInput}
-                    className="FormInput m-0 w-full h-full text-base pt-2"
-                    placeholder="Add Reply"
-                  />
-                </div>
-                <button className="ButtonHome m-0 w-20 h-8 mt-4">REPLY</button>
-              </form>
-            </div>
-            {DiscussionDataReplyList}
-          </div>
-        </div>
-      </>
-    );
-  });
+    return DiscussionDataList;
+  }
+  function handleSubmitReply(e) {
+    e.preventDefault();
+    console.log(inputDiscussionReply);
+  }
 
   return (
     <div className="HomePageCard">
@@ -449,7 +476,7 @@ function HomePageCard({
                 <img
                   src={handlePhoto(userDetails.profilePicture)}
                   alt="userprofile"
-                  className="object-cover w-10 h-10 mx-5"
+                  className="object-cover w-10 h-10 mx-5 rounded-full"
                 />
                 <form action="" onSubmit={handleSubmit} className="w-full mr-2">
                   <div className="h-28">
@@ -467,10 +494,8 @@ function HomePageCard({
                 </form>
               </div>
 
-              {/* <DiscussionSection InnerContentDiscussion="hello" /> */}
-              {DiscussionDataList}
+              {DiscussionSectionData()}
             </div>
-            {/* <DiscussionSection InnerContentDiscussion="hello" /> */}
           </div>
         ) : null}
       </div>
