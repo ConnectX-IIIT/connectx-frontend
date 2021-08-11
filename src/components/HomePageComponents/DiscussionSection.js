@@ -12,7 +12,7 @@ import homeDownvoteIconSelected from "../../assets/home/post/upvotes/s_ic_downvo
 import UserProfile from "../../assets/profile/user_profile_default_icon.svg";
 import HomeCardInnerContent from "./HomeCardInnerContent";
 
-function DiscussionSection({ InnerContentDiscussion }) {
+function DiscussionSection({ InnerContentDiscussion, UserName }) {
   const [UpvotesHandle, setUpvotesHandle] = useState(0);
   const [UpvoteActive, setUpvoteActive] = useState(false);
   const [DownvoteActive, setDownvoteActive] = useState(false);
@@ -103,7 +103,7 @@ function DiscussionSection({ InnerContentDiscussion }) {
         >
           <div className="mt-4 mb-2">
             <h2 className="font-manrope font-medium inline text-lg mr-3">
-              Raj Noobda
+              {UserName}
             </h2>
             <p
               className="font-manrope inline text-xs font-semibold"
