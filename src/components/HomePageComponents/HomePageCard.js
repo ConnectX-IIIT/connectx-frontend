@@ -87,7 +87,6 @@ function HomePageCard({
     reference: "",
   });
   const [DiscussionData, setDiscussionData] = useState([]);
-  const [isDiscussionReply, setisDiscussionReply] = useState(false);
 
   const handleInput = (e) => {
     const name = e.target.name;
@@ -249,7 +248,12 @@ function HomePageCard({
 
   var obj = {};
 
+  function handleDisplay(elementId) {
+    document.getElementById(elementId).classList.toggle("hidden");
+  }
+
   const [inputDiscussionReply, setInputDiscussionReply] = useState(obj);
+  const [isDiscussionReply, setisDiscussionReply] = useState(false);
   function DiscussionSectionData() {
     const handleInputReply = (e) => {
       const name = e.target.name;
@@ -291,12 +295,16 @@ function HomePageCard({
                   ...DiscussionReply,
                   reference: item.discussion._id,
                 });
+                handleDisplay(`${DiscussionData[index].discussion._id}`);
               }}
             >
               Reply
             </p>
             <div>
-              <div className="pt-4 flex">
+              <div
+                className="pt-4 flex hidden"
+                id={`${DiscussionData[index].discussion._id}`}
+              >
                 <img
                   src={handlePhoto(userDetails.profilePicture)}
                   alt="userprofile"
