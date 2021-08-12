@@ -21,7 +21,7 @@ function CreatePostRadio({
         <label
           htmlFor={RadioHeading + RadioOption}
           key={RadioOption}
-          className="radioLabel"
+          className="radioLabel text-lg mt-0 ml-0"
           style={{
             color: "#717171",
           }}
@@ -36,7 +36,6 @@ function CreatePostRadio({
     <div
       style={{
         display: "inline-block",
-        marginLeft: "4vw",
       }}
     >
       <p
@@ -44,10 +43,10 @@ function CreatePostRadio({
           fontFamily: "'Manrope' , sans-serif",
           fontStyle: "normal",
           fontWeight: "500",
-          fontSize: "1vw",
+          fontSize: "1.1vw",
           lineHeight: "1.4vw",
           color: "#A6A6A6",
-          marginBottom: "0.7vw",
+          marginBottom: "0.8vw",
         }}
       >
         {RadioHeading}
