@@ -18,12 +18,6 @@ function PhotoUpload() {
     coverPhoto: "",
   });
 
-  // const handleInput = (e) => {
-  //   const name = e.target.name;
-  //   const value = e.target.value;
-  //   setUserRegistration({ ...userRegistration, [name]: value });
-  // };
-
   const previewFile = (index) => (e) => {
     let preview = document.getElementsByClassName("UserProfileImage")[index];
 
@@ -48,10 +42,14 @@ function PhotoUpload() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const photoHeight = document.getElementsByClassName("UserProfileImage")[1].naturalHeight;
-    const photoWidth = document.getElementsByClassName("UserProfileImage")[1].naturalWidth;
-    const coverPhotoHeight = document.getElementsByClassName("UserProfileImage")[0].naturalHeight;
-    const coverPhotoWidth = document.getElementsByClassName("UserProfileImage")[0].naturalWidth;
+    const photoHeight =
+      document.getElementsByClassName("UserProfileImage")[1].naturalHeight;
+    const photoWidth =
+      document.getElementsByClassName("UserProfileImage")[1].naturalWidth;
+    const coverPhotoHeight =
+      document.getElementsByClassName("UserProfileImage")[0].naturalHeight;
+    const coverPhotoWidth =
+      document.getElementsByClassName("UserProfileImage")[0].naturalWidth;
 
     const formDataForProfile = new FormData();
     const formDataForCover = new FormData();
@@ -72,17 +70,18 @@ function PhotoUpload() {
 
     try {
       if (userRegistration.photo) {
-
         if (userDetails.profilePicture) {
-          await instance.post(`/user/remove/${userDetails.profilePicture}`,
+          await instance.post(
+            `/user/remove/${userDetails.profilePicture}`,
             {
-              "type": true,
+              type: true,
             },
             {
               headers: {
                 Authorization: `${token}`,
               },
-            });
+            }
+          );
         }
 
         await instance.post(`/user/upload`, formDataForProfile, {
@@ -93,17 +92,18 @@ function PhotoUpload() {
       }
 
       if (userRegistration.coverPhoto) {
-
         if (userDetails.backgroundPicture) {
-          await instance.post(`/user/remove/${userDetails.backgroundPicture}`,
+          await instance.post(
+            `/user/remove/${userDetails.backgroundPicture}`,
             {
-              "type": false,
+              type: false,
             },
             {
               headers: {
                 Authorization: `${token}`,
               },
-            });
+            }
+          );
         }
 
         await instance.post(`/user/upload`, formDataForCover, {
@@ -113,17 +113,11 @@ function PhotoUpload() {
         });
       }
 
-      history.replace('/home');
+      history.replace("/home");
     } catch (error) {
       return alert(`${error.response.data.error}`);
     }
   };
-
-  // const TriggerUpload = (index) => {
-  //   if (index === 0)
-  //     document.getElementsByClassName("PhotoUploadInput")[0].click();
-  //   else document.getElementsByClassName("PhotoUploadInput")[1].click();
-  // };
 
   return (
     <div className="PhotoUpload">
