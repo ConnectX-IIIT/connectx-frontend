@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ImgStackHome from "./ImgStackHome";
 
 import homeUpvoteIcon from "../../assets/home/post/upvotes/ic_upvote.svg";
@@ -14,20 +14,39 @@ import HomeCardInnerContent from "./HomeCardInnerContent";
 import Cookies from "js-cookie";
 import instance from "../../helper/axios";
 import { useHistory } from "react-router-dom";
+import { useStateValue } from "../../helper/state_provider";
 
 function DiscussionSection({
   InnerContentDiscussion,
   UserName,
   userProfile,
   timestamp,
-  discussionId
+  discussionId,
+  upvotes
 }) {
 
   const history = useHistory();
-  const [UpvotesHandle, setUpvotesHandle] = useState(0);
+  const [{ userDetails }, dispatch] = useStateValue(false);
+  const [UpvotesHandle, setUpvotesHandle] = useState(upvotes);
   const [UpvoteActive, setUpvoteActive] = useState(false);
   const [DownvoteActive, setDownvoteActive] = useState(false);
   const imgURL = "https://obscure-ridge-13663.herokuapp.com/user/fetch/";
+
+  useEffect(() => {
+    if (
+      userDetails.upvotedDiscussions &&
+      userDetails.upvotedDiscussions.includes(`${discussionId}`)
+    ) {
+      setUpvoteActive(true);
+    }
+
+    if (
+      userDetails.downvotedDiscussions &&
+      userDetails.downvotedDiscussions.includes(`${discussionId}`)
+    ) {
+      setDownvoteActive(true);
+    }
+  }, [userDetails]);
 
   async function updateReactions(type) {
     try {

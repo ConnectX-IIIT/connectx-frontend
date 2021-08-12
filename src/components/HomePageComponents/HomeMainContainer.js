@@ -49,7 +49,7 @@ function HomeMainContainer() {
         PostUserName={item.userName}
         PostContent={item.description}
         PostImageUrls={item.attachedImages}
-        Upvotes={item.upvotedUsers.length - item.downvotedUsers.length}
+        Upvotes={item.reactions}
         PostTitle={item.title}
         isPostProject={item.isProject}
         discussionsIds={item.discussions}
