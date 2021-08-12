@@ -61,7 +61,7 @@ function HomeMainContainer() {
     <div className="HomeMainContainer">
       <HomeUserDetails />
       <div>
-        <Link to="/createpost">
+        <Link to="/home/createpost">
           <div className="HomePageCard h-14 items-center">
             <img src={addImage} alt="Add Post" className="h-6 mx-5" />
             <p
