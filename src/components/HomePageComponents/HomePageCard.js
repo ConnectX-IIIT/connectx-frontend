@@ -315,6 +315,7 @@ function HomePageCard({
             userProfile={item.reply[index].userProfile}
             timestamp={handleTimestamp(item.reply[index].timestamp)}
             discussionId={item.reply[index]._id}
+            upvotes={item.reply[index].reactions}
           />
         );
       });
@@ -328,6 +329,7 @@ function HomePageCard({
             timestamp={handleTimestamp(item.discussion.timestamp)}
             key={index}
             discussionId={item.discussion._id}
+            upvotes={item.discussion.reactions}
           />
           <div style={{ marginLeft: "4vw" }}>
             <p
