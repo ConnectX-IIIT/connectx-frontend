@@ -10,7 +10,7 @@ function CreatePostInput({
   isInput,
 }) {
   return (
-    <div className="registerFromInput">
+    <div className="registerFromInput mx-0">
       {isInput ? (
         <input
           type={inputType}
@@ -18,8 +18,9 @@ function CreatePostInput({
           id={inputName}
           value={inputValue}
           onChange={onChangeFunction}
-          className="RegisterFormInput"
+          className="RegisterFormInput text-lg mb-3"
           autoComplete="Off"
+          placeholder={labelContent}
         />
       ) : (
         <textarea
@@ -27,40 +28,14 @@ function CreatePostInput({
           id={inputName}
           value={inputValue}
           onChange={onChangeFunction}
-          className="RegisterFormInput w-96 h-28"
+          className="RegisterFormInput w-96 h-28 text-lg"
           autoComplete="Off"
           style={{
-            paddingTop: "1vw",
+            paddingTop: "0.4vw",
           }}
+          placeholder={labelContent}
         />
       )}
-
-      <label
-        htmlFor={inputName}
-        className="RegisterFormLabel"
-        style={
-          isActive
-            ? {
-                transform: "translateY(-75%)",
-                fontSize: "0.9vw",
-                transition:
-                  "transform 0.2s ease-out , font-size 0.15s ease-out , background-color 0.15s ease-out",
-                paddingLeft: "0.5vw",
-                paddingRight: "0.5vw",
-                left: "4%",
-                backgroundColor: "#fcfdff",
-              }
-            : {
-                transform: "translateY(0)",
-                fontSize: "1.25vw",
-                transition:
-                  "transform 0.2s ease-out , font-size 0.15s ease-out , background-color 0.15s ease-out",
-                backgroundColor: "transparent",
-              }
-        }
-      >
-        {labelContent}
-      </label>
     </div>
   );
 }

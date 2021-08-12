@@ -1,19 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../styles/CreatePost/CreatePost.css";
 import CreatePostInput from "./CreatePostInput";
 import CreatePostRadio from "./CreatePostRadio";
-import Button from "../signUpCompontents/Button";
+
+import replaceIcon from "../../assets/create_post/ic_replace_image.svg";
 import Cookies from "js-cookie";
 import { useHistory } from "react-router-dom";
 import instance from "../../helper/axios";
+import CreatePostImageInput from "./CreatePostImageInput";
 
 function CreatePost() {
-
   const history = useHistory();
   const TypeOfPostArr = ["Job", "Project", "Blog"];
-  const [isActiveTitle, setActiveTitle] = useState(false);
-  const [isActiveDescription, setActiveDescription] = useState(false);
-  const [isActiveLink, setActiveLink] = useState(false);
+
+  const [isJobLink, setJobLink] = useState(false);
 
   const [postDetails, setPostDetails] = useState({
     postTitle: "",
@@ -34,33 +34,14 @@ function CreatePost() {
     } else {
       setPostDetails({ ...postDetails, [name]: value });
     }
+    if (name === "typeOfPost") {
+      setJobLink(false);
+    }
+    if (name === "typeOfPost" && value === "Job") {
+      setJobLink(true);
+    }
+
     // console.log(postDetails);
-  };
-
-  const handleTextChange = (e) => {
-    handleInput(e);
-
-    if (e.target.name === "postTitle") {
-      if (e.target.value !== "") {
-        setActiveTitle(true);
-      } else {
-        setActiveTitle(false);
-      }
-    }
-    if (e.target.name === "postDescription") {
-      if (e.target.value !== "") {
-        setActiveDescription(true);
-      } else {
-        setActiveDescription(false);
-      }
-    }
-    if (e.target.name === "jobLink") {
-      if (e.target.value !== "") {
-        setActiveLink(true);
-      } else {
-        setActiveLink(false);
-      }
-    }
   };
 
   const handleSubmit = async (e) => {
@@ -69,20 +50,6 @@ function CreatePost() {
 
     const attachedImgs = postDetails.attachedImgs;
     let isProject = false;
-    // let imageHeights = [];
-    // let imageWidths = [];
-
-    // if (attachedImgs.length !== 0) {
-    //   console.log(attachedImgs);
-    //   Array.prototype.forEach.call(attachedImgs, function (file, index) {
-
-    //     let reader = new FileReader();
-    //     reader.readAsDataURL(file);
-
-    //     imageHeights[index] = 5
-    //     console.log(reader.readAsDataURL(file));
-    //   });
-    // }
 
     if (postDetails.typeOfPost === "Project") {
       isProject = true;
@@ -102,16 +69,13 @@ function CreatePost() {
       return alert("Please fill all the details properly!");
     }
 
-    if (!postDetails.postTitle && postDetails.typeOfPost !== 'Blog') {
+    if (!postDetails.postTitle && postDetails.typeOfPost !== "Blog") {
       return alert("Please add post title!");
     }
 
-    if (!postDetails.jobLink && postDetails.typeOfPost === 'Job') {
+    if (!postDetails.jobLink && postDetails.typeOfPost === "Job") {
       return alert("Please add joblink!");
     }
-
-    // postData.append("imageHeights", imageHeights);
-    // postData.append("imageWidths", imageWidths);
 
     try {
       const token = Cookies.get("token");
@@ -124,34 +88,85 @@ function CreatePost() {
         });
 
         if (addPostRes.status === 200) {
-          history.replace('/home');
+          history.replace("/home");
         }
-
       }
     } catch (error) {
       return alert(`${error.response.data.error}`);
     }
   };
 
+  function ImgVisible(index) {
+    if (index < 5) {
+      var element = document.getElementsByClassName("CreatePostImage")[index];
+      element.style.display = "block";
+    }
+  }
+
+  function toggleImgSource(index) {
+    if (index < 5) {
+      var element = document.getElementsByClassName("ImgCreatePost")[index];
+      element.src = replaceIcon;
+      var element = document.getElementsByClassName("OverLayImageCreatePost")[
+        index
+      ];
+      element.style.display = "block";
+    }
+  }
+
+  const previewFile = (index) => (e) => {
+    console.log("hello");
+    let preview = document.getElementsByClassName("CreatePostImage")[index];
+
+    let file =
+      document.getElementsByClassName("CreatePostInput")[index].files[0];
+    let reader = new FileReader();
+
+    reader.onloadend = function () {
+      preview.src = reader.result;
+    };
+    if (file) {
+      reader.readAsDataURL(file);
+    } else {
+      preview.src = "";
+    }
+
+    let tempImgArr = postDetails.attachedImgs;
+    tempImgArr.push(e.target.files[0]);
+    setPostDetails({ ...postDetails, attachedImgs: tempImgArr });
+
+    ImgVisible(index + 1);
+    toggleImgSource(index);
+  };
+
+  useEffect(() => {
+    ImgVisible(0);
+  }, []);
+
   return (
     <div className="PostMainContainer">
-      <form action="" onSubmit={handleSubmit} encType="multipart/form-data" method="post">
+      <h2 className="font-manrope font-semibold text-2xl mb-6">Create Post</h2>
+      <form
+        action=""
+        onSubmit={handleSubmit}
+        encType="multipart/form-data"
+        method="post"
+        className="flex flex-col"
+      >
         <CreatePostInput
           inputType="text"
           inputName="postTitle"
           inputValue={postDetails.postTitle}
-          onChangeFunction={handleTextChange}
+          onChangeFunction={handleInput}
           labelContent="Post Title"
-          isActive={isActiveTitle}
           isInput={true}
         />
         <CreatePostInput
           inputType="text"
           inputName="postDescription"
           inputValue={postDetails.postDescription}
-          onChangeFunction={handleTextChange}
+          onChangeFunction={handleInput}
           labelContent="Post Description"
-          isActive={isActiveDescription}
         />
         <div
           style={{
@@ -167,24 +182,44 @@ function CreatePost() {
             RadioValue={postDetails.typeOfPost}
           />
         </div>
-        <CreatePostInput
-          inputType="text"
-          inputName="jobLink"
-          inputValue={postDetails.jobLink}
-          onChangeFunction={handleTextChange}
-          labelContent="Job Link"
-          isActive={isActiveLink}
-          isInput={true}
-        />
-        <input
-          type="file"
-          id="attachedImgs"
-          name="attachedImgs"
-          accept=".png , .jpg , .jpeg "
-          onChange={handleInput}
-          multiple
-        />
-        <Button />
+        {isJobLink ? (
+          <CreatePostInput
+            inputType="text"
+            inputName="jobLink"
+            inputValue={postDetails.jobLink}
+            onChangeFunction={handleInput}
+            labelContent="Job Link"
+            isInput={true}
+          />
+        ) : null}
+        <div className="mt-6">
+          <p
+            style={{
+              fontFamily: "'Manrope' , sans-serif",
+              fontStyle: "normal",
+              fontWeight: "500",
+              fontSize: "1.1vw",
+              lineHeight: "1.4vw",
+              color: "#A6A6A6",
+              marginBottom: "0.8vw",
+            }}
+          >
+            Photos
+          </p>
+          <div className="flex">
+            <CreatePostImageInput index={0} onChangeFunction={previewFile(0)} />
+            <CreatePostImageInput index={1} onChangeFunction={previewFile(1)} />
+            <CreatePostImageInput index={2} onChangeFunction={previewFile(2)} />
+            <CreatePostImageInput index={3} onChangeFunction={previewFile(3)} />
+            <CreatePostImageInput index={4} onChangeFunction={previewFile(4)} />
+          </div>
+        </div>
+        <button
+          className="w-28 rounded h-9 font-manrope font-semibold text-white transition-colors duration-200 hover:bg-blue-500 mt-8"
+          style={{ backgroundColor: "#C4C4C4" }}
+        >
+          Post
+        </button>
       </form>
     </div>
   );
