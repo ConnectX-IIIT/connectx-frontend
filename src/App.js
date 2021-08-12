@@ -12,7 +12,6 @@ import Cookies from "js-cookie";
 import instance from "./helper/axios";
 import { useStateValue } from "./helper/state_provider";
 import ResetPassword from "./components/ResetPassword";
-import CreatePost from "./components/CreatePost/CreatePost";
 
 function App() {
   const [{ userDetails }, dispatch] = useStateValue();
@@ -56,7 +55,6 @@ function App() {
         <Route exact path="/about" component={About} />
         <Route path="/home" component={Home} />
         <Route exact path="/photoupload" component={PhotoUpload} />
-        <Route exact path="/createpost" component={CreatePost} />
       </Switch>
     </Router>
   );
