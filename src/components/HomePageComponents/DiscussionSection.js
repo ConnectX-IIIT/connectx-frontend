@@ -11,40 +11,78 @@ import homeDownvoteIconSelected from "../../assets/home/post/upvotes/s_ic_downvo
 
 import UserProfile from "../../assets/profile/user_profile_default_icon.svg";
 import HomeCardInnerContent from "./HomeCardInnerContent";
+import Cookies from "js-cookie";
+import instance from "../../helper/axios";
+import { useHistory } from "react-router-dom";
 
 function DiscussionSection({
   InnerContentDiscussion,
   UserName,
   userProfile,
   timestamp,
+  discussionId
 }) {
+
+  const history = useHistory();
   const [UpvotesHandle, setUpvotesHandle] = useState(0);
   const [UpvoteActive, setUpvoteActive] = useState(false);
   const [DownvoteActive, setDownvoteActive] = useState(false);
   const imgURL = "https://obscure-ridge-13663.herokuapp.com/user/fetch/";
 
-  function handleUpvotes() {
-    setUpvoteActive(!UpvoteActive);
-    if (UpvoteActive) {
-      setUpvotesHandle(UpvotesHandle - 1);
-    } else {
-      setUpvotesHandle(UpvotesHandle + 1);
+  async function updateReactions(type) {
+    try {
+      const token = Cookies.get("token");
+
+      if (token) {
+        const voteRes = await instance.post(
+          `/discussion/vote/${type}`,
+          {
+            discussionId,
+          },
+          {
+            headers: {
+              Authorization: `${token}`,
+            },
+          }
+        );
+        return parseInt(voteRes.data.reactions);
+      } else {
+        history.replace("/signin");
+      }
+    } catch (error) {
+      return alert(`${error.response.data.error}`);
     }
   }
+
   const handlePhoto = (photo) => {
     if (photo) {
       return imgURL + photo;
     }
     return UserProfile;
   };
-  function handleDownvotes() {
-    setDownvoteActive(!DownvoteActive);
-    if (DownvoteActive) {
-      setUpvotesHandle(UpvotesHandle + 1);
+
+  async function handleUpvotes() {
+    setUpvoteActive(!UpvoteActive);
+    if (UpvoteActive) {
+      const upvotes = await updateReactions(2);
+      setUpvotesHandle(upvotes);
     } else {
-      setUpvotesHandle(UpvotesHandle - 1);
+      const upvotes = await updateReactions(1);
+      setUpvotesHandle(upvotes);
     }
   }
+
+  async function handleDownvotes() {
+    setDownvoteActive(!DownvoteActive);
+    if (DownvoteActive) {
+      const upvotes = await updateReactions(4);
+      setUpvotesHandle(upvotes);
+    } else {
+      const upvotes = await updateReactions(3);
+      setUpvotesHandle(upvotes);
+    }
+  }
+
   const handleReaction = (isUpvoted) => {
     if (DownvoteActive && isUpvoted) {
       handleUpvotes();
@@ -60,6 +98,7 @@ function DiscussionSection({
       }
     }
   };
+
   return (
     <div className="flex pt-4">
       <img
