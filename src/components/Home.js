@@ -9,6 +9,7 @@ import ConnectionMainContainer from "./HomePageComponents/ConnectionMainContaine
 import MessageMainContainer from "./HomePageComponents/MessageMainContainer";
 import SearchBarPopOutPeople from "./HomePageComponents/SearchBarPopOutPeople";
 import SearchBarPopOutQueries from "./HomePageComponents/SearchBarPopOutQueries";
+import CreatePost from "./CreatePost/CreatePost";
 import instance from "../helper/axios";
 import Cookies from "js-cookie";
 
@@ -36,7 +37,6 @@ const PopoutQueriesList = PopoutQueries.map((item, index) => {
 });
 
 export const Home = () => {
-
   const history = useHistory();
 
   const PopoutPeopleList = PopoutPeople.map((item, index) => {
@@ -77,14 +77,12 @@ export const Home = () => {
         const userData = getSearchRes.data.userData;
         PopoutPeople = userData;
         const queriesData = getSearchRes.data.questionData;
-
       } else {
-        history.replace('/signin');
+        history.replace("/signin");
       }
     } catch (error) {
       return alert(`${error}`);
     }
-
   };
   const [isSearchBarClicked, setIsSearchBarClicked] = useState(false);
 
@@ -109,7 +107,7 @@ export const Home = () => {
         style={
           isSearchBarClicked
             ? { opacity: "1", zIndex: "2", height: "100%", top: "0px" }
-            : { opacity: "0", zIndex: "1", height: "0" ,  top: "0px" }
+            : { opacity: "0", zIndex: "1", height: "0", top: "0px" }
         }
       >
         <div
@@ -118,8 +116,8 @@ export const Home = () => {
             isSearchBarClicked
               ? { display: "block" }
               : {
-                display: "none",
-              }
+                  display: "none",
+                }
           }
         >
           <div className="Queries">
@@ -142,6 +140,7 @@ export const Home = () => {
             component={ConnectionMainContainer}
           />
           <Route exact path="/home/message" component={MessageMainContainer} />
+          <Route exact path="/home/createpost" component={CreatePost} />
         </Switch>
       </div>
     </div>
