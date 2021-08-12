@@ -180,7 +180,7 @@ input[type="number"]::-webkit-outer-spin-button {
   content: "";
   color: #1dc002;
   position: absolute;
-  top: -0.2vw;
+  top: 0;
   left: 14%;
   width: 0.576923077vw;
   height: 1.34615385vw;
