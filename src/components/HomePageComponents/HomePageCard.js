@@ -74,17 +74,21 @@ function HomePageCard({
   isPostProject,
   discussionsIds,
 }) {
+
   const history = useHistory();
   const imgURL = "https://obscure-ridge-13663.herokuapp.com/user/fetch/";
+
   const [UpvotesHandle, setUpvotesHandle] = useState(Upvotes);
   const [UpvoteActive, setUpvoteActive] = useState(false);
   const [DownvoteActive, setDownvoteActive] = useState(false);
   const [isDiscussion, setIsDiscussion] = useState(false);
+
   const [DiscussionReply, setDiscussionReply] = useState({
     content: "",
     postId: PostId,
     reference: "",
   });
+
   const [DiscussionData, setDiscussionData] = useState([]);
 
   const handleInput = (e) => {
@@ -92,6 +96,7 @@ function HomePageCard({
     const value = e.target.value;
     setDiscussionReply({ ...DiscussionReply, [name]: value });
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const content = DiscussionReply.content;
@@ -127,6 +132,7 @@ function HomePageCard({
       return alert(`${error.response.data.error}`);
     }
   };
+
   const [{ userDetails }, dispatch] = useStateValue(false);
 
   const is_Job = jobLink;
@@ -197,9 +203,9 @@ function HomePageCard({
 
       if (token) {
         const voteRes = await instance.post(
-          `/post/vote/${PostId}`,
+          `/post/vote/${type}`,
           {
-            type,
+            postId: PostId,
           },
           {
             headers: {
@@ -226,6 +232,7 @@ function HomePageCard({
       setUpvotesHandle(upvotes);
     }
   }
+
   async function handleDownvotes() {
     setDownvoteActive(!DownvoteActive);
     if (DownvoteActive) {
@@ -236,6 +243,7 @@ function HomePageCard({
       setUpvotesHandle(upvotes);
     }
   }
+
   const handleReaction = (isUpvoted) => {
     if (DownvoteActive && isUpvoted) {
       handleUpvotes();
@@ -251,13 +259,14 @@ function HomePageCard({
       }
     }
   };
+
   const handleOnclickDiscussion = async () => {
     try {
       const token = Cookies.get("token");
 
       if (token) {
         const discussionRes = await instance.post(
-          `/post/getdiscussions`,
+          `/discussion/getdiscussions`,
           {
             discussionIds: discussionsIds,
           },
@@ -285,13 +294,17 @@ function HomePageCard({
     postId: PostId,
     reference: ""
   });
+
   const [isDiscussionReply, setisDiscussionReply] = useState(false);
+
   function DiscussionSectionData() {
+
     const handleInputReply = (e) => {
       const name = e.target.name;
       const value = e.target.value;
       setInputDiscussionReply({ ...inputDiscussionReply, [name]: value });
     };
+
     const DiscussionDataList = DiscussionData.map((item, index) => {
       const DiscussionDataReplyList = item.reply.map((reply, index) => {
         return (
@@ -301,6 +314,7 @@ function HomePageCard({
             UserName={item.reply[index].userName}
             userProfile={item.reply[index].userProfile}
             timestamp={handleTimestamp(item.reply[index].timestamp)}
+            discussionId={item.reply[index]._id}
           />
         );
       });
@@ -313,6 +327,7 @@ function HomePageCard({
             userProfile={item.discussion.userProfile}
             timestamp={handleTimestamp(item.discussion.timestamp)}
             key={index}
+            discussionId={item.discussion._id}
           />
           <div style={{ marginLeft: "4vw" }}>
             <p
