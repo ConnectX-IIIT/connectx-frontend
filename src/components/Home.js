@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Switch, Route, useHistory } from "react-router-dom";
 import Navbar from "./HomePageComponents/Navbar";
 import HomeMainContainer from "../components/HomePageComponents/HomeMainContainer";
-import QueriesMainConatiner from "../components/HomePageComponents/QueriesMainConatiner";
+import QueriesMainConatiner from "./Queries/QueriesMainConatiner";
 
 import "../styles/HomePage/HomePage.css";
 import ConnectionMainContainer from "./HomePageComponents/ConnectionMainContainer";
