@@ -28,7 +28,7 @@ function SignUpFormBottom() {
         });
 
         Cookies.set("token", googleSigninData.token, {
-          expires: 1,
+          expires: 30,
           secure: true,
         });
 
@@ -47,14 +47,20 @@ function SignUpFormBottom() {
         });
 
         Cookies.set("token", googleSignupData.token, {
-          expires: 1,
+          expires: 30,
           secure: true,
         });
 
         history.push("/setpassword");
       }
     } catch (error) {
-      return alert(`${error.response.data.error}`);
+      if (error.response.status === 500) {
+        return alert(`Server error occured!`);
+      }
+      if (error.response.status === 400) {
+        return alert(`User already exists!`);
+      }
+      return alert(`User does not exist!`);
     }
   };
 
