@@ -53,7 +53,7 @@ function DiscussionSection({
       const token = Cookies.get("token");
 
       if (token) {
-        const voteRes = await instance.post(
+        await instance.post(
           `/discussion/vote/${type}`,
           {
             discussionId,
@@ -64,7 +64,6 @@ function DiscussionSection({
             },
           }
         );
-        return parseInt(voteRes.data.reactions);
       } else {
         history.replace("/signin");
       }
@@ -83,10 +82,12 @@ function DiscussionSection({
   async function handleUpvotes() {
     setUpvoteActive(!UpvoteActive);
     if (UpvoteActive) {
-      const upvotes = await updateReactions(2);
+      await updateReactions(2);
+      upvotes = upvotes - 1;
       setUpvotesHandle(upvotes);
     } else {
-      const upvotes = await updateReactions(1);
+      await updateReactions(1);
+      upvotes = upvotes + 1;
       setUpvotesHandle(upvotes);
     }
   }
@@ -94,10 +95,12 @@ function DiscussionSection({
   async function handleDownvotes() {
     setDownvoteActive(!DownvoteActive);
     if (DownvoteActive) {
-      const upvotes = await updateReactions(4);
+      await updateReactions(4);
+      upvotes = upvotes + 1;
       setUpvotesHandle(upvotes);
     } else {
       const upvotes = await updateReactions(3);
+      upvotes = upvotes - 1;
       setUpvotesHandle(upvotes);
     }
   }
