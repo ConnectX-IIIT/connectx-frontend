@@ -6,8 +6,8 @@ function CreatePostInput({
   inputValue,
   onChangeFunction,
   labelContent,
-  isActive,
   isInput,
+  style,
 }) {
   return (
     <div className="registerFromInput mx-0 w-auto">
@@ -18,9 +18,10 @@ function CreatePostInput({
           id={inputName}
           value={inputValue}
           onChange={onChangeFunction}
-          className="RegisterFormInput text-lg mb-3 w-64"
+          className="RegisterFormInput text-lg mb-3 InputCreatePost"
           autoComplete="Off"
           placeholder={labelContent}
+          style={style}
         />
       ) : (
         <textarea
