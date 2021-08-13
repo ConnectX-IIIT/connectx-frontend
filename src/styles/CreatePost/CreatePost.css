@@ -1,7 +1,12 @@
 .PostMainContainer {
-  height: 100vh;
-  background-color: white;
-  padding-top: calc(95px + 1.2vw);
+  height: fit-content;
+  width: fit-content;
   position: relative;
-  margin-left: 10.1vw;
+  top: 0.35%;
+  background-color: white;
+  padding-top: calc(1.2vw);
+  position: relative;
+  padding-left: 2.5vw;
+  padding-right: 2.5vw;
+  margin: auto;
 }
