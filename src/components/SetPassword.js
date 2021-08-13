@@ -59,7 +59,22 @@ function SetPassword() {
             history.push('/register');
 
         } catch (error) {
-            return alert(`${error.response.data.error}`);
+            if (error.response.status === 500) {
+                return alert(`Server error occured!`);
+            }
+            if (error.response.status === 400) {
+                return alert(`Please fill all the details properly!`);
+            }
+            if (error.response.status === 401) {
+                return alert(`Password not matched!`);
+            }
+            if (error.response.status === 402) {
+                return alert(`${error.response.data.error}`);
+            }
+            if (error.response.status === 403) {
+                return alert(`User does not exist!`);
+            }
+            return alert(`Your session has expired, please login again!`);
         }
     };
 
