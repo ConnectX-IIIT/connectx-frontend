@@ -28,7 +28,7 @@ function CreatePostImageInput({ index, onChangeFunction }) {
         alt="Add Icon"
       />
       <div
-        className="w-full h-full absolute top-0 left-0 OverLayImageCreatePost"
+        className="w-full h-full absolute top-0 left-0 OverLayImageCreatePost pointer-events-none"
         style={{
           backgroundColor: "rgba(0,0,0,0.5)",
           display: "none",
