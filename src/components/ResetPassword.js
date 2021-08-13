@@ -53,8 +53,28 @@ function ResetPassword() {
             history.replace('/signin');
 
         } catch (error) {
-            console.log(error);
-            return alert(`${error.response.data.error}`);
+            if (error.response.status === 500) {
+                return alert(`Server error occured!`);
+            }
+            if (error.response.status === 400) {
+                return alert(`Please fill all the details properly!`);
+            }
+            if (error.response.status === 401) {
+                return alert(`Password not matched!`);
+            }
+            if (error.response.status === 404) {
+                return alert(`Token not found!`);
+            }
+            if (error.response.status === 403) {
+                return alert(`User does not exist!`);
+            }
+            if (error.response.status === 405) {
+                return alert(`Reset password link expired!`);
+            }
+            if (error.response.status === 402) {
+                return alert(`${error.response.passwordValidate.error}`);
+            }
+            return;
         }
     };
 
