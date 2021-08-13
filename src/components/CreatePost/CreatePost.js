@@ -8,6 +8,7 @@ import Cookies from "js-cookie";
 import { useHistory } from "react-router-dom";
 import instance from "../../helper/axios";
 import CreatePostImageInput from "./CreatePostImageInput";
+import deleteIcon from "../../assets/create_post/ic_close.svg";
 
 function CreatePost() {
   const history = useHistory();
@@ -145,7 +146,22 @@ function CreatePost() {
 
   return (
     <div className="PostMainContainer">
-      <h2 className="font-manrope font-semibold text-2xl mb-6">Create Post</h2>
+      <div className="flex justify-between mb-4">
+        <h2 className="font-manrope font-semibold text-xl">Create Post</h2>
+        <img
+          src={deleteIcon}
+          alt="delete"
+          onClick={() => {
+            document
+              .getElementById("HomeContainerCreatePost")
+              .classList.toggle("hidden");
+          }}
+          className="cursor-pointer"
+          onMouseOver={() => {
+            console.log();
+          }}
+        />
+      </div>
       <form
         action=""
         onSubmit={handleSubmit}
@@ -192,7 +208,7 @@ function CreatePost() {
             isInput={true}
           />
         ) : null}
-        <div className="mt-6">
+        <div className="mt-2">
           <p
             style={{
               fontFamily: "'Manrope' , sans-serif",
@@ -200,7 +216,7 @@ function CreatePost() {
               fontWeight: "500",
               fontSize: "1.1vw",
               lineHeight: "1.4vw",
-              color: "#A6A6A6",
+              color: "#444444",
               marginBottom: "0.8vw",
             }}
           >
@@ -215,7 +231,7 @@ function CreatePost() {
           </div>
         </div>
         <button
-          className="w-28 rounded h-9 font-manrope font-semibold text-white transition-colors duration-200 hover:bg-blue-500 mt-8"
+          className="w-28 rounded h-9 font-manrope font-semibold text-white transition-colors duration-200 hover:bg-blue-500 my-8 m-auto"
           style={{ backgroundColor: "#C4C4C4" }}
         >
           Post
