@@ -96,7 +96,7 @@ function Register() {
     }
 
     try {
-      await instance.post(`/auth/register`, {
+      await instance.post(`/auth/addextradetails`, {
         mobile,
         description,
         passingYear: PassingYear,
@@ -108,7 +108,14 @@ function Register() {
       });
       history.replace("/photoupload");
     } catch (error) {
-      return alert(`${error.response.data.error}`);
+      if (error.response.status === 500) {
+        return alert(`Server error occured!`);
+      }
+      if (error.response.status === 400) {
+        return alert(`Please fill all the details properly!`);
+      }
+      return alert(`Your session has expired, please login again!`);
+
     }
   };
   const [isActive, setActive] = useState(false);

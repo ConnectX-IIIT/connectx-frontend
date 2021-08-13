@@ -80,7 +80,10 @@ export const Home = () => {
         history.replace("/signin");
       }
     } catch (error) {
-      return alert(`${error}`);
+      if (error.response.status === 500) {
+        return alert(`Server error occured!`);
+      }
+      return alert(`Your session has expired, please login again!`);
     }
   };
   const [isSearchBarClicked, setIsSearchBarClicked] = useState(false);
@@ -115,8 +118,8 @@ export const Home = () => {
             isSearchBarClicked
               ? { display: "block" }
               : {
-                  display: "none",
-                }
+                display: "none",
+              }
           }
         >
           <div className="Queries">
