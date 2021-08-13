@@ -47,7 +47,14 @@ function SignIn() {
       alert('Link to reset your password has been sent to your email!')
 
     } catch (error) {
-      return alert(`${error.response.data.error}`);
+      if (error.response.status === 500) {
+        return alert(`Server error occured!`);
+      }
+      if (error.response.status === 400) {
+        return alert(`Enter a valid email!`);
+      }
+      return alert(`Enter registered email!`);
+
     }
   }
 
@@ -87,12 +94,21 @@ function SignIn() {
         userData: userData
       })
 
-      Cookies.set("token", signinData.token, { expires: 1, secure: true });
+      Cookies.set("token", signinData.token, { expires: 30, secure: true });
 
       history.push('/home');
 
     } catch (error) {
-      return alert(`${error.response.data.error}`);
+      if (error.response.status === 500) {
+        return alert(`Server error occured!`);
+      }
+      if (error.response.status === 400) {
+        return alert(`Please fill all the details properly!`);
+      }
+      if (error.response.status === 401) {
+        return alert(`User does not exist!`);
+      }
+      return alert(`Incorrect password!`);
     }
   };
 
