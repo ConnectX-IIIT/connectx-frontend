@@ -7,6 +7,7 @@ import "../../styles/HomePage/HomeMainContainer/HomeMainContainer.css";
 import instance from "../../helper/axios";
 import Cookies from "js-cookie";
 import { useHistory } from "react-router-dom";
+import CreatePost from "./../CreatePost/CreatePost";
 
 function HomeMainContainer() {
   const history = useHistory();
@@ -58,22 +59,36 @@ function HomeMainContainer() {
   });
 
   return (
-    <div className="HomeMainContainer">
+    <div className="HomeMainContainer relative">
+      <div
+        className="h-full w-full absolute top-0 left-0 z-10 hidden"
+        id="HomeContainerCreatePost"
+        style={{ backgroundColor: "rgb(0, 19, 36 , 0.6)" }}
+      >
+        <CreatePost />
+      </div>
+
       <HomeUserDetails />
       <div>
-        <Link to="/home/createpost">
-          <div className="HomePageCard h-14 items-center">
-            <img src={addImage} alt="Add Post" className="h-6 mx-5" />
-            <p
-              className="font-manrope font-semibold text-lg"
-              style={{
-                color: "#5F5F5F",
-              }}
-            >
-              Create a Post
-            </p>
-          </div>
-        </Link>
+        <div
+          className="HomePageCard h-14 items-center cursor-pointer"
+          onClick={() => {
+            document
+              .getElementById("HomeContainerCreatePost")
+              .classList.toggle("hidden");
+          }}
+        >
+          <img src={addImage} alt="Add Post" className="h-6 mx-5" />
+          <p
+            className="font-manrope font-semibold text-lg"
+            style={{
+              color: "#5F5F5F",
+            }}
+          >
+            Create a Post
+          </p>
+        </div>
+
         {HomePageCardDetailsList}
       </div>
     </div>
