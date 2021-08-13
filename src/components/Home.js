@@ -9,7 +9,6 @@ import ConnectionMainContainer from "./HomePageComponents/ConnectionMainContaine
 import MessageMainContainer from "./HomePageComponents/MessageMainContainer";
 import SearchBarPopOutPeople from "./HomePageComponents/SearchBarPopOutPeople";
 import SearchBarPopOutQueries from "./HomePageComponents/SearchBarPopOutQueries";
-import CreatePost from "./CreatePost/CreatePost";
 import instance from "../helper/axios";
 import Cookies from "js-cookie";
 
@@ -140,7 +139,6 @@ export const Home = () => {
             component={ConnectionMainContainer}
           />
           <Route exact path="/home/message" component={MessageMainContainer} />
-          <Route exact path="/home/createpost" component={CreatePost} />
         </Switch>
       </div>
     </div>
