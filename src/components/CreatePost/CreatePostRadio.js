@@ -23,7 +23,7 @@ function CreatePostRadio({
           key={RadioOption}
           className="radioLabel text-lg mt-0 ml-0"
           style={{
-            color: "#717171",
+            color: "#444444",
           }}
         >
           {RadioOption}
@@ -45,7 +45,7 @@ function CreatePostRadio({
           fontWeight: "500",
           fontSize: "1.1vw",
           lineHeight: "1.4vw",
-          color: "#A6A6A6",
+          color: "#444444",
           marginBottom: "0.8vw",
         }}
       >

@@ -25,6 +25,10 @@ import { useHistory } from "react-router-dom";
 import { useStateValue } from "../../helper/state_provider";
 import instance from "../../helper/axios";
 
+import EditButtomImage from "../../assets/home/post/menu/ic_edit_post.svg";
+import DeleteButtomImage from "../../assets/home/post/menu/ic_delete_post.svg";
+import ReportButtomImage from "../../assets/home/post/menu/ic_report_post.svg";
+
 function isJob(jobLink) {
   return (
     <div className="HomeCardButtonContainer">
@@ -61,6 +65,25 @@ function isProject() {
   );
 }
 
+function MoreOptionHomePageCard({ Image, content, style }) {
+  return (
+    <div
+      className="flex items-center pl-2 rounded-md mb-2 cursor-pointer"
+      style={style}
+    >
+      <img src={Image} alt="MoreOption" className="w-6 object-contain mr-1" />
+      <p
+        className="font-manrope font-semibold"
+        style={{
+          fontSize: "1.25vw",
+        }}
+      >
+        {content}
+      </p>
+    </div>
+  );
+}
+
 function HomePageCard({
   UserProfilePhoto,
   TimeStamp,
@@ -74,7 +97,6 @@ function HomePageCard({
   isPostProject,
   discussionsIds,
 }) {
-
   const history = useHistory();
   const imgURL = "https://obscure-ridge-13663.herokuapp.com/user/fetch/";
 
@@ -116,7 +138,7 @@ function HomePageCard({
           {
             content,
             postId,
-            reference
+            reference,
           },
           {
             headers: {
@@ -295,13 +317,12 @@ function HomePageCard({
   const [inputDiscussionReply, setInputDiscussionReply] = useState({
     content: "",
     postId: PostId,
-    reference: ""
+    reference: "",
   });
 
   const [isDiscussionReply, setisDiscussionReply] = useState(false);
 
   function DiscussionSectionData() {
-
     const handleInputReply = (e) => {
       const name = e.target.name;
       const value = e.target.value;
@@ -405,7 +426,7 @@ function HomePageCard({
           {
             content,
             postId,
-            reference
+            reference,
           },
           {
             headers: {
@@ -464,7 +485,29 @@ function HomePageCard({
             paddingRight: "1.5vw",
           }}
         >
-          <div id="PostDetailsContainer">
+          <div id="PostDetailsContainer" className="relative">
+            <div
+              className="absolute hidden"
+              id={`${PostId}` + "MoreOption"}
+              style={{ right: "0", top: "2.5vw", width: "7.34vw" }}
+            >
+              <MoreOptionHomePageCard
+                Image={EditButtomImage}
+                content="Edit"
+                style={{
+                  color: "#38ABF0",
+                  backgroundColor: "#DDF2FF",
+                }}
+              />
+              <MoreOptionHomePageCard
+                Image={DeleteButtomImage}
+                content="Delete"
+                style={{
+                  color: "#FF6969",
+                  backgroundColor: "#FFEDED",
+                }}
+              />
+            </div>
             <img
               src={handlePhoto(UserProfilePhoto)}
               alt="Userprofile"
@@ -507,6 +550,13 @@ function HomePageCard({
               alt="dot"
               style={{
                 margin: "auto",
+              }}
+              className="cursor-pointer"
+              onClick={() => {
+                var element = document.getElementById(
+                  `${PostId}` + "MoreOption"
+                );
+                element.classList.toggle("hidden");
               }}
             />
           </div>

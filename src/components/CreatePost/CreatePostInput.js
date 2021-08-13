@@ -10,7 +10,7 @@ function CreatePostInput({
   isInput,
 }) {
   return (
-    <div className="registerFromInput mx-0">
+    <div className="registerFromInput mx-0 w-auto">
       {isInput ? (
         <input
           type={inputType}
@@ -18,7 +18,7 @@ function CreatePostInput({
           id={inputName}
           value={inputValue}
           onChange={onChangeFunction}
-          className="RegisterFormInput text-lg mb-3"
+          className="RegisterFormInput text-lg mb-3 w-64"
           autoComplete="Off"
           placeholder={labelContent}
         />
@@ -32,6 +32,7 @@ function CreatePostInput({
           autoComplete="Off"
           style={{
             paddingTop: "0.4vw",
+            marginRight: "2.5vw",
           }}
           placeholder={labelContent}
         />
