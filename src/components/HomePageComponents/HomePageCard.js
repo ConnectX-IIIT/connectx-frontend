@@ -224,7 +224,7 @@ function HomePageCard({
       const token = Cookies.get("token");
 
       if (token) {
-        const voteRes = await instance.post(
+        await instance.post(
           `/post/vote/${type}`,
           {
             postId: PostId,
@@ -235,7 +235,6 @@ function HomePageCard({
             },
           }
         );
-        return parseInt(voteRes.data.reactions);
       } else {
         history.replace("/signin");
       }
@@ -247,22 +246,26 @@ function HomePageCard({
   async function handleUpvotes() {
     setUpvoteActive(!UpvoteActive);
     if (UpvoteActive) {
-      const upvotes = await updateReactions(2);
-      setUpvotesHandle(upvotes);
+      await updateReactions(2);
+      Upvotes = Upvotes - 1;
+      setUpvotesHandle(Upvotes);
     } else {
-      const upvotes = await updateReactions(1);
-      setUpvotesHandle(upvotes);
+      await updateReactions(1);
+      Upvotes = Upvotes + 1;
+      setUpvotesHandle(Upvotes);
     }
   }
 
   async function handleDownvotes() {
     setDownvoteActive(!DownvoteActive);
     if (DownvoteActive) {
-      const upvotes = await updateReactions(4);
-      setUpvotesHandle(upvotes);
+      await updateReactions(4);
+      Upvotes = Upvotes + 1;
+      setUpvotesHandle(Upvotes);
     } else {
-      const upvotes = await updateReactions(3);
-      setUpvotesHandle(upvotes);
+      await updateReactions(3);
+      Upvotes = Upvotes - 1;
+      setUpvotesHandle(Upvotes);
     }
   }
 
