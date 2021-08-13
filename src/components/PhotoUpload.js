@@ -115,7 +115,13 @@ function PhotoUpload() {
 
       history.replace("/home");
     } catch (error) {
-      return alert(`${error.response.data.error}`);
+      if (error.response.status === 500) {
+        return alert(`Server error occured!`);
+      }
+      if (error.response.status === 400) {
+        return;
+      }
+      return alert(`Your session has expired, please login again!`);
     }
   };
 
