@@ -3,7 +3,13 @@ import CreatePostInput from "./../CreatePost/CreatePostInput";
 import ProfilePhoto from "../../assets/profile/user_profile_default_icon.svg";
 import SortComponent from "./SortComponent";
 import HomePageCard from "./../HomePageComponents/HomePageCard";
+import { useStateValue } from "../../helper/state_provider";
+
+const imgURL = "https://obscure-ridge-13663.herokuapp.com/user/fetch/";
+
 function QueriesQuestionContainer() {
+
+  const [{ userDetails }, dispatch] = useStateValue(false);
   const [UserQueries, setUserQueries] = useState({
     askedQuestion: "",
   });
@@ -12,6 +18,13 @@ function QueriesQuestionContainer() {
     const name = e.target.name;
     const value = e.target.value;
     setUserQueries({ ...UserQueries, [name]: value });
+  };
+
+  const handlePhoto = (photo) => {
+    if (photo) {
+      return imgURL + photo;
+    }
+    return ProfilePhoto;
   };
 
   return (
@@ -23,7 +36,7 @@ function QueriesQuestionContainer() {
         }}
       >
         <img
-          src={ProfilePhoto}
+          src={handlePhoto(userDetails.profilePicture)}
           alt="profile"
           className="object-cover w-11 h-11"
         />
