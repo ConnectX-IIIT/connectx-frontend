@@ -27,15 +27,22 @@ function QueriesQuestionContainer() {
           alt="profile"
           className="object-cover w-11 h-11"
         />
-        <CreatePostInput
-          inputType="text"
-          inputName="askedQuestion"
-          inputValue={UserQueries.askedQuestion}
-          onChangeFunction={handleInput}
-          labelContent="Ask Something"
-          isInput
-          style={{ width: "100%" }}
-        />
+        <div
+          onClick={() => {
+            document
+              .getElementById("QueriesAskQuestionContainer")
+              .classList.toggle("hidden");
+          }}
+        >
+          <CreatePostInput
+            inputType="text"
+            inputName="askedQuestion"
+            inputValue={UserQueries.askedQuestion}
+            labelContent="Ask Something"
+            isInput
+            style={{ width: "100%" }}
+          />
+        </div>
       </div>
 
       <SortComponent />
