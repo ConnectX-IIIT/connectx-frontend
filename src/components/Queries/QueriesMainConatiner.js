@@ -1,5 +1,6 @@
 import React from "react";
 import QueriesQuestionContainer from "./QueriesQuestionContainer";
+import QueriesPopOutContainer from "./QueriesPopOutContainer";
 
 function QueriesMainConatiner() {
   return (
@@ -12,7 +13,9 @@ function QueriesMainConatiner() {
           top: "-1.2vw",
           height: "calc(100% + 1.2vw)",
         }}
-      ></div>
+      >
+        <QueriesPopOutContainer />
+      </div>
       <div
         className="flex flex-col max-w-screen-lg font-manrope mx-auto relative"
         style={{ marginTop: "calc(81px + 1.2vw)", width: "50vw" }}
