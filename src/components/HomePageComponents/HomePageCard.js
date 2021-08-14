@@ -65,11 +65,12 @@ function isProject() {
   );
 }
 
-function MoreOptionHomePageCard({ Image, content, style }) {
+function MoreOptionHomePageCard({ Image, content, style, onClickFunction }) {
   return (
     <div
       className="flex items-center pl-2 rounded-md mb-2 cursor-pointer"
       style={style}
+      onClick={onClickFunction}
     >
       <img src={Image} alt="MoreOption" className="w-6 object-contain mr-1" />
       <p
@@ -96,6 +97,9 @@ function HomePageCard({
   PostId,
   isPostProject,
   discussionsIds,
+  isDiscussionQueries,
+  queriesInnerStyle,
+  queriesMainContainerStyle,
 }) {
   const history = useHistory();
   const imgURL = "https://obscure-ridge-13663.herokuapp.com/user/fetch/";
@@ -112,6 +116,33 @@ function HomePageCard({
   });
 
   const [DiscussionData, setDiscussionData] = useState([]);
+
+  async function handleDeletePost() {
+    console.log(PostId);
+    try {
+      const token = Cookies.get("token");
+
+      if (!userDetails.posts.includes(PostId)) {
+        return alert("You can't remove this post!");
+      }
+
+      if (token) {
+        await instance.get(`/post/remove/${PostId}`, {
+          headers: {
+            Authorization: `${token}`,
+          },
+        });
+      } else {
+        history.replace("/signin");
+      }
+    } catch (error) {
+      return alert(`${error.response.data.error}`);
+    }
+  }
+
+  async function handleEditPost() {
+    console.log(PostId);
+  }
 
   const handleInput = (e) => {
     const name = e.target.name;
@@ -444,7 +475,7 @@ function HomePageCard({
   }
 
   return (
-    <div className="HomePageCard">
+    <div className="HomePageCard" style={queriesMainContainerStyle}>
       <div id="HomePageCardLeftContainer">
         <ImgStackHome
           normalImageSrc={homeUpvoteIcon}
@@ -498,6 +529,7 @@ function HomePageCard({
                   color: "#38ABF0",
                   backgroundColor: "#DDF2FF",
                 }}
+                onClickFunction={handleEditPost}
               />
               <MoreOptionHomePageCard
                 Image={DeleteButtomImage}
@@ -506,6 +538,7 @@ function HomePageCard({
                   color: "#FF6969",
                   backgroundColor: "#FFEDED",
                 }}
+                onClickFunction={handleDeletePost}
               />
             </div>
             <img
@@ -563,7 +596,10 @@ function HomePageCard({
           <div className="font-manrope font-medium text-xl my-3">
             {PostTitle}
           </div>
-          <HomeCardInnerContent InnerContent={PostContent} />
+          <HomeCardInnerContent
+            InnerContent={PostContent}
+            styleInnerContent={queriesInnerStyle}
+          />
           {PostImageUrls.length > 0 ? (
             <CarouselHome CarouselImgs={PostImageUrls} />
           ) : null}
@@ -577,16 +613,18 @@ function HomePageCard({
             borderTop: "2px solid #bdbfc4",
           }}
         >
-          <div
-            className="HomeCardDiscussion"
-            onClick={() => {
-              setIsDiscussion(!isDiscussion);
-              handleOnclickDiscussion();
-            }}
-          >
-            <TextDiscussion className="mr-2 textDiscussion" />
-            Discussion
-          </div>
+          {isDiscussionQueries ? null : (
+            <div
+              className="HomeCardDiscussion"
+              onClick={() => {
+                setIsDiscussion(!isDiscussion);
+                handleOnclickDiscussion();
+              }}
+            >
+              <TextDiscussion className="mr-2 textDiscussion" />
+              Discussion
+            </div>
+          )}
           <div
             className="HomeCardDiscussion"
             style={{
