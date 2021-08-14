@@ -118,7 +118,6 @@ function HomePageCard({
   const [DiscussionData, setDiscussionData] = useState([]);
 
   async function handleDeletePost() {
-    console.log(PostId);
     try {
       const token = Cookies.get("token");
 
