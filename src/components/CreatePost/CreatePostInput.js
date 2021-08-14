@@ -18,7 +18,7 @@ function CreatePostInput({
           id={inputName}
           value={inputValue}
           onChange={onChangeFunction}
-          className="RegisterFormInput text-lg mb-3 InputCreatePost"
+          className="RegisterFormInput text-lg InputCreatePost"
           autoComplete="Off"
           placeholder={labelContent}
           style={style}
