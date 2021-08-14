@@ -47,7 +47,6 @@ function CreatePost() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(postDetails);
 
     const attachedImgs = postDetails.attachedImgs;
     let isProject = false;
@@ -90,6 +89,9 @@ function CreatePost() {
 
         if (addPostRes.status === 200) {
           history.replace("/home");
+          document
+            .getElementById("HomeContainerCreatePost")
+            .classList.toggle("hidden");
         }
       }
     } catch (error) {
@@ -119,7 +121,6 @@ function CreatePost() {
   }
 
   const previewFile = (index) => (e) => {
-    console.log("hello");
     let preview = document.getElementsByClassName("CreatePostImage")[index];
 
     let file =
@@ -160,9 +161,6 @@ function CreatePost() {
               .classList.toggle("hidden");
           }}
           className="cursor-pointer"
-          onMouseOver={() => {
-            console.log();
-          }}
         />
       </div>
       <form
