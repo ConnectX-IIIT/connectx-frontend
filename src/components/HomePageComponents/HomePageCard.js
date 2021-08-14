@@ -136,7 +136,13 @@ function HomePageCard({
         history.replace("/signin");
       }
     } catch (error) {
-      return alert(`${error.response.data.error}`);
+      if (error.response.status === 500) {
+        return alert(`Server error occured!`);
+      }
+      if (error.response.status === 400 || error.response.status === 401) {
+        return alert(`You can't remove this comment!`);
+      }
+      return alert(`Your session has expired, please login again!`);
     }
   }
 
@@ -164,7 +170,7 @@ function HomePageCard({
       const token = Cookies.get("token");
 
       if (token) {
-        const addDiscussionRes = await instance.post(
+        await instance.post(
           `/post/adddiscussion`,
           {
             content,
@@ -177,12 +183,17 @@ function HomePageCard({
             },
           }
         );
-        console.log(addDiscussionRes.data);
       } else {
         history.replace("/signin");
       }
     } catch (error) {
-      return alert(`${error.response.data.error}`);
+      if (error.response.status === 500) {
+        return alert(`Server error occured!`);
+      }
+      if (error.response.status === 400) {
+        return alert(`You can't post empty post!`);
+      }
+      return alert(`Your session has expired, please login again!`);
     }
   };
 
@@ -270,7 +281,10 @@ function HomePageCard({
         history.replace("/signin");
       }
     } catch (error) {
-      return alert(`${error.response.data.error}`);
+      if (error.response.status === 500 || error.response.status === 400) {
+        return alert(`Server error occured!`);
+      }
+      return alert(`Your session has expired, please login again!`);
     }
   }
 
@@ -337,7 +351,10 @@ function HomePageCard({
         history.replace("/signin");
       }
     } catch (error) {
-      return alert(`${error.response.data.error}`);
+      if (error.response.status === 500) {
+        return alert(`Server error occured!`);
+      }
+      return alert(`Your session has expired, please login again!`);
     }
   };
 
@@ -470,7 +487,13 @@ function HomePageCard({
         history.replace("/signin");
       }
     } catch (error) {
-      return alert(`${error.response.data.error}`);
+      if (error.response.status === 500) {
+        return alert(`Server error occured!`);
+      }
+      if (error.response.status === 400) {
+        return alert(`You can't post empty comment!`);
+      }
+      return alert(`Your session has expired, please login again!`);
     }
   }
 

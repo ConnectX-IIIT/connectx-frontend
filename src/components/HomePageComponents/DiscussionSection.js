@@ -68,7 +68,10 @@ function DiscussionSection({
         history.replace("/signin");
       }
     } catch (error) {
-      return alert(`${error.response.data.error}`);
+      if (error.response.status === 500 || error.response.status === 400) {
+        return alert(`Server error occured!`);
+      }
+      return alert(`Your session has expired, please login again!`);
     }
   }
 
