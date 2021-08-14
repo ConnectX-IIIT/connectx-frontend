@@ -149,7 +149,7 @@ function CreatePost() {
   }, []);
 
   return (
-    <div className="PostMainContainer">
+    <div className="PostMainContainer rounded-md">
       <div className="flex justify-between mb-4">
         <h2 className="font-manrope font-semibold text-xl">Create Post</h2>
         <img
