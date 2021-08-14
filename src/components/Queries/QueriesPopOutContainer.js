@@ -32,16 +32,16 @@ function QueriesPopOutContainer() {
   };
 
   return (
-    <div className="PostMainContainer rounded-md">
+    <div className="PostMainContainer rounded-md mt-24">
       <div className="flex justify-between mb-11">
         <h2 className="font-manrope font-semibold text-xl">Add Question</h2>
         <img
           src={deleteIcon}
           alt="delete"
           onClick={() => {
-            // document
-            //   .getElementById("HomeContainerCreatePost")
-            //   .classList.toggle("hidden");
+            document
+              .getElementById("QueriesAskQuestionContainer")
+              .classList.toggle("hidden");
           }}
           className="cursor-pointer"
         />
