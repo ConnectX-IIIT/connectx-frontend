@@ -1,0 +1,26 @@
+.ImgChatSection {
+  width: 3vw;
+  height: 3vw;
+  @apply object-cover mr-4;
+}
+.ChatSectionIndividual {
+  @apply w-full flex;
+  height: 4.11vw;
+  padding: 0.68vw 1.25vw;
+  border-bottom: 1px solid #555555;
+}
+.ChatInformationContainer {
+  width: 85%;
+}
+.ChatInformationContainer h2 {
+  @apply font-manrope font-semibold;
+}
+.ChatInformationContainer span {
+  @apply font-manrope text-xs;
+}
+.ChatInformationContainer div:first-child {
+  @apply flex items-center justify-between;
+}
+.ChatInformationContainer div:last-child {
+  @apply truncate;
+}
