@@ -29,8 +29,8 @@ function HomeUserDetails() {
   return (
     <div className="HomeUserDetails">
       <div id="UpperImageContainer">
-        <img src={handlePhoto(userDetails.backgroundPicture, false)} alt="Cover" />
-        <img src={handlePhoto(userDetails.profilePicture, true)} alt="profile" />
+        <img src={DefaultCoverPhoto} alt="Cover" />
+        <img src={DefaultProfilePhoto} alt="profile" />
       </div>
       <div id="UserDetailsContent">
         <h2>{userDetails.name}</h2>
