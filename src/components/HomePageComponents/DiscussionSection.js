@@ -127,7 +127,7 @@ function DiscussionSection({
   return (
     <div className="flex pt-4">
       <img
-        src={handlePhoto(userProfile)}
+        src={UserProfile}
         alt="userprofile"
         className="object-cover w-10 h-10 mx-5 rounded-full"
       />
