@@ -1,0 +1,19 @@
+.MessageMainContainer {
+  margin-top: calc(81px + 1.2vw);
+  width: 88.5416667vw;
+  grid-template-columns: 32.76% 67.24%;
+  border-color: #555555;
+  height: 81.95vh;
+  border-radius: 5px;
+}
+.MessageLeftContainer {
+  overflow-y: scroll;
+}
+.MessageLeftContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.MessageLeftContainer {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
