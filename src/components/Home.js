@@ -6,7 +6,7 @@ import QueriesMainConatiner from "./Queries/QueriesMainConatiner";
 
 import "../styles/HomePage/HomePage.css";
 import ConnectionMainContainer from "./HomePageComponents/ConnectionMainContainer";
-import MessageMainContainer from "./HomePageComponents/MessageMainContainer";
+import ChatsMainContainer from "./ChatsHomePage/ChatsMainContainer";
 import SearchBarPopOutPeople from "./HomePageComponents/SearchBarPopOutPeople";
 import SearchBarPopOutQueries from "./HomePageComponents/SearchBarPopOutQueries";
 import instance from "../helper/axios";
@@ -118,8 +118,8 @@ export const Home = () => {
             isSearchBarClicked
               ? { display: "block" }
               : {
-                display: "none",
-              }
+                  display: "none",
+                }
           }
         >
           <div className="Queries">
@@ -141,7 +141,7 @@ export const Home = () => {
             path="/home/connection"
             component={ConnectionMainContainer}
           />
-          <Route exact path="/home/message" component={MessageMainContainer} />
+          <Route exact path="/home/message" component={ChatsMainContainer} />
         </Switch>
       </div>
     </div>
