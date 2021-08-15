@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import CreatePostInput from "../CreatePost/CreatePostInput";
 import deleteIcon from "../../assets/create_post/ic_close.svg";
+import { useStateValue } from "../../helper/state_provider";
+import Cookies from "js-cookie";
+import instance from "../../helper/axios";
+import { useHistory } from "react-router-dom";
 
 function QuestionSuggestion({ QuestionInnerContent }) {
+
   return (
     <div
       className="pl-6 border-2 border-t-0 mx-1.5 font-manrope font-semibold py-1.5 text-lg truncate cursor-pointer"
@@ -17,6 +22,10 @@ function QuestionSuggestion({ QuestionInnerContent }) {
 }
 
 function QueriesPopOutContainer() {
+
+  const [{ userDetails }, dispatch] = useStateValue(false);
+  const history = useHistory();
+
   const [UserQueries, setUserQueries] = useState({
     askedQuestion: "",
   });
@@ -26,9 +35,45 @@ function QueriesPopOutContainer() {
     const value = e.target.value;
     setUserQueries({ ...UserQueries, [name]: value });
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(UserQueries);
+    const question = UserQueries.askedQuestion;
+    const userName = userDetails.name;
+    const userProfile = userDetails.profilePicture;
+
+    if (!question) {
+      return alert("Please enter a question!")
+    }
+
+    try {
+      const token = Cookies.get("token");
+
+      if (token) {
+        await instance.post(
+          `/home/addquestion`,
+          {
+            question,
+            userName,
+            userProfile,
+          },
+          {
+            headers: {
+              Authorization: `${token}`,
+            },
+          }
+        );
+      } else {
+        history.replace("/signin");
+      }
+    } catch (error) {
+      if (error.response.status === 500) {
+        return alert(`Server error occured!`);
+      }
+      if (error.response.status === 400) {
+        return alert(`You can't post empty question!`);
+      }
+      return alert(`Your session has expired, please login again!`);
+    }
   };
 
   return (
@@ -49,7 +94,6 @@ function QueriesPopOutContainer() {
 
       <form
         action=""
-        onSubmit={handleSubmit}
         encType="multipart/form-data"
         method="post"
         className="flex flex-col"
@@ -73,6 +117,7 @@ function QueriesPopOutContainer() {
 
       <div className="flex">
         <button
+          onClick={handleSubmit}
           className="w-28 rounded h-9 font-manrope font-semibold text-white transition-colors duration-200 hover:bg-blue-500 my-8 mx-auto"
           style={{ backgroundColor: "#C4C4C4" }}
         >
