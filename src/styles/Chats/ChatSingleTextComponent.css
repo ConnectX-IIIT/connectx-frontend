@@ -2,5 +2,6 @@
   max-width: 34.29vw;
   background-color: #efefef;
   padding: 0.498vw 0.83vw;
+  margin-bottom: 0.7vw;
   @apply font-manrope font-medium w-max;
 }

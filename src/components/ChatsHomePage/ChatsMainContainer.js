@@ -5,10 +5,12 @@ import SearchIcon from "../../assets/home/top_navbar/ic_search_icon.svg";
 import UserProfile from "../../assets/profile/user_profile_default_icon.svg";
 import ChatIndividual from "./ChatIndividual";
 import ChatSingleTextComponent from "./ChatSingleTextComponent";
+import sendbutton from "../../assets/chats/send_btn.svg";
 
 function MessageMainContainer() {
   const [userSearch, setUserSearch] = useState({
     chatSearch: "",
+    chatMessage: "",
   });
 
   const handleInput = (e) => {
@@ -28,7 +30,7 @@ function MessageMainContainer() {
   return (
     <div className="mx-auto font-manrope grid border MessageMainContainer">
       <div
-        className="scrollbarHidden"
+        className="scrollbarHidden relative"
         style={{
           borderRight: "1px solid #555555",
         }}
@@ -75,7 +77,27 @@ function MessageMainContainer() {
         </div>
         <div className="w-full p-4">
           <ChatSingleTextComponent />
+          <ChatSingleTextComponent />
+          <ChatSingleTextComponent isRight />
+          <ChatSingleTextComponent isRight />
+          <ChatSingleTextComponent isRight />
         </div>
+        <form action="" className="sticky bottom-0" onSubmit={handleSubmit}>
+          <div className=" BottomChatSection">
+            <input
+              type="text"
+              name="chatMessage"
+              id="chatMessage"
+              value={userSearch.chatMessage}
+              onChange={handleInput}
+              placeholder="Type a message..."
+              autoComplete="off"
+            />
+            <button type="submit">
+              <img src={sendbutton} alt="submit" />
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );
