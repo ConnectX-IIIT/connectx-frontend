@@ -17,3 +17,21 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+.BottomChatSection {
+  @apply w-full  rounded-br-md flex items-center justify-evenly;
+  background-color: #f5f5f5;
+  height: 4vw;
+}
+
+#chatMessage {
+  border: 1px solid #222222;
+  padding: 0.781vw 2.09vw;
+  @apply rounded-full w-11/12 outline-none font-manrope font-medium text-sm;
+}
+
+.BottomChatSection button {
+  background-color: #c4c4c4;
+  width: 3.125vw;
+  height: 3.125vw;
+  @apply rounded-full inline-flex items-center justify-center hover:bg-blue-500 transition;
+}
