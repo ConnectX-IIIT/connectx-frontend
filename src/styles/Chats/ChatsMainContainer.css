@@ -9,11 +9,11 @@
 .MessageLeftContainer {
   overflow-y: scroll;
 }
-.MessageLeftContainer::-webkit-scrollbar {
+.scrollbarHidden::-webkit-scrollbar {
   display: none;
 }
 
-.MessageLeftContainer {
+.scrollbarHidden {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
