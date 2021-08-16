@@ -1,0 +1,6 @@
+.ChatSingleTextComponent {
+  max-width: 34.29vw;
+  background-color: #efefef;
+  padding: 0.498vw 0.83vw;
+  @apply font-manrope font-medium w-max;
+}
