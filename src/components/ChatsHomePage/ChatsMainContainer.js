@@ -32,7 +32,7 @@ function MessageMainContainer() {
         }}
       >
         <div
-          className=" relative rounded-l-md"
+          className=" sticky rounded-l-md top-0"
           style={{ backgroundColor: "#F5F5F5", padding: "0.68vw 0" }}
         >
           <CreatePostInput
