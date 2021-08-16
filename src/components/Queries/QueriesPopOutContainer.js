@@ -7,7 +7,6 @@ import instance from "../../helper/axios";
 import { useHistory } from "react-router-dom";
 
 function QuestionSuggestion({ QuestionInnerContent }) {
-
   return (
     <div
       className="pl-6 border-2 border-t-0 mx-1.5 font-manrope font-semibold py-1.5 text-lg truncate cursor-pointer"
@@ -22,7 +21,6 @@ function QuestionSuggestion({ QuestionInnerContent }) {
 }
 
 function QueriesPopOutContainer() {
-
   const [{ userDetails }, dispatch] = useStateValue(false);
   const history = useHistory();
 
@@ -42,7 +40,7 @@ function QueriesPopOutContainer() {
     const userProfile = userDetails.profilePicture;
 
     if (!question) {
-      return alert("Please enter a question!")
+      return alert("Please enter a question!");
     }
 
     try {
@@ -62,6 +60,9 @@ function QueriesPopOutContainer() {
             },
           }
         );
+        document
+          .getElementById("QueriesAskQuestionContainer")
+          .classList.toggle("hidden");
       } else {
         history.replace("/signin");
       }

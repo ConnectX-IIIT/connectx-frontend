@@ -71,6 +71,9 @@ function DiscussionSection({
       if (error.response.status === 500 || error.response.status === 400) {
         return alert(`Server error occured!`);
       }
+      if (error.response.status === 401) {
+        return;
+      }
       return alert(`Your session has expired, please login again!`);
     }
   }
@@ -127,7 +130,7 @@ function DiscussionSection({
   return (
     <div className="flex pt-4">
       <img
-        src={handlePhoto(userProfile)}
+        src={UserProfile}
         alt="userprofile"
         className="object-cover w-10 h-10 mx-5 rounded-full"
       />

@@ -6,7 +6,7 @@ function QueriesMainConatiner() {
   return (
     <>
       <div
-        className="w-full absolute  left-0 z-10 hidden "
+        className="w-full absolute left-0 z-10 hidden "
         id="QueriesAskQuestionContainer"
         style={{
           backgroundColor: "rgb(0, 19, 36 , 0.6)",

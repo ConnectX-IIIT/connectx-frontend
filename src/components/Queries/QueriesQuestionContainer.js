@@ -3,7 +3,6 @@ import CreatePostInput from "./../CreatePost/CreatePostInput";
 import ProfilePhoto from "../../assets/profile/user_profile_default_icon.svg";
 import SortComponent from "./SortComponent";
 import HomePageCard from "./../HomePageComponents/HomePageCard";
-import { useStateValue } from "../../helper/state_provider";
 import Cookies from "js-cookie";
 import instance from "../../helper/axios";
 import { useHistory } from "react-router-dom";
@@ -12,7 +11,6 @@ const imgURL = "https://obscure-ridge-13663.herokuapp.com/user/fetch/";
 
 function QueriesQuestionContainer() {
 
-  const [{ userDetails }, dispatch] = useStateValue(false);
   const history = useHistory();
   const [questionData, setQuestionData] = useState([]);
   const [UserQueries, setUserQueries] = useState({
