@@ -3,10 +3,17 @@
   background-color: #efefef;
   padding: 0.498vw 0.83vw;
   margin-bottom: 0.7vw;
-  @apply font-manrope font-medium w-max relative;
+  @apply font-manrope font-medium w-max relative rounded;
   z-index: -1;
 }
 .TimeStampSingleChatComponent {
   @apply font-medium text-sm block text-right;
   color: #888888;
+}
+.ReferenceMessageChatSection {
+  background-color: #d8d8d8;
+  @apply rounded overflow-hidden overflow-ellipsis;
+  padding: 0.1vw 0.83vw;
+  max-height: 5.4vw;
+  margin-bottom: 0.7vw;
 }
