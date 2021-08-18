@@ -7,6 +7,6 @@
   z-index: -1;
 }
 .TimeStampSingleChatComponent {
-  @apply font-medium text-sm ml-auto;
+  @apply font-medium text-sm block text-right;
   color: #888888;
 }
