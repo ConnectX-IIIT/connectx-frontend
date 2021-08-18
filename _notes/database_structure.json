@@ -187,13 +187,13 @@
     "message": "This is message!",
     "user_id": "60f68ade7e4fdb95c36eb07f",
     "timestamp": { "$numberLong": "1626768841451" },
+    "chatId":"60f68ade7e4fdb95c36eb07f",
     "reference": "60f67d687e4fdb95c36eb079",
     "picture": "60f67d687e4fdbd687e4fdb95c36eb079",
     "image_dimnes": [500, 600]
   },
   "chats": {
     "_id": { "$oid": "60f68ade7e4fdb95c36eb07f" },
-    "chat": ["60f68ade7e4fdb95c36eb07f", "60f68ade7e4fdb95c36eb07f"],
     "user1": "60f68ade7e4fdb95c36eb07f",
     "user1_name": "60f68ade7e4fdb95c36eb07f",
     "user_profile_1": "60f67d687e4fdbd687e4fdb95c36eb079",
