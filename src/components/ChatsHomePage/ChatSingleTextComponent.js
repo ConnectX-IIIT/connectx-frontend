@@ -12,7 +12,8 @@ function ChatSingleTextComponent({ isRight }) {
       dolor hic doloremque debitis? Quod, corrupti sint reiciendis hic provident
       expedita vel earum beatae neque dicta officiis. Dicta, mollitia ratione
       numquam cupiditate excepturi id beatae, aut ad iusto porro minima dolore.
-      Rerum, quam.
+      Rerum, quam.fdsfdsdfdsfsdffsdffs ddsdfdsf
+      <span className="TimeStampSingleChatComponent">15:34</span>
     </div>
   );
 }
