@@ -4,15 +4,19 @@ import { useStateValue } from "../../helper/state_provider";
 import "../../styles/Chats/ChatIndividual.css";
 
 function ChatIndividual({ conversation }) {
-
   const [{ userDetails }, dispatch] = useStateValue();
   const [friendName, setFriendName] = useState("");
   const [friendProfile, setFriendProfile] = useState("");
-  console.log("hello");
 
   useEffect(() => {
-    setFriendName(conversation.userNames.find((name) => name !== userDetails.name));
-    setFriendProfile(conversation.userProfiles.find((profile) => profile !== userDetails.profilePicture));
+    setFriendName(
+      conversation.userNames.find((name) => name !== userDetails.name)
+    );
+    setFriendProfile(
+      conversation.userProfiles.find(
+        (profile) => profile !== userDetails.profilePicture
+      )
+    );
   }, []);
 
   return (

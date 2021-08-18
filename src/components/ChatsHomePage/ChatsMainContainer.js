@@ -12,7 +12,6 @@ import { useHistory } from "react-router-dom";
 import { useStateValue } from "../../helper/state_provider";
 
 function MessageMainContainer() {
-
   const history = useHistory();
   const [{ userDetails }, dispatch] = useStateValue();
   const [conversations, setConversations] = useState([]);
@@ -31,54 +30,49 @@ function MessageMainContainer() {
     });
   };
 
-  const getConversations = async () => {
-
+  const getConversations = async (e) => {
     try {
       const token = Cookies.get("token");
 
       if (token) {
-        const getConversationsRes = await instance.post(`/conversation/getconversations`,
+        const getConversationsRes = await instance.post(
+          `/conversation/getconversations`,
+
           {
-            conversationIds: userDetails.conversations
+            conversationIds: userDetails.conversations,
           },
           {
             headers: {
               Authorization: `${token}`,
             },
-          });
+          }
+        );
 
         const data = await getConversationsRes.data.conversations;
-        setConversations(data);
-        console.log(data);
 
+        setConversations(data);
       } else {
         history.replace("/signin");
       }
-
     } catch (error) {
       if (error.response.status === 500) {
         return alert(`Server error occured!`);
       }
       return alert(`Your session has expired, please login again!`);
     }
-  }
+  };
 
   useEffect(() => {
     getConversations();
-  }, []);
-
-  const ConversationsList = conversations.map((item, index) => {
-    return (
-      <ChatIndividual
-        conversation={item}
-      />
-    );
-  });
+  }, [userDetails]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(userSearch);
   };
+  const ConversationsList = conversations.map((item, index) => {
+    return <ChatIndividual conversation={item} />;
+  });
 
   return (
     <div className="mx-auto font-manrope grid border MessageMainContainer">
