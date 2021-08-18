@@ -140,6 +140,10 @@ function MessageMainContainer() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!newMessage || !currentChat || !newMessage.replace(/\s/g, '').length) {
+      return;
+    }
+
     const receiverId = currentChat.userIds.find((id) => id !== userDetails._id);
 
     socket.current.emit("sendMessage", {
@@ -150,10 +154,6 @@ function MessageMainContainer() {
 
     try {
       const token = Cookies.get("token");
-
-      if (!newMessage || !currentChat) {
-        return;
-      }
 
       if (token) {
         const addMessagesRes = await instance.post(
