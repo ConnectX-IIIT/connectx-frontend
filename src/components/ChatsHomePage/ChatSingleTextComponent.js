@@ -1,5 +1,6 @@
 import React from "react";
 import "../../styles/Chats/ChatSingleTextComponent.css";
+import { format } from "timeago.js";
 
 function ReferenceMessage() {
   return (
@@ -12,21 +13,16 @@ function ReferenceMessage() {
   );
 }
 
-function ChatSingleTextComponent({ isRight, isReference = true }) {
+function ChatSingleTextComponent({ message, own, isReference }) {
   return (
     <div
       className="ChatSingleTextComponent"
-      style={isRight ? { marginLeft: "auto" } : { marginRight: "auto" }}
+      style={own ? { marginLeft: "auto" } : { marginRight: "auto" }}
     >
       <h2 className="font-semibold text-lg mb-2">Raj Noobda</h2>
       {isReference ? <ReferenceMessage /> : null}
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas libero
-      voluptates error! Repudiandae, assumenda! Maiores praesentium dolores
-      dolor hic doloremque debitis? Quod, corrupti sint reiciendis hic provident
-      expedita vel earum beatae neque dicta officiis. Dicta, mollitia ratione
-      numquam cupiditate excepturi id beatae, aut ad iusto porro minima dolore.
-      Rerum, quam. lorem impdfsd fdsfjdsjkl
-      <span className="TimeStampSingleChatComponent">15:34</span>
+      {message.message}
+      <span className="TimeStampSingleChatComponent">{format(message.createdAt)}</span>
     </div>
   );
 }
