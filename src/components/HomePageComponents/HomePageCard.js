@@ -101,9 +101,8 @@ function HomePageCard({
   queriesInnerStyle,
   queriesMainContainerStyle,
 }) {
-  const history = useHistory();
-  const imgURL = "https://obscure-ridge-13663.herokuapp.com/user/fetch/";
 
+  const history = useHistory();
   const [UpvotesHandle, setUpvotesHandle] = useState(Upvotes);
   const [UpvoteActive, setUpvoteActive] = useState(false);
   const [DownvoteActive, setDownvoteActive] = useState(false);
@@ -219,7 +218,7 @@ function HomePageCard({
 
   const handlePhoto = (photo) => {
     if (photo) {
-      return imgURL + photo;
+      return photo;
     }
     return UserProfile;
   };

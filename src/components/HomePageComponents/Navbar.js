@@ -42,11 +42,10 @@ function Navbar({
   const [{ userDetails }, dispatch] = useStateValue();
 
   const [navLocation, setNavLocation] = useState("home");
-  const imgURL = "https://obscure-ridge-13663.herokuapp.com/user/fetch/";
 
   const handlePhoto = (photo) => {
     if (photo) {
-      return imgURL + photo;
+      return photo;
     }
     return UserProfileDefaultIcon;
   };
@@ -104,7 +103,7 @@ function Navbar({
 
         <div className="NavbarUserProfile">
           <img
-            src={UserProfileDefaultIcon}
+            src={handlePhoto(userDetails.profilePicture)}
             alt="user profile icon"
             className="NavbarUserProfile object-cover"
           />

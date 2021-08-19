@@ -10,13 +10,12 @@ import { useStateValue } from "../../helper/state_provider";
 
 function HomeUserDetails() {
 
-  const imgURL = "https://obscure-ridge-13663.herokuapp.com/user/fetch/";
   const [{ userDetails }, dispatch] = useStateValue();
 
   const handlePhoto = (photo, index) => {
 
     if (photo) {
-      return imgURL + photo
+      return photo
     }
     if (index) {
       return DefaultProfilePhoto;
@@ -29,8 +28,8 @@ function HomeUserDetails() {
   return (
     <div className="HomeUserDetails">
       <div id="UpperImageContainer">
-        <img src={DefaultCoverPhoto} alt="Cover" />
-        <img src={DefaultProfilePhoto} alt="profile" />
+        <img src={handlePhoto(userDetails.backgroundPicture, 0)} alt="Cover" />
+        <img src={handlePhoto(userDetails.profilePicture, 1)} alt="profile" />
       </div>
       <div id="UserDetailsContent">
         <h2>{userDetails.name}</h2>
