@@ -1,0 +1,32 @@
+.ConnectionIndividualComponent {
+  width: auto;
+  @apply border border-black rounded-sm;
+}
+.ConnectionIndividualComponent img:first-child {
+  @apply object-cover;
+}
+.ConnectionIndividualComponent img:last-child {
+  width: 5.8vw;
+  height: 5.8vw;
+  margin-top: -2.6vw;
+  margin-bottom: 0.82vw;
+  @apply object-cover rounded-full mx-auto;
+}
+.ConnectionIndividualComponentDetails {
+  @apply flex flex-col items-center justify-center font-manrope font-medium;
+  color: #222222;
+  font-size: 0.9vw;
+}
+.ConnectionIndividualComponentDetails div:first-child {
+  font-size: 1.14vw;
+  @apply mb-1;
+}
+.ConnectionIndividualComponentDetails div:last-child {
+  @apply text-center mt-1;
+}
+.ConnectionIndividualComponentButton {
+  @apply capitalize border border-black block font-medium font-manrope;
+  margin: 0.781vw auto;
+  padding: 0.31vw 2.96vw;
+  font-size: 1.14vw;
+}
