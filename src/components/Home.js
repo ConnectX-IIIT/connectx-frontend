@@ -5,7 +5,7 @@ import HomeMainContainer from "../components/HomePageComponents/HomeMainContaine
 import QueriesMainConatiner from "./Queries/QueriesMainConatiner";
 
 import "../styles/HomePage/HomePage.css";
-import ConnectionMainContainer from "./HomePageComponents/ConnectionMainContainer";
+import ConnectionMainContainer from "./ConnectionsHomePage/ConnectionMainContainer";
 import ChatsMainContainer from "./ChatsHomePage/ChatsMainContainer";
 import SearchBarPopOutPeople from "./HomePageComponents/SearchBarPopOutPeople";
 import SearchBarPopOutQueries from "./HomePageComponents/SearchBarPopOutQueries";
