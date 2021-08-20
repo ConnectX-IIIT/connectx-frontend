@@ -30,7 +30,6 @@ function DiscussionSection({
   const [UpvotesHandle, setUpvotesHandle] = useState(upvotes);
   const [UpvoteActive, setUpvoteActive] = useState(false);
   const [DownvoteActive, setDownvoteActive] = useState(false);
-  const imgURL = "https://obscure-ridge-13663.herokuapp.com/user/fetch/";
 
   useEffect(() => {
     if (
@@ -80,7 +79,7 @@ function DiscussionSection({
 
   const handlePhoto = (photo) => {
     if (photo) {
-      return imgURL + photo;
+      return photo;
     }
     return UserProfile;
   };
@@ -130,7 +129,7 @@ function DiscussionSection({
   return (
     <div className="flex pt-4">
       <img
-        src={UserProfile}
+        src={handlePhoto(userProfile)}
         alt="userprofile"
         className="object-cover w-10 h-10 mx-5 rounded-full"
       />

@@ -10,7 +10,13 @@ function CarouselHome({ CarouselImgs }) {
   else carouselLenght = true;
 
   const [index, setIndex] = useState(0);
-  const imgURL = "https://obscure-ridge-13663.herokuapp.com/user/fetch/";
+
+  const handlePhoto = (photo) => {
+    if (photo) {
+      return photo;
+    }
+    return DefaultCoverPhoto;
+  };
 
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
@@ -22,7 +28,7 @@ function CarouselHome({ CarouselImgs }) {
         <img
           key={img.toString()}
           className="d-block w-100 ImgCarouselHome"
-          src={DefaultCoverPhoto}
+          src={handlePhoto(img)}
           alt="slide"
         />
       </Carousel.Item>
@@ -38,7 +44,7 @@ function CarouselHome({ CarouselImgs }) {
       {carouselLenght ? (
         <img
           className="d-block w-100 ImgCarouselHome"
-          src={DefaultCoverPhoto}
+          src={handlePhoto(CarouselImgs[0])}
           alt="slide"
           style={{
             height: "auto",

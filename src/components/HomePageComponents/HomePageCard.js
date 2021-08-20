@@ -566,7 +566,7 @@ function HomePageCard({
               />
             </div>
             <img
-              src={UserProfile}
+              src={handlePhoto(UserProfilePhoto)}
               alt="Userprofile"
               style={{
                 width: "3vw",
