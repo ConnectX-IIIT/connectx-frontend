@@ -33,7 +33,7 @@ function ChatIndividual({ conversation }) {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 export default ChatIndividual;

@@ -10,7 +10,7 @@ function ReferenceMessage() {
       tenetur, asperiores dolorem quisquam pariatur voluptatem officiis dolores
       atque natus ullam?
     </div>
-  );
+  )
 }
 
 function ChatSingleTextComponent({ message, own, isReference }) {

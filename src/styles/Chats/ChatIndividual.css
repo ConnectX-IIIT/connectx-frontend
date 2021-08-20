@@ -8,7 +8,10 @@
   height: 4.11vw;
   padding: 0.68vw 1.25vw;
   border-bottom: 1px solid #555555;
+  cursor: pointer;
+  
 }
+
 .ChatInformationContainer {
   width: 85%;
 }

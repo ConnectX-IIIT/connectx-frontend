@@ -190,7 +190,7 @@ function MessageMainContainer() {
 
   const ConversationsList = conversations.map((item, index) => {
     return <div onClick={() => setCurrentChat(item)}>
-      <ChatIndividual conversation={item} />;
+      <ChatIndividual conversation={item} />
     </div>
   });
 
