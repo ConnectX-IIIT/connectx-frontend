@@ -1,0 +1,8 @@
+.ConnectionMainContainer {
+  margin-top: 81px;
+  padding-top: 1.32vw;
+}
+.ConnectionMainContainerInnerContainer {
+  width: 67.7vw;
+  @apply border border-black mx-auto grid grid-cols-4 gap-4 p-4;
+}
