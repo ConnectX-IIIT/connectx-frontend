@@ -1,20 +1,34 @@
 import React from "react";
-import UserPhoto from "../../assets/_rough/Jethalal-1200.jpg";
-import CoverPhoto from "../../assets/_rough/achi photo part 2.jpg";
+import DefaultUserPhoto from "../../assets/profile/user_profile_default_icon.svg";
+import DefaultCoverPhoto from "../../assets/profile/user_profile_default_cover.svg";
 import "../../styles/Connection/ConnectionIndividualComponent.css";
 
-function ConnectionIndividualComponent() {
+function ConnectionIndividualComponent({ user }) {
+
+  const handlePhoto = (photo, index) => {
+
+    if (photo) {
+      return photo
+    }
+    if (index) {
+      return DefaultUserPhoto;
+    } else {
+      return DefaultCoverPhoto;
+    }
+
+  }
+
   return (
     <div className="ConnectionIndividualComponent">
       <div>
-        <img src={CoverPhoto} alt="cover" />
-        <img src={UserPhoto} alt="User" />
+        <img src={handlePhoto(user.backgroundPicture, 0)} alt="cover" />
+        <img src={handlePhoto(user.profilePicture, 1)} alt="User" />
       </div>
       <div className="ConnectionIndividualComponentDetails">
-        <div>Light Yagami</div>
-        <div>2020-IMT</div>
+        <div>{user.name}</div>
+        <div>{user.batch}</div>
         <div>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus
+          {user.description}
         </div>
       </div>
       <button className="ConnectionIndividualComponentButton">Message</button>
