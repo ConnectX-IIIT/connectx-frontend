@@ -23,7 +23,7 @@ function CreatePostImageInput({ index, onChangeFunction }) {
       />
       <img
         src={CreatePostAddIcon}
-        className="absolute ImgCreatePost pointer-events-none z-10"
+        className="absolute ImgCreatePost z-10"
         style={{ top: "39%", left: "40%" }}
         alt="Add Icon"
       />

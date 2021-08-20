@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../../styles/CreatePost/CreatePost.css";
 import CreatePostInput from "./CreatePostInput";
 import CreatePostRadio from "./CreatePostRadio";
+import DefaultPostImage from "../../assets/create_post/default_image.svg";
 
 import replaceIcon from "../../assets/create_post/ic_replace_image.svg";
 import Cookies from "js-cookie";
@@ -113,10 +114,11 @@ function CreatePost() {
     if (index < 5) {
       var element = document.getElementsByClassName("ImgCreatePost")[index];
       element.src = replaceIcon;
-      var element = document.getElementsByClassName("OverLayImageCreatePost")[
+      element.style.pointerEvents = "auto";
+      var element2 = document.getElementsByClassName("OverLayImageCreatePost")[
         index
       ];
-      element.style.display = "block";
+      element2.style.display = "block";
     }
   }
 
@@ -125,6 +127,7 @@ function CreatePost() {
 
     let file =
       document.getElementsByClassName("CreatePostInput")[index].files[0];
+
     let reader = new FileReader();
 
     reader.onloadend = function () {
@@ -133,7 +136,7 @@ function CreatePost() {
     if (file) {
       reader.readAsDataURL(file);
     } else {
-      preview.src = "";
+      preview.src = DefaultPostImage;
     }
 
     let tempImgArr = postDetails.attachedImgs;
@@ -142,6 +145,7 @@ function CreatePost() {
 
     ImgVisible(index + 1);
     toggleImgSource(index);
+    console.log(file);
   };
 
   useEffect(() => {
