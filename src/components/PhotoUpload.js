@@ -70,11 +70,12 @@ function PhotoUpload() {
 
     try {
       if (userRegistration.photo) {
-        if (userDetails.profilePicture) {
+        if (userDetails.profilePicture !== "") {
           await instance.post(
-            `/user/remove/${userDetails.profilePicture}`,
+            `/user/remove`,
             {
               type: true,
+              photoURL: userDetails.profilePicture
             },
             {
               headers: {
@@ -92,11 +93,12 @@ function PhotoUpload() {
       }
 
       if (userRegistration.coverPhoto) {
-        if (userDetails.backgroundPicture) {
+        if (userDetails.backgroundPicture !== "") {
           await instance.post(
-            `/user/remove/${userDetails.backgroundPicture}`,
+            `/user/remove`,
             {
               type: false,
+              photoURL: userDetails.backgroundPicture
             },
             {
               headers: {
