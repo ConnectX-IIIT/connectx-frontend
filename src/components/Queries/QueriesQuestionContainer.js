@@ -6,12 +6,12 @@ import HomePageCard from "./../HomePageComponents/HomePageCard";
 import Cookies from "js-cookie";
 import instance from "../../helper/axios";
 import { useHistory } from "react-router-dom";
-
-const imgURL = "https://obscure-ridge-13663.herokuapp.com/user/fetch/";
+import { useStateValue } from "../../helper/state_provider";
 
 function QueriesQuestionContainer() {
 
   const history = useHistory();
+  const [{ userDetails }, dispatch] = useStateValue();
   const [questionData, setQuestionData] = useState([]);
   const [UserQueries, setUserQueries] = useState({
     askedQuestion: "",
@@ -29,7 +29,7 @@ function QueriesQuestionContainer() {
 
   const handlePhoto = (photo) => {
     if (photo) {
-      return imgURL + photo;
+      return photo;
     }
     return ProfilePhoto;
   };
@@ -85,7 +85,7 @@ function QueriesQuestionContainer() {
         }}
       >
         <img
-          src={ProfilePhoto}
+          src={handlePhoto(userDetails.profilePicture)}
           alt="profile"
           className="object-cover w-11 h-11"
         />
