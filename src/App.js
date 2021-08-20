@@ -35,7 +35,10 @@ function App() {
         });
       }
     } catch (error) {
-      return alert(`${error.response.data.error}`);
+      if (error.response.status === 500) {
+        return alert(`Server error occured!`);
+      }
+      return alert(`Your session has expired, please login again!`);
     }
   }
 
