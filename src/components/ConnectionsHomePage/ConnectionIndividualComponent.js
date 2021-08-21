@@ -2,20 +2,73 @@ import React from "react";
 import DefaultUserPhoto from "../../assets/profile/user_profile_default_icon.svg";
 import DefaultCoverPhoto from "../../assets/profile/user_profile_default_cover.svg";
 import "../../styles/Connection/ConnectionIndividualComponent.css";
+import { useHistory } from "react-router-dom";
+import { useStateValue } from "../../helper/state_provider";
+import instance from "../../helper/axios";
+import Cookies from "js-cookie";
 
 function ConnectionIndividualComponent({ user }) {
 
-  const handlePhoto = (photo, index) => {
+  const history = useHistory();
+  const [{ userDetails }, dispatch] = useStateValue();
 
+  const handlePhoto = (photo, index) => {
     if (photo) {
-      return photo
+      return photo;
     }
     if (index) {
       return DefaultUserPhoto;
     } else {
       return DefaultCoverPhoto;
     }
+  }
 
+  const handleMessage = async (e) => {
+
+    e.preventDefault();
+    const commanConversation = await user.conversations.filter(value => userDetails.conversations.includes(value));
+
+    if (commanConversation.length) {
+      history.push(`/home/message/${commanConversation[0]}`);
+    } else {
+
+      try {
+        const token = Cookies.get("token");
+
+        if (token) {
+          const addConversationRes = await instance.post(
+            `/conversation/addconversation`,
+            {
+              userNames: [userDetails.name, user.name],
+              userProfiles: [userDetails.profilePicture, user.profilePicture],
+              userIds: [userDetails._id, user._id]
+            },
+            {
+              headers: {
+                Authorization: `${token}`,
+              },
+            }
+          );
+
+          const conversationId = await addConversationRes.data.id;
+
+          await dispatch({
+            type: "UPDATE_CONVERSATIONS",
+            id: conversationId,
+          });
+
+          history.push(`/home/message/${conversationId}`);
+
+        } else {
+          history.replace("/signin");
+        }
+      } catch (error) {
+        if (error.response.status === 500) {
+          return alert(`Server error occured!`);
+        }
+        return alert(`Your session has expired, please login again!`);
+      }
+    }
   }
 
   return (
@@ -31,7 +84,7 @@ function ConnectionIndividualComponent({ user }) {
           {user.description}
         </div>
       </div>
-      <button className="ConnectionIndividualComponentButton">Message</button>
+      <button className="ConnectionIndividualComponentButton" onClick={handleMessage}>Message</button>
     </div>
   );
 }
