@@ -8,20 +8,21 @@ function ChatIndividual({ conversation }) {
   const [friendName, setFriendName] = useState("");
   const [friendProfile, setFriendProfile] = useState("");
 
+  const handlePhoto = (photo) => {
+    if (photo) {
+      return photo
+    }
+    return userProfile;
+  }
+
   useEffect(() => {
-    setFriendName(
-      conversation.userNames.find((name) => name !== userDetails.name)
-    );
-    setFriendProfile(
-      conversation.userProfiles.find(
-        (profile) => profile !== userDetails.profilePicture
-      )
-    );
+    setFriendName(conversation.userNames.find((name) => name !== userDetails.name));
+    setFriendProfile(conversation.userProfiles.find((profile) => profile !== userDetails.profilePicture));
   }, []);
 
   return (
     <div className="ChatSectionIndividual">
-      <img src={userProfile} alt="Default" className="ImgChatSection" />
+      <img src={handlePhoto(friendProfile)} alt="Default" className="ImgChatSection" />
       <div className="ChatInformationContainer">
         <div>
           <h2>{friendName}</h2>
