@@ -5,6 +5,7 @@
   border-color: #555555;
   height: 81.95vh;
   border-radius: 5px;
+  position: relative;
 }
 .MessageLeftContainer {
   overflow-y: scroll;
@@ -21,6 +22,8 @@
   @apply w-full  rounded-br-md flex items-center justify-evenly;
   background-color: #f5f5f5;
   height: 4vw;
+  position:absolute;
+
 }
 
 #chatMessage {
@@ -38,4 +41,7 @@
 
 .ImgChatSection{
   border-radius:20px;
+}
+.submitButton{
+  width: 2vw;
 }
