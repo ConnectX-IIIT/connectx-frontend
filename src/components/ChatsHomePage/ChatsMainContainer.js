@@ -286,7 +286,7 @@ function MessageMainContainer(props) {
                 </div>
               </form>
             </> :
-            <span>Select a chat to start messaging</span>
+            <span className="selectChat">Select a chat to start messaging</span>
         }
       </div>
     </div>
