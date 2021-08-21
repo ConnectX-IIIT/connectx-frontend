@@ -35,3 +35,7 @@
   height: 3.125vw;
   @apply rounded-full inline-flex items-center justify-center hover:bg-blue-500 transition;
 }
+
+.ImgChatSection{
+  border-radius:20px;
+}
