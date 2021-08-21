@@ -1,9 +1,12 @@
 .ConnectionIndividualComponent {
   width: auto;
   @apply border border-black rounded-sm;
+  
 }
 .ConnectionIndividualComponent img:first-child {
   @apply object-cover;
+  height:10.29vw;
+  width: auto;
 }
 .ConnectionIndividualComponent img:last-child {
   width: 5.8vw;
