@@ -12,8 +12,7 @@ import { useHistory } from "react-router-dom";
 import { useStateValue } from "../../helper/state_provider";
 import socketIo from "socket.io-client";
 
-function MessageMainContainer() {
-
+function MessageMainContainer(props) {
   const history = useHistory();
   const scrollRef = useRef();
   const socket = useRef();
@@ -27,6 +26,16 @@ function MessageMainContainer() {
     chatSearch: "",
     chatMessage: "",
   });
+
+  useEffect(() => {
+    if (props.match.params.chatId) {
+      const chatId = props.match.params.chatId;
+      const conversation = conversations.find((conversation) => conversation._id === chatId);
+      setCurrentChat(conversation);
+    } else {
+      setCurrentChat(null)
+    }
+  }, [props.match.params.chatId, []])
 
   const handleInput = (e) => {
     const name = e.target.name;
@@ -50,6 +59,13 @@ function MessageMainContainer() {
     })
   }, []);
 
+  const handlePhoto = (photo) => {
+    if (photo) {
+      return photo
+    }
+    return UserProfile;
+  }
+
   useEffect(() => {
     arrivalMessage && currentChat?.userIds.includes(arrivalMessage.userId) &&
       setMessages([...messages, arrivalMessage]);
@@ -58,7 +74,7 @@ function MessageMainContainer() {
   useEffect(() => {
     socket.current.emit("addUser", userDetails._id);
     socket.current.on("getUsers", users => {
-      console.log(users);
+      // console.log(users);
     })
   }, [userDetails]);
 
@@ -185,11 +201,10 @@ function MessageMainContainer() {
       }
       return alert(`Your session has expired, please login again!`);
     }
-    console.log(newMessage);
   };
 
   const ConversationsList = conversations.map((item, index) => {
-    return <div onClick={() => setCurrentChat(item)}>
+    return <div onClick={() => history.push(`/home/message/${item._id}`)}>
       <ChatIndividual conversation={item} />
     </div>
   });
@@ -242,8 +257,8 @@ function MessageMainContainer() {
                   height: "66.89px",
                 }}
               >
-                <img src={UserProfile} alt="profile" className="ImgChatSection" />
-                <h2 className="font-manrope font-semibold text-xl">2020-IMT</h2>
+                <img src={handlePhoto(currentChat.userProfiles.find((profile) => profile !== userDetails.profilePicture))} alt="profile" className="ImgChatSection" />
+                <h2 className="font-manrope font-semibold text-xl">{currentChat.userNames.find((name) => name !== userDetails.name)}</h2>
               </div>
               <div className="w-full p-4">
                 {messages.map((message) => (
