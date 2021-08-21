@@ -118,8 +118,8 @@ export const Home = () => {
             isSearchBarClicked
               ? { display: "block" }
               : {
-                  display: "none",
-                }
+                display: "none",
+              }
           }
         >
           <div className="Queries">
@@ -142,6 +142,7 @@ export const Home = () => {
             component={ConnectionMainContainer}
           />
           <Route exact path="/home/message" component={ChatsMainContainer} />
+          <Route exact path="/home/message/:chatId" component={ChatsMainContainer} />
         </Switch>
       </div>
     </div>
