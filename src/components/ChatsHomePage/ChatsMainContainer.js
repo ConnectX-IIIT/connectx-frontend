@@ -255,6 +255,8 @@ function MessageMainContainer(props) {
                   backgroundColor: "#F5F5F5",
                   padding: "0.68vw 1vw",
                   height: "66.89px",
+                  
+
                 }}
               >
                 <img src={handlePhoto(currentChat.userProfiles.find((profile) => profile !== userDetails.profilePicture))} alt="profile" className="ImgChatSection" />
@@ -279,7 +281,7 @@ function MessageMainContainer(props) {
                     autoComplete="off"
                   />
                   <button type="submit">
-                    <img src={sendbutton} alt="submit" />
+                    <img className="submitButton"src={sendbutton} alt="submit" />
                   </button>
                 </div>
               </form>
