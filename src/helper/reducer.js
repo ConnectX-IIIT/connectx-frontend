@@ -8,13 +8,19 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 userDetails: action.userData
-            }
+            };
 
-        case 'SET_USER':
-            return state;
-
-        case 'EMPTY_BASKET':
-            return state;
+        case 'UPDATE_CONVERSATIONS':
+            return {
+                ...state,
+                userDetails: {
+                    ...state.userDetails,
+                    conversations: [
+                        ...state.userDetails.conversations,
+                        action.id
+                    ]
+                }
+            };
 
         default:
             return state;
