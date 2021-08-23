@@ -87,6 +87,8 @@ function MessageMainContainer(props) {
           `/conversation/getconversations`,
           {
             conversationIds: userDetails.conversations,
+            batch: userDetails.batch,
+            joiningYear: userDetails.joiningYear
           },
           {
             headers: {
@@ -95,8 +97,18 @@ function MessageMainContainer(props) {
           }
         );
 
-        const data = await getConversationsRes.data.conversations;
-        setConversations(data);
+        const conversationData = await getConversationsRes.data.conversations;
+        const groupData = await getConversationsRes.data.group;
+        await conversationData.push(groupData);
+
+        for (let i = 0; i < conversationData.length; i = i + 1) {
+          if (i === conversationData.length - 1) {
+            conversationData[i]['isGroup'] = true;
+          } else {
+            conversationData[i]['isGroup'] = false;
+          }
+        }
+        setConversations(conversationData);
 
       } else {
         history.replace("/signin");
@@ -142,7 +154,9 @@ function MessageMainContainer(props) {
   };
 
   useEffect(() => {
-    fetchConversations();
+    if (userDetails.name) {
+      fetchConversations();
+    }
   }, [userDetails]);
 
   useEffect(() => {
@@ -205,7 +219,7 @@ function MessageMainContainer(props) {
 
   const ConversationsList = conversations.map((item, index) => {
     return <div onClick={() => history.push(`/home/message/${item._id}`)}>
-      <ChatIndividual conversation={item} />
+      <ChatIndividual conversation={item} isGroup={item.isGroup} />
     </div>
   });
 
@@ -255,12 +269,10 @@ function MessageMainContainer(props) {
                   backgroundColor: "#F5F5F5",
                   padding: "0.68vw 1vw",
                   height: "66.89px",
-                  
-
                 }}
               >
-                <img src={handlePhoto(currentChat.userProfiles.find((profile) => profile !== userDetails.profilePicture))} alt="profile" className="ImgChatSection" />
-                <h2 className="font-manrope font-semibold text-xl">{currentChat.userNames.find((name) => name !== userDetails.name)}</h2>
+                <img src={handlePhoto(currentChat.isGroup ? currentChat.profilePicture : currentChat.userProfiles.find((profile) => profile !== userDetails.profilePicture))} alt="profile" className="ImgChatSection" />
+                <h2 className="font-manrope font-semibold text-xl">{currentChat.isGroup ? currentChat.name : currentChat.userNames.find((name) => name !== userDetails.name)}</h2>
               </div>
               <div className="w-full p-4">
                 {messages.map((message) => (
@@ -281,7 +293,7 @@ function MessageMainContainer(props) {
                     autoComplete="off"
                   />
                   <button type="submit">
-                    <img className="submitButton"src={sendbutton} alt="submit" />
+                    <img className="submitButton" src={sendbutton} alt="submit" />
                   </button>
                 </div>
               </form>
