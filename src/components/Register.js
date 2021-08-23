@@ -5,6 +5,7 @@ import "../styles/Register/Register.css";
 import { useStateValue } from "../helper/state_provider";
 import instance from "../helper/axios";
 import { useHistory } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const Batch = ["IPG-MTech", "IPG-MBA", "BCS", "MTech", "PhD"];
 const BatchList = Batch.map((batch) => {
@@ -70,7 +71,6 @@ function Register() {
     let batch = userRegistration.batch;
     let currentRole = userRegistration.currentrole;
     let Gender = userRegistration.gender;
-    let userId = userDetails._id;
     let isAlumni;
 
     if (
@@ -95,6 +95,8 @@ function Register() {
       isAlumni = false;
     }
 
+    const token = Cookies.get("token");
+
     try {
       await instance.post(`/auth/addextradetails`, {
         mobile,
@@ -103,10 +105,17 @@ function Register() {
         joiningYear: JoiningYear,
         batch,
         isAlumni,
-        gender: Gender,
-        userId,
-      });
+        gender: Gender
+      },
+        {
+          headers: {
+            Authorization: `${token}`,
+          },
+        }
+      );
+
       history.replace("/photoupload");
+
     } catch (error) {
       if (error.response.status === 500) {
         return alert(`Server error occured!`);
