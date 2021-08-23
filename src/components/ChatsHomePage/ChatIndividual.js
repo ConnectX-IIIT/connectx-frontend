@@ -20,7 +20,7 @@ function ChatIndividual({ conversation }) {
     setFriendProfile(conversation.userProfiles.find((profile) => profile !== userDetails.profilePicture));
   }, []);
 
-  return (
+  return (<div className="forHover">
     <div className="ChatSectionIndividual">
       <img src={handlePhoto(friendProfile)} alt="Default" className="ImgChatSection" />
       <div className="ChatInformationContainer">
@@ -33,6 +33,7 @@ function ChatIndividual({ conversation }) {
           expedita.
         </div>
       </div>
+    </div>
     </div>
   )
 }

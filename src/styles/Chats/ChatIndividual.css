@@ -11,6 +11,9 @@
   cursor: pointer;
   
 }
+.forHover :hover {
+  background-color: rgb(216, 224, 236);
+}
 
 .ChatInformationContainer {
   width: 85%;
