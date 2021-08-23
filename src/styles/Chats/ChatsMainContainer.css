@@ -40,7 +40,8 @@
 }
 
 .ImgChatSection{
-  border-radius:20px;
+  border-radius:50%;
+  object-fit: contain;
 }
 .submitButton{
   width: 2vw;
