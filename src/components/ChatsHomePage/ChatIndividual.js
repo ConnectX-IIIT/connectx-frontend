@@ -3,21 +3,23 @@ import userProfile from "../../assets/profile/user_profile_default_icon.svg";
 import { useStateValue } from "../../helper/state_provider";
 import "../../styles/Chats/ChatIndividual.css";
 
-function ChatIndividual({ conversation }) {
+function ChatIndividual({ conversation, isGroup }) {
   const [{ userDetails }, dispatch] = useStateValue();
   const [friendName, setFriendName] = useState("");
   const [friendProfile, setFriendProfile] = useState("");
 
   const handlePhoto = (photo) => {
     if (photo) {
-      return photo
+      return photo;
     }
     return userProfile;
   }
 
   useEffect(() => {
-    setFriendName(conversation.userNames.find((name) => name !== userDetails.name));
-    setFriendProfile(conversation.userProfiles.find((profile) => profile !== userDetails.profilePicture));
+    const name = isGroup ? conversation.name : conversation.userNames.find((name) => name !== userDetails.name);
+    const profile = isGroup ? conversation.profilePicture : conversation.userProfiles.find((profile) => profile !== userDetails.profilePicture);
+    setFriendName(name);
+    setFriendProfile(profile);
   }, []);
 
   return (<div className="forHover">
@@ -34,7 +36,7 @@ function ChatIndividual({ conversation }) {
         </div>
       </div>
     </div>
-    </div>
+  </div>
   )
 }
 
