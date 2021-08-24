@@ -19,7 +19,7 @@ function ChatSingleTextComponent({ message, own, isReference }) {
       className="ChatSingleTextComponent"
       style={own ? { marginLeft: "auto" } : { marginRight: "auto" }}
     >
-      <h2 className="font-semibold text-lg mb-2">Raj Noobda</h2>
+      <h2 className="font-semibold text-lg mb-2">{message.userName}</h2>
       {isReference ? <ReferenceMessage /> : null}
       {message.message}
       <span className="TimeStampSingleChatComponent">{format(message.createdAt)}</span>
