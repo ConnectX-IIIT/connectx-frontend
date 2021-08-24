@@ -20,6 +20,7 @@ function MessageMainContainer(props) {
   const [conversations, setConversations] = useState([]);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+  const [arrivalRoom, setArrivalRoom] = useState(null);
   const [arrivalMessage, setArrivalMessage] = useState(null);
   const [currentChat, setCurrentChat] = useState(null);
   const [userSearch, setUserSearch] = useState({
@@ -51,9 +52,11 @@ function MessageMainContainer(props) {
     socket.current = socketIo("https://immense-oasis-49966.herokuapp.com", { transports: ['websocket'] });
 
     socket.current.on("getMessage", data => {
+      setArrivalRoom(data.room)
       setArrivalMessage({
-        userId: data.senderId,
-        message: data.text,
+        userId: data.message.senderId,
+        message: data.message.text,
+        userName: data.message.senderName,
         createdAt: Date.now()
       })
     })
@@ -67,12 +70,18 @@ function MessageMainContainer(props) {
   }
 
   useEffect(() => {
-    arrivalMessage && currentChat?.userIds.includes(arrivalMessage.userId) &&
+
+    if (arrivalRoom && currentChat.isGroup && currentChat.name === arrivalRoom) {
       setMessages([...messages, arrivalMessage]);
+    }
+
+    if (arrivalRoom === "" && !currentChat.isGroup && currentChat.userIds.includes(arrivalMessage.userId)) {
+      setMessages([...messages, arrivalMessage]);
+    }
   }, [arrivalMessage, currentChat])
 
   useEffect(() => {
-    socket.current.emit("addUser", userDetails._id);
+    socket.current.emit("addUser", userDetails._id, userDetails.name, userDetails.batch + "-" + userDetails.joiningYear);
     socket.current.on("getUsers", users => {
       // console.log(users);
     })
@@ -174,12 +183,17 @@ function MessageMainContainer(props) {
       return;
     }
 
-    const receiverId = currentChat.userIds.find((id) => id !== userDetails._id);
+    let receiverId = "";
+    if (!currentChat.isGroup) {
+      receiverId = await currentChat.userIds.find((id) => id !== userDetails._id);
+    }
 
     socket.current.emit("sendMessage", {
       senderId: userDetails._id,
       receiverId,
-      text: newMessage
+      senderName: userDetails.name,
+      text: newMessage,
+      isGroup: currentChat.isGroup
     })
 
     try {
@@ -190,6 +204,7 @@ function MessageMainContainer(props) {
           `/message/addmessage/${currentChat._id}`,
           {
             message: newMessage,
+            name: userDetails.name,
             reference: ""
           },
           {
