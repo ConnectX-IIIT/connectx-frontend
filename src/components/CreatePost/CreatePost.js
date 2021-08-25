@@ -4,12 +4,15 @@ import CreatePostInput from "./CreatePostInput";
 import CreatePostRadio from "./CreatePostRadio";
 import DefaultPostImage from "../../assets/create_post/default_image.svg";
 
-import replaceIcon from "../../assets/create_post/ic_replace_image.svg";
+import replaceIcon from "../../assets/create_post/ic_delete_image.svg";
+import AddIcon from "../../assets/create_post/ic_add_image.svg";
 import Cookies from "js-cookie";
 import { useHistory } from "react-router-dom";
 import instance from "../../helper/axios";
 import CreatePostImageInput from "./CreatePostImageInput";
 import deleteIcon from "../../assets/create_post/ic_close.svg";
+
+let tempAttachedImgs = new Array(5);
 
 function CreatePost() {
   const history = useHistory();
@@ -119,6 +122,22 @@ function CreatePost() {
         index
       ];
       element2.style.display = "block";
+      element2.classList.remove("pointer-events-none");
+    }
+  }
+
+  function toggleImgSourceDelete(index) {
+    if (index < 5) {
+      var element = document.getElementsByClassName("ImgCreatePost")[index];
+      element.src = AddIcon;
+      element.style.pointerEvents = "none";
+      var element2 = document.getElementsByClassName("OverLayImageCreatePost")[
+        index
+      ];
+      element2.style.display = "none";
+      element2.classList.add("pointer-events-none");
+      let element3 = document.getElementsByClassName("CreatePostImage")[index];
+      element3.src = DefaultPostImage;
     }
   }
 
@@ -141,16 +160,47 @@ function CreatePost() {
 
     let tempImgArr = postDetails.attachedImgs;
     tempImgArr.push(e.target.files[0]);
+    tempAttachedImgs[index] = e.target.files[0];
     setPostDetails({ ...postDetails, attachedImgs: tempImgArr });
 
     ImgVisible(index + 1);
     toggleImgSource(index);
-    console.log(file);
+
+    // if (document.getElementsByClassName("CreatePostImage")[0] !== undefined) {
+    //   console.log(document.getElementsByClassName("CreatePostImage")[0]);
+    // }
+  };
+
+  const handleDeleteImg = (index) => (e) => {
+    let tempImgArr = postDetails.attachedImgs;
+    if (tempImgArr.includes(tempAttachedImgs[index])) {
+      for (let i = 0; i < tempImgArr.length; i++) {
+        if (tempImgArr[i] === tempAttachedImgs[index]) {
+          tempImgArr.splice(i, 1);
+          console.log("hehe");
+          break;
+        }
+      }
+      tempAttachedImgs[index] = undefined;
+      setPostDetails({ ...postDetails, attachedImgs: tempImgArr });
+      toggleImgSourceDelete(index);
+    }
+  };
+
+  const handleCreatePostImage = (index) => (e) => {
+    if (tempAttachedImgs[index] === undefined) {
+      previewFile(index)(e);
+      return;
+    } else {
+      handleDeleteImg(index)(e);
+    }
   };
 
   useEffect(() => {
     ImgVisible(0);
   }, []);
+
+  console.log(postDetails.attachedImgs);
 
   return (
     <div className="PostMainContainer rounded-md">
@@ -228,11 +278,26 @@ function CreatePost() {
             Photos
           </p>
           <div className="flex">
-            <CreatePostImageInput index={0} onChangeFunction={previewFile(0)} />
-            <CreatePostImageInput index={1} onChangeFunction={previewFile(1)} />
-            <CreatePostImageInput index={2} onChangeFunction={previewFile(2)} />
-            <CreatePostImageInput index={3} onChangeFunction={previewFile(3)} />
-            <CreatePostImageInput index={4} onChangeFunction={previewFile(4)} />
+            <CreatePostImageInput
+              index={0}
+              onChangeFunction={handleCreatePostImage(0)}
+            />
+            <CreatePostImageInput
+              index={1}
+              onChangeFunction={handleCreatePostImage(1)}
+            />
+            <CreatePostImageInput
+              index={2}
+              onChangeFunction={handleCreatePostImage(2)}
+            />
+            <CreatePostImageInput
+              index={3}
+              onChangeFunction={handleCreatePostImage(3)}
+            />
+            <CreatePostImageInput
+              index={4}
+              onChangeFunction={handleCreatePostImage(4)}
+            />
           </div>
         </div>
         <button
