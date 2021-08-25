@@ -23,9 +23,10 @@ function CreatePostImageInput({ index, onChangeFunction }) {
       />
       <img
         src={CreatePostAddIcon}
-        className="absolute ImgCreatePost z-10"
+        className="absolute ImgCreatePost z-10 cursor-pointer "
         style={{ top: "39%", left: "40%" }}
         alt="Add Icon"
+        onClick={onChangeFunction}
       />
       <div
         className="w-full h-full absolute top-0 left-0 OverLayImageCreatePost pointer-events-none"
