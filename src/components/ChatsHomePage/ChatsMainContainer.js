@@ -31,12 +31,14 @@ function MessageMainContainer(props) {
   useEffect(() => {
     if (props.match.params.chatId) {
       const chatId = props.match.params.chatId;
-      const conversation = conversations.find((conversation) => conversation._id === chatId);
+      const conversation = conversations.find(
+        (conversation) => conversation._id === chatId
+      );
       setCurrentChat(conversation);
     } else {
-      setCurrentChat(null)
+      setCurrentChat(null);
     }
-  }, [props.match.params.chatId, []])
+  }, [props.match.params.chatId, []]);
 
   const handleInput = (e) => {
     const name = e.target.name;
@@ -49,42 +51,56 @@ function MessageMainContainer(props) {
   };
 
   useEffect(() => {
-    socket.current = socketIo("https://immense-oasis-49966.herokuapp.com", { transports: ['websocket'] });
+    socket.current = socketIo("https://immense-oasis-49966.herokuapp.com", {
+      transports: ["websocket"],
+    });
 
-    socket.current.on("getMessage", data => {
-      setArrivalRoom(data.room)
+    socket.current.on("getMessage", (data) => {
+      setArrivalRoom(data.room);
       setArrivalMessage({
         userId: data.message.senderId,
         message: data.message.text,
         userName: data.message.senderName,
-        createdAt: Date.now()
-      })
-    })
+        createdAt: Date.now(),
+      });
+    });
   }, []);
 
   const handlePhoto = (photo) => {
     if (photo) {
-      return photo
+      return photo;
     }
     return UserProfile;
-  }
+  };
 
   useEffect(() => {
-
-    if (arrivalRoom && currentChat.isGroup && currentChat.name === arrivalRoom) {
+    if (
+      arrivalRoom &&
+      currentChat.isGroup &&
+      currentChat.name === arrivalRoom
+    ) {
       setMessages([...messages, arrivalMessage]);
     }
 
-    if (arrivalRoom === "" && !currentChat.isGroup && currentChat.userIds.includes(arrivalMessage.userId)) {
+    if (
+      arrivalRoom === "" &&
+      !currentChat.isGroup &&
+      currentChat.userIds.includes(arrivalMessage.userId)
+    ) {
       setMessages([...messages, arrivalMessage]);
     }
-  }, [arrivalMessage, currentChat])
+  }, [arrivalMessage, currentChat]);
 
   useEffect(() => {
-    socket.current.emit("addUser", userDetails._id, userDetails.name, userDetails.batch + "-" + userDetails.joiningYear);
-    socket.current.on("getUsers", users => {
+    socket.current.emit(
+      "addUser",
+      userDetails._id,
+      userDetails.name,
+      userDetails.batch + "-" + userDetails.joiningYear
+    );
+    socket.current.on("getUsers", (users) => {
       // console.log(users);
-    })
+    });
   }, [userDetails]);
 
   const fetchConversations = async (e) => {
@@ -97,7 +113,7 @@ function MessageMainContainer(props) {
           {
             conversationIds: userDetails.conversations,
             batch: userDetails.batch,
-            joiningYear: userDetails.joiningYear
+            joiningYear: userDetails.joiningYear,
           },
           {
             headers: {
@@ -112,13 +128,12 @@ function MessageMainContainer(props) {
 
         for (let i = 0; i < conversationData.length; i = i + 1) {
           if (i === conversationData.length - 1) {
-            conversationData[i]['isGroup'] = true;
+            conversationData[i]["isGroup"] = true;
           } else {
-            conversationData[i]['isGroup'] = false;
+            conversationData[i]["isGroup"] = false;
           }
         }
         setConversations(conversationData);
-
       } else {
         history.replace("/signin");
       }
@@ -150,7 +165,6 @@ function MessageMainContainer(props) {
 
         const data = await getMessagesRes.data.messages;
         setMessages(data);
-
       } else {
         history.replace("/signin");
       }
@@ -179,13 +193,15 @@ function MessageMainContainer(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!newMessage || !currentChat || !newMessage.replace(/\s/g, '').length) {
+    if (!newMessage || !currentChat || !newMessage.replace(/\s/g, "").length) {
       return;
     }
 
     let receiverId = "";
     if (!currentChat.isGroup) {
-      receiverId = await currentChat.userIds.find((id) => id !== userDetails._id);
+      receiverId = await currentChat.userIds.find(
+        (id) => id !== userDetails._id
+      );
     }
 
     socket.current.emit("sendMessage", {
@@ -193,8 +209,8 @@ function MessageMainContainer(props) {
       receiverId,
       senderName: userDetails.name,
       text: newMessage,
-      isGroup: currentChat.isGroup
-    })
+      isGroup: currentChat.isGroup,
+    });
 
     try {
       const token = Cookies.get("token");
@@ -205,7 +221,7 @@ function MessageMainContainer(props) {
           {
             message: newMessage,
             name: userDetails.name,
-            reference: ""
+            reference: "",
           },
           {
             headers: {
@@ -217,7 +233,6 @@ function MessageMainContainer(props) {
         const msg = await addMessagesRes.data.message;
         setMessages([...messages, msg]);
         setNewMessage("");
-
       } else {
         history.replace("/signin");
       }
@@ -233,13 +248,35 @@ function MessageMainContainer(props) {
   };
 
   const ConversationsList = conversations.map((item, index) => {
-    return <div onClick={() => history.push(`/home/message/${item._id}`)}>
-      <ChatIndividual conversation={item} isGroup={item.isGroup} />
-    </div>
+    return (
+      <div onClick={() => history.push(`/home/message/${item._id}`)}>
+        <ChatIndividual conversation={item} isGroup={item.isGroup} />
+      </div>
+    );
   });
 
   return (
     <div className="mx-auto font-manrope grid border MessageMainContainer">
+      <form
+        action=""
+        className="MessageMainContainerForm"
+        onSubmit={handleSubmit}
+      >
+        <div className=" BottomChatSection">
+          <input
+            type="text"
+            name="chatMessage"
+            id="chatMessage"
+            value={newMessage}
+            onChange={(e) => setNewMessage(e.target.value)}
+            placeholder="Type a message..."
+            autoComplete="off"
+          />
+          <button type="submit">
+            <img className="submitButton" src={sendbutton} alt="submit" />
+          </button>
+        </div>
+      </form>
       <div
         className="scrollbarHidden relative"
         style={{
@@ -275,46 +312,49 @@ function MessageMainContainer(props) {
         {ConversationsList}
       </div>
       <div className="overflow-auto scrollbarHidden">
-        {
-          currentChat ?
-            <>
-              <div
-                className=" sticky top-0 flex items-center"
-                style={{
-                  backgroundColor: "#F5F5F5",
-                  padding: "0.68vw 1vw",
-                  height: "66.89px",
-                }}
-              >
-                <img src={handlePhoto(currentChat.isGroup ? currentChat.profilePicture : currentChat.userProfiles.find((profile) => profile !== userDetails.profilePicture))} alt="profile" className="ImgChatSection" />
-                <h2 className="font-manrope font-semibold text-xl">{currentChat.isGroup ? currentChat.name : currentChat.userNames.find((name) => name !== userDetails.name)}</h2>
-              </div>
-              <div className="w-full p-4">
-                {messages.map((message) => (
-                  <div ref={scrollRef}>
-                    <ChatSingleTextComponent message={message} own={message.userId === userDetails._id} />
-                  </div>
-                ))}
-              </div>
-              <form action="" className="sticky bottom-0" onSubmit={handleSubmit}>
-                <div className=" BottomChatSection">
-                  <input
-                    type="text"
-                    name="chatMessage"
-                    id="chatMessage"
-                    value={newMessage}
-                    onChange={(e) => setNewMessage(e.target.value)}
-                    placeholder="Type a message..."
-                    autoComplete="off"
+        {currentChat ? (
+          <>
+            <div
+              className=" sticky top-0 flex items-center"
+              style={{
+                backgroundColor: "#F5F5F5",
+                padding: "0.68vw 1vw",
+                height: "66.89px",
+              }}
+            >
+              <img
+                src={handlePhoto(
+                  currentChat.isGroup
+                    ? currentChat.profilePicture
+                    : currentChat.userProfiles.find(
+                        (profile) => profile !== userDetails.profilePicture
+                      )
+                )}
+                alt="profile"
+                className="ImgChatSection"
+              />
+              <h2 className="font-manrope font-semibold text-xl">
+                {currentChat.isGroup
+                  ? currentChat.name
+                  : currentChat.userNames.find(
+                      (name) => name !== userDetails.name
+                    )}
+              </h2>
+            </div>
+            <div className=" main-chat-wrapper">
+              {messages.map((message) => (
+                <div ref={scrollRef}>
+                  <ChatSingleTextComponent
+                    message={message}
+                    own={message.userId === userDetails._id}
                   />
-                  <button type="submit">
-                    <img className="submitButton" src={sendbutton} alt="submit" />
-                  </button>
                 </div>
-              </form>
-            </> :
-            <span className="selectChat">Select a chat to start messaging</span>
-        }
+              ))}
+            </div>
+          </>
+        ) : (
+          <span className="selectChat">Select a chat to start messaging</span>
+        )}
       </div>
     </div>
   );
