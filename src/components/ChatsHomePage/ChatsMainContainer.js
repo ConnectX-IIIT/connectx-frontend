@@ -27,6 +27,7 @@ function MessageMainContainer(props) {
     chatSearch: "",
     chatMessage: "",
   });
+  const [currentActiveStates, setCurrentActiveStates] = useState([]);
 
   useEffect(() => {
     if (props.match.params.chatId) {
@@ -181,6 +182,16 @@ function MessageMainContainer(props) {
       fetchConversations();
     }
   }, [userDetails]);
+ 
+  useEffect(() => {
+    if (conversations.length > 0) {
+      let tempArr = [];
+      for (let index = 0; index < conversations.length; index++) {
+        tempArr.push(false);
+      }
+      setCurrentActiveStates(tempArr)
+    }
+  }, [conversations]);
 
   useEffect(() => {
     fetchMessages();
@@ -246,11 +257,26 @@ function MessageMainContainer(props) {
       return alert(`Your session has expired, please login again!`);
     }
   };
+  function updateCurrentActiveChat(i) {
+    let tempArr = [];
+    for (let index = 0; index < conversations.length; index++) {
+      if (i == index) {
+        tempArr.push(true);
+      } else {
+        tempArr.push(false);
+      }
+    }
+    setCurrentActiveStates(tempArr)
+  }
 
   const ConversationsList = conversations.map((item, index) => {
     return (
-      <div onClick={() => history.push(`/home/message/${item._id}`)}>
-        <ChatIndividual conversation={item} isGroup={item.isGroup} />
+      <div onClick={() => 
+       {updateCurrentActiveChat(index)
+      history.push(`/home/message/${item._id}`)}}>
+        <ChatIndividual isActive={currentActiveStates[index]}
+
+        conversation={item} isGroup={item.isGroup} />
       </div>
     );
   });
