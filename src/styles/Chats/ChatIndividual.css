@@ -2,6 +2,7 @@
   width: 3vw;
   height: 3vw;
   @apply object-cover mr-4;
+  pointer-events: none;
 }
 .ChatSectionIndividual {
   @apply w-full flex;
@@ -9,24 +10,29 @@
   padding: 0.68vw 1.25vw;
   border-bottom: 1px solid #555555;
   cursor: pointer;
-  
+  pointer-events: none;
 }
-.forHover :hover {
+/* .forHover :hover {
   background-color: rgb(216, 224, 236);
-}
+} */
 
 .ChatInformationContainer {
   width: 85%;
+  pointer-events: none;
 }
 .ChatInformationContainer h2 {
   @apply font-manrope font-semibold;
+  pointer-events: none;
 }
 .ChatInformationContainer span {
   @apply font-manrope text-xs;
+  pointer-events: none;
 }
 .ChatInformationContainer div:first-child {
   @apply flex items-center justify-between;
+  pointer-events: none;
 }
 .ChatInformationContainer div:last-child {
   @apply truncate;
+  pointer-events: none;
 }
