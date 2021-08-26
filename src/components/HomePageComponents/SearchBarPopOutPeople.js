@@ -6,6 +6,14 @@ function SearchBarPopOutPeople({
   UserProfileName,
   UserProfileDescription,
 }) {
+
+  const handlePhoto = (photo) => {
+    if (photo) {
+      return photo;
+    }
+    return UserProfileDefaultIcon;
+  };
+
   return (
     <div
       style={{
@@ -19,7 +27,7 @@ function SearchBarPopOutPeople({
       }}
     >
       <img
-        src={`https://obscure-ridge-13663.herokuapp.com/user/fetch/${UserProfileSrc}`}
+        src={handlePhoto(UserProfileSrc)}
         alt=""
         style={{
           width: "2.1vw",
