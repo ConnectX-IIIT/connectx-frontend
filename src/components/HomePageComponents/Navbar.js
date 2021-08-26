@@ -104,6 +104,8 @@ function Navbar({
                 ? false
                 : navLocation === "/home/queries"
                 ? false
+                : navLocation === "/home/userprofile"
+                ? false
                 : true
             }
           />
