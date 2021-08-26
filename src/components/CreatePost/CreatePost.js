@@ -12,7 +12,9 @@ import instance from "../../helper/axios";
 import CreatePostImageInput from "./CreatePostImageInput";
 import deleteIcon from "../../assets/create_post/ic_close.svg";
 
-let tempAttachedImgs = new Array(5);
+let tempAttachedImgs = [];
+let tempAttachedImgsHeight = [];
+let tempAttachedImgsWidth = [];
 
 function CreatePost() {
   const history = useHistory();
@@ -26,6 +28,7 @@ function CreatePost() {
     jobLink: "",
     typeOfPost: "",
     attachedImgs: [],
+    attachedImgHeight: [],
   });
 
   const handleInput = (e) => {
@@ -55,6 +58,8 @@ function CreatePost() {
     const attachedImgs = postDetails.attachedImgs;
     let isProject = false;
 
+    console.log(attachedImgs);
+
     if (postDetails.typeOfPost === "Project") {
       isProject = true;
     }
@@ -81,29 +86,29 @@ function CreatePost() {
       return alert("Please add joblink!");
     }
 
-    try {
-      const token = Cookies.get("token");
+    // try {
+    //   const token = Cookies.get("token");
 
-      if (token) {
-        const addPostRes = await instance.post(`/home/addpost`, postData, {
-          headers: {
-            Authorization: `${token}`,
-          },
-        });
+    //   if (token) {
+    //     const addPostRes = await instance.post(`/home/addpost`, postData, {
+    //       headers: {
+    //         Authorization: `${token}`,
+    //       },
+    //     });
 
-        if (addPostRes.status === 200) {
-          history.replace("/home");
-          document
-            .getElementById("HomeContainerCreatePost")
-            .classList.toggle("hidden");
-        }
-      }
-    } catch (error) {
-      if (error.response.status === 500) {
-        return alert(`Server error occured!`);
-      }
-      return alert(`Your session has expired, please login again!`);
-    }
+    //     if (addPostRes.status === 200) {
+    //       history.replace("/home");
+    //       document
+    //         .getElementById("HomeContainerCreatePost")
+    //         .classList.toggle("hidden");
+    //     }
+    //   }
+    // } catch (error) {
+    //   if (error.response.status === 500) {
+    //     return alert(`Server error occured!`);
+    //   }
+    //   return alert(`Your session has expired, please login again!`);
+    // }
   };
 
   function ImgVisible(index) {
@@ -163,8 +168,24 @@ function CreatePost() {
     tempAttachedImgs[index] = e.target.files[0];
     setPostDetails({ ...postDetails, attachedImgs: tempImgArr });
 
+    let tempImgHeight = postDetails.attachedImgHeight;
+
+    var _URL = window.URL || window.webkitURL;
+    let img = new Image();
+    var objectUrl = _URL.createObjectURL(file);
+    img.onload = function () {
+      console.log(this.width + " " + this.height);
+      tempImgHeight.push(this.height);
+      tempAttachedImgsHeight[index] = this.height;
+      setPostDetails({ ...postDetails, attachedImgHeight: tempImgHeight });
+      _URL.revokeObjectURL(objectUrl);
+    };
+    img.src = objectUrl;
+
     ImgVisible(index + 1);
     toggleImgSource(index);
+
+    console.log(tempAttachedImgs, tempAttachedImgsHeight);
 
     // if (document.getElementsByClassName("CreatePostImage")[0] !== undefined) {
     //   console.log(document.getElementsByClassName("CreatePostImage")[0]);
@@ -173,17 +194,26 @@ function CreatePost() {
 
   const handleDeleteImg = (index) => (e) => {
     let tempImgArr = postDetails.attachedImgs;
+    let tempHeightArr = postDetails.attachedImgHeight;
     if (tempImgArr.includes(tempAttachedImgs[index])) {
       for (let i = 0; i < tempImgArr.length; i++) {
         if (tempImgArr[i] === tempAttachedImgs[index]) {
           tempImgArr.splice(i, 1);
-          console.log("hehe");
+          break;
+        }
+      }
+      for (let i = 0; i < tempHeightArr.length; i++) {
+        if (tempHeightArr[i] === tempAttachedImgsHeight[index]) {
+          tempHeightArr.splice(i, 1);
           break;
         }
       }
       tempAttachedImgs[index] = undefined;
+      tempAttachedImgsHeight[index] = undefined;
       setPostDetails({ ...postDetails, attachedImgs: tempImgArr });
+      setPostDetails({ ...postDetails, attachedImgHeight: tempHeightArr });
       toggleImgSourceDelete(index);
+      console.log(postDetails.attachedImgs, postDetails.attachedImgHeight);
     }
   };
 
@@ -200,7 +230,7 @@ function CreatePost() {
     ImgVisible(0);
   }, []);
 
-  console.log(postDetails.attachedImgs);
+  // console.log(postDetails.attachedImgs);
 
   return (
     <div className="PostMainContainer rounded-md">
