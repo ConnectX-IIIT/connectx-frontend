@@ -56,7 +56,7 @@ function MessageMainContainer(props) {
     } else {
       setCurrentChat(null);
     }
-  }, [conversations]);
+  }, [props.match.params.chatId, []]);
 
   const handleInput = (e) => {
     const name = e.target.name;
