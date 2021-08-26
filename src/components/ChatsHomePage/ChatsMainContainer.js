@@ -27,6 +27,7 @@ function MessageMainContainer(props) {
     chatSearch: "",
     chatMessage: "",
   });
+  const [currentActiveStates, setCurrentActiveStates] = useState([]);
 
   useEffect(() => {
     if (props.match.params.chatId) {
@@ -74,16 +75,33 @@ function MessageMainContainer(props) {
   };
 
   useEffect(() => {
+    console.log(arrivalMessage);
     if (
-      arrivalRoom &&
+      arrivalRoom && currentChat &&
       currentChat.isGroup &&
       currentChat.name === arrivalRoom
     ) {
       setMessages([...messages, arrivalMessage]);
     }
 
+    if (arrivalRoom) {
+      let conversationList = conversations;
+      let index = conversationList.findIndex((conversation) => conversation.isGroup === true);
+      conversationList[index].lastMessage = arrivalMessage.message;
+      conversationList[index].lastModified = arrivalMessage.createdAt
+      setConversations(conversationList);
+    }
+
+    if (arrivalRoom === "") {
+      let conversationList = conversations;
+      let index = conversationList.findIndex((conversation) => conversation.userIds.includes(arrivalMessage.userId));
+      conversationList[index].lastMessage = arrivalMessage.message;
+      conversationList[index].lastModified = arrivalMessage.createdAt
+      setConversations(conversationList);
+    }
+
     if (
-      arrivalRoom === "" &&
+      arrivalRoom === "" && currentChat &&
       !currentChat.isGroup &&
       currentChat.userIds.includes(arrivalMessage.userId)
     ) {
@@ -183,6 +201,16 @@ function MessageMainContainer(props) {
   }, [userDetails]);
 
   useEffect(() => {
+    if (conversations.length > 0) {
+      let tempArr = [];
+      for (let index = 0; index < conversations.length; index++) {
+        tempArr.push(false);
+      }
+      setCurrentActiveStates(tempArr);
+    }
+  }, [conversations, arrivalMessage, newMessage]);
+
+  useEffect(() => {
     fetchMessages();
   }, [currentChat]);
 
@@ -221,6 +249,7 @@ function MessageMainContainer(props) {
           {
             message: newMessage,
             name: userDetails.name,
+            isGroup: currentChat.isGroup,
             reference: "",
           },
           {
@@ -233,10 +262,18 @@ function MessageMainContainer(props) {
         const msg = await addMessagesRes.data.message;
         setMessages([...messages, msg]);
         setNewMessage("");
+
+        let conversationList = conversations;
+        let index = conversationList.indexOf(currentChat);
+        conversationList[index].lastMessage = newMessage;
+        conversationList[index].lastModified = Date.now();
+        setConversations(conversationList);
+
       } else {
         history.replace("/signin");
       }
     } catch (error) {
+      console.log(error);
       if (error.response.status === 500) {
         return alert(`Server error occured!`);
       }
@@ -246,11 +283,26 @@ function MessageMainContainer(props) {
       return alert(`Your session has expired, please login again!`);
     }
   };
+  function updateCurrentActiveChat(i) {
+    let tempArr = [];
+    for (let index = 0; index < conversations.length; index++) {
+      if (i == index) {
+        tempArr.push(true);
+      } else {
+        tempArr.push(false);
+      }
+    }
+    setCurrentActiveStates(tempArr)
+  }
 
   const ConversationsList = conversations.map((item, index) => {
     return (
-      <div onClick={() => history.push(`/home/message/${item._id}`)}>
-        <ChatIndividual conversation={item} isGroup={item.isGroup} />
+      <div onClick={() => {
+        updateCurrentActiveChat(index)
+        history.push(`/home/message/${item._id}`)
+      }}>
+        <ChatIndividual isActive={currentActiveStates[index]}
+          conversation={conversations[index]} isGroup={conversations[index].isGroup} />
       </div>
     );
   });
@@ -327,8 +379,8 @@ function MessageMainContainer(props) {
                   currentChat.isGroup
                     ? currentChat.profilePicture
                     : currentChat.userProfiles.find(
-                        (profile) => profile !== userDetails.profilePicture
-                      )
+                      (profile) => profile !== userDetails.profilePicture
+                    )
                 )}
                 alt="profile"
                 className="ImgChatSection"
@@ -337,8 +389,8 @@ function MessageMainContainer(props) {
                 {currentChat.isGroup
                   ? currentChat.name
                   : currentChat.userNames.find(
-                      (name) => name !== userDetails.name
-                    )}
+                    (name) => name !== userDetails.name
+                  )}
               </h2>
             </div>
             <div className=" main-chat-wrapper">
