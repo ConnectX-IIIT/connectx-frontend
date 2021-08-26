@@ -9,7 +9,6 @@ import { useHistory } from "react-router-dom";
 import { useStateValue } from "../../helper/state_provider";
 
 function QueriesQuestionContainer() {
-
   const history = useHistory();
   const [{ userDetails }, dispatch] = useStateValue();
   const [questionData, setQuestionData] = useState([]);
@@ -47,7 +46,6 @@ function QueriesQuestionContainer() {
 
         const questions = getQuestionsRes.data.questions;
         setQuestionData(questions);
-
       } else {
         history.replace("/signin");
       }
@@ -68,7 +66,7 @@ function QueriesQuestionContainer() {
         PostContent={item.question}
         PostImageUrls={[]}
         Upvotes={item.upvotes}
-        PostId="1"
+        PostId={item._id}
         isDiscussionQueries={true}
         queriesInnerStyle={{ fontWeight: "600", fontFamily: "manrope" }}
         queriesMainContainerStyle={{ marginLeft: "0" }}
