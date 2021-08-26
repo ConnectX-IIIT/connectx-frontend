@@ -30,7 +30,7 @@ function ChatIndividual({ conversation, isGroup, isActive = false }) {
 
       }
     }
-  }, [isBeingHovered,isActive]);
+  }, [isBeingHovered, isActive]);
 
   useEffect(() => {
     const name = isGroup
