@@ -232,6 +232,7 @@ function MessageMainContainer(props) {
           {
             message: newMessage,
             name: userDetails.name,
+            isGroup: currentChat.isGroup,
             reference: "",
           },
           {
@@ -248,6 +249,7 @@ function MessageMainContainer(props) {
         history.replace("/signin");
       }
     } catch (error) {
+      console.log(error);
       if (error.response.status === 500) {
         return alert(`Server error occured!`);
       }
@@ -353,8 +355,8 @@ function MessageMainContainer(props) {
                   currentChat.isGroup
                     ? currentChat.profilePicture
                     : currentChat.userProfiles.find(
-                        (profile) => profile !== userDetails.profilePicture
-                      )
+                      (profile) => profile !== userDetails.profilePicture
+                    )
                 )}
                 alt="profile"
                 className="ImgChatSection"
@@ -363,8 +365,8 @@ function MessageMainContainer(props) {
                 {currentChat.isGroup
                   ? currentChat.name
                   : currentChat.userNames.find(
-                      (name) => name !== userDetails.name
-                    )}
+                    (name) => name !== userDetails.name
+                  )}
               </h2>
             </div>
             <div className=" main-chat-wrapper">
