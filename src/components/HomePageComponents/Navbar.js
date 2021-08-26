@@ -97,7 +97,15 @@ function Navbar({
             normalImageSrc={messageImage}
             hoverImageSrc={hoverMessageImage}
             activeImageSrc={activeMessageImage}
-            isActive={navLocation === "/home/message" ? true : false}
+            isActive={
+              navLocation === "/home"
+                ? false
+                : navLocation === "/home/connection"
+                ? false
+                : navLocation === "/home/queries"
+                ? false
+                : true
+            }
           />
         </NavLink>
 
