@@ -161,6 +161,7 @@
   "reports": {
     "_id": { "$oid": "60f68ade7e4fdb95c36eb07f" },
     "type": "2",
+    "description": "This is a group for 2020 batch",
     "reference": "60f67d687e4fdb95c36eb079",
     "user": "60f67d687e4fdb95c36eb079",
     "timestamp": { "$numberLong": "1626768841451" },
