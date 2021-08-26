@@ -85,7 +85,7 @@ function QueriesQuestionContainer() {
         <img
           src={handlePhoto(userDetails.profilePicture)}
           alt="profile"
-          className="object-cover w-11 h-11"
+          className="object-cover w-11 h-11 rounded-full"
         />
         <div
           onClick={() => {
