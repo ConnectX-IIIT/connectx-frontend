@@ -1,23 +1,37 @@
 .profile-page-information-container-wrapper {
   @apply font-manrope;
   margin-top: 4vw;
+  margin-left: 2.4vw;
 }
 .profile-page-information-container {
   @apply flex items-center font-semibold;
-  margin-left: 2.4vw;
 }
 .profile-page-information-container div:first-child {
   font-size: 2vw;
+  padding-bottom: 0.5%;
 }
 .profile-page-information-container div:nth-child(3),
 .profile-page-information-container div:nth-child(5) {
   font-size: 1.3vw;
 }
 .profile-page-information-container div:nth-child(2n) {
-  height: 7px;
-  width: 7px;
+  height: 5px;
+  width: 5px;
   background-color: #222222;
   border-radius: 50%;
   margin-left: 0.7vw;
   margin-right: 0.7vw;
+}
+.profile-page-description-container {
+  @apply font-medium;
+  width: 75%;
+  font-size: 1.1vw;
+}
+.profile-page-year-batch {
+  @apply rounded-full font-medium;
+  width: fit-content;
+  border: 2px solid;
+  font-size: 0.9vw;
+  padding: 0.2vw 0.9vw;
+  margin-top: 1vw;
 }
