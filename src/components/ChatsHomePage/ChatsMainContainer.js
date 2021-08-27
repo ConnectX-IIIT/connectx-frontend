@@ -3,14 +3,15 @@ import "../../styles/Chats/ChatsMainContainer.css";
 import CreatePostInput from "./../CreatePost/CreatePostInput";
 import SearchIcon from "../../assets/home/top_navbar/ic_search_icon.svg";
 import UserProfile from "../../assets/profile/user_profile_default_icon.svg";
-import ChatIndividual from "./ChatIndividual";
 import ChatSingleTextComponent from "./ChatSingleTextComponent";
+import ChatIndividual from "./ChatIndividual";
+import GroupChat from "./GroupChat";
 import sendbutton from "../../assets/chats/send_btn.svg";
 import Cookies from "js-cookie";
 import instance from "../../helper/axios";
 import { useHistory } from "react-router-dom";
 import { useStateValue } from "../../helper/state_provider";
-import socketIo from "socket.io-client";
+import socketIo from "socket.io-client"
 
 function MessageMainContainer(props) {
   const history = useHistory();
@@ -338,7 +339,9 @@ function MessageMainContainer(props) {
   });
 
   return (
+    
     <div className="mx-auto font-manrope grid border MessageMainContainer">
+     
       <form
         action=""
         className="MessageMainContainerForm"
@@ -351,7 +354,7 @@ function MessageMainContainer(props) {
             id="chatMessage"
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
-            placeholder="Type a message..."
+            placeholder="Type a message"
             autoComplete="off"
           />
           <button type="submit">
@@ -365,6 +368,7 @@ function MessageMainContainer(props) {
           borderRight: "1px solid #555555",
         }}
       >
+        
         <div
           className=" sticky rounded-l-md top-0"
           style={{ backgroundColor: "#F5F5F5", padding: "0.68vw 0" }}
@@ -393,6 +397,7 @@ function MessageMainContainer(props) {
         </div>
         {ConversationsList}
       </div>
+      {/* <GroupChat /> */}
       <div className="overflow-auto scrollbarHidden">
         {currentChat ? (
           <>
@@ -404,6 +409,7 @@ function MessageMainContainer(props) {
                 height: "66.89px",
               }}
             >
+             
               <img
                 src={handlePhoto(
                   currentChat.isGroup
@@ -423,7 +429,9 @@ function MessageMainContainer(props) {
                     )}
               </h2>
             </div>
+           
             <div className=" main-chat-wrapper">
+            
               {messages.map((message) => (
                 <div ref={scrollRef}>
                   <ChatSingleTextComponent
@@ -440,6 +448,7 @@ function MessageMainContainer(props) {
       </div>
     </div>
   );
+
 }
 
 export default MessageMainContainer;
