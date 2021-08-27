@@ -5,6 +5,8 @@ import HomeMainContainer from "../components/HomePageComponents/HomeMainContaine
 import QueriesMainConatiner from "./Queries/QueriesMainConatiner";
 
 import "../styles/HomePage/HomePage.css";
+import ProfilePage from "../components/ProfilePage/ProfilePage";
+
 import ConnectionMainContainer from "./ConnectionsHomePage/ConnectionMainContainer";
 import ChatsMainContainer from "./ChatsHomePage/ChatsMainContainer";
 import SearchBarPopOutPeople from "./HomePageComponents/SearchBarPopOutPeople";
@@ -118,8 +120,8 @@ export const Home = () => {
             isSearchBarClicked
               ? { display: "block" }
               : {
-                display: "none",
-              }
+                  display: "none",
+                }
           }
         >
           <div className="Queries">
@@ -142,7 +144,12 @@ export const Home = () => {
             component={ConnectionMainContainer}
           />
           <Route exact path="/home/message" component={ChatsMainContainer} />
-          <Route exact path="/home/message/:chatId" component={ChatsMainContainer} />
+          <Route
+            exact
+            path="/home/message/:chatId"
+            component={ChatsMainContainer}
+          />
+          <Route exact path="/home/userprofile" component={ProfilePage} />
         </Switch>
       </div>
     </div>
