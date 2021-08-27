@@ -34,6 +34,8 @@ function ProfilePageImageContainer() {
       [e.target.name]: e.target.files[0],
     });
   };
+  console.log(updatedDetails);
+
   return (
     <div className="profile-page-image-container">
       <input
