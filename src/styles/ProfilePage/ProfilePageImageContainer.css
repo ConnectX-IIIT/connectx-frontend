@@ -1,0 +1,55 @@
+.profile-page-image-container {
+  @apply relative;
+  height: 14.66vw;
+}
+.profile-page-cover-photo {
+  @apply object-cover h-full w-full;
+  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+.profile-page-upload-photo {
+  @apply absolute flex items-center justify-center rounded-md cursor-pointer;
+  background-color: #ffffff;
+  width: 27.96%;
+  height: 14.9%;
+  bottom: 2.54%;
+  right: 0.88%;
+}
+.profile-page-upload-photo img {
+  @apply object-contain;
+  width: 7.77%;
+  margin-right: 3.3%;
+}
+.profile-page-upload-photo div {
+  @apply capitalize font-medium;
+  color: #222222;
+  font-size: 1.04vw;
+}
+.profile-page-profile-photo-wrapper {
+  @apply absolute;
+  top: 50.65%;
+  left: 5.63%;
+}
+.profile-page-profile-photo {
+  @apply object-cover;
+  border-radius: 50%;
+  border: 6px solid #ffffff;
+  width: calc(10.8vw + 6px);
+  height: calc(10.8vw + 6px);
+}
+.profile-page-profile-photo-edit {
+  @apply absolute rounded-full flex items-center justify-center cursor-pointer;
+  width: 2.3vw;
+  height: 2.3vw;
+  top: 62.65%;
+  left: 78.63%;
+  background: #1792dd;
+  border: 2px solid #ffffff;
+}
+.profile-page-profile-photo-edit img {
+  @apply object-contain;
+  width: 50%;
+}
+.profile-page-photo-input {
+  @apply hidden;
+}
