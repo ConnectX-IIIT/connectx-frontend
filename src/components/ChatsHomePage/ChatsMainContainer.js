@@ -188,12 +188,16 @@ function MessageMainContainer(props) {
   };
 
   const fetchMessages = async (e) => {
+
+    if (!currentChat) {
+      return;
+    }
+    if (!userDetails.isVerified) {
+      return alert("Your verification is under process!");
+    }
+
     try {
       const token = Cookies.get("token");
-
-      if (!currentChat) {
-        return;
-      }
 
       if (token) {
         const getMessagesRes = await instance.get(
@@ -213,6 +217,9 @@ function MessageMainContainer(props) {
     } catch (error) {
       if (error.response.status === 500) {
         return alert(`Server error occured!`);
+      }
+      if (error.response.status === 408) {
+        return alert(`Your verification is under process!`);
       }
       return alert(`Your session has expired, please login again!`);
     }
@@ -250,6 +257,10 @@ function MessageMainContainer(props) {
 
     if (!newMessage || !currentChat || !newMessage.replace(/\s/g, "").length) {
       return;
+    }
+
+    if (!userDetails.isVerified) {
+      return alert("Your verification is under process!");
     }
 
     let receiverId = "";
@@ -305,6 +316,9 @@ function MessageMainContainer(props) {
       }
       if (error.response.status === 400) {
         return alert(`You can't send empty message!`);
+      }
+      if (error.response.status === 408) {
+        return alert(`Your verification is under process!`);
       }
       return alert(`Your session has expired, please login again!`);
     }
@@ -411,8 +425,8 @@ function MessageMainContainer(props) {
                   currentChat.isGroup
                     ? currentChat.profilePicture
                     : currentChat.userProfiles.find(
-                        (profile) => profile !== userDetails.profilePicture
-                      )
+                      (profile) => profile !== userDetails.profilePicture
+                    )
                 )}
                 alt="profile"
                 className="ImgChatSection"
@@ -421,8 +435,8 @@ function MessageMainContainer(props) {
                 {currentChat.isGroup
                   ? currentChat.name
                   : currentChat.userNames.find(
-                      (name) => name !== userDetails.name
-                    )}
+                    (name) => name !== userDetails.name
+                  )}
               </h2>
             </div>
 

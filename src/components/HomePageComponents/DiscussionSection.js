@@ -48,6 +48,11 @@ function DiscussionSection({
   }, [userDetails]);
 
   async function updateReactions(type) {
+
+    if (!userDetails.isVerified) {
+      return alert("Your verification is under process!");
+    }
+
     try {
       const token = Cookies.get("token");
 
@@ -69,6 +74,9 @@ function DiscussionSection({
     } catch (error) {
       if (error.response.status === 500 || error.response.status === 400) {
         return alert(`Server error occured!`);
+      }
+      if (error.response.status === 408) {
+        return alert(`Your verification is under process!`);
       }
       if (error.response.status === 401) {
         return;

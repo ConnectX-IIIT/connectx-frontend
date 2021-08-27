@@ -11,6 +11,7 @@ import { useHistory } from "react-router-dom";
 import instance from "../../helper/axios";
 import CreatePostImageInput from "./CreatePostImageInput";
 import deleteIcon from "../../assets/create_post/ic_close.svg";
+import { useStateValue } from "../../helper/state_provider";
 
 let tempAttachedImgs = [];
 let tempAttachedImgsHeight = [];
@@ -21,7 +22,7 @@ function CreatePost() {
   const TypeOfPostArr = ["Job", "Project", "Blog"];
 
   const [isJobLink, setJobLink] = useState(false);
-
+  const [{ userDetails }, dispatch] = useStateValue();
   const [postDetails, setPostDetails] = useState({
     postTitle: "",
     postDescription: "",
@@ -86,6 +87,10 @@ function CreatePost() {
       return alert("Please add joblink!");
     }
 
+    if (!userDetails.isVerified) {
+      return alert("Your verification is under process!");
+    }
+
     // try {
     //   const token = Cookies.get("token");
 
@@ -107,6 +112,9 @@ function CreatePost() {
     //   if (error.response.status === 500) {
     //     return alert(`Server error occured!`);
     //   }
+    // if (error.response.status === 408) {
+    //   return alert(`Your verification is under process!`);
+    // }
     //   return alert(`Your session has expired, please login again!`);
     // }
   };
