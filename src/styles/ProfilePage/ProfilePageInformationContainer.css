@@ -1,0 +1,23 @@
+.profile-page-information-container-wrapper {
+  @apply font-manrope;
+  margin-top: 4vw;
+}
+.profile-page-information-container {
+  @apply flex items-center font-semibold;
+  margin-left: 2.4vw;
+}
+.profile-page-information-container div:first-child {
+  font-size: 2vw;
+}
+.profile-page-information-container div:nth-child(3),
+.profile-page-information-container div:nth-child(5) {
+  font-size: 1.3vw;
+}
+.profile-page-information-container div:nth-child(2n) {
+  height: 7px;
+  width: 7px;
+  background-color: #222222;
+  border-radius: 50%;
+  margin-left: 0.7vw;
+  margin-right: 0.7vw;
+}
