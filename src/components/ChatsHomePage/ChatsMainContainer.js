@@ -5,7 +5,7 @@ import SearchIcon from "../../assets/home/top_navbar/ic_search_icon.svg";
 import UserProfile from "../../assets/profile/user_profile_default_icon.svg";
 import ChatSingleTextComponent from "./ChatSingleTextComponent";
 import ChatIndividual from "./ChatIndividual";
-// import GroupChat from "./GroupChat";
+import GroupChat from "./GroupChat";
 import sendbutton from "../../assets/chats/send_btn.svg";
 import Cookies from "js-cookie";
 import instance from "../../helper/axios";
@@ -408,7 +408,7 @@ function MessageMainContainer(props) {
         </div>
         {ConversationsList}
       </div>
-      {/* <GroupChat /> */}
+      <GroupChat />
       <div className="overflow-auto scrollbarHidden">
         {currentChat ? (
           <>
