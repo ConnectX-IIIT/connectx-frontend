@@ -1,0 +1,12 @@
+.logOutBttn {
+  width: 9.71vw;
+  height: 2.1vw;
+  border: 1px solid #222222;
+  box-sizing: border-box;
+  border-radius: 3px;
+}
+.logOut {
+  @apply font-manrope font-medium;
+  font-size: 1.02vw;
+  color: #222222;
+}

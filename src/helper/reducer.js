@@ -22,6 +22,24 @@ const reducer = (state, action) => {
                 }
             };
 
+        case 'UPDATE_PROFILE':
+            return {
+                ...state,
+                userDetails: {
+                    ...state.userDetails,
+                    profilePicture: action.url
+                }
+            };
+
+        case 'UPDATE_BACKGROUND':
+            return {
+                ...state,
+                userDetails: {
+                    ...state.userDetails,
+                    backgroundPicture: action.url
+                }
+            };
+
         default:
             return state;
     }

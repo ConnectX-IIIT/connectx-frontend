@@ -11,7 +11,7 @@ import Cookies from "js-cookie";
 import instance from "../../helper/axios";
 import { useHistory } from "react-router-dom";
 import { useStateValue } from "../../helper/state_provider";
-import socketIo from "socket.io-client"
+import socketIo from "socket.io-client";
 
 function MessageMainContainer(props) {
   const history = useHistory();
@@ -188,12 +188,16 @@ function MessageMainContainer(props) {
   };
 
   const fetchMessages = async (e) => {
+
+    if (!currentChat) {
+      return;
+    }
+    if (!userDetails.isVerified) {
+      return alert("Your verification is under process!");
+    }
+
     try {
       const token = Cookies.get("token");
-
-      if (!currentChat) {
-        return;
-      }
 
       if (token) {
         const getMessagesRes = await instance.get(
@@ -213,6 +217,9 @@ function MessageMainContainer(props) {
     } catch (error) {
       if (error.response.status === 500) {
         return alert(`Server error occured!`);
+      }
+      if (error.response.status === 408) {
+        return alert(`Your verification is under process!`);
       }
       return alert(`Your session has expired, please login again!`);
     }
@@ -250,6 +257,10 @@ function MessageMainContainer(props) {
 
     if (!newMessage || !currentChat || !newMessage.replace(/\s/g, "").length) {
       return;
+    }
+
+    if (!userDetails.isVerified) {
+      return alert("Your verification is under process!");
     }
 
     let receiverId = "";
@@ -306,6 +317,9 @@ function MessageMainContainer(props) {
       if (error.response.status === 400) {
         return alert(`You can't send empty message!`);
       }
+      if (error.response.status === 408) {
+        return alert(`Your verification is under process!`);
+      }
       return alert(`Your session has expired, please login again!`);
     }
   };
@@ -339,9 +353,7 @@ function MessageMainContainer(props) {
   });
 
   return (
-    
     <div className="mx-auto font-manrope grid border MessageMainContainer">
-     
       <form
         action=""
         className="MessageMainContainerForm"
@@ -368,7 +380,6 @@ function MessageMainContainer(props) {
           borderRight: "1px solid #555555",
         }}
       >
-        
         <div
           className=" sticky rounded-l-md top-0"
           style={{ backgroundColor: "#F5F5F5", padding: "0.68vw 0" }}
@@ -397,7 +408,7 @@ function MessageMainContainer(props) {
         </div>
         {ConversationsList}
       </div>
-      {/* <GroupChat /> */}
+      <GroupChat />
       <div className="overflow-auto scrollbarHidden">
         {currentChat ? (
           <>
@@ -409,14 +420,13 @@ function MessageMainContainer(props) {
                 height: "66.89px",
               }}
             >
-             
               <img
                 src={handlePhoto(
                   currentChat.isGroup
                     ? currentChat.profilePicture
                     : currentChat.userProfiles.find(
-                        (profile) => profile !== userDetails.profilePicture
-                      )
+                      (profile) => profile !== userDetails.profilePicture
+                    )
                 )}
                 alt="profile"
                 className="ImgChatSection"
@@ -425,13 +435,12 @@ function MessageMainContainer(props) {
                 {currentChat.isGroup
                   ? currentChat.name
                   : currentChat.userNames.find(
-                      (name) => name !== userDetails.name
-                    )}
+                    (name) => name !== userDetails.name
+                  )}
               </h2>
             </div>
-           
+
             <div className=" main-chat-wrapper">
-            
               {messages.map((message) => (
                 <div ref={scrollRef}>
                   <ChatSingleTextComponent
@@ -448,7 +457,6 @@ function MessageMainContainer(props) {
       </div>
     </div>
   );
-
 }
 
 export default MessageMainContainer;

@@ -1,0 +1,54 @@
+/* body{
+    border: 0.63px solid #555555 ; 
+     width:350px;
+    height:20px;`
+} */
+.MemberName{
+    position: absolute;
+width: 110.69px;
+height: 21.51px;
+left: 77px;
+top: 354px;
+
+font-family: Manrope;
+font-style: normal;
+font-weight: 600;
+font-size: 15.8131px;
+line-height: 22px;
+/* identical to box height */
+
+
+color: #222222;
+
+}
+.MemberInfo{
+    position: absolute;
+width: 266.29px;
+height: 14.55px;
+left: 77px;
+top: 377px;
+
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 12.6505px;
+line-height: 15px;
+/* identical to box height */
+
+
+color: #555555;
+}
+.MembersProfile {
+    @apply object-cover;
+    border-radius: 50%;
+    border: 6px solid #ffffff;
+    width: calc(3.5vw + 6px);
+    height: calc(3.5vw + 6px);
+    margin-left: 10px;
+  }
+  .memberBorder{
+      border-top: 1px solid #555555;
+      border-bottom: 1px solid #555555;
+      height:65px;
+      margin-top: 100px;
+  }

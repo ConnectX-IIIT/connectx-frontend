@@ -32,6 +32,10 @@ function ConnectionIndividualComponent({ user }) {
       history.push(`/home/message/${commanConversation[0]}`);
     } else {
 
+      if (!userDetails.isVerified) {
+        return alert("Your verification is under process!");
+      }
+
       try {
         const token = Cookies.get("token");
 
@@ -65,6 +69,9 @@ function ConnectionIndividualComponent({ user }) {
       } catch (error) {
         if (error.response.status === 500) {
           return alert(`Server error occured!`);
+        }
+        if (error.response.status === 408) {
+          return alert(`Your verification is under process!`);
         }
         return alert(`Your session has expired, please login again!`);
       }

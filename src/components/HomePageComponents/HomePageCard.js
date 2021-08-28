@@ -123,6 +123,9 @@ function HomePageCard({
       if (!userDetails.posts.includes(PostId)) {
         return alert("You can't remove this post!");
       }
+      if (!userDetails.isVerified) {
+        return alert("Your verification is under process!");
+      }
 
       if (token) {
         await instance.get(`/post/remove/${PostId}`, {
@@ -139,6 +142,9 @@ function HomePageCard({
       }
       if (error.response.status === 400 || error.response.status === 401) {
         return alert(`You can't remove this comment!`);
+      }
+      if (error.response.status === 408) {
+        return alert(`Your verification is under process!`);
       }
       return alert(`Your session has expired, please login again!`);
     }
@@ -162,6 +168,10 @@ function HomePageCard({
 
     if (reference || !content) {
       return alert("You can't post empty comment!");
+    }
+
+    if (!userDetails.isVerified) {
+      return alert("Your verification is under process!");
     }
 
     try {
@@ -190,6 +200,9 @@ function HomePageCard({
       }
       if (error.response.status === 400) {
         return alert(`You can't post empty post!`);
+      }
+      if (error.response.status === 408) {
+        return alert(`Your verification is under process!`);
       }
       return alert(`Your session has expired, please login again!`);
     }
@@ -260,6 +273,11 @@ function HomePageCard({
   };
 
   async function updateReactions(type) {
+
+    if (!userDetails.isVerified) {
+      return alert("Your verification is under process!");
+    }
+
     try {
       const token = Cookies.get("token");
 
@@ -284,6 +302,9 @@ function HomePageCard({
       }
       if (error.response.status === 401) {
         return;
+      }
+      if (error.response.status === 408) {
+        return alert(`Your verification is under process!`);
       }
       return alert(`Your session has expired, please login again!`);
     }

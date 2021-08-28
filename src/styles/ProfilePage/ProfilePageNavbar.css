@@ -1,0 +1,18 @@
+.profile-page-navbar-wrapper {
+  padding-left: 2.4vw;
+  padding-right: 2.4vw;
+  padding-bottom: 1.1vw;
+  margin-top: 1.3vw;
+  border-bottom: 1px solid #888888;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.profile-page-link {
+  @apply font-medium;
+  font-size: 1.1vw;
+  margin-right: 1.56vw;
+}
+.profile-page-active-class {
+  color: #1792dd;
+}

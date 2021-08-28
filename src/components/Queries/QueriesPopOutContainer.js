@@ -43,6 +43,10 @@ function QueriesPopOutContainer() {
       return alert("Please enter a question!");
     }
 
+    if (!userDetails.isVerified) {
+      return alert("Your verification is under process!");
+    }
+
     try {
       const token = Cookies.get("token");
 
@@ -72,6 +76,9 @@ function QueriesPopOutContainer() {
       }
       if (error.response.status === 400) {
         return alert(`You can't post empty question!`);
+      }
+      if (error.response.status === 408) {
+        return alert(`Your verification is under process!`);
       }
       return alert(`Your session has expired, please login again!`);
     }
