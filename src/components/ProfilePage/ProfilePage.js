@@ -9,13 +9,13 @@ import ProfilePageNavbar from "./ProfilePageNavbar";
 import ProfilePagePost from "./ProfilePagePost";
 import ProfilePageQuestion from "./ProfilePageQuestion";
 import ProfilePageAnswer from "./ProfilePageAnswer";
-
+import ProfilePageLogOut from "./ProfilePageLogOut";
 function ProfilePage() {
   return (
     <div className="profile-page-wrapper">
       <ProfilePageImageContainer />
       <ProfilePageInformationContainer />
-
+      <ProfilePageLogOut/>
       <Router>
         <ProfilePageNavbar />
         <Switch>
@@ -30,6 +30,7 @@ function ProfilePage() {
           />
         </Switch>
       </Router>
+      
     </div>
   );
 }
