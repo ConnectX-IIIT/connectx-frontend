@@ -60,7 +60,7 @@ function ProfilePageImageContainer() {
     try {
       if (photoURL) {
         await instance.post(
-          `/user/remove`,
+          `/user/removephoto`,
           {
             type,
             photoURL,

@@ -72,7 +72,7 @@ function PhotoUpload() {
       if (userRegistration.photo) {
         if (userDetails.profilePicture !== "") {
           await instance.post(
-            `/user/remove`,
+            `/user/removephoto`,
             {
               type: true,
               photoURL: userDetails.profilePicture
@@ -95,7 +95,7 @@ function PhotoUpload() {
       if (userRegistration.coverPhoto) {
         if (userDetails.backgroundPicture !== "") {
           await instance.post(
-            `/user/remove`,
+            `/user/removephoto`,
             {
               type: false,
               photoURL: userDetails.backgroundPicture
