@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import "../../styles/ProfilePage/ProfilePageImageContainer.css";
 import photoIcon from "../../assets/profile_page/ic_camera.svg";
@@ -12,6 +12,7 @@ import instance from "../../helper/axios";
 function ProfilePageImageContainer() {
 
   const [{ userDetails }, dispatch] = useStateValue();
+  const [photoIndex, setPhotoIndex] = useState(2);
   const [updatedDetails, setUpdatedDetails] = useState({
     coverPhoto: "",
     profilePhoto: "",
@@ -43,7 +44,8 @@ function ProfilePageImageContainer() {
     const formDataForProfile = new FormData();
     formDataForProfile.append("height", photoHeight);
     formDataForProfile.append("width", photoWidth);
-
+    console.log(photoHeight);
+    console.log(photoWidth);
     if (index) {
       formDataForProfile.append("photo", updatedDetails.profilePhoto);
       formDataForProfile.append("type", true);
@@ -61,37 +63,43 @@ function ProfilePageImageContainer() {
       profilePhoto: "",
     });
 
-    try {
-      if (photoURL) {
-        await instance.post(
-          `/user/remove`,
-          {
-            type,
-            photoURL,
-          },
-          {
-            headers: {
-              Authorization: `${token}`,
-            },
-          }
-        );
-      }
+    // try {
+    //   if (photoURL) {
+    //     await instance.post(
+    //       `/user/remove`,
+    //       {
+    //         type,
+    //         photoURL,
+    //       },
+    //       {
+    //         headers: {
+    //           Authorization: `${token}`,
+    //         },
+    //       }
+    //     );
+    //   }
 
-      await instance.post(`/user/upload`, formDataForProfile, {
-        headers: {
-          Authorization: `${token}`,
-        },
-      });
-    } catch (error) {
-      if (error.response.status === 500) {
-        return alert(`Server error occured!`);
-      }
-      if (error.response.status === 400) {
-        return;
-      }
-      return alert(`Your session has expired, please login again!`);
-    }
+    //   await instance.post(`/user/upload`, formDataForProfile, {
+    //     headers: {
+    //       Authorization: `${token}`,
+    //     },
+    //   });
+    // } catch (error) {
+    //   if (error.response.status === 500) {
+    //     return alert(`Server error occured!`);
+    //   }
+    //   if (error.response.status === 400) {
+    //     return;
+    //   }
+    //   return alert(`Your session has expired, please login again!`);
+    // }
   };
+
+  useEffect(() => {
+    if ((updatedDetails.coverPhoto || updatedDetails.profilePhoto) && (photoIndex === 0 || photoIndex === 1)) {
+      handleSubmit(photoIndex);
+    }
+  }, [updatedDetails, photoIndex])
 
   const previewFile = (index) => (e) => {
     let preview = document.getElementsByClassName("profile-page-images")[index];
@@ -113,9 +121,7 @@ function ProfilePageImageContainer() {
       ...updatedDetails,
       [e.target.name]: e.target.files[0],
     });
-
-    handleSubmit(index);
-    console.log(updatedDetails);
+    setPhotoIndex(index);
   };
 
   return (
