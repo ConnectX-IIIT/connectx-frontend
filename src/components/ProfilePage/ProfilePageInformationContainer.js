@@ -2,9 +2,9 @@ import React from "react";
 import { useStateValue } from "../../helper/state_provider";
 
 import "../../styles/ProfilePage/ProfilePageInformationContainer.css";
+import penIcon from "../../assets/profile/pen.svg";
 
 function ProfilePageInformationContainer() {
-
   const [{ userDetails }, dispatch] = useStateValue();
   return (
     <div className="profile-page-information-container-wrapper">
@@ -13,7 +13,20 @@ function ProfilePageInformationContainer() {
         <div></div>
         <div>{userDetails.batch}</div>
         <div></div>
-        <div>{userDetails.joiningYear}-{userDetails.passingYear}</div>
+        <div>
+          {userDetails.joiningYear}-{userDetails.passingYear}
+        </div>
+        <button
+          className="profile-page-edit-button"
+          onClick={() => {
+            document
+              .getElementById("ProfilePageEditProfile")
+              .classList.toggle("hidden");
+          }}
+        >
+          <img src={penIcon} alt="pen" />
+          <p>Edit Profile</p>
+        </button>
       </div>
       <div className="profile-page-description-container">
         {userDetails.description}

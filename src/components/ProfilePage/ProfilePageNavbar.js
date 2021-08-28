@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 
 import "../../styles/ProfilePage/ProfilePageNavbar.css";
+import ProfilePageLogOut from "./ProfilePageLogOut";
 
 const ProfilePageNavbarName = ["Post", "Question", "Answer"];
 
@@ -35,6 +36,9 @@ function ProfilePageNavbar() {
     <div className="profile-page-navbar-wrapper">
       <div className="profile-page-navbar-left-wrapper">
         {NavbarRoutersNameList}
+      </div>
+      <div className="profile-page-navbar-right-wrapper">
+        <ProfilePageLogOut />
       </div>
     </div>
   );
