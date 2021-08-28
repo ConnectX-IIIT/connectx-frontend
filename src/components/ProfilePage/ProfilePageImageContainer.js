@@ -12,8 +12,8 @@ import instance from "../../helper/axios";
 function ProfilePageImageContainer() {
 
   const [{ userDetails }, dispatch] = useStateValue();
-  const [photoIndex, setPhotoIndex] = useState(2);
   const [updatedDetails, setUpdatedDetails] = useState({
+    photoIndex: null,
     coverPhoto: "",
     profilePhoto: "",
   });
@@ -44,8 +44,7 @@ function ProfilePageImageContainer() {
     const formDataForProfile = new FormData();
     formDataForProfile.append("height", photoHeight);
     formDataForProfile.append("width", photoWidth);
-    console.log(photoHeight);
-    console.log(photoWidth);
+
     if (index) {
       formDataForProfile.append("photo", updatedDetails.profilePhoto);
       formDataForProfile.append("type", true);
@@ -58,70 +57,84 @@ function ProfilePageImageContainer() {
       photoURL = userDetails.backgroundPicture;
     }
 
-    setUpdatedDetails({
-      coverPhoto: "",
-      profilePhoto: "",
-    });
+    try {
+      if (photoURL) {
+        await instance.post(
+          `/user/remove`,
+          {
+            type,
+            photoURL,
+          },
+          {
+            headers: {
+              Authorization: `${token}`,
+            },
+          }
+        );
+      }
 
-    // try {
-    //   if (photoURL) {
-    //     await instance.post(
-    //       `/user/remove`,
-    //       {
-    //         type,
-    //         photoURL,
-    //       },
-    //       {
-    //         headers: {
-    //           Authorization: `${token}`,
-    //         },
-    //       }
-    //     );
-    //   }
+      const uploadRes = await instance.post(`/user/upload`, formDataForProfile, {
+        headers: {
+          Authorization: `${token}`,
+        },
+      });
+      const pictureURL = await uploadRes.data.url;
 
-    //   await instance.post(`/user/upload`, formDataForProfile, {
-    //     headers: {
-    //       Authorization: `${token}`,
-    //     },
-    //   });
-    // } catch (error) {
-    //   if (error.response.status === 500) {
-    //     return alert(`Server error occured!`);
-    //   }
-    //   if (error.response.status === 400) {
-    //     return;
-    //   }
-    //   return alert(`Your session has expired, please login again!`);
-    // }
+      if (updatedDetails.photoIndex) {
+        await dispatch({
+          type: "UPDATE_PROFILE",
+          url: pictureURL,
+        });
+      } else {
+        await dispatch({
+          type: "UPDATE_BACKGROUND",
+          url: pictureURL,
+        });
+      }
+
+      setUpdatedDetails({
+        coverPhoto: "",
+        profilePhoto: "",
+        photoIndex: null
+      });
+
+    } catch (error) {
+      if (error.response.status === 500) {
+        return alert(`Server error occured!`);
+      }
+      if (error.response.status === 400) {
+        return;
+      }
+      return alert(`Your session has expired, please login again!`);
+    }
   };
 
   useEffect(() => {
-    if ((updatedDetails.coverPhoto || updatedDetails.profilePhoto) && (photoIndex === 0 || photoIndex === 1)) {
-      handleSubmit(photoIndex);
+    if ((updatedDetails.coverPhoto || updatedDetails.profilePhoto) && (updatedDetails.photoIndex === 0 || updatedDetails.photoIndex === 1)) {
+      handleSubmit(updatedDetails.photoIndex);
     }
-  }, [updatedDetails, photoIndex])
+  }, [updatedDetails])
 
   const previewFile = (index) => (e) => {
     let preview = document.getElementsByClassName("profile-page-images")[index];
 
-    let file = document.getElementsByClassName("profile-page-photo-input")[
-      index
-    ].files[0];
+    let file = document.getElementsByClassName("profile-page-photo-input")[index].files[0];
     let reader = new FileReader();
 
     reader.onloadend = function () {
       preview.src = reader.result;
+      setUpdatedDetails({
+        ...updatedDetails,
+        [e.target.name]: e.target.files[0],
+        photoIndex: index,
+      });
     };
     if (file) {
       reader.readAsDataURL(file);
     } else {
       preview.src = "";
     }
-    setUpdatedDetails({
-      ...updatedDetails,
-      [e.target.name]: e.target.files[0],
-    });
-    setPhotoIndex(index);
+
   };
 
   return (
