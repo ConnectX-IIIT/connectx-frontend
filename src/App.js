@@ -30,7 +30,7 @@ function App() {
         const userData = getDetailsRes.data.userData;
 
         dispatch({
-          type: "UPDATE_DETAILS",
+          type: "SET_USER_DETAILS",
           userData: userData,
         });
       }

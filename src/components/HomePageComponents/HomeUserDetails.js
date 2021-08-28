@@ -13,7 +13,6 @@ function HomeUserDetails() {
   const [{ userDetails }, dispatch] = useStateValue();
 
   const handlePhoto = (photo, index) => {
-
     if (photo) {
       return photo
     }
@@ -22,7 +21,6 @@ function HomeUserDetails() {
     } else {
       return DefaultCoverPhoto;
     }
-
   }
 
   return (

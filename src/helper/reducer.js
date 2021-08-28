@@ -4,7 +4,7 @@ export const initialState = {
 
 const reducer = (state, action) => {
     switch (action.type) {
-        case 'UPDATE_DETAILS':
+        case 'SET_USER_DETAILS':
             return {
                 ...state,
                 userDetails: action.userData
@@ -37,6 +37,18 @@ const reducer = (state, action) => {
                 userDetails: {
                     ...state.userDetails,
                     backgroundPicture: action.url
+                }
+            };
+
+        case 'UPDATE_USER_DETAILS':
+            return {
+                ...state,
+                userDetails: {
+                    ...state.userDetails,
+                    name: action.name,
+                    email: action.email,
+                    mobile: action.mobile,
+                    description: action.description,
                 }
             };
 
