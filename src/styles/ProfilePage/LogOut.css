@@ -1,0 +1,24 @@
+.logOutBttn{
+    position: absolute;
+width: 141px;
+height: 38px;
+left: 630px;
+top: 420px;
+
+border: 1px solid #222222;
+box-sizing: border-box;
+border-radius: 3px;
+}
+.logOut{
+    /* width: 71px;
+height: 27px; */
+    
+font-family: Manrope;
+font-style: normal;
+font-weight: 500;
+font-size: 20px;
+line-height: 27px;
+
+color: #222222;
+
+}
