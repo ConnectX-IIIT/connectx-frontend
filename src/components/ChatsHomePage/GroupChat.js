@@ -1,6 +1,9 @@
 import React from "react";
 import "../../styles/Chats/GroupChat.css";
 import SearchIcon from "../../assets/home/top_navbar/ic_search_icon.svg";
+import Pen from "../../assets/profile/pen.svg"
+import Error from "../../assets/profile/error.svg"
+
 import DefaultProfilePhoto from "../../assets/_rough/Jethalal-1200.jpg";
 import GroupMembers from "./GroupMembers";
 const GroupChat = () => {
@@ -8,7 +11,7 @@ const GroupChat = () => {
     <div className="OuterContainer">
       <div className="upperBlock">
         <div className="heading">Group info</div>
-        <div className="cross">X</div>
+        <button><div className="cross">X</div></button>
         <img
           src={DefaultProfilePhoto}
           className="groupImage"
@@ -20,6 +23,12 @@ const GroupChat = () => {
       </div>
       <div className="groupDescription">
         <div className="groupDescriptionHeading">Description</div>
+        <button> <img
+            src={Pen}
+            alt="search"
+            className="pen"
+           ></img>
+            </button>
         <div className="groupDescriptionContent">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Exercitationem fugit est debitis nemo </div>
       </div>
       <div className="members">
@@ -34,10 +43,18 @@ const GroupChat = () => {
             }}></img>
             </button>
       </div>
+    
       <GroupMembers />
-      {/* <GroupMembers />
-      <GroupMembers /> */}
+      <div className="reportBorder">
+      <img src={Error} style={{
+        position:"relative",
+        top:"15px",
+     
+        left:"90px",
+        
+      }}></img>
       <div className="report">Report group</div>
+      </div>
     </div>
   );
 };
