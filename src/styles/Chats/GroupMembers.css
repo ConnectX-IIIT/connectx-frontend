@@ -1,14 +1,14 @@
-body{
+/* body{
     border: 0.63px solid #555555 ; 
      width:350px;
-    height:20px;
-}
+    height:20px;`
+} */
 .MemberName{
     position: absolute;
 width: 110.69px;
 height: 21.51px;
 left: 77px;
-top: 350px;
+top: 354px;
 
 font-family: Manrope;
 font-style: normal;
@@ -26,7 +26,7 @@ color: #222222;
 width: 266.29px;
 height: 14.55px;
 left: 77px;
-top: 375px;
+top: 377px;
 
 font-family: Roboto;
 font-style: normal;
@@ -44,6 +44,11 @@ color: #555555;
     border: 6px solid #ffffff;
     width: calc(3.5vw + 6px);
     height: calc(3.5vw + 6px);
-    margin-top: 164px;
     margin-left: 10px;
+  }
+  .memberBorder{
+      border-top: 1px solid #555555;
+      border-bottom: 1px solid #555555;
+      height:65px;
+      margin-top: 100px;
   }
