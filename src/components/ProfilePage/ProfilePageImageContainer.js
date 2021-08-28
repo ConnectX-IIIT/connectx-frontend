@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 
 import "../../styles/ProfilePage/ProfilePageImageContainer.css";
-
 import photoIcon from "../../assets/profile_page/ic_camera.svg";
 import DefaultCoverPhoto from "../../assets/profile/user_profile_default_cover.svg";
 import DefaultProfilePhoto from "../../assets/profile/user_profile_default_icon.svg";
 import photoIconWhite from "../../assets/profile_page/ic_camera_white.svg";
 import { useStateValue } from "../../helper/state_provider";
+import Cookies from "js-cookie";
+import instance from "../../helper/axios";
 
 function ProfilePageImageContainer() {
 
@@ -26,6 +27,71 @@ function ProfilePageImageContainer() {
       return DefaultCoverPhoto;
     }
   }
+
+  const handleSubmit = async (index) => {
+
+    const token = Cookies.get("token");
+
+    if (!updatedDetails.profilePhoto && !updatedDetails.coverPhoto) {
+      return;
+    }
+
+    const photoHeight = document.getElementsByClassName("profile-page-images")[index].naturalHeight;
+    const photoWidth = document.getElementsByClassName("profile-page-images")[index].naturalWidth;
+    let type;
+    let photoURL;
+    const formDataForProfile = new FormData();
+    formDataForProfile.append("height", photoHeight);
+    formDataForProfile.append("width", photoWidth);
+
+    if (index) {
+      formDataForProfile.append("photo", updatedDetails.profilePhoto);
+      formDataForProfile.append("type", true);
+      type = true;
+      photoURL = userDetails.profilePicture;
+    } else {
+      formDataForProfile.append("photo", updatedDetails.coverPhoto);
+      formDataForProfile.append("type", false);
+      type = false;
+      photoURL = userDetails.backgroundPicture;
+    }
+
+    setUpdatedDetails({
+      coverPhoto: "",
+      profilePhoto: "",
+    });
+
+    try {
+      if (photoURL) {
+        await instance.post(
+          `/user/remove`,
+          {
+            type,
+            photoURL,
+          },
+          {
+            headers: {
+              Authorization: `${token}`,
+            },
+          }
+        );
+      }
+
+      await instance.post(`/user/upload`, formDataForProfile, {
+        headers: {
+          Authorization: `${token}`,
+        },
+      });
+    } catch (error) {
+      if (error.response.status === 500) {
+        return alert(`Server error occured!`);
+      }
+      if (error.response.status === 400) {
+        return;
+      }
+      return alert(`Your session has expired, please login again!`);
+    }
+  };
 
   const previewFile = (index) => (e) => {
     let preview = document.getElementsByClassName("profile-page-images")[index];
@@ -47,14 +113,16 @@ function ProfilePageImageContainer() {
       ...updatedDetails,
       [e.target.name]: e.target.files[0],
     });
+
+    handleSubmit(index);
+    console.log(updatedDetails);
   };
-  console.log(updatedDetails);
 
   return (
     <div className="profile-page-image-container">
       <input
         type="file"
-        name={"coverPhoto"}
+        name="coverPhoto"
         onChange={previewFile(0)}
         className="profile-page-photo-input"
         accept=".png , .jpg , .jpeg "
