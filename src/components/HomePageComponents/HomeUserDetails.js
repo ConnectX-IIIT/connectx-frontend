@@ -36,7 +36,7 @@ function HomeUserDetails() {
         <p>
           {userDetails.description}
         </p>
-        <Link to="/">View Profile</Link>
+        <Link to="/home/userprofile">View Profile</Link>
       </div>
       <div className="ProfileOptions">
         <img src={TrendingIcon} alt="trending" />
