@@ -1,0 +1,149 @@
+.OuterContainer{
+    border: 1px solid rgb(85, 85, 85);
+    margin-left: 635px;
+    width: 350px;
+    height: 81.95vh;
+    position: relative;
+    grid-template-columns: 32.76% 67.24%;
+    border-radius: 5px;
+}
+
+.heading{
+    position: absolute;
+width: 100px;
+height: 2px;
+left: 25px;
+top: 7px;
+
+font-family: Manrope;
+font-style: normal;
+font-weight: 600;
+font-size: 20px;
+line-height: 27px;
+
+color: #222222;
+
+}
+.cross{
+    
+    position: absolute;
+width: 12px;
+height: 12px;
+left: 320px;
+top: 7px;
+color: #222222;
+}
+
+.imageSideContent h1{
+    position: absolute;
+width: 115px;
+height: 34px;
+left: 158px;
+top: 68px;
+
+font-family: Manrope;
+font-style: normal;
+font-weight: 600;
+font-size: 25px;
+line-height: 34px;
+
+color: #222222;
+}
+.imageSideContent p{
+    position: absolute;
+    width: 115px;
+    height: 34px;
+    left: 160px;
+    top: 100px;
+    
+    font-family: Manrope;
+font-style: normal;
+font-weight: 500;
+font-size: 18px;
+line-height: 25px;
+/* identical to box height */
+
+
+color: #444444;
+
+
+}
+.groupImage {
+    @apply object-cover;
+    border-radius: 50%;
+    border: 6px solid #ffffff;
+    width: calc(6.7vw + 6px);
+    height: calc(6.7vw + 6px);
+    margin-top: 45px;
+    margin-left: 25px;
+  }
+  .groupDescriptionHeading{
+    position: absolute;
+    width: 82px;
+    height: 20px;
+    left: 27px;
+    top: 187px;
+    
+    font-family: Manrope;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 20px;
+    
+    color: #888888;
+    
+  }
+  .groupDescriptionContent{
+    position: absolute;
+    width: 296px;
+    height: 125px;
+    left: 27px;
+    top: 210px;
+    font-family: Manrope;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 25px;
+    
+    color: #444444;
+  }
+  .numberOfMembers{
+    position: absolute;
+    width: 100px;
+    height: 20px;
+    left: 27px;
+    top: 320px;
+    
+    font-family: Manrope;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 20px;
+    
+    color: #888888;
+  }
+  
+
+  .searchIcon{
+      position: absolute;
+      width: 1rem;
+    margin-top:73px;
+      
+  }
+
+  .report{
+      
+    position: absolute;
+    left: 25%;
+    right: 16.51%;
+    top: 90%;
+    bottom: 13.15%;
+    
+    font-family: Manrope;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 20px;
+    
+    color: #DF3333;
+  }
