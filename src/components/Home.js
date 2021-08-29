@@ -15,27 +15,7 @@ import instance from "../helper/axios";
 import Cookies from "js-cookie";
 
 let PopoutPeople = [];
-
-const PopoutQueries = [
-  {
-    SearchBarQueries: "akash piro raj piro",
-  },
-  {
-    SearchBarQueries: "akash piro raj piro",
-  },
-  {
-    SearchBarQueries: "akash piro raj piro",
-  },
-];
-
-const PopoutQueriesList = PopoutQueries.map((item, index) => {
-  return (
-    <SearchBarPopOutQueries
-      SearchBarQueries={item.SearchBarQueries}
-      key={index}
-    />
-  );
-});
+let PopoutQueries = [];
 
 export const Home = () => {
   const history = useHistory();
@@ -47,6 +27,15 @@ export const Home = () => {
         key={index}
         UserProfileName={item.name}
         UserProfileDescription={item.description}
+      />
+    );
+  });
+
+  const PopoutQueriesList = PopoutQueries.map((item, index) => {
+    return (
+      <SearchBarPopOutQueries
+        SearchBarQueries={item.question}
+        key={index}
       />
     );
   });
@@ -75,9 +64,10 @@ export const Home = () => {
           },
         });
 
-        const userData = getSearchRes.data.userData;
+        const userData = await getSearchRes.data.userData;
+        const queriesData = await getSearchRes.data.questionData;
         PopoutPeople = userData;
-        const queriesData = getSearchRes.data.questionData;
+        PopoutQueries = queriesData;
       } else {
         history.replace("/signin");
       }
@@ -120,8 +110,8 @@ export const Home = () => {
             isSearchBarClicked
               ? { display: "block" }
               : {
-                  display: "none",
-                }
+                display: "none",
+              }
           }
         >
           <div className="Queries">
