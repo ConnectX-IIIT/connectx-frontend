@@ -1,5 +1,10 @@
 export const initialState = {
-    userDetails: {}
+    userDetails: {},
+    postFilter: {
+        jobs: false,
+        projects: false,
+        blogs: false,
+    }
 };
 
 const reducer = (state, action) => {
@@ -50,6 +55,12 @@ const reducer = (state, action) => {
                     mobile: action.mobile,
                     description: action.description,
                 }
+            };
+
+        case 'UPDATE_POST_FILTER':
+            return {
+                ...state,
+                postFilter: action.filter
             };
 
         default:
