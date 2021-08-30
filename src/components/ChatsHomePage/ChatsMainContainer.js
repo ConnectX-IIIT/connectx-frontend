@@ -29,6 +29,7 @@ function MessageMainContainer(props) {
     chatMessage: "",
   });
   const [currentActiveStates, setCurrentActiveStates] = useState([]);
+  const [isGroupsSectionOpen, setIsGroupsSectionOpen] = useState(false);
 
   useEffect(() => {
     if (props.match.params.chatId) {
@@ -352,11 +353,10 @@ function MessageMainContainer(props) {
   });
 
   return (
-    // currentChat?.isGroup 20.80
     <div
       className="mx-auto font-manrope grid border MessageMainContainer"
       style={
-        currentChat?.isGroup
+        currentChat?.isGroup && isGroupsSectionOpen
           ? { gridTemplateColumns: "32.76% 46.44% 20.8%" }
           : { gridTemplateColumns: "32.76% 67.24%" }
       }
@@ -368,7 +368,11 @@ function MessageMainContainer(props) {
       >
         <div
           className=" BottomChatSection"
-          style={currentChat?.isGroup ? { width: "69%" } : { width: "100%" }}
+          style={
+            currentChat?.isGroup && isGroupsSectionOpen
+              ? { width: "69%" }
+              : { width: "100%" }
+          }
         >
           <input
             type="text"
@@ -422,7 +426,12 @@ function MessageMainContainer(props) {
         {currentChat ? (
           <>
             <div
-              className=" sticky top-0 flex items-center"
+              className=" sticky top-0 flex items-center cursor-pointer"
+              onClick={() => {
+                if (currentChat?.isGroup) {
+                  setIsGroupsSectionOpen(!isGroupsSectionOpen);
+                }
+              }}
               style={{
                 backgroundColor: "#F5F5F5",
                 padding: "0.68vw 1vw",
@@ -466,10 +475,15 @@ function MessageMainContainer(props) {
       </div>
       <div
         style={
-          currentChat?.isGroup ? { display: "block" } : { display: "none" }
+          currentChat?.isGroup && isGroupsSectionOpen
+            ? { display: "block" }
+            : { display: "none" }
         }
       >
-        <ChatGroupInformation />
+        <ChatGroupInformation
+          closingFunction={setIsGroupsSectionOpen}
+          closingState={isGroupsSectionOpen}
+        />
       </div>
     </div>
   );
