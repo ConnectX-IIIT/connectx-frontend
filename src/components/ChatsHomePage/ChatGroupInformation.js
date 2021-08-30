@@ -8,7 +8,7 @@ import reportIcon from "../../assets/_general/reporting_icon.svg";
 import "../../styles/Chats/ChatGroupInformation.css";
 import ChatGroupMember from "./ChatGroupMember";
 
-function ChatGroupInformation() {
+function ChatGroupInformation({ closingFunction, closingState }) {
   const [updateGroupDetails, setUpdateGroupDetails] = useState({
     groupPhoto: "",
   });
@@ -39,7 +39,14 @@ function ChatGroupInformation() {
     <div className="chat-group-information scrollbarHidden">
       <div className="chat-group-header">
         <p>Group Info</p>
-        <img src={closeSign} alt="" />
+        <img
+          src={closeSign}
+          alt="cross"
+          style={{ cursor: "pointer" }}
+          onClick={() => {
+            closingFunction(!closingState);
+          }}
+        />
       </div>
       <div className="chat-group-details">
         <input
