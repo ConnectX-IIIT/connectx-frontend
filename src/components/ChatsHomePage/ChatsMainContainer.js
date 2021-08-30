@@ -357,7 +357,7 @@ function MessageMainContainer(props) {
       className="mx-auto font-manrope grid border MessageMainContainer"
       style={
         currentChat?.isGroup && isGroupsSectionOpen
-          ? { gridTemplateColumns: "32.76% 46.44% 20.8%" }
+          ? { gridTemplateColumns: "30% 46% 24%" }
           : { gridTemplateColumns: "32.76% 67.24%" }
       }
     >
@@ -365,12 +365,17 @@ function MessageMainContainer(props) {
         action=""
         className="MessageMainContainerForm"
         onSubmit={handleSubmit}
+        style={
+          currentChat?.isGroup && isGroupsSectionOpen
+            ? { right: "3%", bottom: "0" }
+            : { right: "0" }
+        }
       >
         <div
           className=" BottomChatSection"
           style={
             currentChat?.isGroup && isGroupsSectionOpen
-              ? { width: "69%" }
+              ? { width: "68.5%" }
               : { width: "100%" }
           }
         >
@@ -443,8 +448,8 @@ function MessageMainContainer(props) {
                   currentChat.isGroup
                     ? currentChat.profilePicture
                     : currentChat.userProfiles.find(
-                        (profile) => profile !== userDetails.profilePicture
-                      )
+                      (profile) => profile !== userDetails.profilePicture
+                    )
                 )}
                 alt="profile"
                 className="ImgChatSection"
@@ -453,8 +458,8 @@ function MessageMainContainer(props) {
                 {currentChat.isGroup
                   ? currentChat.name
                   : currentChat.userNames.find(
-                      (name) => name !== userDetails.name
-                    )}
+                    (name) => name !== userDetails.name
+                  )}
               </h2>
             </div>
 
@@ -480,10 +485,11 @@ function MessageMainContainer(props) {
             : { display: "none" }
         }
       >
-        <ChatGroupInformation
+        {currentChat?.isGroup && <ChatGroupInformation
           closingFunction={setIsGroupsSectionOpen}
           closingState={isGroupsSectionOpen}
-        />
+          groupDetails={currentChat}
+        />}
       </div>
     </div>
   );

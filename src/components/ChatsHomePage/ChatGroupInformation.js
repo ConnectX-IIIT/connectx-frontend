@@ -1,17 +1,24 @@
 import React, { useState } from "react";
 
 import closeSign from "../../assets/create_post/ic_close.svg";
-import defaultpic from "../../assets/_rough/achi photo part 3.jpg";
+import defaultpic from "../../assets/profile/user_profile_default_icon.svg";
 import editButton from "../../assets/profile/pen.svg";
 import reportIcon from "../../assets/_general/reporting_icon.svg";
 
 import "../../styles/Chats/ChatGroupInformation.css";
 import ChatGroupMember from "./ChatGroupMember";
 
-function ChatGroupInformation({ closingFunction, closingState }) {
+function ChatGroupInformation({ closingFunction, closingState, groupDetails }) {
   const [updateGroupDetails, setUpdateGroupDetails] = useState({
     groupPhoto: "",
   });
+
+  const handlePhoto = (photo) => {
+    if (photo) {
+      return photo;
+    }
+    return defaultpic;
+  };
 
   const previewFile = (index) => (e) => {
     let preview = document.getElementsByClassName("chat-group-image")[index];
@@ -35,6 +42,12 @@ function ChatGroupInformation({ closingFunction, closingState }) {
     }
   };
 
+  const groupMembersList = groupDetails.members.map((item, index) => {
+    return (
+      <ChatGroupMember memberDetails={item} />
+    );
+  });
+
   return (
     <div className="chat-group-information scrollbarHidden">
       <div className="chat-group-header">
@@ -56,7 +69,7 @@ function ChatGroupInformation({ closingFunction, closingState }) {
           className="chat-group-photo-input"
           accept=".png , .jpg , .jpeg "
         />
-        <img src={defaultpic} alt="default" className="chat-group-image" />
+        <img src={handlePhoto(groupDetails.profilePicture)} alt="default" className="chat-group-image" />
         <img
           src={editButton}
           alt="edit"
@@ -68,8 +81,8 @@ function ChatGroupInformation({ closingFunction, closingState }) {
           }}
         />
         <div>
-          <p>2020 IMT</p>
-          <p>15 Member</p>
+          <p>{groupDetails.name}</p>
+          <p>{groupDetails.members.length} Members</p>
         </div>
       </div>
       <div className="chat-group-description">
@@ -78,14 +91,12 @@ function ChatGroupInformation({ closingFunction, closingState }) {
           <img src={editButton} alt="edit" />
         </div>
         <div>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis
-          cupiditate suscipit quaerat nisi fugit tempora aliquam! Nisi amet vero
-          ipsum?
+          {groupDetails.description}
         </div>
       </div>
       <div className="chat-group-members-list">
-        <p>15 Members</p>
-        <ChatGroupMember />
+        <p>{groupDetails.members.length} Members</p>
+        {groupMembersList}
       </div>
       <div className="chat-group-report">
         <img src={reportIcon} alt="" />
