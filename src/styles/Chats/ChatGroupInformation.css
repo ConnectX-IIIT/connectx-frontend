@@ -24,7 +24,7 @@
 .chat-group-edit-image {
   @apply object-cover rounded-full absolute cursor-pointer;
   top: 58%;
-  left: 28%;
+  left: 24%;
 }
 
 .chat-group-details div p:first-child {
