@@ -1,6 +1,6 @@
 .chat-group-information {
   @apply overflow-auto;
-  height: 81vh;
+  height: 81.8vh;
   border-left: 1px solid #444444;
 }
 .chat-group-header {
