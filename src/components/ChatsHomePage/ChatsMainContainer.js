@@ -5,13 +5,13 @@ import SearchIcon from "../../assets/home/top_navbar/ic_search_icon.svg";
 import UserProfile from "../../assets/profile/user_profile_default_icon.svg";
 import ChatSingleTextComponent from "./ChatSingleTextComponent";
 import ChatIndividual from "./ChatIndividual";
-import GroupChat from "./GroupChat";
 import sendbutton from "../../assets/chats/send_btn.svg";
 import Cookies from "js-cookie";
 import instance from "../../helper/axios";
 import { useHistory } from "react-router-dom";
 import { useStateValue } from "../../helper/state_provider";
 import socketIo from "socket.io-client";
+import ChatGroupInformation from "./ChatGroupInformation";
 
 function MessageMainContainer(props) {
   const history = useHistory();
@@ -188,7 +188,6 @@ function MessageMainContainer(props) {
   };
 
   const fetchMessages = async (e) => {
-
     if (!currentChat) {
       return;
     }
@@ -353,13 +352,24 @@ function MessageMainContainer(props) {
   });
 
   return (
-    <div className="mx-auto font-manrope grid border MessageMainContainer">
+    // currentChat?.isGroup 20.80
+    <div
+      className="mx-auto font-manrope grid border MessageMainContainer"
+      style={
+        currentChat?.isGroup
+          ? { gridTemplateColumns: "32.76% 46.44% 20.8%" }
+          : { gridTemplateColumns: "32.76% 67.24%" }
+      }
+    >
       <form
         action=""
         className="MessageMainContainerForm"
         onSubmit={handleSubmit}
       >
-        <div className=" BottomChatSection">
+        <div
+          className=" BottomChatSection"
+          style={currentChat?.isGroup ? { width: "69%" } : { width: "100%" }}
+        >
           <input
             type="text"
             name="chatMessage"
@@ -408,7 +418,6 @@ function MessageMainContainer(props) {
         </div>
         {ConversationsList}
       </div>
-      <GroupChat />
       <div className="overflow-auto scrollbarHidden">
         {currentChat ? (
           <>
@@ -425,8 +434,8 @@ function MessageMainContainer(props) {
                   currentChat.isGroup
                     ? currentChat.profilePicture
                     : currentChat.userProfiles.find(
-                      (profile) => profile !== userDetails.profilePicture
-                    )
+                        (profile) => profile !== userDetails.profilePicture
+                      )
                 )}
                 alt="profile"
                 className="ImgChatSection"
@@ -435,8 +444,8 @@ function MessageMainContainer(props) {
                 {currentChat.isGroup
                   ? currentChat.name
                   : currentChat.userNames.find(
-                    (name) => name !== userDetails.name
-                  )}
+                      (name) => name !== userDetails.name
+                    )}
               </h2>
             </div>
 
@@ -454,6 +463,13 @@ function MessageMainContainer(props) {
         ) : (
           <span className="selectChat">Select a chat to start messaging</span>
         )}
+      </div>
+      <div
+        style={
+          currentChat?.isGroup ? { display: "block" } : { display: "none" }
+        }
+      >
+        <ChatGroupInformation />
       </div>
     </div>
   );
