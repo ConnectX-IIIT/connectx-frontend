@@ -48,23 +48,6 @@ function isJob(jobLink) {
   );
 }
 
-function isProject() {
-  return (
-    <div className="HomeCardButtonContainer">
-      <ButtonHome
-        content="Discuss in Personal"
-        styleButton={{
-          width: "12vw",
-          height: "3vw",
-          fontSize: "1vw",
-          marginRight: "1vw",
-          margin: "0",
-        }}
-      />
-    </div>
-  );
-}
-
 function MoreOptionHomePageCard({ Image, content, style, onClickFunction }) {
   return (
     <div
@@ -97,6 +80,7 @@ function HomePageCard({
   PostId,
   isPostProject,
   discussionsIds,
+  UserId,
   isDiscussionQueries,
   queriesInnerStyle,
   queriesMainContainerStyle,
@@ -107,14 +91,30 @@ function HomePageCard({
   const [UpvoteActive, setUpvoteActive] = useState(false);
   const [DownvoteActive, setDownvoteActive] = useState(false);
   const [isDiscussion, setIsDiscussion] = useState(false);
-
+  const [DiscussionData, setDiscussionData] = useState([]);
   const [DiscussionReply, setDiscussionReply] = useState({
     content: "",
     postId: PostId,
     reference: "",
   });
 
-  const [DiscussionData, setDiscussionData] = useState([]);
+  function isProject() {
+    return (
+      <div className="HomeCardButtonContainer">
+        <ButtonHome
+          content="Discuss in Personal"
+          postUserId={UserId}
+          styleButton={{
+            width: "12vw",
+            height: "3vw",
+            fontSize: "1vw",
+            marginRight: "1vw",
+            margin: "0",
+          }}
+        />
+      </div>
+    );
+  }
 
   async function handleDeletePost() {
     try {
