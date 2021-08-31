@@ -15,6 +15,10 @@ function ButtonHome({ content, styleButton, jobLink, filter, postUserId }) {
     try {
       const token = Cookies.get("token");
 
+      if (!userDetails.isVerified) {
+        return alert(`Your verification is under process!`);
+      }
+
       if (token) {
         const getDetailsRes = await instance.get(`/user/getdetails/${userId}`, {
           headers: {
@@ -50,7 +54,9 @@ function ButtonHome({ content, styleButton, jobLink, filter, postUserId }) {
 
     if (postUserId) {
       const userData = await fetchData(postUserId);
-      handleMessage(userData, userDetails, dispatch, history)(e);
+      if (userData) {
+        handleMessage(userData, userDetails, dispatch, history)(e);
+      }
     }
   }
 
