@@ -48,23 +48,6 @@ function isJob(jobLink) {
   );
 }
 
-function isProject() {
-  return (
-    <div className="HomeCardButtonContainer">
-      <ButtonHome
-        content="Discuss in Personal"
-        styleButton={{
-          width: "12vw",
-          height: "3vw",
-          fontSize: "1vw",
-          marginRight: "1vw",
-          margin: "0",
-        }}
-      />
-    </div>
-  );
-}
-
 function MoreOptionHomePageCard({ Image, content, style, onClickFunction }) {
   return (
     <div
@@ -97,6 +80,7 @@ function HomePageCard({
   PostId,
   isPostProject,
   discussionsIds,
+  UserId,
   isDiscussionQueries,
   queriesInnerStyle,
   queriesMainContainerStyle,
@@ -107,24 +91,43 @@ function HomePageCard({
   const [UpvoteActive, setUpvoteActive] = useState(false);
   const [DownvoteActive, setDownvoteActive] = useState(false);
   const [isDiscussion, setIsDiscussion] = useState(false);
-
+  const [DiscussionData, setDiscussionData] = useState([]);
   const [DiscussionReply, setDiscussionReply] = useState({
     content: "",
     postId: PostId,
     reference: "",
   });
 
-  const [DiscussionData, setDiscussionData] = useState([]);
+  function isProject() {
+    return (
+      <div className="HomeCardButtonContainer">
+        <ButtonHome
+          content="Discuss in Personal"
+          postUserId={UserId}
+          styleButton={{
+            width: "12vw",
+            height: "3vw",
+            fontSize: "1vw",
+            marginRight: "1vw",
+            margin: "0",
+          }}
+        />
+      </div>
+    );
+  }
 
   async function handleDeletePost() {
     try {
       const token = Cookies.get("token");
 
-      if (!userDetails.posts.includes(PostId)) {
-        return alert("You can't remove this post!");
+      if (!userDetails.isMailVerified) {
+        return alert("Please verify your mail!");
       }
       if (!userDetails.isVerified) {
         return alert("Your verification is under process!");
+      }
+      if (!userDetails.posts.includes(PostId)) {
+        return alert("You can't remove this post!");
       }
 
       if (token) {
@@ -160,18 +163,32 @@ function HomePageCard({
     setDiscussionReply({ ...DiscussionReply, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e, index) => {
     e.preventDefault();
-    const content = DiscussionReply.content;
-    const postId = DiscussionReply.postId;
-    const reference = DiscussionReply.reference;
+    let content;
+    let postId;
+    let reference;
 
-    if (reference || !content) {
-      return alert("You can't post empty comment!");
+    if (index) {
+      content = inputDiscussionReply.content;
+      postId = inputDiscussionReply.postId;
+      reference = inputDiscussionReply.reference;
+    } else {
+      content = DiscussionReply.content;
+      postId = DiscussionReply.postId;
+      reference = DiscussionReply.reference;
+    }
+
+    if (!userDetails.isMailVerified) {
+      return alert("Please verify your mail!");
     }
 
     if (!userDetails.isVerified) {
       return alert("Your verification is under process!");
+    }
+
+    if (reference || !content) {
+      return alert("You can't post empty comment!");
     }
 
     try {
@@ -273,6 +290,10 @@ function HomePageCard({
   };
 
   async function updateReactions(type) {
+
+    if (!userDetails.isMailVerified) {
+      return alert("Please verify your mail!");
+    }
 
     if (!userDetails.isVerified) {
       return alert("Your verification is under process!");
@@ -451,7 +472,7 @@ function HomePageCard({
                 />
                 <form
                   action=""
-                  onSubmit={handleSubmitReply}
+                  onSubmit={handleSubmit(1)}
                   className="w-full mr-2"
                 >
                   <div>
@@ -476,47 +497,6 @@ function HomePageCard({
       );
     });
     return DiscussionDataList;
-  }
-  async function handleSubmitReply(e) {
-    e.preventDefault();
-    const content = inputDiscussionReply.content;
-    const postId = inputDiscussionReply.postId;
-    const reference = inputDiscussionReply.reference;
-
-    if (!reference || !content) {
-      return alert("You can't post empty comment!");
-    }
-
-    try {
-      const token = Cookies.get("token");
-
-      if (token) {
-        const addDiscussionRes = await instance.post(
-          `/post/adddiscussion`,
-          {
-            content,
-            postId,
-            reference,
-          },
-          {
-            headers: {
-              Authorization: `${token}`,
-            },
-          }
-        );
-        console.log(addDiscussionRes.data);
-      } else {
-        history.replace("/signin");
-      }
-    } catch (error) {
-      if (error.response.status === 500) {
-        return alert(`Server error occured!`);
-      }
-      if (error.response.status === 400) {
-        return alert(`You can't post empty comment!`);
-      }
-      return alert(`Your session has expired, please login again!`);
-    }
   }
 
   return (
@@ -698,7 +678,7 @@ function HomePageCard({
                   alt="userprofile"
                   className="object-cover w-10 h-10 mx-5 rounded-full"
                 />
-                <form action="" onSubmit={handleSubmit} className="w-full mr-2">
+                <form action="" onSubmit={handleSubmit(0)} className="w-full mr-2">
                   <div className="h-28">
                     <textarea
                       type="text"
