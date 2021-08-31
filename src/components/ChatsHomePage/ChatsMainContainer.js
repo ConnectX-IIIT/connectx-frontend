@@ -40,7 +40,6 @@ function MessageMainContainer(props) {
       let i = conversations.findIndex(
         (conversation) => conversation._id === chatId
       );
-      console.log(i);
 
       let tempArr = currentActiveStates;
       if (!tempArr.length > 0) {
@@ -94,7 +93,6 @@ function MessageMainContainer(props) {
   };
 
   useEffect(() => {
-    console.log(arrivalMessage);
     if (
       arrivalRoom &&
       currentChat &&
