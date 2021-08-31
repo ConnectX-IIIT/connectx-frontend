@@ -1,0 +1,8 @@
+.upvote-section-main-container {
+  @apply flex flex-col justify-center items-center;
+}
+.upvote-section-vote-count {
+  @apply font-manrope font-medium;
+  font-size: 1.1vw;
+  color: #000000;
+}

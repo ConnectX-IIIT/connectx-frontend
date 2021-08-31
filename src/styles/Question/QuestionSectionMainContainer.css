@@ -1,0 +1,23 @@
+.question-section-main-container {
+  padding-top: 81px;
+}
+.question-section-question-wrapper-wrapper {
+  @apply flex items-start justify-center;
+  background-color: #fcfcfc;
+  border-bottom: 1px solid #bdbfc4;
+  padding: 2vw 0;
+}
+.question-section-question-wrapper {
+  @apply flex flex-col;
+  margin-left: 2.05vw;
+}
+.question-section-question {
+  @apply font-manrope font-semibold;
+  max-width: 43.2vw;
+  font-size: 1.4vw;
+  color: rgba(95, 95, 95, 1);
+}
+.question-section-question-bottom {
+  @apply flex items-center justify-between;
+  margin-top: 1.5vw;
+}

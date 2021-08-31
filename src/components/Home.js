@@ -9,6 +9,7 @@ import ProfilePage from "../components/ProfilePage/ProfilePage";
 
 import ConnectionMainContainer from "./ConnectionsHomePage/ConnectionMainContainer";
 import ChatsMainContainer from "./ChatsHomePage/ChatsMainContainer";
+import QuestionSectionMainContainer from "./Queries_Answer/QuestionSectionMainContainer";
 import SearchBarPopOutPeople from "./HomePageComponents/SearchBarPopOutPeople";
 import SearchBarPopOutQueries from "./HomePageComponents/SearchBarPopOutQueries";
 import instance from "../helper/axios";
@@ -33,10 +34,7 @@ export const Home = () => {
 
   const PopoutQueriesList = PopoutQueries.map((item, index) => {
     return (
-      <SearchBarPopOutQueries
-        SearchBarQueries={item.question}
-        key={index}
-      />
+      <SearchBarPopOutQueries SearchBarQueries={item.question} key={index} />
     );
   });
 
@@ -110,8 +108,8 @@ export const Home = () => {
             isSearchBarClicked
               ? { display: "block" }
               : {
-                display: "none",
-              }
+                  display: "none",
+                }
           }
         >
           <div className="Queries">
@@ -140,6 +138,11 @@ export const Home = () => {
             component={ChatsMainContainer}
           />
           <Route exact path="/home/userprofile" component={ProfilePage} />
+          <Route
+            exact
+            path="/home/question"
+            component={QuestionSectionMainContainer}
+          />
         </Switch>
       </div>
     </div>
