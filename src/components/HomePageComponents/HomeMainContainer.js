@@ -8,17 +8,45 @@ import instance from "../../helper/axios";
 import Cookies from "js-cookie";
 import { useHistory } from "react-router-dom";
 import CreatePost from "./../CreatePost/CreatePost";
+import { useStateValue } from "../../helper/state_provider";
 
 function HomeMainContainer() {
+
   const history = useHistory();
+  const [{ userDetails, postFilter }, dispatch] = useStateValue();
+  const [index, setIndex] = useState(1);
   const [postData, setPostData] = useState([]);
+
+  const updateIndex = () => {
+    if (postFilter.jobs === postFilter.projects && postFilter.projects === postFilter.blogs) {
+      return setIndex(1);
+    }
+    if (postFilter.jobs && !postFilter.projects && !postFilter.blogs) {
+      return setIndex(5);
+    }
+    if (!postFilter.jobs && postFilter.projects && !postFilter.blogs) {
+      return setIndex(7);
+    }
+    if (!postFilter.jobs && !postFilter.projects && postFilter.blogs) {
+      return setIndex(6);
+    }
+    if (postFilter.jobs && postFilter.projects && !postFilter.blogs) {
+      return setIndex(2);
+    }
+    if (postFilter.jobs && !postFilter.projects && postFilter.blogs) {
+      return setIndex(3);
+    }
+    if (!postFilter.jobs && postFilter.projects && postFilter.blogs) {
+      return setIndex(4);
+    }
+  }
 
   const fetchData = async (e) => {
     try {
       const token = Cookies.get("token");
 
       if (token) {
-        const getDetailsRes = await instance.get(`/post/getposts/1`, {
+        const getDetailsRes = await instance.get(`/post/getposts/${index}`, {
           headers: {
             Authorization: `${token}`,
           },
@@ -38,8 +66,12 @@ function HomeMainContainer() {
   };
 
   useEffect(() => {
+    updateIndex();
+  }, [postFilter]);
+
+  useEffect(() => {
     fetchData();
-  }, []);
+  }, [index]);
 
   const HomePageCardDetailsList = postData.map((item, index) => {
     return (

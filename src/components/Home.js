@@ -9,33 +9,14 @@ import ProfilePage from "../components/ProfilePage/ProfilePage";
 
 import ConnectionMainContainer from "./ConnectionsHomePage/ConnectionMainContainer";
 import ChatsMainContainer from "./ChatsHomePage/ChatsMainContainer";
+import QuestionSectionMainContainer from "./Queries_Answer/QuestionSectionMainContainer";
 import SearchBarPopOutPeople from "./HomePageComponents/SearchBarPopOutPeople";
 import SearchBarPopOutQueries from "./HomePageComponents/SearchBarPopOutQueries";
 import instance from "../helper/axios";
 import Cookies from "js-cookie";
 
 let PopoutPeople = [];
-
-const PopoutQueries = [
-  {
-    SearchBarQueries: "akash piro raj piro",
-  },
-  {
-    SearchBarQueries: "akash piro raj piro",
-  },
-  {
-    SearchBarQueries: "akash piro raj piro",
-  },
-];
-
-const PopoutQueriesList = PopoutQueries.map((item, index) => {
-  return (
-    <SearchBarPopOutQueries
-      SearchBarQueries={item.SearchBarQueries}
-      key={index}
-    />
-  );
-});
+let PopoutQueries = [];
 
 export const Home = () => {
   const history = useHistory();
@@ -48,6 +29,12 @@ export const Home = () => {
         UserProfileName={item.name}
         UserProfileDescription={item.description}
       />
+    );
+  });
+
+  const PopoutQueriesList = PopoutQueries.map((item, index) => {
+    return (
+      <SearchBarPopOutQueries SearchBarQueries={item.question} key={index} />
     );
   });
 
@@ -75,9 +62,10 @@ export const Home = () => {
           },
         });
 
-        const userData = getSearchRes.data.userData;
+        const userData = await getSearchRes.data.userData;
+        const queriesData = await getSearchRes.data.questionData;
         PopoutPeople = userData;
-        const queriesData = getSearchRes.data.questionData;
+        PopoutQueries = queriesData;
       } else {
         history.replace("/signin");
       }
@@ -150,6 +138,11 @@ export const Home = () => {
             component={ChatsMainContainer}
           />
           <Route exact path="/home/userprofile" component={ProfilePage} />
+          <Route
+            exact
+            path="/home/question"
+            component={QuestionSectionMainContainer}
+          />
         </Switch>
       </div>
     </div>

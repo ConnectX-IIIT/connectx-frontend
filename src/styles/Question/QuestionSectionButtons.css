@@ -1,0 +1,10 @@
+.QuestionSectionButtons {
+  @apply flex justify-center items-center font-manrope font-semibold rounded-full;
+  font-size: 1vw;
+  padding: 0.35vw 1.15vw;
+}
+.QuestionSectionButtons img {
+  @apply object-contain;
+  width: 1.5vw;
+  margin-right: 0.625vw;
+}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import DefaultCoverPhoto from "../../assets/profile/user_profile_default_cover.svg";
 import DefaultProfilePhoto from "../../assets/profile/user_profile_default_icon.svg";
@@ -10,10 +10,14 @@ import { useStateValue } from "../../helper/state_provider";
 
 function HomeUserDetails() {
 
-  const [{ userDetails }, dispatch] = useStateValue();
+  const [{ userDetails, postFilter }, dispatch] = useStateValue();
+  const [filter, setFilter] = useState({
+    jobs: false,
+    projects: false,
+    blogs: false
+  })
 
   const handlePhoto = (photo, index) => {
-
     if (photo) {
       return photo
     }
@@ -22,8 +26,17 @@ function HomeUserDetails() {
     } else {
       return DefaultCoverPhoto;
     }
-
   }
+
+  const handleInput = (e) => {
+    const name = e.target.name;
+    const value = e.target.value === "true";
+    if (value) {
+      setFilter({ ...filter, [name]: false });
+    } else {
+      setFilter({ ...filter, [name]: true });
+    }
+  };
 
   return (
     <div className="HomeUserDetails">
@@ -49,19 +62,20 @@ function HomeUserDetails() {
       <div>
         <form action="">
           <div className="form-group">
-            <input type="checkbox" id="jobs" />
+            <input type="checkbox" name="jobs" value={filter.jobs} onChange={handleInput} id="jobs" />
             <label htmlFor="jobs">Jobs</label>
           </div>
           <div className="form-group">
-            <input type="checkbox" id="projects" />
+            <input type="checkbox" name="projects" value={filter.projects} onChange={handleInput} id="projects" />
             <label htmlFor="projects">Projects</label>
           </div>
           <div className="form-group">
-            <input type="checkbox" id="blogs" />
+            <input type="checkbox" name="blogs" value={filter.blogs} onChange={handleInput} id="blogs" />
             <label htmlFor="blogs">Blogs</label>
           </div>
           <ButtonHome
             content="Apply"
+            filter={filter}
             styleButton={{
               width: "6.25vw",
               height: "2.2vw",

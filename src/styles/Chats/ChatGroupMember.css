@@ -1,0 +1,12 @@
+.chat-group-member {
+  @apply flex items-center;
+  color: #222222;
+  border-top: 1px solid #555555;
+  padding: 0.5vw 0;
+}
+.chat-group-member img {
+  @apply object-cover rounded-full;
+  width: 2vw;
+  height: 2vw;
+  margin: 0 0.5vw 0 0.8vw;
+}

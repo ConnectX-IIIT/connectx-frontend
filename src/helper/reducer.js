@@ -1,10 +1,15 @@
 export const initialState = {
-    userDetails: {}
+    userDetails: {},
+    postFilter: {
+        jobs: false,
+        projects: false,
+        blogs: false,
+    }
 };
 
 const reducer = (state, action) => {
     switch (action.type) {
-        case 'UPDATE_DETAILS':
+        case 'SET_USER_DETAILS':
             return {
                 ...state,
                 userDetails: action.userData
@@ -38,6 +43,24 @@ const reducer = (state, action) => {
                     ...state.userDetails,
                     backgroundPicture: action.url
                 }
+            };
+
+        case 'UPDATE_USER_DETAILS':
+            return {
+                ...state,
+                userDetails: {
+                    ...state.userDetails,
+                    name: action.name,
+                    email: action.email,
+                    mobile: action.mobile,
+                    description: action.description,
+                }
+            };
+
+        case 'UPDATE_POST_FILTER':
+            return {
+                ...state,
+                postFilter: action.filter
             };
 
         default:

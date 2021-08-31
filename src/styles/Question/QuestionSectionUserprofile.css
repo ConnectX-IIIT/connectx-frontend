@@ -1,0 +1,18 @@
+.question-section-user-profile-wrapper {
+  @apply flex items-center;
+}
+.question-section-user-profile-wrapper img {
+  @apply object-cover rounded-full;
+  width: 3.2vw;
+  height: 3.2vw;
+}
+.question-section-user-profile p:first-child {
+  @apply font-manrope font-semibold;
+  color: #222222;
+  font-size: 1.1vw;
+}
+.question-section-user-profile p:last-child {
+  @apply font-manrope font-medium;
+  color: #bdbfc4;
+  font-size: 0.8vw;
+}

@@ -1,0 +1,79 @@
+.chat-group-information {
+  @apply overflow-auto;
+  height: 81.8vh;
+  border-left: 1px solid #444444;
+}
+.chat-group-header {
+  @apply flex justify-between items-center font-manrope font-semibold;
+  font-size: 1.2vw;
+  color: #222222;
+  padding: 0.5vw 1.3vw;
+}
+.chat-group-details {
+  @apply flex items-center font-manrope relative;
+  padding: 0.8vw 1.3vw;
+  background-color: #fafafa;
+  margin-bottom: 0.4vw;
+}
+.chat-group-image {
+  @apply object-cover rounded-full;
+  width: 5vw;
+  height: 5vw;
+  margin-right: 1vw;
+}
+.chat-group-edit-image {
+  @apply object-cover rounded-full absolute cursor-pointer;
+  top: 58%;
+  left: 24%;
+}
+
+.chat-group-details div p:first-child {
+  @apply font-semibold;
+  font-size: 1.3vw;
+  color: #222222;
+}
+.chat-group-details div p:last-child {
+  @apply font-medium;
+  font-size: 1vw;
+  color: #444444;
+}
+.chat-group-photo-input {
+  @apply hidden;
+}
+.chat-group-description {
+  background-color: #fafafa;
+  padding: 0 1.45vw;
+}
+.chat-group-description div:first-child {
+  @apply font-medium font-manrope flex items-center justify-between;
+  font-size: 1vw;
+  color: #888888;
+}
+.chat-group-description div:nth-child(2) {
+  @apply font-semibold;
+  font-size: 1.1vw;
+}
+.chat-group-members-list {
+  @apply font-medium;
+
+  font-size: 1vw;
+  color: #888888;
+}
+.chat-group-members-list p:first-child {
+  background-color: #fafafa;
+  margin-top: 3.4vw;
+  margin-bottom: 0.4vw;
+  padding: 0 1.45vw;
+}
+.chat-group-report {
+  @apply flex items-center font-manrope justify-center font-medium cursor-pointer;
+  background: #fff5f5;
+  margin-top: 2.5vw;
+  margin-bottom: 2.5vw;
+  font-size: 1vw;
+  color: #df3333;
+  padding: 0.5vw 0;
+}
+.chat-group-report img {
+  margin-right: 0.8vw;
+}
