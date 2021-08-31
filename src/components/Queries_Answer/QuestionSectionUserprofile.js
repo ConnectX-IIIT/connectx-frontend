@@ -17,7 +17,7 @@ function QuestionSectionUserprofile({
           imgOrder === "0"
             ? { marginRight: "1.2vw" }
             : {
-                marginLeft: "1.2vw",
+                marginLeft: "1vw",
                 order: "1",
               }
         }
