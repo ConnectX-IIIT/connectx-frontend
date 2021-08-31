@@ -14,10 +14,22 @@
 .question-section-question {
   @apply font-manrope font-semibold;
   max-width: 43.2vw;
-  font-size: 1.4vw;
+  font-size: 1.5vw;
   color: rgba(95, 95, 95, 1);
 }
 .question-section-question-bottom {
-  @apply flex items-center justify-between;
-  margin-top: 1.5vw;
+  @apply flex items-end justify-between;
+  margin-top: 1vw;
+}
+.question-section-answer-input-wrapper {
+  @apply grid mx-auto;
+  grid-template-columns: 3.2vw 1fr;
+  grid-gap: 1.5vw;
+  width: 47vw;
+  margin-top: 1vw;
+}
+.question-section-answer-input-wrapper img {
+  @apply object-cover rounded-full mx-auto;
+  width: 3.2vw;
+  height: 3.2vw;
 }
