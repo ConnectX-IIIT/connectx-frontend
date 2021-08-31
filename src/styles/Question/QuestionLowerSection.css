@@ -1,0 +1,5 @@
+.question-section-lower-wrapper {
+  @apply mx-auto;
+  margin-top: 1vw;
+  width: 50vw;
+}
