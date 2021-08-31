@@ -1,5 +1,5 @@
 .question-section-user-profile-wrapper {
-  @apply flex justify-center items-center;
+  @apply flex items-center;
 }
 .question-section-user-profile-wrapper img {
   @apply object-cover rounded-full;
