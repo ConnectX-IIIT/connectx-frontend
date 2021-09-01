@@ -4,7 +4,8 @@ export const initialState = {
         jobs: false,
         projects: false,
         blogs: false,
-    }
+    },
+    currentQuestion: {}
 };
 
 const reducer = (state, action) => {
@@ -61,6 +62,12 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 postFilter: action.filter
+            };
+
+        case 'SET_CURRENT_QUESTION':
+            return {
+                ...state,
+                currentQuestion: action.question
             };
 
         default:
