@@ -108,8 +108,8 @@ export const Home = () => {
             isSearchBarClicked
               ? { display: "block" }
               : {
-                  display: "none",
-                }
+                display: "none",
+              }
           }
         >
           <div className="Queries">
@@ -140,7 +140,7 @@ export const Home = () => {
           <Route exact path="/home/userprofile" component={ProfilePage} />
           <Route
             exact
-            path="/home/question"
+            path="/home/question/:questionId"
             component={QuestionSectionMainContainer}
           />
         </Switch>
