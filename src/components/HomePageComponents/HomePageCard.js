@@ -29,25 +29,6 @@ import EditButtomImage from "../../assets/home/post/menu/ic_edit_post.svg";
 import DeleteButtomImage from "../../assets/home/post/menu/ic_delete_post.svg";
 import ReportButtomImage from "../../assets/home/post/menu/ic_report_post.svg";
 
-function isJob(jobLink) {
-  return (
-    <div className="HomeCardButtonContainer">
-      <ButtonHome
-        content="APPLY NOW"
-        styleButton={{
-          width: "10vw",
-          height: "3vw",
-          fontSize: "1vw",
-          marginRight: "1vw",
-          margin: "0",
-        }}
-        jobLink={jobLink}
-      />
-      <div className="discussInPersonal">Discuss in Personal</div>
-    </div>
-  );
-}
-
 function MoreOptionHomePageCard({ Image, content, style, onClickFunction }) {
   return (
     <div
@@ -98,7 +79,49 @@ function HomePageCard({
     reference: "",
   });
 
+  function isJob(jobLink) {
+    if (UserId === userDetails._id) {
+      return;
+    }
+    return (
+      <div className="HomeCardButtonContainer">
+        <ButtonHome
+          content="APPLY NOW"
+          styleButton={{
+            width: "10vw",
+            height: "3vw",
+            fontSize: "1vw",
+            marginRight: "1vw",
+            margin: "0",
+          }}
+          jobLink={jobLink}
+        />
+        <ButtonHome
+          content="Discuss in Personal"
+          postUserId={UserId}
+          styleButton={{
+            fontStyle: "normal",
+            fontWeight: "500",
+            fontSize: "0.9vw",
+            lineHeight: "1vw",
+            color: "#787878",
+            marginLeft: "1vw",
+            cursor: "pointer",
+            backgroundColor: "white",
+            width: "10vw",
+            height: "3vw",
+            marginRight: "1vw",
+            margin: "0",
+          }}
+        />
+      </div>
+    );
+  }
+
   function isProject() {
+    if (UserId === userDetails._id) {
+      return;
+    }
     return (
       <div className="HomeCardButtonContainer">
         <ButtonHome
@@ -472,7 +495,7 @@ function HomePageCard({
                 />
                 <form
                   action=""
-                  onSubmit={handleSubmit(1)}
+                  onSubmit={(e) => handleSubmit(1)(e)}
                   className="w-full mr-2"
                 >
                   <div>
@@ -678,7 +701,7 @@ function HomePageCard({
                   alt="userprofile"
                   className="object-cover w-10 h-10 mx-5 rounded-full"
                 />
-                <form action="" onSubmit={handleSubmit(0)} className="w-full mr-2">
+                <form action="" onSubmit={(e) => handleSubmit(0)(e)} className="w-full mr-2">
                   <div className="h-28">
                     <textarea
                       type="text"
