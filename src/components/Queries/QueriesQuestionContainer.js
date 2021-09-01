@@ -33,6 +33,16 @@ function QueriesQuestionContainer() {
     return ProfilePhoto;
   };
 
+  const handleQuestionClick = (question) => async (e) => {
+    e.preventDefault();
+
+    await dispatch({
+      type: "SET_CURRENT_QUESTION",
+      question,
+    });
+    history.push(`/home/question/${question._id}`);
+  }
+
   const fetchQuestionData = async (e) => {
     try {
       const token = Cookies.get("token");
@@ -59,18 +69,20 @@ function QueriesQuestionContainer() {
 
   const HomePageQuestionsList = questionData.map((item, index) => {
     return (
-      <HomePageCard
-        UserProfilePhoto={item.userProfile}
-        TimeStamp={item.timestamp}
-        PostUserName={item.userName}
-        PostContent={item.question}
-        PostImageUrls={[]}
-        Upvotes={item.upvotes}
-        PostId={item._id}
-        isDiscussionQueries={true}
-        queriesInnerStyle={{ fontWeight: "600", fontFamily: "manrope" }}
-        queriesMainContainerStyle={{ marginLeft: "0" }}
-      />
+      <div onClick={handleQuestionClick(item)}>
+        <HomePageCard
+          UserProfilePhoto={item.userProfile}
+          TimeStamp={item.timestamp}
+          PostUserName={item.userName}
+          PostContent={item.question}
+          PostImageUrls={[]}
+          Upvotes={item.upvotes}
+          PostId={item._id}
+          isDiscussionQueries={true}
+          queriesInnerStyle={{ fontWeight: "600", fontFamily: "manrope" }}
+          queriesMainContainerStyle={{ marginLeft: "0" }}
+        />
+      </div>
     );
   });
 
