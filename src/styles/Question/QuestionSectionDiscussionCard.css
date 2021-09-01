@@ -1,0 +1,31 @@
+.question-section-discussion-card-wrapper {
+  @apply w-full grid rounded-md;
+  grid-template-columns: 7.5% 1fr;
+  border: 1px solid #bdbfc4;
+}
+.question-section-discussion-left-card-wrapper {
+  @apply rounded-l-md;
+  background: #efefef;
+  padding-top: 0.8vw;
+}
+.question-section-discussion-right-card-wrapper {
+  @apply flex items-center;
+  padding-top: 0.8vw;
+  padding-bottom: 0.8vw;
+  padding-left: 1.2vw;
+}
+.question-section-discussion-right-card-wrapper p:first-child {
+  @apply font-manrope font-semibold;
+  font-size: 1.1vw;
+  color: #444444;
+  margin-right: 0.9vw;
+}
+.question-section-discussion-right-card-wrapper p:nth-child(2) {
+  @apply font-manrope font-semibold;
+  font-size: 0.8vw;
+  color: #999999;
+}
+.question-section-discussion-content-wrapper {
+  padding-left: 1.2vw;
+  padding-right: 1.2vw;
+}
