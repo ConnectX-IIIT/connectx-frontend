@@ -33,11 +33,10 @@ function QueriesPopOutContainer() {
     const value = e.target.value;
     setUserQueries({ ...UserQueries, [name]: value });
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const question = UserQueries.askedQuestion;
-    const userName = userDetails.name;
-    const userProfile = userDetails.profilePicture;
 
     if (!question) {
       return alert("Please enter a question!");
@@ -55,8 +54,6 @@ function QueriesPopOutContainer() {
           `/home/addquestion`,
           {
             question,
-            userName,
-            userProfile,
           },
           {
             headers: {
