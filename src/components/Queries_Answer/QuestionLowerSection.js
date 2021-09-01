@@ -7,6 +7,7 @@ function QuestionLowerSection() {
   return (
     <div className="question-section-lower-wrapper">
       <QuestionSectionCard />
+      <QuestionSectionCard />
     </div>
   );
 }
