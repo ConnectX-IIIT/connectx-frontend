@@ -354,44 +354,74 @@ function HomePageCard({
     }
   }
 
-  async function handleUpvotes() {
+  async function handleUpvotes(index) {
     setUpvoteActive(!UpvoteActive);
+    let upvotes = UpvotesHandle;
     if (UpvoteActive) {
       await updateReactions(2);
-      Upvotes = Upvotes - 1;
-      setUpvotesHandle(Upvotes);
+      if (index === 2) {
+        upvotes = upvotes - 1;
+      }
+      if (index === 1) {
+        upvotes = upvotes - 2;
+      }
+      if (index !== 3) {
+        setUpvotesHandle(upvotes);
+      }
     } else {
       await updateReactions(1);
-      Upvotes = Upvotes + 1;
-      setUpvotesHandle(Upvotes);
+      if (index === 2) {
+        upvotes = upvotes + 1;
+      }
+      if (index === 1) {
+        upvotes = upvotes + 2;
+      }
+      if (index !== 3) {
+        setUpvotesHandle(upvotes);
+      }
     }
   }
 
-  async function handleDownvotes() {
+  async function handleDownvotes(index) {
     setDownvoteActive(!DownvoteActive);
+    let upvotes = UpvotesHandle;
     if (DownvoteActive) {
       await updateReactions(4);
-      Upvotes = Upvotes + 1;
-      setUpvotesHandle(Upvotes);
+      if (index === 2) {
+        upvotes = upvotes + 1;
+      }
+      if (index === 1) {
+        upvotes = upvotes + 2;
+      }
+      if (index !== 3) {
+        setUpvotesHandle(upvotes);
+      }
     } else {
       await updateReactions(3);
-      Upvotes = Upvotes - 1;
-      setUpvotesHandle(Upvotes);
+      if (index === 2) {
+        upvotes = upvotes - 1;
+      }
+      if (index === 1) {
+        upvotes = upvotes - 2;
+      }
+      if (index !== 3) {
+        setUpvotesHandle(upvotes);
+      }
     }
   }
 
-  const handleReaction = (isUpvoted) => {
+  const handleReaction = async (isUpvoted) => {
     if (DownvoteActive && isUpvoted) {
-      handleUpvotes();
-      handleDownvotes();
+      await handleUpvotes(1);
+      await handleDownvotes(3);
     } else if (UpvoteActive && !isUpvoted) {
-      handleDownvotes();
-      handleUpvotes();
+      await handleDownvotes(1);
+      await handleUpvotes(3);
     } else {
       if (isUpvoted) {
-        handleUpvotes();
+        await handleUpvotes(2);
       } else {
-        handleDownvotes();
+        await handleDownvotes(2);
       }
     }
   };
