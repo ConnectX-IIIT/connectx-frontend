@@ -14,6 +14,7 @@
 .question-section-question {
   @apply font-manrope font-semibold;
   max-width: 43.2vw;
+  min-width: 43.2vw;
   font-size: 1.5vw;
   color: rgba(95, 95, 95, 1);
 }
