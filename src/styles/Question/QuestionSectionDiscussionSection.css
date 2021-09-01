@@ -1,0 +1,29 @@
+.question-discussion-section-answer-input-wrapper,
+.question-discussion-section-discussion-wrapper {
+  @apply grid mx-auto;
+  grid-template-columns: 2.5vw 1fr;
+  grid-gap: 1.3vw;
+  width: 100%;
+  margin-top: 1vw;
+  padding-left: 1.3vw;
+  padding-right: 1.7vw;
+}
+.question-discussion-section-answer-input-wrapper img {
+  @apply object-cover rounded-full mx-auto;
+  width: 2.5vw;
+  height: 2.5vw;
+}
+.question-section-discussion-section-discussion-wrapper-image {
+  @apply object-cover rounded-full mx-auto;
+  width: 2.5vw;
+  height: 2.5vw;
+}
+.question-discussion-section-reply {
+  padding-left: 5.2vw;
+}
+.question-discussion-section-reply-para {
+  @apply font-manrope font-semibold;
+  font-size: 1.1vw;
+  color: #444444;
+  margin-top: 0.5vw;
+}
