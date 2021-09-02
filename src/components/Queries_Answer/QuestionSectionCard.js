@@ -1,7 +1,4 @@
 import React from "react";
-
-import DefaultProfile from "../../assets/_rough/achi photo part 2.jpg";
-
 import "../../styles/Question/QuestionSectionCard.css";
 import QuestionSectionUserprofile from "./QuestionSectionUserprofile";
 import UpvotesSection from "./UpvotesSection";
@@ -9,8 +6,11 @@ import HomeCardInnerContent from "./../HomePageComponents/HomeCardInnerContent";
 import QuestionSectionButtons from "./QuestionSectionButtons";
 
 import QuestionSectionDiscussionSection from "./QuestionSectionDiscussionSection";
+import { handleTimestamp } from "../HomePageComponents/HomePageCard";
+import { handlePhoto } from "./QuestionSectionMainContainer";
 
-function QuestionSectionCard() {
+function QuestionSectionCard({ answer }) {
+
   return (
     <div className="question-section-card-wrapper">
       <div className="question-section-card-left-wrapper">
@@ -19,9 +19,9 @@ function QuestionSectionCard() {
       <div className="question-section-card-right-wrapper">
         <div className="question-section-card-user-profile">
           <QuestionSectionUserprofile
-            UserName="Harshil Piro"
-            TimeStamp="15:34 PM"
-            ProfilePhoto={DefaultProfile}
+            UserName={answer.userName}
+            TimeStamp={handleTimestamp(answer.timestamp)}
+            ProfilePhoto={handlePhoto(answer.userProfile)}
           />
         </div>
         <div className="question-section-read-more-wrapper">
@@ -29,7 +29,7 @@ function QuestionSectionCard() {
             styleInnerContent={{
               lineHeight: "initial",
             }}
-            InnerContent="Hello Everyone"
+            InnerContent={answer.answer}
           />
         </div>
         <div className="question-section-card-bottom-wrapper">

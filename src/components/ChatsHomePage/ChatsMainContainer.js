@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import "../../styles/Chats/ChatsMainContainer.css";
 import CreatePostInput from "./../CreatePost/CreatePostInput";
 import SearchIcon from "../../assets/home/top_navbar/ic_search_icon.svg";
-import UserProfile from "../../assets/profile/user_profile_default_icon.svg";
 import ChatSingleTextComponent from "./ChatSingleTextComponent";
 import ChatIndividual from "./ChatIndividual";
 import sendbutton from "../../assets/chats/send_btn.svg";
@@ -12,6 +11,7 @@ import { useHistory } from "react-router-dom";
 import { useStateValue } from "../../helper/state_provider";
 import socketIo from "socket.io-client";
 import ChatGroupInformation from "./ChatGroupInformation";
+import { handlePhoto } from "../Queries_Answer/QuestionSectionMainContainer";
 
 function MessageMainContainer(props) {
   const history = useHistory();
@@ -84,13 +84,6 @@ function MessageMainContainer(props) {
       });
     });
   }, []);
-
-  const handlePhoto = (photo) => {
-    if (photo) {
-      return photo;
-    }
-    return UserProfile;
-  };
 
   useEffect(() => {
     if (

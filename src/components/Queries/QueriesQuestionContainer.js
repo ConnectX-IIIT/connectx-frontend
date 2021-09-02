@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import CreatePostInput from "./../CreatePost/CreatePostInput";
-import ProfilePhoto from "../../assets/profile/user_profile_default_icon.svg";
 import SortComponent from "./SortComponent";
 import HomePageCard from "./../HomePageComponents/HomePageCard";
 import Cookies from "js-cookie";
 import instance from "../../helper/axios";
 import { useHistory } from "react-router-dom";
 import { useStateValue } from "../../helper/state_provider";
+import { handlePhoto } from "../Queries_Answer/QuestionSectionMainContainer";
 
 function QueriesQuestionContainer() {
   const history = useHistory();
@@ -24,13 +24,6 @@ function QueriesQuestionContainer() {
     const name = e.target.name;
     const value = e.target.value;
     setUserQueries({ ...UserQueries, [name]: value });
-  };
-
-  const handlePhoto = (photo) => {
-    if (photo) {
-      return photo;
-    }
-    return ProfilePhoto;
   };
 
   const handleQuestionClick = (question) => async (e) => {

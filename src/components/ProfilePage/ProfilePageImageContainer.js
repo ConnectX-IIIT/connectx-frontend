@@ -2,12 +2,11 @@ import React, { useEffect, useState } from "react";
 
 import "../../styles/ProfilePage/ProfilePageImageContainer.css";
 import photoIcon from "../../assets/profile_page/ic_camera.svg";
-import DefaultCoverPhoto from "../../assets/profile/user_profile_default_cover.svg";
-import DefaultProfilePhoto from "../../assets/profile/user_profile_default_icon.svg";
 import photoIconWhite from "../../assets/profile_page/ic_camera_white.svg";
 import { useStateValue } from "../../helper/state_provider";
 import Cookies from "js-cookie";
 import instance from "../../helper/axios";
+import { handlePhoto } from "../Queries_Answer/QuestionSectionMainContainer";
 
 function ProfilePageImageContainer() {
 
@@ -17,17 +16,6 @@ function ProfilePageImageContainer() {
     coverPhoto: "",
     profilePhoto: "",
   });
-
-  const handlePhoto = (photo, index) => {
-    if (photo) {
-      return photo;
-    }
-    if (index) {
-      return DefaultProfilePhoto;
-    } else {
-      return DefaultCoverPhoto;
-    }
-  }
 
   const handleSubmit = async (index) => {
 

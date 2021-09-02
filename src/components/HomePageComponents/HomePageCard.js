@@ -16,7 +16,6 @@ import DiscussionSection from "./DiscussionSection";
 
 import "../../styles/HomePage/HomeMainContainer/HomePageCard.css";
 import ButtonHome from "./ButtonHome";
-import UserProfile from "../../assets/profile/user_profile_default_icon.svg";
 
 import { ReactComponent as TextDiscussion } from "../../assets/home/post/bottom/ic_dicussion.svg";
 import { ReactComponent as ShareIcon } from "../../assets/home/post/bottom/ic_share.svg";
@@ -28,6 +27,7 @@ import instance from "../../helper/axios";
 import EditButtomImage from "../../assets/home/post/menu/ic_edit_post.svg";
 import DeleteButtomImage from "../../assets/home/post/menu/ic_delete_post.svg";
 import ReportButtomImage from "../../assets/home/post/menu/ic_report_post.svg";
+import { handlePhoto } from "../Queries_Answer/QuestionSectionMainContainer";
 
 function MoreOptionHomePageCard({ Image, content, style, onClickFunction }) {
   return (
@@ -304,13 +304,6 @@ function HomePageCard({
       setDownvoteActive(true);
     }
   }, [userDetails]);
-
-  const handlePhoto = (photo) => {
-    if (photo) {
-      return photo;
-    }
-    return UserProfile;
-  };
 
   async function updateReactions(type) {
 

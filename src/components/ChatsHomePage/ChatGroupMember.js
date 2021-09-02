@@ -1,16 +1,9 @@
 import React from "react";
 
 import "../../styles/Chats/ChatGroupMember.css";
-import DefaultPhoto from "../../assets/profile/user_profile_default_icon.svg";
+import { handlePhoto } from "../Queries_Answer/QuestionSectionMainContainer";
 
 function ChatGroupMember({ memberDetails }) {
-
-  const handlePhoto = (photo) => {
-    if (photo) {
-      return photo;
-    }
-    return DefaultPhoto;
-  };
 
   return (
     <div className="chat-group-member">

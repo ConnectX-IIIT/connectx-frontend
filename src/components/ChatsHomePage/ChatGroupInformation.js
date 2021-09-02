@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 
 import closeSign from "../../assets/create_post/ic_close.svg";
-import defaultpic from "../../assets/profile/user_profile_default_icon.svg";
 import editButton from "../../assets/profile/pen.svg";
 import reportIcon from "../../assets/_general/reporting_icon.svg";
 
@@ -9,18 +8,12 @@ import "../../styles/Chats/ChatGroupInformation.css";
 import ChatGroupMember from "./ChatGroupMember";
 import Cookies from "js-cookie";
 import instance from "../../helper/axios";
+import { handlePhoto } from "../Queries_Answer/QuestionSectionMainContainer";
 
 function ChatGroupInformation({ closingFunction, closingState, groupDetails }) {
   const [updateGroupDetails, setUpdateGroupDetails] = useState({
     groupPhoto: "",
   });
-
-  const handlePhoto = (photo) => {
-    if (photo) {
-      return photo;
-    }
-    return defaultpic;
-  };
 
   const handleSubmit = async () => {
 

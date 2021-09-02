@@ -8,13 +8,12 @@ import homeUpvoteIconSelected from "../../assets/home/post/upvotes/s_ic_upvote.s
 import homeDownvoteIcon from "../../assets/home/post/upvotes/ic_downvote.svg";
 import homeDownvoteIconHover from "../../assets/home/post/upvotes/h_ic_downvote.svg";
 import homeDownvoteIconSelected from "../../assets/home/post/upvotes/s_ic_downvote.svg";
-
-import UserProfile from "../../assets/profile/user_profile_default_icon.svg";
 import HomeCardInnerContent from "./HomeCardInnerContent";
 import Cookies from "js-cookie";
 import instance from "../../helper/axios";
 import { useHistory } from "react-router-dom";
 import { useStateValue } from "../../helper/state_provider";
+import { handlePhoto } from "../Queries_Answer/QuestionSectionMainContainer";
 
 function DiscussionSection({
   InnerContentDiscussion,
@@ -84,13 +83,6 @@ function DiscussionSection({
       return alert(`Your session has expired, please login again!`);
     }
   }
-
-  const handlePhoto = (photo) => {
-    if (photo) {
-      return photo;
-    }
-    return UserProfile;
-  };
 
   async function handleUpvotes() {
     setUpvoteActive(!UpvoteActive);

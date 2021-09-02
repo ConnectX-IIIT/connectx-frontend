@@ -1,11 +1,10 @@
 import React from "react";
-import DefaultUserPhoto from "../../assets/profile/user_profile_default_icon.svg";
-import DefaultCoverPhoto from "../../assets/profile/user_profile_default_cover.svg";
 import "../../styles/Connection/ConnectionIndividualComponent.css";
 import { useHistory } from "react-router-dom";
 import { useStateValue } from "../../helper/state_provider";
 import instance from "../../helper/axios";
 import Cookies from "js-cookie";
+import { handlePhoto } from "../HomePageComponents/HomeUserDetails";
 
 export const handleMessage = (user, userDetails, dispatch, history) => async (e) => {
 
@@ -66,17 +65,6 @@ function ConnectionIndividualComponent({ user }) {
 
   const history = useHistory();
   const [{ userDetails }, dispatch] = useStateValue();
-
-  const handlePhoto = (photo, index) => {
-    if (photo) {
-      return photo;
-    }
-    if (index) {
-      return DefaultUserPhoto;
-    } else {
-      return DefaultCoverPhoto;
-    }
-  }
 
   return (
     <div className="ConnectionIndividualComponent">

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../../styles/Question/QuestionSectionMainContainer.css";
-import DefaultProfile from "../../assets/_rough/achi photo part 2.jpg";
+import DefaultProfile from "../../assets/profile/user_profile_default_icon.svg";
 import UpvotesSection from "./UpvotesSection";
 import QuestionSectionButtons from "./QuestionSectionButtons";
 import QuestionSectionUserprofile from "./QuestionSectionUserprofile";
@@ -12,14 +12,14 @@ import Cookies from "js-cookie";
 import { useHistory } from "react-router-dom";
 import instance from "../../helper/axios";
 
-function QuestionSectionQuestion({ question }) {
+export const handlePhoto = (photo) => {
+  if (photo) {
+    return photo;
+  }
+  return DefaultProfile;
+};
 
-  const handlePhoto = (photo) => {
-    if (photo) {
-      return photo;
-    }
-    return DefaultProfile;
-  };
+function QuestionSectionQuestion({ question }) {
 
   return (
     <div className="question-section-question-wrapper">
@@ -42,7 +42,9 @@ function QuestionSectionQuestion({ question }) {
 function QuestionSectionMainContainer(props) {
 
   const history = useHistory();
+  const questionId = props.match.params.questionId;
   const [{ userDetails, currentQuestion }, dispatch] = useStateValue();
+  const [answers, setAnswers] = useState([]);
   const [inputValue, setInputValue] = useState({
     answer: "",
   });
@@ -63,7 +65,7 @@ function QuestionSectionMainContainer(props) {
       if (token) {
         const getQuestionRes = await instance.post(`/question/getquestions`,
           {
-            questionId: props.match.params.questionId,
+            questionId
           },
           {
             headers: {
@@ -88,11 +90,47 @@ function QuestionSectionMainContainer(props) {
     }
   };
 
+  const fetchAnswers = async (e) => {
+    try {
+      const token = Cookies.get("token");
+
+      if (token) {
+        const getAnswersRes = await instance.post(`/answer/getanswers`,
+          {
+            questionId,
+          },
+          {
+            headers: {
+              Authorization: `${token}`,
+            },
+          });
+
+        const answerData = getAnswersRes.data.answers;
+        console.log(answerData);
+        setAnswers(answerData);
+
+      } else {
+        history.replace("/signin");
+      }
+    } catch (error) {
+      if (error.response.status === 500) {
+        return alert(`Server error occured!`);
+      }
+      return alert(`Your session has expired, please login again!`);
+    }
+  };
+
   useEffect(() => {
     if (!currentQuestion.user) {
       fetchQuestionData();
     }
-  }, [currentQuestion])
+  }, [currentQuestion]);
+
+  useEffect(() => {
+    if (!answers.user) {
+      fetchAnswers();
+    }
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -106,7 +144,7 @@ function QuestionSectionMainContainer(props) {
         <QuestionSectionQuestion question={currentQuestion} />
       </div>
       <div className="question-section-answer-input-wrapper">
-        <img src={DefaultProfile} alt="default" />
+        <img src={handlePhoto(userDetails.profilePicture)} alt="default" />
         <div>
           <QuestionSectionInput
             InputName="answer"
@@ -117,7 +155,7 @@ function QuestionSectionMainContainer(props) {
           />
         </div>
       </div>
-      <QuestionLowerSection />
+      <QuestionLowerSection answers={answers} />
     </div>
   );
 }

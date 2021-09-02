@@ -1,21 +1,14 @@
 import React, { useEffect, useState, useRef } from "react";
-import userProfile from "../../assets/profile/user_profile_default_icon.svg";
 import { useStateValue } from "../../helper/state_provider";
 import "../../styles/Chats/ChatIndividual.css";
 import { format } from "timeago.js";
+import { handlePhoto } from "../Queries_Answer/QuestionSectionMainContainer";
 
 function ChatIndividual({ conversation, isGroup, isActive = false }) {
   const [{ userDetails }, dispatch] = useStateValue();
   const [friendName, setFriendName] = useState("");
   const [friendProfile, setFriendProfile] = useState("");
   const [isBeingHovered, setIsBeingHovered] = useState("");
-
-  const handlePhoto = (photo) => {
-    if (photo) {
-      return photo;
-    }
-    return userProfile;
-  };
 
   useEffect(() => {
     const name = isGroup
@@ -24,8 +17,8 @@ function ChatIndividual({ conversation, isGroup, isActive = false }) {
     const profile = isGroup
       ? conversation.profilePicture
       : conversation.userProfiles.find(
-          (profile) => profile !== userDetails.profilePicture
-        );
+        (profile) => profile !== userDetails.profilePicture
+      );
     setFriendName(name);
     setFriendProfile(profile);
   }, []);
@@ -46,11 +39,11 @@ function ChatIndividual({ conversation, isGroup, isActive = false }) {
       style={
         isBeingHovered
           ? {
-              backgroundColor: "rgb(240, 240, 240)",
-            }
+            backgroundColor: "rgb(240, 240, 240)",
+          }
           : {
-              backgroundColor: "rgb(255, 255, 255)",
-            }
+            backgroundColor: "rgb(255, 255, 255)",
+          }
       }
     >
       <div
@@ -58,8 +51,8 @@ function ChatIndividual({ conversation, isGroup, isActive = false }) {
         style={
           isActive
             ? {
-                backgroundColor: "rgb(220, 220, 220)",
-              }
+              backgroundColor: "rgb(220, 220, 220)",
+            }
             : {}
         }
       >

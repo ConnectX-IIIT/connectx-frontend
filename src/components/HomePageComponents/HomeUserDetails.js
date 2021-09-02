@@ -8,6 +8,17 @@ import "../../styles/HomePage/HomeMainContainer/HomeUserDetails.css";
 import ButtonHome from "../../components/HomePageComponents/ButtonHome";
 import { useStateValue } from "../../helper/state_provider";
 
+export const handlePhoto = (photo, index) => {
+  if (photo) {
+    return photo
+  }
+  if (index) {
+    return DefaultProfilePhoto;
+  } else {
+    return DefaultCoverPhoto;
+  }
+}
+
 function HomeUserDetails() {
 
   const [{ userDetails, postFilter }, dispatch] = useStateValue();
@@ -16,17 +27,6 @@ function HomeUserDetails() {
     projects: false,
     blogs: false
   })
-
-  const handlePhoto = (photo, index) => {
-    if (photo) {
-      return photo
-    }
-    if (index) {
-      return DefaultProfilePhoto;
-    } else {
-      return DefaultCoverPhoto;
-    }
-  }
 
   const handleInput = (e) => {
     const name = e.target.name;

@@ -3,11 +3,17 @@ import React from "react";
 import "../../styles/Question/QuestionLowerSection.css";
 import QuestionSectionCard from "./QuestionSectionCard";
 
-function QuestionLowerSection() {
+function QuestionLowerSection({ answers }) {
+
+  const answersList = answers.map((item, index) => {
+    return (
+      <QuestionSectionCard answer={item} />
+    );
+  });
+
   return (
     <div className="question-section-lower-wrapper">
-      <QuestionSectionCard />
-      <QuestionSectionCard />
+      {answersList}
     </div>
   );
 }
