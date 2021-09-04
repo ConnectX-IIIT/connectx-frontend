@@ -7,7 +7,8 @@ import "../styles/ExtraDetailsPage/PhotoUpload.css";
 import { useStateValue } from "../helper/state_provider";
 import { useHistory } from "react-router-dom";
 import Cookies from "js-cookie";
-import instance from "../helper/axios";
+import { uploadProfilePic } from "./general_helper/photo_upload/upload_profile_picture";
+import { uploadBackgroundPic } from "./general_helper/photo_upload/upload_background_picture";
 
 function PhotoUpload() {
   const history = useHistory();
@@ -42,89 +43,43 @@ function PhotoUpload() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const photoHeight =
-      document.getElementsByClassName("UserProfileImage")[1].naturalHeight;
-    const photoWidth =
-      document.getElementsByClassName("UserProfileImage")[1].naturalWidth;
-    const coverPhotoHeight =
-      document.getElementsByClassName("UserProfileImage")[0].naturalHeight;
-    const coverPhotoWidth =
-      document.getElementsByClassName("UserProfileImage")[0].naturalWidth;
-
-    const formDataForProfile = new FormData();
-    const formDataForCover = new FormData();
-    formDataForProfile.append("photo", userRegistration.photo);
-    formDataForCover.append("photo", userRegistration.coverPhoto);
-    formDataForCover.append("height", coverPhotoHeight);
-    formDataForCover.append("width", coverPhotoWidth);
-    formDataForCover.append("type", false);
-    formDataForProfile.append("height", photoHeight);
-    formDataForProfile.append("width", photoWidth);
-    formDataForProfile.append("type", true);
-
-    const token = Cookies.get("token");
-
     if (!userRegistration.photo && !userRegistration.coverPhoto) {
       return;
     }
 
-    try {
-      if (userRegistration.photo) {
-        if (userDetails.profilePicture !== "") {
-          await instance.post(
-            `/user/removephoto`,
-            {
-              type: true,
-              photoURL: userDetails.profilePicture
-            },
-            {
-              headers: {
-                Authorization: `${token}`,
-              },
-            }
-          );
-        }
+    const token = Cookies.get("token");
 
-        await instance.post(`/user/upload`, formDataForProfile, {
-          headers: {
-            Authorization: `${token}`,
-          },
-        });
-      }
-
-      if (userRegistration.coverPhoto) {
-        if (userDetails.backgroundPicture !== "") {
-          await instance.post(
-            `/user/removephoto`,
-            {
-              type: false,
-              photoURL: userDetails.backgroundPicture
-            },
-            {
-              headers: {
-                Authorization: `${token}`,
-              },
-            }
-          );
-        }
-
-        await instance.post(`/user/upload`, formDataForCover, {
-          headers: {
-            Authorization: `${token}`,
-          },
-        });
-      }
-
-      history.replace("/home");
-    } catch (error) {
-      if (error.response.status === 500) {
-        return alert(`Server error occured!`);
-      }
-      if (error.response.status === 400) {
-        return;
-      }
-      return alert(`Your session has expired, please login again!`);
+    if (!token) {
+      history.replace("/signin");
     }
+
+    if (userRegistration.photo) {
+
+      const photoHeight = document.getElementsByClassName("UserProfileImage")[1].naturalHeight;
+      const photoWidth = document.getElementsByClassName("UserProfileImage")[1].naturalWidth;
+      const formDataForProfile = new FormData();
+      formDataForProfile.append("photo", userRegistration.photo);
+      formDataForProfile.append("height", photoHeight);
+      formDataForProfile.append("width", photoWidth);
+      formDataForProfile.append("type", true);
+
+      await uploadProfilePic(userDetails, token, formDataForProfile);
+    }
+
+    if (userRegistration.coverPhoto) {
+
+      const coverPhotoHeight = document.getElementsByClassName("UserProfileImage")[0].naturalHeight;
+      const coverPhotoWidth = document.getElementsByClassName("UserProfileImage")[0].naturalWidth;
+      const formDataForCover = new FormData();
+      formDataForCover.append("photo", userRegistration.coverPhoto);
+      formDataForCover.append("height", coverPhotoHeight);
+      formDataForCover.append("width", coverPhotoWidth);
+      formDataForCover.append("type", false);
+
+      await uploadBackgroundPic(userDetails, token, formDataForCover);
+    }
+
+    history.replace("/home");
   };
 
   return (

@@ -6,7 +6,9 @@ import photoIconWhite from "../../assets/profile_page/ic_camera_white.svg";
 import { useStateValue } from "../../helper/state_provider";
 import { handlePhoto } from "../HomePageComponents/helper/handle_photo";
 import { useHistory } from "react-router-dom";
-import { uploadPhoto } from "./helper/upload_photo";
+import Cookies from "js-cookie";
+import { uploadProfilePic } from "../general_helper/photo_upload/upload_profile_picture";
+import { uploadBackgroundPic } from "../general_helper/photo_upload/upload_background_picture";
 
 function ProfilePageImageContainer() {
 
@@ -20,9 +22,61 @@ function ProfilePageImageContainer() {
 
   useEffect(() => {
     if ((updatedDetails.coverPhoto || updatedDetails.profilePhoto) && (updatedDetails.photoIndex === 0 || updatedDetails.photoIndex === 1)) {
-      uploadPhoto(userDetails, history, dispatch, updatedDetails, setUpdatedDetails, updatedDetails.photoIndex);
+      uploadPhoto(updatedDetails.photoIndex);
     }
-  }, [updatedDetails])
+  }, [updatedDetails]);
+
+  const uploadPhoto = async (index) => {
+
+    const token = Cookies.get("token");
+
+    if (!token) {
+      history.push('/signin');
+    }
+
+    if (!updatedDetails.profilePhoto && !updatedDetails.coverPhoto) {
+      return;
+    }
+
+    let pictureURL;
+    const photoHeight = document.getElementsByClassName("profile-page-images")[index].naturalHeight;
+    const photoWidth = document.getElementsByClassName("profile-page-images")[index].naturalWidth;
+    const formData = new FormData();
+    formData.append("height", photoHeight);
+    formData.append("width", photoWidth);
+
+    if (index) {
+      formData.append("photo", updatedDetails.profilePhoto);
+      formData.append("type", true);
+
+      pictureURL = await uploadProfilePic(userDetails, token, formData);
+
+    } else {
+      formData.append("photo", updatedDetails.coverPhoto);
+      formData.append("type", false);
+
+      pictureURL = await uploadBackgroundPic(userDetails, token, formData);
+    }
+
+    if (index) {
+      await dispatch({
+        type: "UPDATE_PROFILE",
+        url: pictureURL,
+      });
+    } else {
+      await dispatch({
+        type: "UPDATE_BACKGROUND",
+        url: pictureURL,
+      });
+    }
+
+    setUpdatedDetails({
+      coverPhoto: "",
+      profilePhoto: "",
+      photoIndex: null
+    });
+
+  };
 
   const previewFile = (index) => (e) => {
     let preview = document.getElementsByClassName("profile-page-images")[index];
