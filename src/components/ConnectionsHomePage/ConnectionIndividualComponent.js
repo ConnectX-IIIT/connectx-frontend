@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import { useStateValue } from "../../helper/state_provider";
 import instance from "../../helper/axios";
 import Cookies from "js-cookie";
-import { handlePhoto } from "../HomePageComponents/HomeUserDetails";
+import { handlePhoto } from "../HomePageComponents/helper/handle_photo";
 
 export const handleMessage = (user, userDetails, dispatch, history) => async (e) => {
 

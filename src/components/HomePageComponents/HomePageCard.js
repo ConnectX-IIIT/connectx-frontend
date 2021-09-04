@@ -19,15 +19,18 @@ import ButtonHome from "./ButtonHome";
 
 import { ReactComponent as TextDiscussion } from "../../assets/home/post/bottom/ic_dicussion.svg";
 import { ReactComponent as ShareIcon } from "../../assets/home/post/bottom/ic_share.svg";
-import Cookies from "js-cookie";
 import { useHistory } from "react-router-dom";
 import { useStateValue } from "../../helper/state_provider";
-import instance from "../../helper/axios";
 
 import EditButtomImage from "../../assets/home/post/menu/ic_edit_post.svg";
 import DeleteButtomImage from "../../assets/home/post/menu/ic_delete_post.svg";
 import ReportButtomImage from "../../assets/home/post/menu/ic_report_post.svg";
-import { handlePhoto } from "../Queries_Answer/QuestionSectionMainContainer";
+import { convertTimestamp } from "./helper/convert_timestamp";
+import { handlePhoto } from "./helper/handle_photo";
+import { handleDeletePost } from "./helper/delete_post";
+import { addDiscussion } from "./helper/add_discussion";
+import { fetchDiscussions } from "./helper/fetch_discussions";
+import { updateUpvotes } from "./helper/update_upvotes";
 
 function MoreOptionHomePageCard({ Image, content, style, onClickFunction }) {
   return (
@@ -48,42 +51,6 @@ function MoreOptionHomePageCard({ Image, content, style, onClickFunction }) {
     </div>
   );
 }
-
-export const handleTimestamp = (timestamp) => {
-  let time = new Date(timestamp);
-  let today = new Date();
-  let yesterday = new Date(new Date().valueOf() - 1000 * 60 * 60 * 24);
-  let timeString;
-
-  if (
-    today.getDate() === time.getDate() &&
-    Date.now() - timestamp < 86400000
-  ) {
-    timeString = "Today";
-  } else if (
-    yesterday.getDate() === time.getDate() &&
-    Date.now() - timestamp < 172800000
-  ) {
-    timeString = "Yesterday";
-  } else {
-    timeString =
-      time.getDate() +
-      " " +
-      time.toLocaleString("default", { month: "short" }) +
-      " " +
-      time.getFullYear();
-  }
-
-  return (
-    timeString +
-    " " +
-    time.toLocaleString("en-US", {
-      hour: "numeric",
-      minute: "numeric",
-      hour12: true,
-    })
-  );
-};
 
 function HomePageCard({
   UserProfilePhoto,
@@ -175,43 +142,6 @@ function HomePageCard({
     );
   }
 
-  async function handleDeletePost() {
-    try {
-      const token = Cookies.get("token");
-
-      if (!userDetails.isMailVerified) {
-        return alert("Please verify your mail!");
-      }
-      if (!userDetails.isVerified) {
-        return alert("Your verification is under process!");
-      }
-      if (!userDetails.posts.includes(PostId)) {
-        return alert("You can't remove this post!");
-      }
-
-      if (token) {
-        await instance.get(`/post/remove/${PostId}`, {
-          headers: {
-            Authorization: `${token}`,
-          },
-        });
-      } else {
-        history.replace("/signin");
-      }
-    } catch (error) {
-      if (error.response.status === 500) {
-        return alert(`Server error occured!`);
-      }
-      if (error.response.status === 400 || error.response.status === 401) {
-        return alert(`You can't remove this comment!`);
-      }
-      if (error.response.status === 408) {
-        return alert(`Your verification is under process!`);
-      }
-      return alert(`Your session has expired, please login again!`);
-    }
-  }
-
   async function handleEditPost() {
     console.log(PostId);
   }
@@ -220,68 +150,6 @@ function HomePageCard({
     const name = e.target.name;
     const value = e.target.value;
     setDiscussionReply({ ...DiscussionReply, [name]: value });
-  };
-
-  const handleSubmit = async (e, index) => {
-    e.preventDefault();
-    let content;
-    let postId;
-    let reference;
-
-    if (index) {
-      content = inputDiscussionReply.content;
-      postId = inputDiscussionReply.postId;
-      reference = inputDiscussionReply.reference;
-    } else {
-      content = DiscussionReply.content;
-      postId = DiscussionReply.postId;
-      reference = DiscussionReply.reference;
-    }
-
-    if (!userDetails.isMailVerified) {
-      return alert("Please verify your mail!");
-    }
-
-    if (!userDetails.isVerified) {
-      return alert("Your verification is under process!");
-    }
-
-    if (reference || !content) {
-      return alert("You can't post empty comment!");
-    }
-
-    try {
-      const token = Cookies.get("token");
-
-      if (token) {
-        await instance.post(
-          `/post/adddiscussion`,
-          {
-            content,
-            postId,
-            reference,
-          },
-          {
-            headers: {
-              Authorization: `${token}`,
-            },
-          }
-        );
-      } else {
-        history.replace("/signin");
-      }
-    } catch (error) {
-      if (error.response.status === 500) {
-        return alert(`Server error occured!`);
-      }
-      if (error.response.status === 400) {
-        return alert(`You can't post empty post!`);
-      }
-      if (error.response.status === 408) {
-        return alert(`Your verification is under process!`);
-      }
-      return alert(`Your session has expired, please login again!`);
-    }
   };
 
   const [{ userDetails }, dispatch] = useStateValue(false);
@@ -304,148 +172,6 @@ function HomePageCard({
       setDownvoteActive(true);
     }
   }, [userDetails]);
-
-  async function updateReactions(type) {
-
-    if (!userDetails.isMailVerified) {
-      return alert("Please verify your mail!");
-    }
-
-    if (!userDetails.isVerified) {
-      return alert("Your verification is under process!");
-    }
-
-    try {
-      const token = Cookies.get("token");
-
-      if (token) {
-        await instance.post(
-          `/post/vote/${type}`,
-          {
-            postId: PostId,
-          },
-          {
-            headers: {
-              Authorization: `${token}`,
-            },
-          }
-        );
-      } else {
-        history.replace("/signin");
-      }
-    } catch (error) {
-      if (error.response.status === 500 || error.response.status === 400) {
-        return alert(`Server error occured!`);
-      }
-      if (error.response.status === 401) {
-        return;
-      }
-      if (error.response.status === 408) {
-        return alert(`Your verification is under process!`);
-      }
-      return alert(`Your session has expired, please login again!`);
-    }
-  }
-
-  async function handleUpvotes(index) {
-    setUpvoteActive(!UpvoteActive);
-    let upvotes = UpvotesHandle;
-    if (UpvoteActive) {
-      await updateReactions(2);
-      if (index === 2) {
-        upvotes = upvotes - 1;
-      }
-      if (index === 1) {
-        upvotes = upvotes - 2;
-      }
-      if (index !== 3) {
-        setUpvotesHandle(upvotes);
-      }
-    } else {
-      await updateReactions(1);
-      if (index === 2) {
-        upvotes = upvotes + 1;
-      }
-      if (index === 1) {
-        upvotes = upvotes + 2;
-      }
-      if (index !== 3) {
-        setUpvotesHandle(upvotes);
-      }
-    }
-  }
-
-  async function handleDownvotes(index) {
-    setDownvoteActive(!DownvoteActive);
-    let upvotes = UpvotesHandle;
-    if (DownvoteActive) {
-      await updateReactions(4);
-      if (index === 2) {
-        upvotes = upvotes + 1;
-      }
-      if (index === 1) {
-        upvotes = upvotes + 2;
-      }
-      if (index !== 3) {
-        setUpvotesHandle(upvotes);
-      }
-    } else {
-      await updateReactions(3);
-      if (index === 2) {
-        upvotes = upvotes - 1;
-      }
-      if (index === 1) {
-        upvotes = upvotes - 2;
-      }
-      if (index !== 3) {
-        setUpvotesHandle(upvotes);
-      }
-    }
-  }
-
-  const handleReaction = async (isUpvoted) => {
-    if (DownvoteActive && isUpvoted) {
-      await handleUpvotes(1);
-      await handleDownvotes(3);
-    } else if (UpvoteActive && !isUpvoted) {
-      await handleDownvotes(1);
-      await handleUpvotes(3);
-    } else {
-      if (isUpvoted) {
-        await handleUpvotes(2);
-      } else {
-        await handleDownvotes(2);
-      }
-    }
-  };
-
-  const handleOnclickDiscussion = async () => {
-    try {
-      const token = Cookies.get("token");
-
-      if (token) {
-        const discussionRes = await instance.post(
-          `/discussion/getdiscussions`,
-          {
-            discussionIds: discussionsIds,
-          },
-          {
-            headers: {
-              Authorization: `${token}`,
-            },
-          }
-        );
-        setDiscussionData(discussionRes.data.discussions);
-      } else {
-        history.replace("/signin");
-      }
-    } catch (error) {
-      if (error.response.status === 500) {
-        return alert(`Server error occured!`);
-      }
-      return alert(`Your session has expired, please login again!`);
-    }
-  };
 
   function handleDisplay(elementId) {
     document.getElementById(elementId).classList.toggle("hidden");
@@ -474,7 +200,7 @@ function HomePageCard({
             key={index}
             UserName={item.reply[index].userName}
             userProfile={item.reply[index].userProfile}
-            timestamp={handleTimestamp(item.reply[index].timestamp)}
+            timestamp={convertTimestamp(item.reply[index].timestamp)}
             discussionId={item.reply[index]._id}
             upvotes={item.reply[index].reactions}
           />
@@ -487,7 +213,7 @@ function HomePageCard({
             InnerContentDiscussion={item.discussion.content}
             UserName={item.discussion.userName}
             userProfile={item.discussion.userProfile}
-            timestamp={handleTimestamp(item.discussion.timestamp)}
+            timestamp={convertTimestamp(item.discussion.timestamp)}
             key={index}
             discussionId={item.discussion._id}
             upvotes={item.discussion.reactions}
@@ -512,13 +238,13 @@ function HomePageCard({
                 id={`${DiscussionData[index].discussion._id}`}
               >
                 <img
-                  src={handlePhoto(userDetails.profilePicture)}
+                  src={handlePhoto(userDetails.profilePicture, 1)}
                   alt="userprofile"
                   className="object-cover w-10 h-10 mx-5 rounded-full"
                 />
                 <form
                   action=""
-                  onSubmit={(e) => handleSubmit(1)(e)}
+                  onSubmit={(e) => addDiscussion(userDetails, history, inputDiscussionReply.content, inputDiscussionReply.postId, inputDiscussionReply.reference)(e)}
                   className="w-full mr-2"
                 >
                   <div>
@@ -559,7 +285,7 @@ function HomePageCard({
           }}
           styleImgContainer={{ margin: "0", width: "2vw", height: "2vw" }}
           onClickFunction={() => {
-            handleReaction(true);
+            updateUpvotes(userDetails, history, PostId, UpvoteActive, DownvoteActive, setUpvoteActive, setDownvoteActive, UpvotesHandle, setUpvotesHandle, true, true);
           }}
           isActive={UpvoteActive}
         />
@@ -575,7 +301,7 @@ function HomePageCard({
           }}
           styleImgContainer={{ margin: "0", width: "2vw", height: "2vw" }}
           onClickFunction={() => {
-            handleReaction(false);
+            updateUpvotes(userDetails, history, PostId, UpvoteActive, DownvoteActive, setUpvoteActive, setDownvoteActive, UpvotesHandle, setUpvotesHandle, false, true);
           }}
           isActive={DownvoteActive}
         />
@@ -609,11 +335,11 @@ function HomePageCard({
                   color: "#FF6969",
                   backgroundColor: "#FFEDED",
                 }}
-                onClickFunction={handleDeletePost}
+                onClickFunction={(e) => handleDeletePost(e)(userDetails, PostId, history)}
               />
             </div>
             <img
-              src={handlePhoto(UserProfilePhoto)}
+              src={handlePhoto(UserProfilePhoto, 1)}
               alt="Userprofile"
               style={{
                 width: "3vw",
@@ -646,7 +372,7 @@ function HomePageCard({
                   fontSize: "0.9vw",
                 }}
               >
-                {handleTimestamp(TimeStamp)}
+                {convertTimestamp(TimeStamp)}
               </div>
             </div>
             <img
@@ -687,9 +413,10 @@ function HomePageCard({
           {isDiscussionQueries ? null : (
             <div
               className="HomeCardDiscussion"
-              onClick={() => {
+              onClick={async () => {
                 setIsDiscussion(!isDiscussion);
-                handleOnclickDiscussion();
+                const discussions = await fetchDiscussions(history, discussionsIds);
+                setDiscussionData(discussions);
               }}
             >
               <TextDiscussion className="mr-2 textDiscussion" />
@@ -720,11 +447,11 @@ function HomePageCard({
             <div>
               <div className="pt-4 flex">
                 <img
-                  src={handlePhoto(userDetails.profilePicture)}
+                  src={handlePhoto(userDetails.profilePicture, 1)}
                   alt="userprofile"
                   className="object-cover w-10 h-10 mx-5 rounded-full"
                 />
-                <form action="" onSubmit={(e) => handleSubmit(0)(e)} className="w-full mr-2">
+                <form action="" onSubmit={(e) => addDiscussion(userDetails, history, DiscussionReply.content, DiscussionReply.postId, DiscussionReply.reference)(e)} className="w-full mr-2">
                   <div className="h-28">
                     <textarea
                       type="text"

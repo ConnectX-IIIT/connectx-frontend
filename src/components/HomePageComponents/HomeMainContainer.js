@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 import HomePageCard from "./HomePageCard";
 import addImage from "../../assets/home/post/add_post/ic_add_post.svg";
 import "../../styles/HomePage/HomeMainContainer/HomeMainContainer.css";
-import instance from "../../helper/axios";
-import Cookies from "js-cookie";
 import { useHistory } from "react-router-dom";
 import CreatePost from "./../CreatePost/CreatePost";
 import { useStateValue } from "../../helper/state_provider";
+import { fetchPosts } from "./helper/fetch_posts";
+import { updateFilter } from "./helper/update_filter";
 
 function HomeMainContainer() {
 
@@ -17,60 +17,12 @@ function HomeMainContainer() {
   const [index, setIndex] = useState(1);
   const [postData, setPostData] = useState([]);
 
-  const updateIndex = () => {
-    if (postFilter.jobs === postFilter.projects && postFilter.projects === postFilter.blogs) {
-      return setIndex(1);
-    }
-    if (postFilter.jobs && !postFilter.projects && !postFilter.blogs) {
-      return setIndex(5);
-    }
-    if (!postFilter.jobs && postFilter.projects && !postFilter.blogs) {
-      return setIndex(7);
-    }
-    if (!postFilter.jobs && !postFilter.projects && postFilter.blogs) {
-      return setIndex(6);
-    }
-    if (postFilter.jobs && postFilter.projects && !postFilter.blogs) {
-      return setIndex(2);
-    }
-    if (postFilter.jobs && !postFilter.projects && postFilter.blogs) {
-      return setIndex(3);
-    }
-    if (!postFilter.jobs && postFilter.projects && postFilter.blogs) {
-      return setIndex(4);
-    }
-  }
-
-  const fetchData = async (e) => {
-    try {
-      const token = Cookies.get("token");
-
-      if (token) {
-        const getDetailsRes = await instance.get(`/post/getposts/${index}`, {
-          headers: {
-            Authorization: `${token}`,
-          },
-        });
-
-        const data = getDetailsRes.data.postData;
-        setPostData(data);
-      } else {
-        history.replace("/signin");
-      }
-    } catch (error) {
-      if (error.response.status === 500) {
-        return alert(`Server error occured!`);
-      }
-      return alert(`Your session has expired, please login again!`);
-    }
-  };
-
   useEffect(() => {
-    updateIndex();
+    updateFilter(postFilter, setIndex);
   }, [postFilter]);
 
   useEffect(() => {
-    fetchData();
+    fetchPosts(history, index, setPostData);
   }, [index]);
 
   const HomePageCardDetailsList = postData.map((item, index) => {

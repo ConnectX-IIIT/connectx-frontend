@@ -28,9 +28,9 @@ import messageImage from "../../assets/home/top_navbar/ic_messages.svg";
 import hoverMessageImage from "../../assets/home/top_navbar/h_ic_messages.svg";
 import activeMessageImage from "../../assets/home/top_navbar/a_ic_messages.svg";
 
-import UserProfileDefaultIcon from "../../assets/profile/user_profile_default_icon.svg";
 import HomePageFormInput from "./HomePageFormInput";
 import { useStateValue } from "../../helper/state_provider";
+import { handlePhoto } from "./helper/handle_photo";
 
 function Navbar({
   isSearchBarClicked,
@@ -42,13 +42,6 @@ function Navbar({
   const [{ userDetails }, dispatch] = useStateValue();
 
   const [navLocation, setNavLocation] = useState("home");
-
-  const handlePhoto = (photo) => {
-    if (photo) {
-      return photo;
-    }
-    return UserProfileDefaultIcon;
-  };
 
   return (
     <nav className="Navbar" onClick={onSearchBarBlur}>
@@ -101,19 +94,19 @@ function Navbar({
               navLocation === "/home"
                 ? false
                 : navLocation === "/home/connection"
-                ? false
-                : navLocation === "/home/queries"
-                ? false
-                : navLocation === "/home/userprofile"
-                ? false
-                : true
+                  ? false
+                  : navLocation === "/home/queries"
+                    ? false
+                    : navLocation === "/home/userprofile"
+                      ? false
+                      : true
             }
           />
         </NavLink>
 
         <div className="NavbarUserProfile">
           <img
-            src={handlePhoto(userDetails.profilePicture)}
+            src={handlePhoto(userDetails.profilePicture, 1)}
             alt="user profile icon"
             className="NavbarUserProfile object-cover"
           />

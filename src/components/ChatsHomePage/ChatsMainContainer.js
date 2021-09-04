@@ -11,7 +11,7 @@ import { useHistory } from "react-router-dom";
 import { useStateValue } from "../../helper/state_provider";
 import socketIo from "socket.io-client";
 import ChatGroupInformation from "./ChatGroupInformation";
-import { handlePhoto } from "../Queries_Answer/QuestionSectionMainContainer";
+import { handlePhoto } from "../HomePageComponents/helper/handle_photo";
 
 function MessageMainContainer(props) {
   const history = useHistory();
@@ -440,7 +440,7 @@ function MessageMainContainer(props) {
                     ? currentChat.profilePicture
                     : currentChat.userProfiles.find(
                       (profile) => profile !== userDetails.profilePicture
-                    )
+                      , 1)
                 )}
                 alt="profile"
                 className="ImgChatSection"

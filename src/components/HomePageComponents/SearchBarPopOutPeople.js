@@ -1,18 +1,11 @@
 import React from "react";
-import UserProfileDefaultIcon from "../../assets/profile/user_profile_default_icon.svg";
+import { handlePhoto } from "./helper/handle_photo";
 
 function SearchBarPopOutPeople({
   UserProfileSrc,
   UserProfileName,
   UserProfileDescription,
 }) {
-
-  const handlePhoto = (photo) => {
-    if (photo) {
-      return photo;
-    }
-    return UserProfileDefaultIcon;
-  };
 
   return (
     <div
@@ -27,7 +20,7 @@ function SearchBarPopOutPeople({
       }}
     >
       <img
-        src={handlePhoto(UserProfileSrc)}
+        src={handlePhoto(UserProfileSrc, 1)}
         alt=""
         style={{
           width: "2.1vw",

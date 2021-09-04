@@ -6,7 +6,7 @@ import Cookies from "js-cookie";
 import instance from "../../helper/axios";
 import { useHistory } from "react-router-dom";
 import { useStateValue } from "../../helper/state_provider";
-import { handlePhoto } from "../Queries_Answer/QuestionSectionMainContainer";
+import { handlePhoto } from "../HomePageComponents/helper/handle_photo";
 
 function QueriesQuestionContainer() {
   const history = useHistory();
@@ -88,7 +88,7 @@ function QueriesQuestionContainer() {
         }}
       >
         <img
-          src={handlePhoto(userDetails.profilePicture)}
+          src={handlePhoto(userDetails.profilePicture, 1)}
           alt="profile"
           className="object-cover w-11 h-11 rounded-full"
         />

@@ -8,7 +8,7 @@ import "../../styles/Chats/ChatGroupInformation.css";
 import ChatGroupMember from "./ChatGroupMember";
 import Cookies from "js-cookie";
 import instance from "../../helper/axios";
-import { handlePhoto } from "../Queries_Answer/QuestionSectionMainContainer";
+import { handlePhoto } from "../HomePageComponents/helper/handle_photo";
 
 function ChatGroupInformation({ closingFunction, closingState, groupDetails }) {
   const [updateGroupDetails, setUpdateGroupDetails] = useState({
@@ -103,7 +103,7 @@ function ChatGroupInformation({ closingFunction, closingState, groupDetails }) {
           className="chat-group-photo-input"
           accept=".png , .jpg , .jpeg "
         />
-        <img src={handlePhoto(groupDetails.profilePicture)} alt="default" className="chat-group-image" />
+        <img src={handlePhoto(groupDetails.profilePicture, 1)} alt="default" className="chat-group-image" />
         <img
           src={editButton}
           alt="edit"

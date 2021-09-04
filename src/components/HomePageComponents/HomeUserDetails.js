@@ -1,23 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import DefaultCoverPhoto from "../../assets/profile/user_profile_default_cover.svg";
-import DefaultProfilePhoto from "../../assets/profile/user_profile_default_icon.svg";
 import TrendingIcon from "../../assets/home/left_container/ic_trending.svg";
 import filterIcon from "../../assets/home/left_container/ic_filter.svg";
 import "../../styles/HomePage/HomeMainContainer/HomeUserDetails.css";
 import ButtonHome from "../../components/HomePageComponents/ButtonHome";
 import { useStateValue } from "../../helper/state_provider";
-
-export const handlePhoto = (photo, index) => {
-  if (photo) {
-    return photo
-  }
-  if (index) {
-    return DefaultProfilePhoto;
-  } else {
-    return DefaultCoverPhoto;
-  }
-}
+import { handlePhoto } from "./helper/handle_photo";
 
 function HomeUserDetails() {
 

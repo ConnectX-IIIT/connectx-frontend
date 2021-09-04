@@ -6,8 +6,8 @@ import HomeCardInnerContent from "./../HomePageComponents/HomeCardInnerContent";
 import QuestionSectionButtons from "./QuestionSectionButtons";
 
 import QuestionSectionDiscussionSection from "./QuestionSectionDiscussionSection";
-import { handleTimestamp } from "../HomePageComponents/HomePageCard";
-import { handlePhoto } from "./QuestionSectionMainContainer";
+import { convertTimestamp } from "../HomePageComponents/helper/convert_timestamp";
+import { handlePhoto } from "../HomePageComponents/helper/handle_photo";
 
 function QuestionSectionCard({ answer }) {
 
@@ -20,8 +20,8 @@ function QuestionSectionCard({ answer }) {
         <div className="question-section-card-user-profile">
           <QuestionSectionUserprofile
             UserName={answer.userName}
-            TimeStamp={handleTimestamp(answer.timestamp)}
-            ProfilePhoto={handlePhoto(answer.userProfile)}
+            TimeStamp={convertTimestamp(answer.timestamp)}
+            ProfilePhoto={handlePhoto(answer.userProfile, 1)}
           />
         </div>
         <div className="question-section-read-more-wrapper">

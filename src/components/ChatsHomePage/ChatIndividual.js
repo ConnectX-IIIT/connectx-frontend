@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useStateValue } from "../../helper/state_provider";
 import "../../styles/Chats/ChatIndividual.css";
 import { format } from "timeago.js";
-import { handlePhoto } from "../Queries_Answer/QuestionSectionMainContainer";
+import { handlePhoto } from "../HomePageComponents/helper/handle_photo";
 
 function ChatIndividual({ conversation, isGroup, isActive = false }) {
   const [{ userDetails }, dispatch] = useStateValue();
@@ -57,7 +57,7 @@ function ChatIndividual({ conversation, isGroup, isActive = false }) {
         }
       >
         <img
-          src={handlePhoto(friendProfile)}
+          src={handlePhoto(friendProfile, 1)}
           alt="Default"
           className="ImgChatSection"
         />

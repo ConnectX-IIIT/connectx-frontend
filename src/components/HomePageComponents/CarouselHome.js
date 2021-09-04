@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../../styles/HomePage/HomeMainContainer/CarouselHome.css";
 import Carousel from "react-bootstrap/Carousel";
-import DefaultCoverPhoto from "../../assets/profile/user_profile_default_cover.svg";
+import { handlePhoto } from "./helper/handle_photo";
 
 function CarouselHome({ CarouselImgs }) {
 
@@ -10,13 +10,6 @@ function CarouselHome({ CarouselImgs }) {
   else carouselLenght = true;
 
   const [index, setIndex] = useState(0);
-
-  const handlePhoto = (photo) => {
-    if (photo) {
-      return photo;
-    }
-    return DefaultCoverPhoto;
-  };
 
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
@@ -28,7 +21,7 @@ function CarouselHome({ CarouselImgs }) {
         <img
           key={img.toString()}
           className="d-block w-100 ImgCarouselHome"
-          src={handlePhoto(img)}
+          src={handlePhoto(img, 0)}
           alt="slide"
         />
       </Carousel.Item>
@@ -44,7 +37,7 @@ function CarouselHome({ CarouselImgs }) {
       {carouselLenght ? (
         <img
           className="d-block w-100 ImgCarouselHome"
-          src={handlePhoto(CarouselImgs[0])}
+          src={handlePhoto(CarouselImgs[0], 0)}
           alt="slide"
           style={{
             height: "auto",

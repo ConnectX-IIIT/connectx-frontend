@@ -1,23 +1,16 @@
 import React, { useEffect, useState } from "react";
 import "../../styles/Question/QuestionSectionMainContainer.css";
-import DefaultProfile from "../../assets/profile/user_profile_default_icon.svg";
 import UpvotesSection from "./UpvotesSection";
 import QuestionSectionButtons from "./QuestionSectionButtons";
 import QuestionSectionUserprofile from "./QuestionSectionUserprofile";
 import QuestionSectionInput from "./QuestionSectionInput";
 import QuestionLowerSection from "./QuestionLowerSection";
 import { useStateValue } from "../../helper/state_provider";
-import { handleTimestamp } from "../HomePageComponents/HomePageCard";
 import Cookies from "js-cookie";
 import { useHistory } from "react-router-dom";
 import instance from "../../helper/axios";
-
-export const handlePhoto = (photo) => {
-  if (photo) {
-    return photo;
-  }
-  return DefaultProfile;
-};
+import { convertTimestamp } from "../HomePageComponents/helper/convert_timestamp";
+import { handlePhoto } from "../HomePageComponents/helper/handle_photo";
 
 function QuestionSectionQuestion({ question }) {
 
@@ -30,8 +23,8 @@ function QuestionSectionQuestion({ question }) {
         <QuestionSectionButtons />
         <QuestionSectionUserprofile
           UserName={question.userName}
-          TimeStamp={handleTimestamp(question.timestamp)}
-          ProfilePhoto={handlePhoto(question.userProfile)}
+          TimeStamp={convertTimestamp(question.timestamp)}
+          ProfilePhoto={handlePhoto(question.userProfile, 1)}
           imgOrder="1"
         />
       </div>

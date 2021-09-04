@@ -9,11 +9,10 @@ import homeDownvoteIcon from "../../assets/home/post/upvotes/ic_downvote.svg";
 import homeDownvoteIconHover from "../../assets/home/post/upvotes/h_ic_downvote.svg";
 import homeDownvoteIconSelected from "../../assets/home/post/upvotes/s_ic_downvote.svg";
 import HomeCardInnerContent from "./HomeCardInnerContent";
-import Cookies from "js-cookie";
-import instance from "../../helper/axios";
 import { useHistory } from "react-router-dom";
 import { useStateValue } from "../../helper/state_provider";
-import { handlePhoto } from "../Queries_Answer/QuestionSectionMainContainer";
+import { handlePhoto } from "./helper/handle_photo";
+import { updateUpvotes } from "./helper/update_upvotes";
 
 function DiscussionSection({
   InnerContentDiscussion,
@@ -46,90 +45,10 @@ function DiscussionSection({
     }
   }, [userDetails]);
 
-  async function updateReactions(type) {
-
-    if (!userDetails.isVerified) {
-      return alert("Your verification is under process!");
-    }
-
-    try {
-      const token = Cookies.get("token");
-
-      if (token) {
-        await instance.post(
-          `/discussion/vote/${type}`,
-          {
-            discussionId,
-          },
-          {
-            headers: {
-              Authorization: `${token}`,
-            },
-          }
-        );
-      } else {
-        history.replace("/signin");
-      }
-    } catch (error) {
-      if (error.response.status === 500 || error.response.status === 400) {
-        return alert(`Server error occured!`);
-      }
-      if (error.response.status === 408) {
-        return alert(`Your verification is under process!`);
-      }
-      if (error.response.status === 401) {
-        return;
-      }
-      return alert(`Your session has expired, please login again!`);
-    }
-  }
-
-  async function handleUpvotes() {
-    setUpvoteActive(!UpvoteActive);
-    if (UpvoteActive) {
-      await updateReactions(2);
-      upvotes = upvotes - 1;
-      setUpvotesHandle(upvotes);
-    } else {
-      await updateReactions(1);
-      upvotes = upvotes + 1;
-      setUpvotesHandle(upvotes);
-    }
-  }
-
-  async function handleDownvotes() {
-    setDownvoteActive(!DownvoteActive);
-    if (DownvoteActive) {
-      await updateReactions(4);
-      upvotes = upvotes + 1;
-      setUpvotesHandle(upvotes);
-    } else {
-      const upvotes = await updateReactions(3);
-      upvotes = upvotes - 1;
-      setUpvotesHandle(upvotes);
-    }
-  }
-
-  const handleReaction = (isUpvoted) => {
-    if (DownvoteActive && isUpvoted) {
-      handleUpvotes();
-      handleDownvotes();
-    } else if (UpvoteActive && !isUpvoted) {
-      handleDownvotes();
-      handleUpvotes();
-    } else {
-      if (isUpvoted) {
-        handleUpvotes();
-      } else {
-        handleDownvotes();
-      }
-    }
-  };
-
   return (
     <div className="flex pt-4">
       <img
-        src={handlePhoto(userProfile)}
+        src={handlePhoto(userProfile, 1)}
         alt="userprofile"
         className="object-cover w-10 h-10 mx-5 rounded-full"
       />
@@ -146,7 +65,7 @@ function DiscussionSection({
             }}
             styleImgContainer={{ margin: "0", width: "1.5vw", height: "2vw" }}
             onClickFunction={() => {
-              handleReaction(true);
+              updateUpvotes(userDetails, history, discussionId, UpvoteActive, DownvoteActive, setUpvoteActive, setDownvoteActive, UpvotesHandle, setUpvotesHandle, true, false);
             }}
             isActive={UpvoteActive}
           />
@@ -167,7 +86,7 @@ function DiscussionSection({
             }}
             styleImgContainer={{ margin: "0", width: "1.5vw", height: "2vw" }}
             onClickFunction={() => {
-              handleReaction(false);
+              updateUpvotes(userDetails, history, discussionId, UpvoteActive, DownvoteActive, setUpvoteActive, setDownvoteActive, UpvotesHandle, setUpvotesHandle, false, false);
             }}
             isActive={DownvoteActive}
           />

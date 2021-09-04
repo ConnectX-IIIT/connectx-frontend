@@ -3,39 +3,12 @@ import { useStateValue } from "../../helper/state_provider";
 import { handleMessage } from "../ConnectionsHomePage/ConnectionIndividualComponent";
 import "../../styles/HomePage/HomeMainContainer/ButtonHome.css";
 import { useHistory } from "react-router-dom";
-import Cookies from "js-cookie";
-import instance from "../../helper/axios";
+import { fetchUserDetails } from "./helper/fetch_user_details";
 
 function ButtonHome({ content, styleButton, jobLink, filter, postUserId }) {
 
   const history = useHistory();
   const [{ userDetails, postFilter }, dispatch] = useStateValue();
-
-  async function fetchData(userId) {
-    try {
-      const token = Cookies.get("token");
-
-      if (!userDetails.isVerified) {
-        return alert(`Your verification is under process!`);
-      }
-
-      if (token) {
-        const getDetailsRes = await instance.get(`/user/getdetails/${userId}`, {
-          headers: {
-            Authorization: `${token}`,
-          },
-        });
-
-        const userData = await getDetailsRes.data.userData;
-        return userData;
-      }
-    } catch (error) {
-      if (error.response.status === 500) {
-        return alert(`Server error occured!`);
-      }
-      return alert(`Your session has expired, please login again!`);
-    }
-  }
 
   const handleSubmit = async (e) => {
 
@@ -53,7 +26,7 @@ function ButtonHome({ content, styleButton, jobLink, filter, postUserId }) {
     }
 
     if (postUserId) {
-      const userData = await fetchData(postUserId);
+      const userData = await fetchUserDetails(userDetails, postUserId);
       if (userData) {
         handleMessage(userData, userDetails, dispatch, history)(e);
       }

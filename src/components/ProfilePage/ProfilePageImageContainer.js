@@ -6,7 +6,7 @@ import photoIconWhite from "../../assets/profile_page/ic_camera_white.svg";
 import { useStateValue } from "../../helper/state_provider";
 import Cookies from "js-cookie";
 import instance from "../../helper/axios";
-import { handlePhoto } from "../Queries_Answer/QuestionSectionMainContainer";
+import { handlePhoto } from "../HomePageComponents/helper/handle_photo";
 
 function ProfilePageImageContainer() {
 
