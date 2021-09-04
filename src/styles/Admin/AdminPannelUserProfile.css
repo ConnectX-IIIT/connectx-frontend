@@ -1,0 +1,15 @@
+.admin-pannel-user-profile-right-wrapper{
+    height:100%;
+    border: 1px solid #444444;
+ 
+    border-radius: 6px;
+}
+.user-profile-image-wrapper{
+    height: 15.5vw;
+    
+}
+.user-profile-cover-photo{
+    height: 100%;
+    width:100%;
+    object-fit: cover;
+}
