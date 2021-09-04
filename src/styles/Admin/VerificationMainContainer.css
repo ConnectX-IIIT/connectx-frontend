@@ -1,0 +1,12 @@
+.admin-pannel-verification-main-container{
+    width:100%;
+    padding-left: 6vw;
+    padding-right: 6vw;
+    display: grid;
+    grid-template-columns: 24.3vw 1fr;
+    grid-gap: 2.2vw ;
+    padding-top:3.15vw;
+}
+.admin-pannel-left-container{
+    height: 36vw;
+}
