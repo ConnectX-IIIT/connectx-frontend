@@ -12,16 +12,15 @@ import ChatsMainContainer from "./ChatsHomePage/ChatsMainContainer";
 import QuestionSectionMainContainer from "./Queries_Answer/QuestionSectionMainContainer";
 import SearchBarPopOutPeople from "./HomePageComponents/SearchBarPopOutPeople";
 import SearchBarPopOutQueries from "./HomePageComponents/SearchBarPopOutQueries";
-import instance from "../helper/axios";
-import Cookies from "js-cookie";
-
-let PopoutPeople = [];
-let PopoutQueries = [];
+import { handleInputSearch } from "./general_helper/home/search";
 
 export const Home = () => {
-  const history = useHistory();
 
-  const PopoutPeopleList = PopoutPeople.map((item, index) => {
+  const history = useHistory();
+  const [popoutPeople, setPopoutPeople] = useState([]);
+  const [popoutQueries, setPopoutQueries] = useState([]);
+
+  const PopoutPeopleList = popoutPeople.map((item, index) => {
     return (
       <SearchBarPopOutPeople
         UserProfileSrc={item.profilePicture}
@@ -32,7 +31,7 @@ export const Home = () => {
     );
   });
 
-  const PopoutQueriesList = PopoutQueries.map((item, index) => {
+  const PopoutQueriesList = popoutQueries.map((item, index) => {
     return (
       <SearchBarPopOutQueries SearchBarQueries={item.question} key={index} />
     );
@@ -42,40 +41,6 @@ export const Home = () => {
     searchedText: "",
   });
 
-  const handleInput = async (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setUserInput({ ...userInput, [name]: value });
-
-    if (value.length === 0) {
-      PopoutPeople = [];
-      return;
-    }
-
-    try {
-      const token = Cookies.get("token");
-
-      if (token) {
-        const getSearchRes = await instance.get(`/home/search/${value}`, {
-          headers: {
-            Authorization: `${token}`,
-          },
-        });
-
-        const userData = await getSearchRes.data.userData;
-        const queriesData = await getSearchRes.data.questionData;
-        PopoutPeople = userData;
-        PopoutQueries = queriesData;
-      } else {
-        history.replace("/signin");
-      }
-    } catch (error) {
-      if (error.response.status === 500) {
-        return alert(`Server error occured!`);
-      }
-      return alert(`Your session has expired, please login again!`);
-    }
-  };
   const [isSearchBarClicked, setIsSearchBarClicked] = useState(false);
 
   function onSearchBarClick() {
@@ -92,7 +57,7 @@ export const Home = () => {
         inputName={userInput.searchedText}
         isSearchBarClicked={onSearchBarClick}
         onSearchBarBlur={onSearchBarBlur}
-        onChangeFunction={handleInput}
+        onChangeFunction={(e) => handleInputSearch(history, userInput, setUserInput, setPopoutPeople, setPopoutQueries)(e)}
       />
       <div
         className="OnSearchDisplay"

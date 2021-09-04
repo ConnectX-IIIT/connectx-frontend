@@ -4,12 +4,10 @@ import FormInput from "./signUpCompontents/FormInput";
 import Button from "./signUpCompontents/Button";
 import SignUpFormBottom from "./signUpCompontents/SignUpFormBottom";
 import FooterCopyRight from "./signUpCompontents/FooterCopyRight";
-import emailValidator from "email-validator";
-import { passwordValidate } from "../helper/password_validator";
-import Cookies from "js-cookie";
-import instance from "../helper/axios";
 import "../styles/SignIn/SignIn.css";
 import { useStateValue } from "../helper/state_provider";
+import { handleSignIn } from "./general_helper/signin/signin";
+import { handleForgotPassword } from "./general_helper/signin/forgot_password";
 
 function SignIn() {
 
@@ -26,96 +24,9 @@ function SignIn() {
     setUserRegistration({ ...userRegistration, [name]: value });
   };
 
-  const handleForgotPassword = async (e) => {
-    e.preventDefault();
-    let email = userRegistration.email;
-
-    if (!email) {
-      return alert('Please enter your registered email!');
-    }
-
-    let emailValidation = emailValidator.validate(email);
-
-    if (!emailValidation) {
-      return alert("Enter a valid email");
-    }
-
-    try {
-      await instance.post(`/auth/forgotpassword`,
-        { email }
-      )
-      alert('Link to reset your password has been sent to your email!')
-
-    } catch (error) {
-      if (error.response.status === 500) {
-        return alert(`Server error occured!`);
-      }
-      if (error.response.status === 400) {
-        return alert(`Enter a valid email!`);
-      }
-      return alert(`Enter registered email!`);
-
-    }
-  }
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    let email = userRegistration.email;
-    let password = userRegistration.password;
-
-    if (!email || !password) {
-      return alert("Please fill all details properly!");
-    }
-
-    let emailValidation = emailValidator.validate(email);
-
-    if (!emailValidation) {
-      return alert("Enter a valid email");
-    }
-
-    let passwordValidation = passwordValidate(password);
-
-    if (!passwordValidation[0]) {
-      return alert(`${passwordValidation[1]}`);
-    }
-
-    try {
-      const signinRes = await instance.post(`/auth/signin`,
-        { email, password }
-      )
-
-      const signinData = signinRes.data;
-
-      const userData = signinData.userData;
-
-      dispatch({
-        type: 'UPDATE_DETAILS',
-        userData: userData
-      })
-
-      Cookies.set("token", signinData.token, { expires: 30, secure: true });
-
-      history.push('/home');
-
-    } catch (error) {
-      if (error.response.status === 500) {
-        return alert(`Server error occured!`);
-      }
-      if (error.response.status === 400) {
-        return alert(`Please fill all the details properly!`);
-      }
-      if (error.response.status === 401) {
-        return alert(`User does not exist!`);
-      }
-      return alert(`Incorrect password!`);
-    }
-  };
-
-
   return (
     <div className="SignInMainPage">
-      <form action="" onSubmit={handleSubmit} className="SignInPageForm">
+      <form action="" onSubmit={(e) => handleSignIn(history, dispatch, userRegistration)(e)} className="SignInPageForm">
         <p id="signinpagepara">Sign In</p>
         <FormInput
           inputType="email"
@@ -133,7 +44,7 @@ function SignIn() {
         />
         <Button />
         <SignUpFormBottom />
-        <Link to='/signin' onClick={handleForgotPassword} id="SignUpformBottomAnchor">
+        <Link to='/signin' onClick={(e) => handleForgotPassword(userRegistration)(e)} id="SignUpformBottomAnchor">
           Forgot Password?
         </Link>
       </form>

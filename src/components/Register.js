@@ -3,9 +3,8 @@ import Button from "./signUpCompontents/Button";
 import FooterCopyRight from "./signUpCompontents/FooterCopyRight";
 import "../styles/Register/Register.css";
 import { useStateValue } from "../helper/state_provider";
-import instance from "../helper/axios";
 import { useHistory } from "react-router-dom";
-import Cookies from "js-cookie";
+import { addExtraDetails } from "./general_helper/register/add_extra_details";
 
 const Batch = ["IPG-MTech", "IPG-MBA", "BCS", "MTech", "PhD"];
 const BatchList = Batch.map((batch) => {
@@ -42,6 +41,7 @@ const joiningyearList = joiningYear.map((year) => {
 });
 
 function Register() {
+
   const history = useHistory();
   const [{ userDetails }] = useStateValue();
 
@@ -56,77 +56,13 @@ function Register() {
     currentrole: "",
     gender: "",
   });
+
   const handleInput = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     setUserRegistration({ ...userRegistration, [name]: value });
   };
-  const handleSubmit = async (e) => {
-    e.preventDefault();
 
-    let mobile = userRegistration.mobileNumber;
-    let description = userRegistration.about;
-    let PassingYear = userRegistration.passingYear;
-    let JoiningYear = userRegistration.joiningYear;
-    let batch = userRegistration.batch;
-    let currentRole = userRegistration.currentrole;
-    let Gender = userRegistration.gender;
-    let isAlumni;
-
-    if (
-      !mobile ||
-      !description ||
-      !JoiningYear ||
-      !PassingYear ||
-      !batch ||
-      !currentrole ||
-      !gender
-    ) {
-      return alert("Please fill all details properly!");
-    }
-
-    if (mobile.length !== 10) {
-      return alert("Mobile should be of length 10!");
-    }
-
-    if (currentRole === "Alumni") {
-      isAlumni = true;
-    } else {
-      isAlumni = false;
-    }
-
-    const token = Cookies.get("token");
-
-    try {
-      await instance.post(`/auth/addextradetails`, {
-        mobile,
-        description,
-        passingYear: PassingYear,
-        joiningYear: JoiningYear,
-        batch,
-        isAlumni,
-        gender: Gender
-      },
-        {
-          headers: {
-            Authorization: `${token}`,
-          },
-        }
-      );
-
-      history.replace("/photoupload");
-
-    } catch (error) {
-      if (error.response.status === 500) {
-        return alert(`Server error occured!`);
-      }
-      if (error.response.status === 400) {
-        return alert(`Please fill all the details properly!`);
-      }
-      return alert(`Your session has expired, please login again!`);
-
-    }
-  };
   const [isActive, setActive] = useState(false);
   const [isActiveAbout, setActiveAbout] = useState(false);
 
@@ -211,7 +147,7 @@ function Register() {
 
   return (
     <div className="RegisterMainPage">
-      <form action="" onSubmit={handleSubmit} className="RegisterPageForm">
+      <form action="" onSubmit={(e) => addExtraDetails(history, userRegistration)(e)} className="RegisterPageForm">
         <div className="registerFromInput">
           <input
             type="number"
