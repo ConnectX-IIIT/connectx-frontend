@@ -6,51 +6,20 @@ import reportIcon from "../../assets/_general/reporting_icon.svg";
 
 import "../../styles/Chats/ChatGroupInformation.css";
 import ChatGroupMember from "./ChatGroupMember";
-import Cookies from "js-cookie";
-import instance from "../../helper/axios";
 import { handlePhoto } from "../HomePageComponents/helper/handle_photo";
+import { updateGroupProfilePicture } from "./helper/update_group_profile";
+import { useHistory } from "react-router-dom";
 
 function ChatGroupInformation({ closingFunction, closingState, groupDetails }) {
+
+  const history = useHistory();
   const [updateGroupDetails, setUpdateGroupDetails] = useState({
     groupPhoto: "",
   });
 
-  const handleSubmit = async () => {
-
-    const token = Cookies.get("token");
-    console.log(updateGroupDetails);
-    if (!updateGroupDetails.groupPhoto) {
-      return;
-    }
-
-    const photoHeight = document.getElementsByClassName("chat-group-image")[0].naturalHeight;
-    const photoWidth = document.getElementsByClassName("chat-group-image")[0].naturalWidth;
-    const formData = new FormData();
-    formData.append("height", photoHeight);
-    formData.append("width", photoWidth);
-    formData.append("photo", updateGroupDetails.groupPhoto);
-
-    try {
-      await instance.post(`/group/updateprofile`, formData, {
-        headers: {
-          Authorization: `${token}`,
-        },
-      });
-
-    } catch (error) {
-      if (error.response.status === 500) {
-        return alert(`Server error occured!`);
-      }
-      if (error.response.status === 400) {
-        return alert("You can't change group profile picture!");
-      }
-      return alert(`Your session has expired, please login again!`);
-    }
-  };
-
   useEffect(() => {
     if (updateGroupDetails.groupPhoto) {
-      handleSubmit();
+      updateGroupProfilePicture(updateGroupDetails, history);
     }
   }, [updateGroupDetails])
 

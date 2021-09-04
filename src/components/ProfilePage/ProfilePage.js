@@ -10,6 +10,7 @@ import ProfilePagePost from "./ProfilePagePost";
 import ProfilePageQuestion from "./ProfilePageQuestion";
 import ProfilePageAnswer from "./ProfilePageAnswer";
 import ProfileEditPage from "./ProfileEditPage";
+
 function ProfilePage() {
   return (
     <div className="relative">

@@ -4,9 +4,13 @@ import instance from "../../../helper/axios";
 export const handleDeletePost = (userDetails, PostId, history) => async (e) => {
     e.preventDefault();
 
-    try {
-        const token = Cookies.get("token");
+    const token = Cookies.get("token");
 
+    if (!token) {
+        history.replace("/signin");
+    }
+
+    try {
         if (!userDetails.isMailVerified) {
             return alert("Please verify your mail!");
         }
@@ -16,16 +20,12 @@ export const handleDeletePost = (userDetails, PostId, history) => async (e) => {
         if (!userDetails.posts.includes(PostId)) {
             return alert("You can't remove this post!");
         }
+        await instance.get(`/post/remove/${PostId}`, {
+            headers: {
+                Authorization: `${token}`,
+            },
+        });
 
-        if (token) {
-            await instance.get(`/post/remove/${PostId}`, {
-                headers: {
-                    Authorization: `${token}`,
-                },
-            });
-        } else {
-            history.replace("/signin");
-        }
     } catch (error) {
         if (error.response.status === 500) {
             return alert(`Server error occured!`);

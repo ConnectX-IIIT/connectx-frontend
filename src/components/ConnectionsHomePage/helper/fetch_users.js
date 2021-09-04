@@ -1,7 +1,7 @@
 import Cookies from "js-cookie";
 import instance from "../../../helper/axios";
 
-export const fetchPosts = async (history, index, setPostData) => {
+export const fetchUsers = async (history, setUserData) => {
 
     const token = Cookies.get("token");
 
@@ -10,14 +10,14 @@ export const fetchPosts = async (history, index, setPostData) => {
     }
 
     try {
-        const getDetailsRes = await instance.get(`/post/getposts/${index}`, {
+        const getDetailsRes = await instance.get(`/home/fetchusers`, {
             headers: {
                 Authorization: `${token}`,
             },
         });
 
-        const data = getDetailsRes.data.postData;
-        setPostData(data);
+        const userDetails = await getDetailsRes.data.userData;
+        setUserData(userDetails)
 
     } catch (error) {
         if (error.response.status === 500) {
@@ -25,4 +25,4 @@ export const fetchPosts = async (history, index, setPostData) => {
         }
         return alert(`Your session has expired, please login again!`);
     }
-};
+}

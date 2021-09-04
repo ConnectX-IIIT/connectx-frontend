@@ -1,9 +1,9 @@
 import React from "react";
 import { useStateValue } from "../../helper/state_provider";
-import { handleMessage } from "../ConnectionsHomePage/ConnectionIndividualComponent";
 import "../../styles/HomePage/HomeMainContainer/ButtonHome.css";
 import { useHistory } from "react-router-dom";
 import { fetchUserDetails } from "./helper/fetch_user_details";
+import { handleMessage } from "../ConnectionsHomePage/helper/handle_message";
 
 function ButtonHome({ content, styleButton, jobLink, filter, postUserId }) {
 
@@ -26,7 +26,7 @@ function ButtonHome({ content, styleButton, jobLink, filter, postUserId }) {
     }
 
     if (postUserId) {
-      const userData = await fetchUserDetails(userDetails, postUserId);
+      const userData = await fetchUserDetails(userDetails, history, postUserId);
       if (userData) {
         handleMessage(userData, userDetails, dispatch, history)(e);
       }

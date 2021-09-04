@@ -4,12 +4,13 @@ import "../../styles/ProfilePage/ProfilePageImageContainer.css";
 import photoIcon from "../../assets/profile_page/ic_camera.svg";
 import photoIconWhite from "../../assets/profile_page/ic_camera_white.svg";
 import { useStateValue } from "../../helper/state_provider";
-import Cookies from "js-cookie";
-import instance from "../../helper/axios";
 import { handlePhoto } from "../HomePageComponents/helper/handle_photo";
+import { useHistory } from "react-router-dom";
+import { uploadPhoto } from "./helper/upload_photo";
 
 function ProfilePageImageContainer() {
 
+  const history = useHistory();
   const [{ userDetails }, dispatch] = useStateValue();
   const [updatedDetails, setUpdatedDetails] = useState({
     photoIndex: null,
@@ -17,89 +18,9 @@ function ProfilePageImageContainer() {
     profilePhoto: "",
   });
 
-  const handleSubmit = async (index) => {
-
-    const token = Cookies.get("token");
-
-    if (!updatedDetails.profilePhoto && !updatedDetails.coverPhoto) {
-      return;
-    }
-
-    const photoHeight = document.getElementsByClassName("profile-page-images")[index].naturalHeight;
-    const photoWidth = document.getElementsByClassName("profile-page-images")[index].naturalWidth;
-    let type;
-    let photoURL;
-    const formDataForProfile = new FormData();
-    formDataForProfile.append("height", photoHeight);
-    formDataForProfile.append("width", photoWidth);
-
-    if (index) {
-      formDataForProfile.append("photo", updatedDetails.profilePhoto);
-      formDataForProfile.append("type", true);
-      type = true;
-      photoURL = userDetails.profilePicture;
-    } else {
-      formDataForProfile.append("photo", updatedDetails.coverPhoto);
-      formDataForProfile.append("type", false);
-      type = false;
-      photoURL = userDetails.backgroundPicture;
-    }
-
-    try {
-      if (photoURL) {
-        await instance.post(
-          `/user/removephoto`,
-          {
-            type,
-            photoURL,
-          },
-          {
-            headers: {
-              Authorization: `${token}`,
-            },
-          }
-        );
-      }
-
-      const uploadRes = await instance.post(`/user/upload`, formDataForProfile, {
-        headers: {
-          Authorization: `${token}`,
-        },
-      });
-      const pictureURL = await uploadRes.data.url;
-
-      if (updatedDetails.photoIndex) {
-        await dispatch({
-          type: "UPDATE_PROFILE",
-          url: pictureURL,
-        });
-      } else {
-        await dispatch({
-          type: "UPDATE_BACKGROUND",
-          url: pictureURL,
-        });
-      }
-
-      setUpdatedDetails({
-        coverPhoto: "",
-        profilePhoto: "",
-        photoIndex: null
-      });
-
-    } catch (error) {
-      if (error.response.status === 500) {
-        return alert(`Server error occured!`);
-      }
-      if (error.response.status === 400) {
-        return;
-      }
-      return alert(`Your session has expired, please login again!`);
-    }
-  };
-
   useEffect(() => {
     if ((updatedDetails.coverPhoto || updatedDetails.profilePhoto) && (updatedDetails.photoIndex === 0 || updatedDetails.photoIndex === 1)) {
-      handleSubmit(updatedDetails.photoIndex);
+      uploadPhoto(userDetails, history, dispatch, updatedDetails, setUpdatedDetails, updatedDetails.photoIndex);
     }
   }, [updatedDetails])
 
