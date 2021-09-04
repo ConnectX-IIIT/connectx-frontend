@@ -13,6 +13,7 @@ import instance from "./helper/axios";
 import { useStateValue } from "./helper/state_provider";
 import ResetPassword from "./components/ResetPassword";
 import Admin from "./components/Admin";
+import CreatePostImagesPreviewTempCompPrimary from "./components/CreatePost/CreatePostImagesPreviewTempCompPrimary";
 
 function App() {
   const [{ userDetails }, dispatch] = useStateValue();
@@ -60,6 +61,11 @@ function App() {
         <Route path="/home" component={Home} />
         <Route exact path="/photoupload" component={PhotoUpload} />
         <Route exact path="/admin" component={Admin} />
+        <Route
+          exact
+          path="/123"
+          component={CreatePostImagesPreviewTempCompPrimary}
+        />
       </Switch>
     </Router>
   );
