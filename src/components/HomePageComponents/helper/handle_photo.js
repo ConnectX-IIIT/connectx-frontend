@@ -3,7 +3,7 @@ import DefaultProfilePhoto from "../../../assets/profile/user_profile_default_ic
 
 export const handlePhoto = (photo, index) => {
     if (photo) {
-        return photo
+        return photo;
     }
     if (index) {
         return DefaultProfilePhoto;

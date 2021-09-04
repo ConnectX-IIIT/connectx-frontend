@@ -4,6 +4,12 @@ import instance from "../../../helper/axios";
 export const addDiscussion = (userDetails, history, content, postId, reference) => async (e) => {
     e.preventDefault();
 
+    const token = Cookies.get("token");
+
+    if (!token) {
+        history.replace("/signin");
+    }
+
     if (!userDetails.isMailVerified) {
         return alert("Please verify your mail!");
     }
@@ -17,25 +23,20 @@ export const addDiscussion = (userDetails, history, content, postId, reference) 
     }
 
     try {
-        const token = Cookies.get("token");
-
-        if (token) {
-            await instance.post(
-                `/post/adddiscussion`,
-                {
-                    content,
-                    postId,
-                    reference,
+        await instance.post(
+            `/post/adddiscussion`,
+            {
+                content,
+                postId,
+                reference,
+            },
+            {
+                headers: {
+                    Authorization: `${token}`,
                 },
-                {
-                    headers: {
-                        Authorization: `${token}`,
-                    },
-                }
-            );
-        } else {
-            history.replace("/signin");
-        }
+            }
+        );
+
     } catch (error) {
         if (error.response.status === 500) {
             return alert(`Server error occured!`);

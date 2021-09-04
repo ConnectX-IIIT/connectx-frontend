@@ -3,6 +3,12 @@ import instance from "../../../helper/axios";
 
 export const upvotePost = async (userDetails, history, PostId, type) => {
 
+    const token = Cookies.get("token");
+
+    if (!token) {
+        history.replace("/signin");
+    }
+
     if (!userDetails.isMailVerified) {
         return alert("Please verify your mail!");
     }
@@ -12,23 +18,18 @@ export const upvotePost = async (userDetails, history, PostId, type) => {
     }
 
     try {
-        const token = Cookies.get("token");
-
-        if (token) {
-            await instance.post(
-                `/post/vote/${type}`,
-                {
-                    postId: PostId,
+        await instance.post(
+            `/post/vote/${type}`,
+            {
+                postId: PostId,
+            },
+            {
+                headers: {
+                    Authorization: `${token}`,
                 },
-                {
-                    headers: {
-                        Authorization: `${token}`,
-                    },
-                }
-            );
-        } else {
-            history.replace("/signin");
-        }
+            }
+        );
+
     } catch (error) {
         if (error.response.status === 500 || error.response.status === 400) {
             return alert(`Server error occured!`);

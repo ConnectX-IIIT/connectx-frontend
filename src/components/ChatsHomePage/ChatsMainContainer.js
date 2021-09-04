@@ -5,13 +5,14 @@ import SearchIcon from "../../assets/home/top_navbar/ic_search_icon.svg";
 import ChatSingleTextComponent from "./ChatSingleTextComponent";
 import ChatIndividual from "./ChatIndividual";
 import sendbutton from "../../assets/chats/send_btn.svg";
-import Cookies from "js-cookie";
-import instance from "../../helper/axios";
 import { useHistory } from "react-router-dom";
 import { useStateValue } from "../../helper/state_provider";
 import socketIo from "socket.io-client";
 import ChatGroupInformation from "./ChatGroupInformation";
 import { handlePhoto } from "../HomePageComponents/helper/handle_photo";
+import { fetchConversations } from "./helper/fetch_conversations";
+import { fetchMessages } from "./helper/fetch_messages";
+import { addMessage } from "./helper/add_message";
 
 function MessageMainContainer(props) {
   const history = useHistory();
@@ -137,88 +138,9 @@ function MessageMainContainer(props) {
     });
   }, [userDetails]);
 
-  const fetchConversations = async (e) => {
-    try {
-      const token = Cookies.get("token");
-
-      if (token) {
-        const getConversationsRes = await instance.post(
-          `/conversation/getconversations`,
-          {
-            conversationIds: userDetails.conversations,
-            batch: userDetails.batch,
-            joiningYear: userDetails.joiningYear,
-          },
-          {
-            headers: {
-              Authorization: `${token}`,
-            },
-          }
-        );
-
-        const conversationData = await getConversationsRes.data.conversations;
-        const groupData = await getConversationsRes.data.group;
-        await conversationData.push(groupData);
-
-        for (let i = 0; i < conversationData.length; i = i + 1) {
-          if (i === conversationData.length - 1) {
-            conversationData[i]["isGroup"] = true;
-          } else {
-            conversationData[i]["isGroup"] = false;
-          }
-        }
-        setConversations(conversationData);
-      } else {
-        history.replace("/signin");
-      }
-    } catch (error) {
-      if (error.response.status === 500) {
-        return alert(`Server error occured!`);
-      }
-      return alert(`Your session has expired, please login again!`);
-    }
-  };
-
-  const fetchMessages = async (e) => {
-    if (!currentChat) {
-      return;
-    }
-    if (!userDetails.isVerified) {
-      return alert("Your verification is under process!");
-    }
-
-    try {
-      const token = Cookies.get("token");
-
-      if (token) {
-        const getMessagesRes = await instance.get(
-          `/message/getmessages/${currentChat._id}`,
-          {
-            headers: {
-              Authorization: `${token}`,
-            },
-          }
-        );
-
-        const data = await getMessagesRes.data.messages;
-        setMessages(data);
-      } else {
-        history.replace("/signin");
-      }
-    } catch (error) {
-      if (error.response.status === 500) {
-        return alert(`Server error occured!`);
-      }
-      if (error.response.status === 408) {
-        return alert(`Your verification is under process!`);
-      }
-      return alert(`Your session has expired, please login again!`);
-    }
-  };
-
   useEffect(() => {
     if (userDetails.name) {
-      fetchConversations();
+      fetchConversations(userDetails, history, setConversations);
     }
   }, [userDetails]);
 
@@ -230,90 +152,18 @@ function MessageMainContainer(props) {
           tempArr.push(false);
         }
       }
-
       setCurrentActiveStates(tempArr);
     }
   }, [conversations, arrivalMessage, newMessage]);
 
   useEffect(() => {
-    fetchMessages();
+    fetchMessages(userDetails, history, currentChat, setMessages);
   }, [currentChat]);
 
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (!newMessage || !currentChat || !newMessage.replace(/\s/g, "").length) {
-      return;
-    }
-
-    if (!userDetails.isVerified) {
-      return alert("Your verification is under process!");
-    }
-
-    let receiverId = "";
-    if (!currentChat.isGroup) {
-      receiverId = await currentChat.userIds.find(
-        (id) => id !== userDetails._id
-      );
-    }
-
-    socket.current.emit("sendMessage", {
-      senderId: userDetails._id,
-      receiverId,
-      senderName: userDetails.name,
-      text: newMessage,
-      isGroup: currentChat.isGroup,
-    });
-
-    try {
-      const token = Cookies.get("token");
-
-      if (token) {
-        const addMessagesRes = await instance.post(
-          `/message/addmessage/${currentChat._id}`,
-          {
-            message: newMessage,
-            name: userDetails.name,
-            isGroup: currentChat.isGroup,
-            reference: "",
-          },
-          {
-            headers: {
-              Authorization: `${token}`,
-            },
-          }
-        );
-
-        const msg = await addMessagesRes.data.message;
-        setMessages([...messages, msg]);
-        setNewMessage("");
-
-        let conversationList = conversations;
-        let index = conversationList.indexOf(currentChat);
-        conversationList[index].lastMessage = newMessage;
-        conversationList[index].lastModified = Date.now();
-        setConversations(conversationList);
-      } else {
-        history.replace("/signin");
-      }
-    } catch (error) {
-      console.log(error);
-      if (error.response.status === 500) {
-        return alert(`Server error occured!`);
-      }
-      if (error.response.status === 400) {
-        return alert(`You can't send empty message!`);
-      }
-      if (error.response.status === 408) {
-        return alert(`Your verification is under process!`);
-      }
-      return alert(`Your session has expired, please login again!`);
-    }
-  };
   function updateCurrentActiveChat(i) {
     let tempArr = [];
     for (let index = 0; index < conversations.length; index++) {
@@ -355,7 +205,7 @@ function MessageMainContainer(props) {
       <form
         action=""
         className="MessageMainContainerForm"
-        onSubmit={handleSubmit}
+        onSubmit={addMessage(userDetails, history, newMessage, currentChat, socket, messages, conversations, setMessages, setNewMessage, setConversations)}
         style={
           currentChat?.isGroup && isGroupsSectionOpen
             ? { right: "3%", bottom: "0" }
@@ -439,8 +289,7 @@ function MessageMainContainer(props) {
                   currentChat.isGroup
                     ? currentChat.profilePicture
                     : currentChat.userProfiles.find(
-                      (profile) => profile !== userDetails.profilePicture
-                      , 1)
+                      (profile) => profile !== userDetails.profilePicture), 1
                 )}
                 alt="profile"
                 className="ImgChatSection"
