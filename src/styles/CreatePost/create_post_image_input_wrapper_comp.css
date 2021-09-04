@@ -1,0 +1,35 @@
+.create-post-preview-images-primary-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  width: fit-content;
+}
+
+.create-post-preview-images-secondary-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.create-post-input-img-input-button-wrapper {
+  background-color: #e1e1e1;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.1s ease-in-out;
+  cursor: pointer;
+}
+.create-post-input-img-input-button-wrapper:hover {
+  background-color: #e9e9e9;
+}
+.create-post-input-img-input-button {
+  display: none;
+}
+
+.create-post-input-img-input-button-plus-icon{
+  pointer-events: none;
+}
