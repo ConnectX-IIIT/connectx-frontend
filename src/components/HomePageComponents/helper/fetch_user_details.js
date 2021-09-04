@@ -1,7 +1,7 @@
 import Cookies from "js-cookie";
 import instance from "../../../helper/axios";
 
-export const fetchUserDetails = async (userDetails, userId) => {
+export const fetchUserDetails = async (userDetails, history, userId) => {
     try {
         const token = Cookies.get("token");
 
@@ -18,6 +18,8 @@ export const fetchUserDetails = async (userDetails, userId) => {
 
             const userData = await getDetailsRes.data.userData;
             return userData;
+        } else {
+            history.push('/signin');
         }
     } catch (error) {
         if (error.response.status === 500) {

@@ -26,7 +26,7 @@ function ButtonHome({ content, styleButton, jobLink, filter, postUserId }) {
     }
 
     if (postUserId) {
-      const userData = await fetchUserDetails(userDetails, postUserId);
+      const userData = await fetchUserDetails(userDetails, history, postUserId);
       if (userData) {
         handleMessage(userData, userDetails, dispatch, history)(e);
       }

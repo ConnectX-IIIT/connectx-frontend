@@ -5,7 +5,9 @@ import "../../styles/ProfilePage/ProfilePageInformationContainer.css";
 import penIcon from "../../assets/profile/pen.svg";
 
 function ProfilePageInformationContainer() {
+
   const [{ userDetails }, dispatch] = useStateValue();
+
   return (
     <div className="profile-page-information-container-wrapper">
       <div className="profile-page-information-container">
