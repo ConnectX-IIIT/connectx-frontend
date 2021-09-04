@@ -335,7 +335,7 @@ function HomePageCard({
                   color: "#FF6969",
                   backgroundColor: "#FFEDED",
                 }}
-                onClickFunction={(e) => handleDeletePost(e)(userDetails, PostId, history)}
+                onClickFunction={(e) => handleDeletePost(userDetails, PostId, history)(e)}
               />
             </div>
             <img
