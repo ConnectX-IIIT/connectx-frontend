@@ -2,11 +2,10 @@ import React, { useEffect, useState } from "react";
 import CreatePostInput from "./../CreatePost/CreatePostInput";
 import SortComponent from "./SortComponent";
 import HomePageCard from "./../HomePageComponents/HomePageCard";
-import Cookies from "js-cookie";
-import instance from "../../helper/axios";
 import { useHistory } from "react-router-dom";
 import { useStateValue } from "../../helper/state_provider";
 import { handlePhoto } from "../HomePageComponents/helper/handle_photo";
+import { fetchQuestions } from "./helper/fetch_questions";
 
 function QueriesQuestionContainer() {
   const history = useHistory();
@@ -17,14 +16,8 @@ function QueriesQuestionContainer() {
   });
 
   useEffect(() => {
-    fetchQuestionData();
+    fetchQuestions(history, setQuestionData);
   }, []);
-
-  const handleInput = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setUserQueries({ ...UserQueries, [name]: value });
-  };
 
   const handleQuestionClick = (question) => async (e) => {
     e.preventDefault();
@@ -35,30 +28,6 @@ function QueriesQuestionContainer() {
     });
     history.push(`/home/question/${question._id}`);
   }
-
-  const fetchQuestionData = async (e) => {
-    try {
-      const token = Cookies.get("token");
-
-      if (token) {
-        const getQuestionsRes = await instance.get(`/question/getquestions/1`, {
-          headers: {
-            Authorization: `${token}`,
-          },
-        });
-
-        const questions = getQuestionsRes.data.questions;
-        setQuestionData(questions);
-      } else {
-        history.replace("/signin");
-      }
-    } catch (error) {
-      if (error.response.status === 500) {
-        return alert(`Server error occured!`);
-      }
-      return alert(`Your session has expired, please login again!`);
-    }
-  };
 
   const HomePageQuestionsList = questionData.map((item, index) => {
     return (

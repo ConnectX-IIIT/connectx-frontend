@@ -1,12 +1,19 @@
 import Cookies from "js-cookie";
 import instance from "../../../helper/axios";
 
-export const upvoteDiscussion = async (userDetails, history, discussionId, type) => {
+export const addQuestion = (userDetails, history, UserQueries) => async (e) => {
+    e.preventDefault();
 
     const token = Cookies.get("token");
 
     if (!token) {
         history.replace("/signin");
+    }
+
+    const question = UserQueries.askedQuestion;
+
+    if (!question) {
+        return alert("Please enter a question!");
     }
 
     if (!userDetails.isVerified) {
@@ -15,9 +22,9 @@ export const upvoteDiscussion = async (userDetails, history, discussionId, type)
 
     try {
         await instance.post(
-            `/discussion/vote/${type}`,
+            `/home/addquestion`,
             {
-                discussionId,
+                question,
             },
             {
                 headers: {
@@ -25,17 +32,20 @@ export const upvoteDiscussion = async (userDetails, history, discussionId, type)
                 },
             }
         );
+        document
+            .getElementById("QueriesAskQuestionContainer")
+            .classList.toggle("hidden");
 
     } catch (error) {
-        if (error.response.status === 500 || error.response.status === 400) {
+        if (error.response.status === 500) {
             return alert(`Server error occured!`);
+        }
+        if (error.response.status === 400) {
+            return alert(`You can't post empty question!`);
         }
         if (error.response.status === 408) {
             return alert(`Your verification is under process!`);
         }
-        if (error.response.status === 401) {
-            return;
-        }
         return alert(`Your session has expired, please login again!`);
     }
-}
+};

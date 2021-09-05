@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import CreatePostInput from "../CreatePost/CreatePostInput";
 import deleteIcon from "../../assets/create_post/ic_close.svg";
 import { useStateValue } from "../../helper/state_provider";
-import Cookies from "js-cookie";
-import instance from "../../helper/axios";
 import { useHistory } from "react-router-dom";
+import { addQuestion } from "./helper/add_question";
 
 function QuestionSuggestion({ QuestionInnerContent }) {
   return (
@@ -32,53 +31,6 @@ function QueriesPopOutContainer() {
     const name = e.target.name;
     const value = e.target.value;
     setUserQueries({ ...UserQueries, [name]: value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const question = UserQueries.askedQuestion;
-
-    if (!question) {
-      return alert("Please enter a question!");
-    }
-
-    if (!userDetails.isVerified) {
-      return alert("Your verification is under process!");
-    }
-
-    try {
-      const token = Cookies.get("token");
-
-      if (token) {
-        await instance.post(
-          `/home/addquestion`,
-          {
-            question,
-          },
-          {
-            headers: {
-              Authorization: `${token}`,
-            },
-          }
-        );
-        document
-          .getElementById("QueriesAskQuestionContainer")
-          .classList.toggle("hidden");
-      } else {
-        history.replace("/signin");
-      }
-    } catch (error) {
-      if (error.response.status === 500) {
-        return alert(`Server error occured!`);
-      }
-      if (error.response.status === 400) {
-        return alert(`You can't post empty question!`);
-      }
-      if (error.response.status === 408) {
-        return alert(`Your verification is under process!`);
-      }
-      return alert(`Your session has expired, please login again!`);
-    }
   };
 
   return (
@@ -122,7 +74,7 @@ function QueriesPopOutContainer() {
 
       <div className="flex">
         <button
-          onClick={handleSubmit}
+          onClick={(e) => addQuestion(userDetails, history, UserQueries)(e)}
           className="w-28 rounded h-9 font-manrope font-semibold text-white transition-colors duration-200 hover:bg-blue-500 my-8 mx-auto"
           style={{ backgroundColor: "#C4C4C4" }}
         >

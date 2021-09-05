@@ -1,88 +1,63 @@
-import { upvoteDiscussion } from "./upvote_discussion";
-import { upvotePost } from "./upvote_post";
+import { upvote } from "./upvote";
 
-const handleUpvotes = async (userDetails, history, id, UpvoteActive, setUpvoteActive, UpvotesHandle, setUpvotesHandle, isPost) => {
+const handleUpvotes = async (userDetails, history, id, UpvoteActive, setUpvoteActive, UpvotesHandle, setUpvotesHandle, typeOfElement) => {
     setUpvoteActive(!UpvoteActive);
     let upvotes = UpvotesHandle;
     if (UpvoteActive) {
         upvotes = upvotes - 1;
         setUpvotesHandle(upvotes);
-        if (isPost) {
-            await upvotePost(userDetails, history, id, 2);
-        } else {
-            await upvoteDiscussion(userDetails, history, id, 2);
-        }
+        await upvote(userDetails, history, id, typeOfElement, 2);
+
     } else {
         upvotes = upvotes + 1;
         setUpvotesHandle(upvotes);
-        if (isPost) {
-            await upvotePost(userDetails, history, id, 1);
-        } else {
-            await upvoteDiscussion(userDetails, history, id, 1);
-        }
+        await upvote(userDetails, history, id, typeOfElement, 1);
     }
 }
 
-const handleUpvoteDownvote = async (userDetails, history, id, DownvoteActive, UpvoteActive, setDownvoteActive, setUpvoteActive, UpvotesHandle, setUpvotesHandle, isPost) => {
+const handleUpvoteDownvote = async (userDetails, history, id, DownvoteActive, UpvoteActive, setDownvoteActive, setUpvoteActive, UpvotesHandle, setUpvotesHandle, typeOfElement) => {
     setUpvoteActive(!UpvoteActive);
     setDownvoteActive(!DownvoteActive);
     UpvotesHandle = UpvotesHandle - 2;
     setUpvotesHandle(UpvotesHandle);
-    if (isPost) {
-        await upvotePost(userDetails, history, id, 2);
-        await upvotePost(userDetails, history, id, 3);
-    } else {
-        await upvoteDiscussion(userDetails, history, id, 2);
-        await upvoteDiscussion(userDetails, history, id, 3);
-    }
+    await upvote(userDetails, history, id, typeOfElement, 2);
+    await upvote(userDetails, history, id, typeOfElement, 3);
 }
 
-const handleDownvotes = async (userDetails, history, id, DownvoteActive, setDownvoteActive, UpvotesHandle, setUpvotesHandle, isPost) => {
+const handleDownvotes = async (userDetails, history, id, DownvoteActive, setDownvoteActive, UpvotesHandle, setUpvotesHandle, typeOfElement) => {
     setDownvoteActive(!DownvoteActive);
     let upvotes = UpvotesHandle;
     if (DownvoteActive) {
         upvotes = upvotes + 1;
         setUpvotesHandle(upvotes);
-        if (isPost) {
-            await upvotePost(userDetails, history, id, 4);
-        } else {
-            await upvoteDiscussion(userDetails, history, id, 4);
-        }
+        await upvote(userDetails, history, id, typeOfElement, 4);
+
     } else {
         upvotes = upvotes - 1;
         setUpvotesHandle(upvotes);
-        if (isPost) {
-            await upvotePost(userDetails, history, id, 3);
-        } else {
-            await upvoteDiscussion(userDetails, history, id, 3);
-        }
+        await upvote(userDetails, history, id, typeOfElement, 3);
     }
 }
 
-const handleDownvoteUpvote = async (userDetails, history, id, DownvoteActive, UpvoteActive, setDownvoteActive, setUpvoteActive, UpvotesHandle, setUpvotesHandle, isPost) => {
+const handleDownvoteUpvote = async (userDetails, history, id, DownvoteActive, UpvoteActive, setDownvoteActive, setUpvoteActive, UpvotesHandle, setUpvotesHandle, typeOfElement) => {
     setDownvoteActive(!DownvoteActive);
     setUpvoteActive(!UpvoteActive);
     UpvotesHandle = UpvotesHandle + 2;
     setUpvotesHandle(UpvotesHandle);
-    if (isPost) {
-        await upvotePost(userDetails, history, id, 4);
-        await upvotePost(userDetails, history, id, 1);
-    } else {
-        await upvoteDiscussion(userDetails, history, id, 4);
-        await upvoteDiscussion(userDetails, history, id, 1);
-    }
+    await upvote(userDetails, history, id, typeOfElement, 4);
+    await upvote(userDetails, history, id, typeOfElement, 1);
 }
 
-export const updateUpvotes = async (userDetails, history, id, UpvoteActive, DownvoteActive, setUpvoteActive, setDownvoteActive, UpvotesHandle, setUpvotesHandle, isUpvoted, isPost) => {
+export const updateUpvotes = async (userDetails, history, id, UpvoteActive, DownvoteActive, setUpvoteActive, setDownvoteActive, UpvotesHandle, setUpvotesHandle, isUpvoted, typeOfElement) => {
     if (DownvoteActive && isUpvoted) {
-        await handleDownvoteUpvote(userDetails, history, id, DownvoteActive, UpvoteActive, setDownvoteActive, setUpvoteActive, UpvotesHandle, setUpvotesHandle, isPost);
+        await handleDownvoteUpvote(userDetails, history, id, DownvoteActive, UpvoteActive, setDownvoteActive, setUpvoteActive, UpvotesHandle, setUpvotesHandle, typeOfElement);
     } else if (UpvoteActive && !isUpvoted) {
-        await handleUpvoteDownvote(userDetails, history, id, DownvoteActive, UpvoteActive, setDownvoteActive, setUpvoteActive, UpvotesHandle, setUpvotesHandle, isPost);
+        await handleUpvoteDownvote(userDetails, history, id, DownvoteActive, UpvoteActive, setDownvoteActive, setUpvoteActive, UpvotesHandle, setUpvotesHandle, typeOfElement);
     } else {
         if (isUpvoted) {
-            await handleUpvotes(userDetails, history, id, UpvoteActive, setUpvoteActive, UpvotesHandle, setUpvotesHandle, isPost);
+            await handleUpvotes(userDetails, history, id, UpvoteActive, setUpvoteActive, UpvotesHandle, setUpvotesHandle, typeOfElement);
         } else {
-            await handleDownvotes(userDetails, history, id, DownvoteActive, setDownvoteActive, UpvotesHandle, setUpvotesHandle, isPost);
+            await handleDownvotes(userDetails, history, id, DownvoteActive, setDownvoteActive, UpvotesHandle, setUpvotesHandle, typeOfElement);
         }
     }
 };

@@ -285,7 +285,9 @@ function HomePageCard({
           }}
           styleImgContainer={{ margin: "0", width: "2vw", height: "2vw" }}
           onClickFunction={() => {
-            updateUpvotes(userDetails, history, PostId, UpvoteActive, DownvoteActive, setUpvoteActive, setDownvoteActive, UpvotesHandle, setUpvotesHandle, true, true);
+            isDiscussionQueries ?
+              updateUpvotes(userDetails, history, PostId, UpvoteActive, DownvoteActive, setUpvoteActive, setDownvoteActive, UpvotesHandle, setUpvotesHandle, true, "question") :
+              updateUpvotes(userDetails, history, PostId, UpvoteActive, DownvoteActive, setUpvoteActive, setDownvoteActive, UpvotesHandle, setUpvotesHandle, true, "post");
           }}
           isActive={UpvoteActive}
         />
@@ -301,7 +303,9 @@ function HomePageCard({
           }}
           styleImgContainer={{ margin: "0", width: "2vw", height: "2vw" }}
           onClickFunction={() => {
-            updateUpvotes(userDetails, history, PostId, UpvoteActive, DownvoteActive, setUpvoteActive, setDownvoteActive, UpvotesHandle, setUpvotesHandle, false, true);
+            isDiscussionQueries ?
+              updateUpvotes(userDetails, history, PostId, UpvoteActive, DownvoteActive, setUpvoteActive, setDownvoteActive, UpvotesHandle, setUpvotesHandle, false, "question") :
+              updateUpvotes(userDetails, history, PostId, UpvoteActive, DownvoteActive, setUpvoteActive, setDownvoteActive, UpvotesHandle, setUpvotesHandle, false, "post");
           }}
           isActive={DownvoteActive}
         />
