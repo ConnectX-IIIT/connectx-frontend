@@ -13,6 +13,7 @@ import CreatePostImageInput from "./CreatePostImageInput";
 import deleteIcon from "../../assets/create_post/ic_close.svg";
 import { useStateValue } from "../../helper/state_provider";
 import { addPost } from "./helper/add_post";
+import CreatePostImagesPreviewTempCompPrimary from "./CreatePostImagesPreviewTempCompPrimary";
 
 let tempAttachedImgs = [];
 let tempAttachedImgsHeight = [];
@@ -30,7 +31,7 @@ function CreatePost() {
     jobLink: "",
     typeOfPost: "",
     attachedImgs: [],
-    attachedImgHeight: [],
+    attachedImgDimensions: [],
   });
 
   const handleInput = (e) => {
@@ -52,126 +53,21 @@ function CreatePost() {
     }
   };
 
-  function ImgVisible(index) {
-    if (index < 5) {
-      var element = document.getElementsByClassName("CreatePostImage")[index];
-      element.style.display = "block";
-    }
+  function attachedImagesDimensionsDetailsUpdaterP(
+    attachedImagesDimensionsDetails
+  ) {
+    setPostDetails({
+      ...postDetails,
+      attachedImgDimensions: attachedImagesDimensionsDetails,
+    });
+  }
+  function attachedImagesDetailsUpdaterP(attachedImagesDetails) {
+    setPostDetails({
+      ...postDetails,
+      attachedImgs: attachedImagesDetails,
+    });
   }
 
-  function toggleImgSource(index) {
-    if (index < 5) {
-      var element = document.getElementsByClassName("ImgCreatePost")[index];
-      element.src = replaceIcon;
-      element.style.pointerEvents = "auto";
-      var element2 = document.getElementsByClassName("OverLayImageCreatePost")[
-        index
-      ];
-      element2.style.display = "block";
-      element2.classList.remove("pointer-events-none");
-    }
-  }
-
-  function toggleImgSourceDelete(index) {
-    if (index < 5) {
-      var element = document.getElementsByClassName("ImgCreatePost")[index];
-      element.src = AddIcon;
-      element.style.pointerEvents = "none";
-      var element2 = document.getElementsByClassName("OverLayImageCreatePost")[
-        index
-      ];
-      element2.style.display = "none";
-      element2.classList.add("pointer-events-none");
-      let element3 = document.getElementsByClassName("CreatePostImage")[index];
-      element3.src = DefaultPostImage;
-    }
-  }
-
-  const previewFile = (index) => (e) => {
-    let preview = document.getElementsByClassName("CreatePostImage")[index];
-
-    let file =
-      document.getElementsByClassName("CreatePostInput")[index].files[0];
-
-    let reader = new FileReader();
-
-    reader.onloadend = function () {
-      preview.src = reader.result;
-    };
-    if (file) {
-      reader.readAsDataURL(file);
-    } else {
-      preview.src = DefaultPostImage;
-    }
-
-    let tempImgArr = postDetails.attachedImgs;
-    tempImgArr.push(e.target.files[0]);
-    tempAttachedImgs[index] = e.target.files[0];
-    setPostDetails({ ...postDetails, attachedImgs: tempImgArr });
-
-    let tempImgHeight = postDetails.attachedImgHeight;
-
-    var _URL = window.URL || window.webkitURL;
-    let img = new Image();
-    var objectUrl = _URL.createObjectURL(file);
-    img.onload = function () {
-      console.log(this.width + " " + this.height);
-      tempImgHeight.push(this.height);
-      tempAttachedImgsHeight[index] = this.height;
-      setPostDetails({ ...postDetails, attachedImgHeight: tempImgHeight });
-      _URL.revokeObjectURL(objectUrl);
-    };
-    img.src = objectUrl;
-
-    ImgVisible(index + 1);
-    toggleImgSource(index);
-
-    console.log(tempAttachedImgs, tempAttachedImgsHeight);
-
-    // if (document.getElementsByClassName("CreatePostImage")[0] !== undefined) {
-    //   console.log(document.getElementsByClassName("CreatePostImage")[0]);
-    // }
-  };
-
-  const handleDeleteImg = (index) => (e) => {
-    let tempImgArr = postDetails.attachedImgs;
-    let tempHeightArr = postDetails.attachedImgHeight;
-    if (tempImgArr.includes(tempAttachedImgs[index])) {
-      for (let i = 0; i < tempImgArr.length; i++) {
-        if (tempImgArr[i] === tempAttachedImgs[index]) {
-          tempImgArr.splice(i, 1);
-          break;
-        }
-      }
-      for (let i = 0; i < tempHeightArr.length; i++) {
-        if (tempHeightArr[i] === tempAttachedImgsHeight[index]) {
-          tempHeightArr.splice(i, 1);
-          break;
-        }
-      }
-      tempAttachedImgs[index] = undefined;
-      tempAttachedImgsHeight[index] = undefined;
-      setPostDetails({ ...postDetails, attachedImgs: tempImgArr });
-      setPostDetails({ ...postDetails, attachedImgHeight: tempHeightArr });
-      toggleImgSourceDelete(index);
-      console.log(postDetails.attachedImgs, postDetails.attachedImgHeight);
-    }
-  };
-
-  const handleCreatePostImage = (index) => (e) => {
-    if (tempAttachedImgs[index] === undefined) {
-      previewFile(index)(e);
-      return;
-    } else {
-      handleDeleteImg(index)(e);
-    }
-  };
-
-  useEffect(() => {
-    ImgVisible(0);
-  }, []);
-
-  // console.log(postDetails.attachedImgs);
 
   return (
     <div className="PostMainContainer rounded-md">
@@ -248,7 +144,10 @@ function CreatePost() {
           >
             Photos
           </p>
-          <div className="flex">
+          {<CreatePostImagesPreviewTempCompPrimary
+          attachedImagesDetailsUpdater={attachedImagesDetailsUpdaterP}
+          attachedImagesDimensionsDetailsUpdater={attachedImagesDimensionsDetailsUpdaterP} />}
+          {/* <div className="flex">
             <CreatePostImageInput
               index={0}
               onChangeFunction={handleCreatePostImage(0)}
@@ -269,7 +168,7 @@ function CreatePost() {
               index={4}
               onChangeFunction={handleCreatePostImage(4)}
             />
-          </div>
+          </div> */}
         </div>
         <button
           className="w-28 rounded h-9 font-manrope font-semibold text-white transition-colors duration-200 hover:bg-blue-500 my-8 m-auto"
