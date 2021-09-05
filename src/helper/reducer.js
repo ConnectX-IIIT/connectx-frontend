@@ -58,6 +58,36 @@ const reducer = (state, action) => {
                 }
             };
 
+        case 'UPDATE_UPVOTED_POSTS':
+            return {
+                ...state,
+                userDetails: {
+                    ...state.userDetails,
+                    upvotedPosts: action.upPosts,
+                    downvotedPosts: action.downPosts,
+                }
+            };
+
+        case 'UPDATE_UPVOTED_DISCUSSIONS':
+            return {
+                ...state,
+                userDetails: {
+                    ...state.userDetails,
+                    upvotedDiscussions: action.upDiscussions,
+                    downvotedDiscussions: action.downDiscussions,
+                }
+            };
+
+        case 'UPDATE_UPVOTED_QUESTIONS':
+            return {
+                ...state,
+                userDetails: {
+                    ...state.userDetails,
+                    upvotedQuestions: action.upQuestions,
+                    downvotedQuestions: action.downQuestions,
+                }
+            };
+
         case 'UPDATE_POST_FILTER':
             return {
                 ...state,

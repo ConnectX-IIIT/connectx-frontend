@@ -66,6 +66,7 @@ function HomePageCard({
   discussionsIds,
   UserId,
   isDiscussionQueries,
+  onQuestionClick,
   queriesInnerStyle,
   queriesMainContainerStyle,
 }) {
@@ -158,20 +159,40 @@ function HomePageCard({
   const is_Project = isPostProject;
 
   useEffect(() => {
-    if (
-      userDetails.upvotedPosts &&
-      userDetails.upvotedPosts.includes(`${PostId}`)
-    ) {
-      setUpvoteActive(true);
-    }
+    if (isDiscussionQueries) {
+      if (
+        userDetails.upvotedQuestions &&
+        userDetails.upvotedQuestions.includes(`${PostId}`)
+      ) {
+        setUpvoteActive(true);
+      }
 
-    if (
-      userDetails.downvotedPosts &&
-      userDetails.downvotedPosts.includes(`${PostId}`)
-    ) {
-      setDownvoteActive(true);
+      if (
+        userDetails.downvotedQuestions &&
+        userDetails.downvotedQuestions.includes(`${PostId}`)
+      ) {
+        setDownvoteActive(true);
+      }
+    } else {
+      if (
+        userDetails.upvotedPosts &&
+        userDetails.upvotedPosts.includes(`${PostId}`)
+      ) {
+        setUpvoteActive(true);
+      }
+
+      if (
+        userDetails.downvotedPosts &&
+        userDetails.downvotedPosts.includes(`${PostId}`)
+      ) {
+        setDownvoteActive(true);
+      }
     }
   }, [userDetails]);
+
+  useEffect(() => {
+
+  }, [userDetails])
 
   function handleDisplay(elementId) {
     document.getElementById(elementId).classList.toggle("hidden");
@@ -286,8 +307,8 @@ function HomePageCard({
           styleImgContainer={{ margin: "0", width: "2vw", height: "2vw" }}
           onClickFunction={() => {
             isDiscussionQueries ?
-              updateUpvotes(userDetails, history, PostId, UpvoteActive, DownvoteActive, setUpvoteActive, setDownvoteActive, UpvotesHandle, setUpvotesHandle, true, "question") :
-              updateUpvotes(userDetails, history, PostId, UpvoteActive, DownvoteActive, setUpvoteActive, setDownvoteActive, UpvotesHandle, setUpvotesHandle, true, "post");
+              updateUpvotes(userDetails, history, dispatch, PostId, UpvoteActive, DownvoteActive, setUpvoteActive, setDownvoteActive, UpvotesHandle, setUpvotesHandle, true, "question") :
+              updateUpvotes(userDetails, history, dispatch, PostId, UpvoteActive, DownvoteActive, setUpvoteActive, setDownvoteActive, UpvotesHandle, setUpvotesHandle, true, "post");
           }}
           isActive={UpvoteActive}
         />
@@ -304,14 +325,14 @@ function HomePageCard({
           styleImgContainer={{ margin: "0", width: "2vw", height: "2vw" }}
           onClickFunction={() => {
             isDiscussionQueries ?
-              updateUpvotes(userDetails, history, PostId, UpvoteActive, DownvoteActive, setUpvoteActive, setDownvoteActive, UpvotesHandle, setUpvotesHandle, false, "question") :
-              updateUpvotes(userDetails, history, PostId, UpvoteActive, DownvoteActive, setUpvoteActive, setDownvoteActive, UpvotesHandle, setUpvotesHandle, false, "post");
+              updateUpvotes(userDetails, history, dispatch, PostId, UpvoteActive, DownvoteActive, setUpvoteActive, setDownvoteActive, UpvotesHandle, setUpvotesHandle, false, "question") :
+              updateUpvotes(userDetails, history, dispatch, PostId, UpvoteActive, DownvoteActive, setUpvoteActive, setDownvoteActive, UpvotesHandle, setUpvotesHandle, false, "post");
           }}
           isActive={DownvoteActive}
         />
       </div>
       <div id="HomePageCardRightContainer">
-        <div
+        <div onClick={isDiscussionQueries ? onQuestionClick : null}
           style={{
             paddingLeft: "1.5vw",
             paddingRight: "1.5vw",

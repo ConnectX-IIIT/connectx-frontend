@@ -31,7 +31,7 @@ function QueriesQuestionContainer() {
 
   const HomePageQuestionsList = questionData.map((item, index) => {
     return (
-      <div onClick={handleQuestionClick(item)}>
+      <div>
         <HomePageCard
           UserProfilePhoto={item.userProfile}
           TimeStamp={item.timestamp}
@@ -41,6 +41,7 @@ function QueriesQuestionContainer() {
           Upvotes={item.upvotes}
           PostId={item._id}
           isDiscussionQueries={true}
+          onQuestionClick={handleQuestionClick(item)}
           queriesInnerStyle={{ fontWeight: "600", fontFamily: "manrope" }}
           queriesMainContainerStyle={{ marginLeft: "0" }}
         />

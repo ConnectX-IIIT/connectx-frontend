@@ -65,7 +65,7 @@ function DiscussionSection({
             }}
             styleImgContainer={{ margin: "0", width: "1.5vw", height: "2vw" }}
             onClickFunction={() => {
-              updateUpvotes(userDetails, history, discussionId, UpvoteActive, DownvoteActive, setUpvoteActive, setDownvoteActive, UpvotesHandle, setUpvotesHandle, true, "discussion");
+              updateUpvotes(userDetails, history, dispatch, discussionId, UpvoteActive, DownvoteActive, setUpvoteActive, setDownvoteActive, UpvotesHandle, setUpvotesHandle, true, "discussion");
             }}
             isActive={UpvoteActive}
           />
@@ -86,7 +86,7 @@ function DiscussionSection({
             }}
             styleImgContainer={{ margin: "0", width: "1.5vw", height: "2vw" }}
             onClickFunction={() => {
-              updateUpvotes(userDetails, history, discussionId, UpvoteActive, DownvoteActive, setUpvoteActive, setDownvoteActive, UpvotesHandle, setUpvotesHandle, false, "discussion");
+              updateUpvotes(userDetails, history, dispatch, discussionId, UpvoteActive, DownvoteActive, setUpvoteActive, setDownvoteActive, UpvotesHandle, setUpvotesHandle, false, "discussion");
             }}
             isActive={DownvoteActive}
           />
