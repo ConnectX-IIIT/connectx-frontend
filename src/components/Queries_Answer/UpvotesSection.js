@@ -11,7 +11,7 @@ import homeDownvoteIcon from "../../assets/home/post/upvotes/ic_downvote.svg";
 import homeDownvoteIconHover from "../../assets/home/post/upvotes/h_ic_downvote.svg";
 import homeDownvoteIconSelected from "../../assets/home/post/upvotes/s_ic_downvote.svg";
 
-function UpvotesSection() {
+function UpvotesSection({ upvotes }) {
   return (
     <div className="upvote-section-main-container">
       <ImgStackHome
@@ -26,7 +26,7 @@ function UpvotesSection() {
         styleImgContainer={{ margin: "0", width: "2vw", height: "2vw" }}
         isActive
       />
-      <div className="upvote-section-vote-count">15</div>
+      <div className="upvote-section-vote-count">{upvotes}</div>
       <ImgStackHome
         normalImageSrc={homeDownvoteIcon}
         hoverImageSrc={homeDownvoteIconHover}

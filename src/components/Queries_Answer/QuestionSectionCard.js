@@ -14,7 +14,7 @@ function QuestionSectionCard({ answer }) {
   return (
     <div className="question-section-card-wrapper">
       <div className="question-section-card-left-wrapper">
-        <UpvotesSection />
+        <UpvotesSection upvotes={answer.upvotes} />
       </div>
       <div className="question-section-card-right-wrapper">
         <div className="question-section-card-user-profile">

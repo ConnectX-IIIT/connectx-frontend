@@ -6,11 +6,11 @@ import QuestionSectionUserprofile from "./QuestionSectionUserprofile";
 import QuestionSectionInput from "./QuestionSectionInput";
 import QuestionLowerSection from "./QuestionLowerSection";
 import { useStateValue } from "../../helper/state_provider";
-import Cookies from "js-cookie";
 import { useHistory } from "react-router-dom";
-import instance from "../../helper/axios";
 import { convertTimestamp } from "../HomePageComponents/helper/convert_timestamp";
 import { handlePhoto } from "../HomePageComponents/helper/handle_photo";
+import { fetchQuestion } from "./helper/fetch_question";
+import { fetchAnswers } from "./helper/fetch_answers";
 
 function QuestionSectionQuestion({ question }) {
 
@@ -23,7 +23,7 @@ function QuestionSectionQuestion({ question }) {
         <QuestionSectionButtons />
         <QuestionSectionUserprofile
           UserName={question.userName}
-          TimeStamp={convertTimestamp(question.timestamp)}
+          TimeStamp={question.timestamp ? convertTimestamp(question.timestamp) : null}
           ProfilePhoto={handlePhoto(question.userProfile, 1)}
           imgOrder="1"
         />
@@ -51,77 +51,15 @@ function QuestionSectionMainContainer(props) {
     });
   };
 
-  const fetchQuestionData = async (e) => {
-    try {
-      const token = Cookies.get("token");
-
-      if (token) {
-        const getQuestionRes = await instance.post(`/question/getquestions`,
-          {
-            questionId
-          },
-          {
-            headers: {
-              Authorization: `${token}`,
-            },
-          });
-
-        const question = getQuestionRes.data.questions;
-        await dispatch({
-          type: "SET_CURRENT_QUESTION",
-          question,
-        });
-
-      } else {
-        history.replace("/signin");
-      }
-    } catch (error) {
-      if (error.response.status === 500) {
-        return alert(`Server error occured!`);
-      }
-      return alert(`Your session has expired, please login again!`);
-    }
-  };
-
-  const fetchAnswers = async (e) => {
-    try {
-      const token = Cookies.get("token");
-
-      if (token) {
-        const getAnswersRes = await instance.post(`/answer/getanswers`,
-          {
-            questionId,
-          },
-          {
-            headers: {
-              Authorization: `${token}`,
-            },
-          });
-
-        const answerData = getAnswersRes.data.answers;
-        console.log(answerData);
-        setAnswers(answerData);
-
-      } else {
-        history.replace("/signin");
-      }
-    } catch (error) {
-      if (error.response.status === 500) {
-        return alert(`Server error occured!`);
-      }
-      return alert(`Your session has expired, please login again!`);
-    }
-  };
-
   useEffect(() => {
     if (!currentQuestion.user) {
-      fetchQuestionData();
+      fetchQuestion(history, dispatch, questionId);
     }
   }, [currentQuestion]);
 
   useEffect(() => {
     if (!answers.user) {
-      fetchAnswers();
+      fetchAnswers(history, setAnswers, questionId);
     }
   }, []);
 
