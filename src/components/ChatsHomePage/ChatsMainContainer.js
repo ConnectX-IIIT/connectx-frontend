@@ -33,7 +33,9 @@ function MessageMainContainer(props) {
   const [isGroupsSectionOpen, setIsGroupsSectionOpen] = useState(false);
 
   useEffect(() => {
+    console.log(props.match.params.chatId);
     if (props.match.params.chatId) {
+      console.log("hehee");
       const chatId = props.match.params.chatId;
       const conversation = conversations.find(
         (conversation) => conversation._id === chatId
@@ -41,24 +43,12 @@ function MessageMainContainer(props) {
       let i = conversations.findIndex(
         (conversation) => conversation._id === chatId
       );
-
-      let tempArr = currentActiveStates;
-      if (!tempArr.length > 0) {
-        for (let index = 0; index < conversations.length; index++) {
-          if (i == index) {
-            tempArr.push(true);
-          } else {
-            tempArr.push(false);
-          }
-        }
-        setCurrentActiveStates(tempArr);
-      }
-
+      updateCurrentActiveChat(i);
       setCurrentChat(conversation);
     } else {
       setCurrentChat(null);
     }
-  }, [props.match.params.chatId, []]);
+  }, [props.match.params.chatId]);
 
   const handleInput = (e) => {
     const name = e.target.name;
@@ -97,7 +87,7 @@ function MessageMainContainer(props) {
     }
 
     if (arrivalRoom) {
-      let conversationList = conversations;
+      let conversationList = conversations.slice();
       let index = conversationList.findIndex(
         (conversation) => conversation.isGroup === true
       );
@@ -107,7 +97,7 @@ function MessageMainContainer(props) {
     }
 
     if (arrivalRoom === "") {
-      let conversationList = conversations;
+      let conversationList = conversations.slice();
       let index = conversationList.findIndex((conversation) =>
         conversation.userIds.includes(arrivalMessage.userId)
       );
@@ -146,7 +136,7 @@ function MessageMainContainer(props) {
 
   useEffect(() => {
     if (conversations.length > 0) {
-      let tempArr = currentActiveStates;
+      let tempArr = currentActiveStates.slice();
       if (!tempArr.length > 0) {
         for (let index = 0; index < conversations.length; index++) {
           tempArr.push(false);
@@ -154,7 +144,15 @@ function MessageMainContainer(props) {
       }
       setCurrentActiveStates(tempArr);
     }
-  }, [conversations, arrivalMessage, newMessage]);
+  }, [conversations]);
+
+  useEffect(() => {
+    if (conversations.length > 0) {
+      let tempArr = currentActiveStates.slice();
+      setCurrentActiveStates([]);
+      setCurrentActiveStates(tempArr);
+    }
+  }, [arrivalMessage, newMessage]);
 
   useEffect(() => {
     fetchMessages(userDetails, history, currentChat, setMessages);
@@ -205,7 +203,18 @@ function MessageMainContainer(props) {
       <form
         action=""
         className="MessageMainContainerForm"
-        onSubmit={addMessage(userDetails, history, newMessage, currentChat, socket, messages, conversations, setMessages, setNewMessage, setConversations)}
+        onSubmit={addMessage(
+          userDetails,
+          history,
+          newMessage,
+          currentChat,
+          socket,
+          messages,
+          conversations,
+          setMessages,
+          setNewMessage,
+          setConversations
+        )}
         style={
           currentChat?.isGroup && isGroupsSectionOpen
             ? { right: "3%", bottom: "0" }
@@ -289,7 +298,9 @@ function MessageMainContainer(props) {
                   currentChat.isGroup
                     ? currentChat.profilePicture
                     : currentChat.userProfiles.find(
-                      (profile) => profile !== userDetails.profilePicture), 1
+                        (profile) => profile !== userDetails.profilePicture
+                      ),
+                  1
                 )}
                 alt="profile"
                 className="ImgChatSection"
@@ -298,8 +309,8 @@ function MessageMainContainer(props) {
                 {currentChat.isGroup
                   ? currentChat.name
                   : currentChat.userNames.find(
-                    (name) => name !== userDetails.name
-                  )}
+                      (name) => name !== userDetails.name
+                    )}
               </h2>
             </div>
 
@@ -325,11 +336,13 @@ function MessageMainContainer(props) {
             : { display: "none" }
         }
       >
-        {currentChat?.isGroup && <ChatGroupInformation
-          closingFunction={setIsGroupsSectionOpen}
-          closingState={isGroupsSectionOpen}
-          groupDetails={currentChat}
-        />}
+        {currentChat?.isGroup && (
+          <ChatGroupInformation
+            closingFunction={setIsGroupsSectionOpen}
+            closingState={isGroupsSectionOpen}
+            groupDetails={currentChat}
+          />
+        )}
       </div>
     </div>
   );
