@@ -1,13 +1,13 @@
 function setInputImageDimensions(
   listPositionIndex,
   imageNaturalHeight,
-  imageNaturalWeight,
+  imageNaturalWidth,
   inputImagesDimensionsList,
   setInputImagesDimensionsList
 ) {
   let tempArrForImagesDimensions = inputImagesDimensionsList.slice();
   tempArrForImagesDimensions[listPositionIndex] = {
-    width: imageNaturalWeight,
+    width: imageNaturalWidth,
     height: imageNaturalHeight,
   };
   setInputImagesDimensionsList(tempArrForImagesDimensions);

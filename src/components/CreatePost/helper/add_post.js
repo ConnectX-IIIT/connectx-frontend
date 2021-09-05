@@ -1,3 +1,4 @@
+import axios from "axios";
 import Cookies from "js-cookie";
 import instance from "../../../helper/axios";
 
@@ -23,6 +24,7 @@ export const addPost = (userDetails, history, postDetails) => async (e) => {
     postData.append("title", postDetails.postTitle);
     postData.append("description", postDetails.postDescription);
     postData.append("jobLink", postDetails.jobLink);
+    postData.append("attachedImgDimensions", JSON.stringify(postDetails.attachedImgDimensions));
     postData.append("isProject", isProject);
 
     for (let file of attachedImgs) {
@@ -46,7 +48,7 @@ export const addPost = (userDetails, history, postDetails) => async (e) => {
     }
 
     try {
-        const addPostRes = await instance.post(`/home/addpost`, postData, {
+        const addPostRes = await axios.post(`http://localhost:5000/home/addpost`, postData, {
             headers: {
                 Authorization: `${token}`,
             },
