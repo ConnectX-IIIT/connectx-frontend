@@ -53,7 +53,7 @@ export const addMessage = (userDetails, history, newMessage, currentChat, socket
         setMessages([...messages, msg]);
         setNewMessage("");
 
-        let conversationList = conversations;
+        let conversationList = conversations.slice();
         let index = conversationList.indexOf(currentChat);
         conversationList[index].lastMessage = newMessage;
         conversationList[index].lastModified = Date.now();

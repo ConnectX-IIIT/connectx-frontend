@@ -147,14 +147,6 @@ function MessageMainContainer(props) {
   }, [conversations]);
 
   useEffect(() => {
-    if (conversations.length > 0) {
-      let tempArr = currentActiveStates.slice();
-      setCurrentActiveStates([]);
-      setCurrentActiveStates(tempArr);
-    }
-  }, [arrivalMessage, newMessage]);
-
-  useEffect(() => {
     fetchMessages(userDetails, history, currentChat, setMessages);
   }, [currentChat]);
 
