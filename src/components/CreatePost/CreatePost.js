@@ -147,28 +147,6 @@ function CreatePost() {
           {<CreatePostImagesPreviewTempCompPrimary
           attachedImagesDetailsUpdater={attachedImagesDetailsUpdaterP}
           attachedImagesDimensionsDetailsUpdater={attachedImagesDimensionsDetailsUpdaterP} />}
-          {/* <div className="flex">
-            <CreatePostImageInput
-              index={0}
-              onChangeFunction={handleCreatePostImage(0)}
-            />
-            <CreatePostImageInput
-              index={1}
-              onChangeFunction={handleCreatePostImage(1)}
-            />
-            <CreatePostImageInput
-              index={2}
-              onChangeFunction={handleCreatePostImage(2)}
-            />
-            <CreatePostImageInput
-              index={3}
-              onChangeFunction={handleCreatePostImage(3)}
-            />
-            <CreatePostImageInput
-              index={4}
-              onChangeFunction={handleCreatePostImage(4)}
-            />
-          </div> */}
         </div>
         <button
           className="w-28 rounded h-9 font-manrope font-semibold text-white transition-colors duration-200 hover:bg-blue-500 my-8 m-auto"
