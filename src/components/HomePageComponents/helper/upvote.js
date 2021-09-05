@@ -79,6 +79,27 @@ export const upvote = async (userDetails, history, dispatch, id, typeOfElement, 
                 upQuestions: response.updatedUpvotedIds,
                 downQuestions: response.updatedDownvotedIds,
             });
+        } else if (typeOfElement === "answer") {
+
+            await instance.post(
+                `/answer/vote/${typeOfVote}`,
+                {
+                    answerId: id,
+                },
+                {
+                    headers: {
+                        Authorization: `${token}`,
+                    },
+                }
+            );
+
+            const response = updateUpvotedIds(userDetails.upvotedAnswers, userDetails.downvotedAnswers, id, typeOfVote);
+
+            await dispatch({
+                type: "UPDATE_UPVOTED_ANSWERS",
+                upAnswers: response.updatedUpvotedIds,
+                downAnswers: response.updatedDownvotedIds,
+            });
         }
 
     } catch (error) {

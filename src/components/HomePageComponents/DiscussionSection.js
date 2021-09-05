@@ -24,7 +24,7 @@ function DiscussionSection({
 }) {
 
   const history = useHistory();
-  const [{ userDetails }, dispatch] = useStateValue(false);
+  const [{ userDetails }, dispatch] = useStateValue();
   const [UpvotesHandle, setUpvotesHandle] = useState(upvotes);
   const [UpvoteActive, setUpvoteActive] = useState(false);
   const [DownvoteActive, setDownvoteActive] = useState(false);

@@ -55,6 +55,7 @@ function QuestionSectionMainContainer(props) {
     if (!currentQuestion.user) {
       fetchQuestion(history, dispatch, questionId);
     }
+    console.log(currentQuestion);
   }, [currentQuestion]);
 
   useEffect(() => {
@@ -71,7 +72,7 @@ function QuestionSectionMainContainer(props) {
   return (
     <div className="question-section-main-container">
       <div className="question-section-question-wrapper-wrapper">
-        <UpvotesSection upvotes={currentQuestion.upvotes} />
+        <UpvotesSection upvotes={currentQuestion.upvotes} type="question" Id={questionId} />
         <QuestionSectionQuestion question={currentQuestion} />
       </div>
       <div className="question-section-answer-input-wrapper">
