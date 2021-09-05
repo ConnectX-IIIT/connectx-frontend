@@ -2,22 +2,12 @@ import React, { useState, useEffect } from "react";
 import "../../styles/CreatePost/CreatePost.css";
 import CreatePostInput from "./CreatePostInput";
 import CreatePostRadio from "./CreatePostRadio";
-import DefaultPostImage from "../../assets/create_post/default_image.svg";
-
-import replaceIcon from "../../assets/create_post/ic_delete_image.svg";
-import AddIcon from "../../assets/create_post/ic_add_image.svg";
-import Cookies from "js-cookie";
 import { useHistory } from "react-router-dom";
-import instance from "../../helper/axios";
-import CreatePostImageInput from "./CreatePostImageInput";
 import deleteIcon from "../../assets/create_post/ic_close.svg";
 import { useStateValue } from "../../helper/state_provider";
 import { addPost } from "./helper/add_post";
 import CreatePostImagesPreviewTempCompPrimary from "./CreatePostImagesPreviewTempCompPrimary";
 
-let tempAttachedImgs = [];
-let tempAttachedImgsHeight = [];
-let tempAttachedImgsWidth = [];
 
 function CreatePost() {
   const history = useHistory();
@@ -67,7 +57,6 @@ function CreatePost() {
       attachedImgs: attachedImagesDetails,
     });
   }
-
 
   return (
     <div className="PostMainContainer rounded-md">
@@ -144,9 +133,14 @@ function CreatePost() {
           >
             Photos
           </p>
-          {<CreatePostImagesPreviewTempCompPrimary
-          attachedImagesDetailsUpdater={attachedImagesDetailsUpdaterP}
-          attachedImagesDimensionsDetailsUpdater={attachedImagesDimensionsDetailsUpdaterP} />}
+          {
+            <CreatePostImagesPreviewTempCompPrimary
+              attachedImagesDetailsUpdater={attachedImagesDetailsUpdaterP}
+              attachedImagesDimensionsDetailsUpdater={
+                attachedImagesDimensionsDetailsUpdaterP
+              }
+            />
+          }
         </div>
         <button
           className="w-28 rounded h-9 font-manrope font-semibold text-white transition-colors duration-200 hover:bg-blue-500 my-8 m-auto"
