@@ -8,6 +8,8 @@ import CreatePostAddIcon from "../../assets/create_post/ic_add_image.svg";
 
 function CreatePostImagesPreviewTempCompPrimary({
   defaultIputImagesList = [],
+  attachedImagesDetailsUpdater,
+  attachedImagesDimensionsDetailsUpdater,
 }) {
   const [inputImagesSrcList, setInputImagesSrcList] = useState(
     defaultIputImagesList
@@ -24,7 +26,12 @@ function CreatePostImagesPreviewTempCompPrimary({
   }, [inputImagesSrcList]);
 
   useEffect(() => {
+    attachedImagesDetailsUpdater(inputImagesFilesList);
+  }, [inputImagesFilesList]);
+
+  useEffect(() => {
     console.log(inputImagesDimensionsList);
+    attachedImagesDimensionsDetailsUpdater(inputImagesDimensionsList);
   }, [inputImagesDimensionsList]);
 
   function setInputImageDimensionsList(filePositionIndex, width, height) {
@@ -64,33 +71,40 @@ function CreatePostImagesPreviewTempCompPrimary({
           );
         })}
       </div>
-      <div
-        className="create-post-input-img-input-button-wrapper"
-        onClick={(e) => {
-          e.target.childNodes[0]?.click();
-        }}
-      >
-        <input
-          type="file"
-          name="attachedImgs"
-          accept=".png , .jpg , .jpeg "
-          onChange={(e) => {
-            incrementInputImageList(
-              e,
-              inputImagesFilesList,
-              setInputImagesFilesList,
-              inputImagesSrcList,
-              setInputImagesSrcList
-            );
+
+      {inputImagesSrcList.length < 5 ? (
+        <div
+          className="create-post-input-img-input-button-wrapper"
+          onClick={(e) => {
+            e.target.childNodes[0]?.click();
           }}
-          className="create-post-input-img-input-button"
-        />
-        <img
-          src={CreatePostAddIcon}
-          alt=""
-          className="create-post-input-img-input-button-plus-icon"
-        />
-      </div>
+        >
+          <input
+            type="file"
+            name="attachedImgs"
+            accept=".png , .jpg , .jpeg "
+            onChange={(e) => {
+              if (inputImagesSrcList.length < 5) {
+                incrementInputImageList(
+                  e,
+                  inputImagesFilesList,
+                  setInputImagesFilesList,
+                  inputImagesSrcList,
+                  setInputImagesSrcList
+                );
+              } else {
+                e.target.files = null;
+              }
+            }}
+            className="create-post-input-img-input-button"
+          />
+          <img
+            src={CreatePostAddIcon}
+            alt=""
+            className="create-post-input-img-input-button-plus-icon"
+          />
+        </div>
+      ) : null}
     </div>
   );
 }
