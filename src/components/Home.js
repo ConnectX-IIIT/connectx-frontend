@@ -63,7 +63,7 @@ export const Home = () => {
         className="OnSearchDisplay"
         style={
           isSearchBarClicked
-            ? { opacity: "1", zIndex: "2", height: "100%", top: "0px" }
+            ? { opacity: "1", zIndex: "2", height: "100vh", top: "0px" }
             : { opacity: "0", zIndex: "1", height: "0", top: "0px" }
         }
       >
