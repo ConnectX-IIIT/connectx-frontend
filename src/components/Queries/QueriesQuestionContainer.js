@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "../../styles/Question/QuestionsPrimarySec.css";
 import CreatePostInput from "./../CreatePost/CreatePostInput";
 import SortComponent from "./SortComponent";
 import HomePageCard from "./../HomePageComponents/HomePageCard";
