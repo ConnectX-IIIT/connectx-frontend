@@ -61,10 +61,10 @@ export const Home = () => {
             userInput,
             setUserInput,
             setPopoutPeople,
-            setPopoutQueries
+            setPopoutQueries,
           )(e)
         }
-        onSearchBarBlur={closeSearchBar}
+        searchBarClosingFun={closeSearchBar}
       />
       <div
         className="OnSearchDisplay"
