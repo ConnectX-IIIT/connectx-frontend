@@ -2,10 +2,10 @@
   background-color: rgba(0, 19, 36, 0.6);
   width: 100%;
   position: fixed;
-  padding-top: 81px;
   top: 81px;
   right: 0;
-  transition: opacity 0.2s ease-in-out, z-index 0.2s ease-in-out;
+  transition: opacity 0.2s ease-in-out, z-index 0.2s ease-in-out,
+    padding-top 0.2s ease-in-out 0.1s;
 }
 .SearchPopOut {
   background-color: white;
