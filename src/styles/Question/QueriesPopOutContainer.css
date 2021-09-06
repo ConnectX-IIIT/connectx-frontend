@@ -1,0 +1,10 @@
+.queries-pop-out-container-form {
+  @apply flex flex-col;
+  width: 38vw;
+}
+
+.queries-pop-out-container-form div {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
