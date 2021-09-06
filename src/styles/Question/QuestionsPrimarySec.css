@@ -10,3 +10,27 @@
     align-items: center;
     justify-content: center;
 } */
+
+.queries-page-add-question-top-container-sub-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.queries-page-add-question-user-profile-image {
+  height: 4vw;
+  width: 4vw;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.queries-page-ask-something-input-wrapper {
+  padding-left: 1vw;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.queries-page-ask-something-input-wrapper div {
+  height: 80%;
+  width: 100% !important
+}
