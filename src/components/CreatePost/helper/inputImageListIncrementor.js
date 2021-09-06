@@ -13,14 +13,12 @@ const incrementInputImageList = (
     let tempArrForInputImagesFilesList = inputImagesFilesList.slice();
     tempArrForInputImagesFilesList[tempArrForInputImagesFilesList.length] =
       event.target.files[0];
-    console.log(tempArrForInputImagesFilesList);
     setInputImagesFilesList(tempArrForInputImagesFilesList);
 
     readerObjForCreatePost.onloadend = function () {
       let tempArrForInputImagesSrcsList = inputImagesSrcList.slice();
       tempArrForInputImagesSrcsList[tempArrForInputImagesSrcsList.length] =
         readerObjForCreatePost.result;
-      console.log(tempArrForInputImagesSrcsList);
       // setInputImagesSrcList([]);
       setInputImagesSrcList(tempArrForInputImagesSrcsList);
     };

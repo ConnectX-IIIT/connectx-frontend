@@ -30,15 +30,14 @@ function CreatePostImagesPreviewTempCompPrimary({
   }, [inputImagesFilesList]);
 
   useEffect(() => {
-    console.log(inputImagesDimensionsList);
     attachedImagesDimensionsDetailsUpdater(inputImagesDimensionsList);
   }, [inputImagesDimensionsList]);
 
   function setInputImageDimensionsList(filePositionIndex, width, height) {
     setInputImageDimensions(
       filePositionIndex,
-      width,
       height,
+      width,
       inputImagesDimensionsList,
       setInputImagesDimensionsList
     );

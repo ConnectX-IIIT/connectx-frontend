@@ -8,7 +8,6 @@ import { useStateValue } from "../../helper/state_provider";
 import { addPost } from "./helper/add_post";
 import CreatePostImagesPreviewTempCompPrimary from "./CreatePostImagesPreviewTempCompPrimary";
 
-
 function CreatePost() {
   const history = useHistory();
   const TypeOfPostArr = ["Job", "Project", "Blog"];
@@ -51,6 +50,7 @@ function CreatePost() {
       attachedImgDimensions: attachedImagesDimensionsDetails,
     });
   }
+
   function attachedImagesDetailsUpdaterP(attachedImagesDetails) {
     setPostDetails({
       ...postDetails,

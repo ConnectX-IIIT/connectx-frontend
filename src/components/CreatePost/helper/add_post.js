@@ -23,6 +23,7 @@ export const addPost = (userDetails, history, postDetails) => async (e) => {
     postData.append("title", postDetails.postTitle);
     postData.append("description", postDetails.postDescription);
     postData.append("jobLink", postDetails.jobLink);
+    postData.append("attachedImgDimensions", JSON.stringify(postDetails.attachedImgDimensions));
     postData.append("isProject", isProject);
 
     for (let file of attachedImgs) {
