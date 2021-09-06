@@ -1,4 +1,5 @@
 import React from "react";
+import "../../styles/Register/Register.css"
 
 function CreatePostInput({
   inputType,
@@ -11,7 +12,7 @@ function CreatePostInput({
   isDisabled = false,
 }) {
   return (
-    <div className="registerFromInput mx-0">
+    <div className="registerFromInput mx-0 w-auto">
       {isInput ? (
         <input
           type={inputType}
@@ -35,7 +36,6 @@ function CreatePostInput({
           autoComplete="Off"
           style={{
             paddingTop: "0.4vw",
-            marginRight: "2.5vw",
           }}
           placeholder={labelContent}
         />
