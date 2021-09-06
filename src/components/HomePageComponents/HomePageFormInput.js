@@ -2,7 +2,11 @@ import React from "react";
 
 import "../../styles/HomePage/HomeMainContainer/HomePageFormInput.css";
 
-function HomePageFormInput({ inputValue, onChangeFunction }) {
+function HomePageFormInput({
+  inputValue,
+  onChangeFunction,
+  isSearchBarActive,
+}) {
   return (
     <div className="FormInputDiv">
       <input
@@ -16,7 +20,7 @@ function HomePageFormInput({ inputValue, onChangeFunction }) {
         style={{
           marginBottom: "0",
           marginLeft: "2vw",
-          width: "24.9vw",
+          width: isSearchBarActive ? "35vw" : "24.9vw",
         }}
       />
     </div>
