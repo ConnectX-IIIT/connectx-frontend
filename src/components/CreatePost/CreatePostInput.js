@@ -21,6 +21,7 @@ function CreatePostInput({
           className="RegisterFormInput text-lg InputCreatePost"
           autoComplete="Off"
           placeholder={labelContent}
+          disabled={true}
           style={style}
         />
       ) : (
