@@ -15,7 +15,6 @@ import SearchBarPopOutQueries from "./HomePageComponents/SearchBarPopOutQueries"
 import { handleInputSearch } from "./general_helper/home/search";
 
 export const Home = () => {
-
   const history = useHistory();
   const [popoutPeople, setPopoutPeople] = useState([]);
   const [popoutQueries, setPopoutQueries] = useState([]);
@@ -41,40 +40,53 @@ export const Home = () => {
     searchedText: "",
   });
 
-  const [isSearchBarClicked, setIsSearchBarClicked] = useState(false);
+  const [isSearchBarOpen, setIsSearchBarClicked] = useState(false);
 
-  function onSearchBarClick() {
-    setIsSearchBarClicked(!isSearchBarClicked);
+  function openSearchBar() {
+    setIsSearchBarClicked(true);
   }
 
-  function onSearchBarBlur() {
-    if (isSearchBarClicked) setIsSearchBarClicked(false);
+  function closeSearchBar() {
+    if (isSearchBarOpen) setIsSearchBarClicked(false);
+  }
+  function checkFun() {
+    console.log("ohho");
   }
 
   return (
     <div>
       <Navbar
         inputName={userInput.searchedText}
-        isSearchBarClicked={onSearchBarClick}
-        onSearchBarBlur={onSearchBarBlur}
-        onChangeFunction={(e) => handleInputSearch(history, userInput, setUserInput, setPopoutPeople, setPopoutQueries)(e)}
+        isSearchBarClicked={openSearchBar}
+        // onSearchBarBlur={checkFun}
+        // onFocusChange={checkFun}
+        onChangeFunction={(e) =>
+          handleInputSearch(
+            history,
+            userInput,
+            setUserInput,
+            setPopoutPeople,
+            setPopoutQueries
+          )(e)
+        }
       />
       <div
         className="OnSearchDisplay"
         style={
-          isSearchBarClicked
+          isSearchBarOpen
             ? { opacity: "1", zIndex: "2", height: "100vh", top: "0px" }
             : { opacity: "0", zIndex: "1", height: "0", top: "0px" }
         }
+        onClick={() => closeSearchBar()}
       >
         <div
           className="SearchPopOut"
           style={
-            isSearchBarClicked
+            isSearchBarOpen
               ? { display: "block" }
               : {
-                display: "none",
-              }
+                  display: "none",
+                }
           }
         >
           <div className="Queries">
