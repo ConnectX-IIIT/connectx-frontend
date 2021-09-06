@@ -54,24 +54,38 @@ export const Home = () => {
     <div>
       <Navbar
         inputName={userInput.searchedText}
-        isSearchBarClicked={openSearchBar}
-        onChangeFunction={(e) =>
+        onChangeFunction={(e) => {
+          openSearchBar();
           handleInputSearch(
             history,
             userInput,
             setUserInput,
             setPopoutPeople,
-            setPopoutQueries,
-          )(e)
-        }
+            setPopoutQueries
+          )(e);
+        }}
         searchBarClosingFun={closeSearchBar}
+        searchBarOpeningFun={openSearchBar}
+        isSearchBarActive={isSearchBarOpen}
       />
       <div
         className="OnSearchDisplay"
         style={
           isSearchBarOpen
-            ? { opacity: "1", zIndex: "2", height: "100vh", top: "0px" }
-            : { opacity: "0", zIndex: "1", height: "0", top: "0px" }
+            ? {
+                opacity: "1",
+                zIndex: "2",
+                height: "100vh",
+                top: "0px",
+                paddingTop: "81px",
+              }
+            : {
+                opacity: "0",
+                zIndex: "1",
+                height: "0",
+                top: "0px",
+                paddingTop: "20px",
+              }
         }
         onClick={() => closeSearchBar()}
       >
