@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../../styles/Question/QuestionSectionCard.css";
 import QuestionSectionUserprofile from "./QuestionSectionUserprofile";
 import UpvotesSection from "./UpvotesSection";
@@ -8,8 +8,23 @@ import QuestionSectionButtons from "./QuestionSectionButtons";
 import QuestionSectionDiscussionSection from "./QuestionSectionDiscussionSection";
 import { convertTimestamp } from "../HomePageComponents/helper/convert_timestamp";
 import { handlePhoto } from "../HomePageComponents/helper/handle_photo";
+import { useHistory } from "react-router";
+import { fetchComments } from "./helper/fetch_comments";
 
 function QuestionSectionCard({ answer }) {
+
+  const history = useHistory();
+  const [comments, setComments] = useState([]);
+
+  useEffect(() => {
+    fetchComments(history, answer.comments, setComments);
+  }, []);
+
+  const CommentList = comments.map((item, index) => {
+    return (
+      <QuestionSectionDiscussionSection comment={item.comment} replies={item.reply} />
+    );
+  });
 
   return (
     <div className="question-section-card-wrapper">
@@ -40,7 +55,7 @@ function QuestionSectionCard({ answer }) {
             <QuestionSectionButtons />
           </div>
         </div>
-        <QuestionSectionDiscussionSection />
+        {CommentList}
       </div>
     </div>
   );

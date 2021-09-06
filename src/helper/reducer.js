@@ -98,6 +98,16 @@ const reducer = (state, action) => {
                 }
             };
 
+        case 'UPDATE_UPVOTED_COMMENTS':
+            return {
+                ...state,
+                userDetails: {
+                    ...state.userDetails,
+                    upvotedComments: action.upComments,
+                    downvotedComments: action.downComments,
+                }
+            };
+
         case 'UPDATE_POST_FILTER':
             return {
                 ...state,

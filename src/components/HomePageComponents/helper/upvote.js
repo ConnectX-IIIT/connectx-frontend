@@ -100,6 +100,27 @@ export const upvote = async (userDetails, history, dispatch, id, typeOfElement, 
                 upAnswers: response.updatedUpvotedIds,
                 downAnswers: response.updatedDownvotedIds,
             });
+        } else if (typeOfElement === "comment") {
+
+            await instance.post(
+                `/comment/vote/${typeOfVote}`,
+                {
+                    commentId: id,
+                },
+                {
+                    headers: {
+                        Authorization: `${token}`,
+                    },
+                }
+            );
+
+            const response = updateUpvotedIds(userDetails.upvotedComments, userDetails.downvotedComments, id, typeOfVote);
+
+            await dispatch({
+                type: "UPDATE_UPVOTED_COMMENTS",
+                upComments: response.updatedUpvotedIds,
+                downComments: response.updatedDownvotedIds,
+            });
         }
 
     } catch (error) {
