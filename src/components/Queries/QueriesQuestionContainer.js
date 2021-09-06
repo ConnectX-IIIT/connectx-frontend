@@ -72,7 +72,7 @@ function QueriesQuestionContainer() {
             inputValue={UserQueries.askedQuestion}
             labelContent="Ask Something"
             isInput
-            disabled={true}
+            isDisabled={true}
             style={{
               width: "100%",
               height: "3vw",
