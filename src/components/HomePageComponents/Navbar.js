@@ -127,6 +127,9 @@ function Navbar({
             src={handlePhoto(userDetails.profilePicture, 1)}
             alt="user profile icon"
             className="NavbarUserProfile object-cover"
+            onClick={() => {
+              history.push("/home/userprofile");
+            }}
           />
         </div>
       </div>
