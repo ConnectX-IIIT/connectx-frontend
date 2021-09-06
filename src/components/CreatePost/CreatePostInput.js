@@ -10,7 +10,7 @@ function CreatePostInput({
   style,
 }) {
   return (
-    <div className="registerFromInput mx-0 w-auto">
+    <div className="registerFromInput mx-0">
       {isInput ? (
         <input
           type={inputType}
