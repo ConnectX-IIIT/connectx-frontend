@@ -73,7 +73,12 @@ function QueriesQuestionContainer() {
             labelContent="Ask Something"
             isInput
             disabled={true}
-            style={{ width: "100%", height: "3vw", margin: "0" }}
+            style={{
+              width: "100%",
+              height: "3vw",
+              margin: "0",
+              backgroundColor: "#ffffff",
+            }}
           />
         </div>
       </div>
