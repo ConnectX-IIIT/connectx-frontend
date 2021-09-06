@@ -52,18 +52,14 @@ function QueriesQuestionContainer() {
 
   return (
     <div>
-      <div
-        className="grid"
-        style={{
-          gridTemplateColumns: "7% 93%",
-        }}
-      >
+      <div className="queries-page-add-question-top-container-sub-wrapper">
         <img
           src={handlePhoto(userDetails.profilePicture, 1)}
           alt="profile"
-          className="object-cover w-11 h-11 rounded-full"
+          className="queries-page-add-question-user-profile-image"
         />
         <div
+          className="queries-page-ask-something-input-wrapper"
           onClick={() => {
             document
               .getElementById("QueriesAskQuestionContainer")
@@ -77,7 +73,7 @@ function QueriesQuestionContainer() {
             labelContent="Ask Something"
             isInput
             disabled={true}
-            style={{ width: "100%" }}
+            style={{ width: "100%", height: "3vw", margin: "0" }}
           />
         </div>
       </div>
