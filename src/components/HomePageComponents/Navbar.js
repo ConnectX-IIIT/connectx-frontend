@@ -3,7 +3,6 @@ import {
   BrowserRouter as Router,
   useRouteMatch,
   NavLink,
-  isSearchBarActive,
 } from "react-router-dom";
 import { useHistory } from "react-router";
 import "../../styles/HomePage/Navbar.css";
@@ -79,9 +78,6 @@ function Navbar({
           to={`${url}`}
           isActive={(match, location) => {
             setNavLocation(location.pathname);
-          }}
-          onClick={() => {
-            searchBarClosingFun();
           }}
         >
           <ImgStackHome
