@@ -15,12 +15,15 @@ import { updateUpvotes } from "../HomePageComponents/helper/update_upvotes";
 import { useHistory } from "react-router";
 
 function UpvotesSection({ upvotes, Id, type }) {
-
   const history = useHistory();
   const [{ userDetails }, dispatch] = useStateValue();
   const [UpvotesHandle, setUpvotesHandle] = useState(upvotes);
   const [UpvoteActive, setUpvoteActive] = useState(false);
   const [DownvoteActive, setDownvoteActive] = useState(false);
+
+  useEffect(() => {
+    setUpvotesHandle(upvotes);
+  }, [upvotes]);
 
   useEffect(() => {
     if (type === "question") {
@@ -67,7 +70,20 @@ function UpvotesSection({ upvotes, Id, type }) {
         }}
         styleImgContainer={{ margin: "0", width: "2vw", height: "2vw" }}
         onClickFunction={() => {
-          updateUpvotes(userDetails, history, dispatch, Id, UpvoteActive, DownvoteActive, setUpvoteActive, setDownvoteActive, UpvotesHandle, setUpvotesHandle, true, type);
+          updateUpvotes(
+            userDetails,
+            history,
+            dispatch,
+            Id,
+            UpvoteActive,
+            DownvoteActive,
+            setUpvoteActive,
+            setDownvoteActive,
+            UpvotesHandle,
+            setUpvotesHandle,
+            true,
+            type
+          );
         }}
         isActive={UpvoteActive}
       />
@@ -83,7 +99,20 @@ function UpvotesSection({ upvotes, Id, type }) {
         }}
         styleImgContainer={{ margin: "0", width: "2vw", height: "2vw" }}
         onClickFunction={() => {
-          updateUpvotes(userDetails, history, dispatch, Id, UpvoteActive, DownvoteActive, setUpvoteActive, setDownvoteActive, UpvotesHandle, setUpvotesHandle, false, type);
+          updateUpvotes(
+            userDetails,
+            history,
+            dispatch,
+            Id,
+            UpvoteActive,
+            DownvoteActive,
+            setUpvoteActive,
+            setDownvoteActive,
+            UpvotesHandle,
+            setUpvotesHandle,
+            false,
+            type
+          );
         }}
         isActive={DownvoteActive}
       />
