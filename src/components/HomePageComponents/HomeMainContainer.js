@@ -47,7 +47,7 @@ function HomeMainContainer() {
   return (
     <div className="HomeMainContainer relative">
       <div
-        className="h-full w-full absolute top-0 left-0 z-10 hidden"
+        className="hidden"
         id="HomeContainerCreatePost"
         style={{ backgroundColor: "rgb(0, 19, 36 , 0.6)" }}
       >
