@@ -4,7 +4,7 @@ import {
   useRouteMatch,
   NavLink,
 } from "react-router-dom";
-
+import { useHistory } from "react-router";
 import "../../styles/HomePage/Navbar.css";
 
 import FormInput from "../signUpCompontents/FormInput";
@@ -39,6 +39,7 @@ function Navbar({
   inputValue,
 }) {
   let { url } = useRouteMatch();
+  const history = useHistory();
   const [{ userDetails }, dispatch] = useStateValue();
 
   const [navLocation, setNavLocation] = useState("home");
@@ -46,7 +47,14 @@ function Navbar({
   return (
     <nav className="Navbar" onClick={searchBarClosingFun}>
       <div className="HomeNavLeft">
-        <img src={connectxlogo} alt="connectxlogo" className="ConnectxLogo" />
+        <img
+          src={connectxlogo}
+          alt="connectxlogo"
+          className="ConnectxLogo"
+          onClick={() => {
+            history.push("/home");
+          }}
+        />
         <div onClick={isSearchBarClicked}>
           <HomePageFormInput
             inputValue={inputValue}
@@ -94,12 +102,12 @@ function Navbar({
               navLocation === "/home"
                 ? false
                 : navLocation === "/home/connection"
-                  ? false
-                  : navLocation === "/home/queries"
-                    ? false
-                    : navLocation === "/home/userprofile"
-                      ? false
-                      : true
+                ? false
+                : navLocation === "/home/queries"
+                ? false
+                : navLocation === "/home/userprofile"
+                ? false
+                : true
             }
           />
         </NavLink>
