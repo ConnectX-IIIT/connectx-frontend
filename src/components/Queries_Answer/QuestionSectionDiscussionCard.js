@@ -3,21 +3,22 @@ import HomeCardInnerContent from "../HomePageComponents/HomeCardInnerContent";
 import UpvotesSection from "./UpvotesSection";
 
 import "../../styles/Question/QuestionSectionDiscussionCard.css";
+import { convertTimestamp } from "../HomePageComponents/helper/convert_timestamp";
 
-function QuestionSectionDiscussionCard() {
+function QuestionSectionDiscussionCard({ commentData }) {
   return (
     <div className="question-section-discussion-card-wrapper">
       <div className="question-section-discussion-left-card-wrapper">
-        <UpvotesSection />
+        <UpvotesSection upvotes={commentData.reactions} Id={commentData._id} type="comment" />
       </div>
       <div>
         <div className="question-section-discussion-right-card-wrapper">
-          <p>Harshil Piro</p>
-          <p>15:34</p>
+          <p>{commentData.userName}</p>
+          <p>{convertTimestamp(commentData.timestamp)}</p>
         </div>
         <div className="question-section-discussion-content-wrapper">
           <HomeCardInnerContent
-            InnerContent="hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello "
+            InnerContent={commentData.content}
             styleInnerContent={{
               lineHeight: "initial",
             }}

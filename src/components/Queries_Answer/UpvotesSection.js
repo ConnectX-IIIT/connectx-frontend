@@ -54,6 +54,20 @@ function UpvotesSection({ upvotes, Id, type }) {
       ) {
         setDownvoteActive(true);
       }
+    } else if (type === "comment") {
+      if (
+        userDetails.upvotedComments &&
+        userDetails.upvotedComments.includes(`${Id}`)
+      ) {
+        setUpvoteActive(true);
+      }
+
+      if (
+        userDetails.downvotedComments &&
+        userDetails.downvotedComments.includes(`${Id}`)
+      ) {
+        setDownvoteActive(true);
+      }
     }
   }, [userDetails]);
 

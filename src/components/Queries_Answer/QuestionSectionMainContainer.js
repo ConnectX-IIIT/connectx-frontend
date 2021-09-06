@@ -55,7 +55,6 @@ function QuestionSectionMainContainer(props) {
     if (!currentQuestion.user) {
       fetchQuestion(history, dispatch, questionId);
     }
-    console.log(currentQuestion);
   }, [currentQuestion]);
 
   useEffect(() => {
@@ -66,7 +65,6 @@ function QuestionSectionMainContainer(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(inputValue);
   };
 
   return (
@@ -76,7 +74,7 @@ function QuestionSectionMainContainer(props) {
         <QuestionSectionQuestion question={currentQuestion} />
       </div>
       <div className="question-section-answer-input-wrapper">
-        <img src={handlePhoto(userDetails.profilePicture)} alt="default" />
+        <img src={handlePhoto(userDetails.profilePicture, 1)} alt="default" />
         <div>
           <QuestionSectionInput
             InputName="answer"
