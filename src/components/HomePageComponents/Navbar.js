@@ -3,6 +3,7 @@ import {
   BrowserRouter as Router,
   useRouteMatch,
   NavLink,
+  isSearchBarActive,
 } from "react-router-dom";
 import { useHistory } from "react-router";
 import "../../styles/HomePage/Navbar.css";
@@ -32,10 +33,11 @@ import { useStateValue } from "../../helper/state_provider";
 import { handlePhoto } from "./helper/handle_photo";
 
 function Navbar({
-  isSearchBarClicked,
+  searchBarOpeningFun,
   searchBarClosingFun,
   onChangeFunction,
   inputValue,
+  isSearchBarActive,
 }) {
   let { url } = useRouteMatch();
   const history = useHistory();
@@ -44,7 +46,12 @@ function Navbar({
   const [navLocation, setNavLocation] = useState("home");
 
   return (
-    <nav className="Navbar" onClick={searchBarClosingFun}>
+    <nav
+      className="Navbar"
+      onClick={() => {
+        searchBarClosingFun();
+      }}
+    >
       <div className="HomeNavLeft">
         <img
           src={connectxlogo}
@@ -54,8 +61,13 @@ function Navbar({
             history.push("/home");
           }}
         />
-        <div onClick={isSearchBarClicked}>
+        <div
+          onClick={() => {
+            searchBarOpeningFun();
+          }}
+        >
           <HomePageFormInput
+            isSearchBarActive={isSearchBarActive}
             inputValue={inputValue}
             onChangeFunction={onChangeFunction}
           />
@@ -67,6 +79,9 @@ function Navbar({
           to={`${url}`}
           isActive={(match, location) => {
             setNavLocation(location.pathname);
+          }}
+          onClick={() => {
+            searchBarClosingFun();
           }}
         >
           <ImgStackHome
