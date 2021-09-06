@@ -27,7 +27,7 @@ function QueriesQuestionContainer() {
       question,
     });
     history.push(`/home/question/${question._id}`);
-  }
+  };
 
   const HomePageQuestionsList = questionData.map((item, index) => {
     return (
@@ -75,6 +75,7 @@ function QueriesQuestionContainer() {
             inputValue={UserQueries.askedQuestion}
             labelContent="Ask Something"
             isInput
+            disabled={true}
             style={{ width: "100%" }}
           />
         </div>
