@@ -64,6 +64,7 @@ export const Home = () => {
             setPopoutQueries
           )(e)
         }
+        onSearchBarBlur={closeSearchBar}
       />
       <div
         className="OnSearchDisplay"
