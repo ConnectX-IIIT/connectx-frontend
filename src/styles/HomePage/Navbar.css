@@ -20,6 +20,7 @@
 .ConnectxLogo {
   width: 10.67vw;
   object-fit: contain;
+  cursor: pointer;
 }
 .NavbarSearchIcon {
   position: absolute;
