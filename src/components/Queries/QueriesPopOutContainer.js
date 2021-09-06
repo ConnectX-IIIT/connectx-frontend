@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import CreatePostInput from "../CreatePost/CreatePostInput";
 import deleteIcon from "../../assets/create_post/ic_close.svg";
+import "../../styles/Question/QueriesPopOutContainer.css"
 import { useStateValue } from "../../helper/state_provider";
 import { useHistory } from "react-router-dom";
 import { addQuestion } from "./helper/add_question";
@@ -53,10 +54,7 @@ function QueriesPopOutContainer() {
         action=""
         encType="multipart/form-data"
         method="post"
-        className="flex flex-col"
-        style={{
-          width: "38vw",
-        }}
+        className="queries-pop-out-container-form"
       >
         <CreatePostInput
           inputType="text"
