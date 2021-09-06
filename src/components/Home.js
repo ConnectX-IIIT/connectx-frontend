@@ -93,9 +93,9 @@ export const Home = () => {
           className="SearchPopOut"
           style={
             isSearchBarOpen
-              ? { display: "block" }
+              ? { display: "block", opacity: "1" }
               : {
-                  display: "none",
+                  opacity: "0.5",
                 }
           }
         >
