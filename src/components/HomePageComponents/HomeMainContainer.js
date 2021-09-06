@@ -11,7 +11,6 @@ import { fetchPosts } from "./helper/fetch_posts";
 import { updateFilter } from "./helper/update_filter";
 
 function HomeMainContainer() {
-
   const history = useHistory();
   const [{ userDetails, postFilter }, dispatch] = useStateValue();
   const [index, setIndex] = useState(1);
