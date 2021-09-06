@@ -34,7 +34,7 @@ import { handlePhoto } from "./helper/handle_photo";
 
 function Navbar({
   isSearchBarClicked,
-  onSearchBarBlur,
+  onSearchBarBlur: searchBarClosingFun,
   onChangeFunction,
   inputValue,
 }) {
@@ -44,7 +44,7 @@ function Navbar({
   const [navLocation, setNavLocation] = useState("home");
 
   return (
-    <nav className="Navbar" onClick={onSearchBarBlur}>
+    <nav className="Navbar" onClick={searchBarClosingFun}>
       <div className="HomeNavLeft">
         <img src={connectxlogo} alt="connectxlogo" className="ConnectxLogo" />
         <div onClick={isSearchBarClicked}>
