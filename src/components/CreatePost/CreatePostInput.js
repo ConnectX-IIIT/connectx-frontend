@@ -8,6 +8,7 @@ function CreatePostInput({
   labelContent,
   isInput,
   style,
+  isDisabled = false,
 }) {
   return (
     <div className="registerFromInput mx-0">
@@ -22,6 +23,7 @@ function CreatePostInput({
           autoComplete="Off"
           placeholder={labelContent}
           style={style}
+          disabled={isDisabled}
         />
       ) : (
         <textarea
