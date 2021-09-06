@@ -91,6 +91,8 @@ function CreatePostImagesPreviewTempCompPrimary({
                   inputImagesSrcList,
                   setInputImagesSrcList
                 );
+                e.target.value = null;
+                console.log(e.target.files);
               } else {
                 e.target.files = null;
               }
