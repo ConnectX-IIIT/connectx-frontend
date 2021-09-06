@@ -33,7 +33,7 @@ import { handlePhoto } from "./helper/handle_photo";
 
 function Navbar({
   isSearchBarClicked,
-  onSearchBarBlur: searchBarClosingFun,
+  searchBarClosingFun,
   onChangeFunction,
   inputValue,
 }) {
