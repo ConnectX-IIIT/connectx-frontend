@@ -7,7 +7,6 @@ import {
 import { useHistory } from "react-router";
 import "../../styles/HomePage/Navbar.css";
 
-import FormInput from "../signUpCompontents/FormInput";
 import ImgStackHome from "./ImgStackHome";
 import connectxlogo from "../../assets/_logo/svg/logo.svg";
 import searchIcon from "../../assets/home/top_navbar/ic_search_icon.svg";
