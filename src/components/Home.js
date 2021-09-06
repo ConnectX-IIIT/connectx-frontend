@@ -49,17 +49,12 @@ export const Home = () => {
   function closeSearchBar() {
     if (isSearchBarOpen) setIsSearchBarClicked(false);
   }
-  function checkFun() {
-    console.log("ohho");
-  }
 
   return (
     <div>
       <Navbar
         inputName={userInput.searchedText}
         isSearchBarClicked={openSearchBar}
-        // onSearchBarBlur={checkFun}
-        // onFocusChange={checkFun}
         onChangeFunction={(e) =>
           handleInputSearch(
             history,
