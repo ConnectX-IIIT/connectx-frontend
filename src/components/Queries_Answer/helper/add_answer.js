@@ -1,0 +1,50 @@
+import Cookies from "js-cookie";
+import instance from "../../../helper/axios";
+
+export const addAnswer = (userDetails, history, answer, questionId, setInputValue) => async (e) => {
+    e.preventDefault();
+
+    const token = Cookies.get("token");
+
+    if (!token) {
+        history.replace("/signin");
+    }
+
+    if (!userDetails.isVerified) {
+        return alert("Your verification is under process!");
+    }
+
+    if (!answer) {
+        return alert("You can't post empty answer!");
+    }
+
+    try {
+        await instance.post(
+            `/question/addanswer/${questionId}`,
+            {
+                answer,
+            },
+            {
+                headers: {
+                    Authorization: `${token}`,
+                },
+            }
+        );
+
+        setInputValue({
+            answer: "",
+        });
+
+    } catch (error) {
+        if (error.response.status === 500) {
+            return alert(`Server error occured!`);
+        }
+        if (error.response.status === 400) {
+            return alert(`You can't post empty answer!`);
+        }
+        if (error.response.status === 408) {
+            return alert(`Your verification is under process!`);
+        }
+        return alert(`Your session has expired, please login again!`);
+    }
+};

@@ -11,6 +11,7 @@ import { convertTimestamp } from "../HomePageComponents/helper/convert_timestamp
 import { handlePhoto } from "../HomePageComponents/helper/handle_photo";
 import { fetchQuestion } from "./helper/fetch_question";
 import { fetchAnswers } from "./helper/fetch_answers";
+import { addAnswer } from "./helper/add_answer";
 
 function QuestionSectionQuestion({ question }) {
 
@@ -63,10 +64,6 @@ function QuestionSectionMainContainer(props) {
     }
   }, []);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
-
   return (
     <div className="question-section-main-container">
       <div className="question-section-question-wrapper-wrapper">
@@ -81,7 +78,7 @@ function QuestionSectionMainContainer(props) {
             InputValue={inputValue.answer}
             PlaceholderContent="Answer The Question"
             OnChangeFunction={handleInput}
-            OnSubmitFunction={handleSubmit}
+            OnSubmitFunction={(e) => addAnswer(userDetails, history, inputValue.answer, questionId, setInputValue)(e)}
           />
         </div>
       </div>
