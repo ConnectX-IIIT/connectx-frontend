@@ -13,6 +13,7 @@ function PostCardBottomButtonComp({
   colorsSet,
   isActive,
   onClickFunction,
+  extraStylesForWrapper,
 }) {
   const [currentButtonColorsState, setCurrentButtonColorsState] =
     useState("INACTIVE");
@@ -81,6 +82,7 @@ function PostCardBottomButtonComp({
       onClick={() => {
         onClickFunction();
       }}
+      style={extraStylesForWrapper}
     >
       <div
         className="post-card-bottom-button-comp-primary-svg-wrapper"
