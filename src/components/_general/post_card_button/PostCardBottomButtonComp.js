@@ -2,7 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import { ReactComponent as DefaultSVGComp } from "../../../assets/home/post/bottom/ic_dicussion.svg";
 import "../.././../styles/_general/post_card_button/PostCardBottomButtonComp.css";
 import setButtonColorsHook from "./helper/colorSetter";
-import setStatusAccToIActivityStatus from "./helper/buttonStatusSetterAccToIActivityStatus";
+import {
+  setStatusAccToIActivityStatus,
+  setStatusAccToIActivityStatusForMouseLeave,
+} from "./helper/buttonStatusSetterAccToIActivityStatus";
 import reactDom from "react-dom";
 function PostCardBottomButtonComp({
   svgComponent,
@@ -17,6 +20,7 @@ function PostCardBottomButtonComp({
     primary: colorsSet.inactiveColors.primary,
     secondary: colorsSet.inactiveColors.secondary,
   });
+  const [isBeingHovered, setIsBeingHovered] = useState(false);
 
   const svgContaineDiv = useRef(123456);
 
@@ -32,7 +36,11 @@ function PostCardBottomButtonComp({
   }, [currentButtonColorsState]);
 
   useEffect(() => {
-    setStatusAccToIActivityStatus(isActive, setCurrentButtonColorsState);
+    setStatusAccToIActivityStatus(
+      isActive,
+      isBeingHovered,
+      setCurrentButtonColorsState
+    );
   }, [isActive]);
 
   const updatedSVGComponentPathFill = (svgNode, colorHashCode) => {
@@ -43,13 +51,18 @@ function PostCardBottomButtonComp({
   };
 
   function handleMouseEnterForButtonWrapper() {
+    setIsBeingHovered(true);
     if (!isActive) {
       setCurrentButtonColorsState("HOVER");
     }
   }
   function handleMouseLeaveForButtonWrapper() {
+    setIsBeingHovered(false);
     if (currentButtonColorsState === "HOVER") {
-      setStatusAccToIActivityStatus(isActive, setCurrentButtonColorsState);
+      setStatusAccToIActivityStatusForMouseLeave(
+        isActive,
+        setCurrentButtonColorsState
+      );
     }
   }
 
