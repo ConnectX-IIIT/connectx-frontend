@@ -71,9 +71,6 @@ function PostCardBottomButtonComp({
     >
       <div
         className="post-card-bottom-button-comp-primary-svg-wrapper"
-        onLoad={(e) => {
-          console.log("HEEHh");
-        }}
         ref={svgContaineDiv}
       >
         {svgComponent}
@@ -93,13 +90,7 @@ function PostCardBottomButtonComp({
 export default PostCardBottomButtonComp;
 
 PostCardBottomButtonComp.defaultProps = {
-  svgComponent: (
-    <DefaultSVGComp
-      onLoad={() => {
-        console.log("fkme");
-      }}
-    />
-  ),
+  svgComponent: <DefaultSVGComp />,
   buttonName: "Discussion",
   colorsSet: {
     activeColors: {
