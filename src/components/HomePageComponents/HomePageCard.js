@@ -20,7 +20,6 @@ import ButtonHome from "./ButtonHome";
 import discussionButtonCompData from "./helper/bottom_buttons_data/postDiscussionButtonData";
 import shareButtonCompData from "./helper/bottom_buttons_data/postShareButtonData";
 
-import { ReactComponent as ShareIcon } from "../../assets/home/post/bottom/ic_share.svg";
 import { useHistory } from "react-router-dom";
 import { useStateValue } from "../../helper/state_provider";
 
