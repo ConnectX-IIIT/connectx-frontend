@@ -10,11 +10,13 @@ import { convertTimestamp } from "../HomePageComponents/helper/convert_timestamp
 import { handlePhoto } from "../HomePageComponents/helper/handle_photo";
 import { useHistory } from "react-router";
 import { fetchComments } from "./helper/fetch_comments";
+import QuestionSectionInput from "./QuestionSectionInput";
+import { useStateValue } from "../../helper/state_provider";
 
 function QuestionSectionCard({ answer }) {
-
   const history = useHistory();
   const [comments, setComments] = useState([]);
+  const [{ userDetails }] = useStateValue();
 
   useEffect(() => {
     fetchComments(history, answer.comments, setComments);
@@ -22,14 +24,21 @@ function QuestionSectionCard({ answer }) {
 
   const CommentList = comments.map((item, index) => {
     return (
-      <QuestionSectionDiscussionSection comment={item.comment} replies={item.reply} />
+      <QuestionSectionDiscussionSection
+        comment={item.comment}
+        replies={item.reply}
+      />
     );
   });
 
   return (
     <div className="question-section-card-wrapper">
       <div className="question-section-card-left-wrapper">
-        <UpvotesSection upvotes={answer.upvotes} type="answer" Id={answer._id} />
+        <UpvotesSection
+          upvotes={answer.upvotes}
+          type="answer"
+          Id={answer._id}
+        />
       </div>
       <div className="question-section-card-right-wrapper">
         <div className="question-section-card-user-profile">
@@ -48,14 +57,38 @@ function QuestionSectionCard({ answer }) {
           />
         </div>
         <div className="question-section-card-bottom-wrapper">
-          <div>
+          <div
+            onClick={() => {
+              document.getElementById(answer._id).classList.toggle("hidden");
+            }}
+          >
             <QuestionSectionButtons buttonType="comment" />
           </div>
           <div>
             <QuestionSectionButtons />
           </div>
         </div>
-        {CommentList}
+        <div
+          id={answer._id}
+          className="hidden question-discussion-section-answer-input-wrapper-wrapper"
+        >
+          <div className="question-discussion-section-answer-input-wrapper">
+            <img
+              src={handlePhoto(userDetails.profilePicture, 1)}
+              alt="default"
+            />
+            <div>
+              <QuestionSectionInput
+                InputName="answer"
+                // InputValue={inputValue.answer}
+                PlaceholderContent="Add Something To Comments"
+                // OnChangeFunction={handleInput}
+                // OnSubmitFunction={handleSubmit}
+              />
+            </div>
+          </div>
+          {CommentList}
+        </div>
       </div>
     </div>
   );
