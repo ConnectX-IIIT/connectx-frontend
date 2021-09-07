@@ -14,7 +14,7 @@ import HomeCardInnerContent from "./HomeCardInnerContent";
 import DotImageHome from "../../assets/home/post/body/info/ic_info_dots.svg";
 import DiscussionSection from "./DiscussionSection";
 
-import "../../styles/HomePage/HomeMainContainer/HomePageCard.css";
+import "../../styles/general_post_card/general_post_card.css";
 import ButtonHome from "./ButtonHome";
 
 import discussionButtonCompData from "./helper/bottom_buttons_data/postDiscussionButtonData";
