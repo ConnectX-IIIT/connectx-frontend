@@ -17,20 +17,21 @@ import DiscussionSection from "./DiscussionSection";
 import "../../styles/HomePage/HomeMainContainer/HomePageCard.css";
 import ButtonHome from "./ButtonHome";
 
-import { ReactComponent as TextDiscussion } from "../../assets/home/post/bottom/ic_dicussion.svg";
+import discussionButtonCompData from "./helper/bottom_buttons_data/postDiscussionButtonData";
+
 import { ReactComponent as ShareIcon } from "../../assets/home/post/bottom/ic_share.svg";
 import { useHistory } from "react-router-dom";
 import { useStateValue } from "../../helper/state_provider";
 
 import EditButtomImage from "../../assets/home/post/menu/ic_edit_post.svg";
 import DeleteButtomImage from "../../assets/home/post/menu/ic_delete_post.svg";
-import ReportButtomImage from "../../assets/home/post/menu/ic_report_post.svg";
 import { convertTimestamp } from "./helper/convert_timestamp";
 import { handlePhoto } from "./helper/handle_photo";
 import { handleDeletePost } from "./helper/delete_post";
 import { addDiscussion } from "./helper/add_discussion";
 import { fetchDiscussions } from "./helper/fetch_discussions";
 import { updateUpvotes } from "./helper/update_upvotes";
+import PostCardBottomButtonComp from "./../_general/post_card_button/PostCardBottomButtonComp";
 
 function MoreOptionHomePageCard({ Image, content, style, onClickFunction }) {
   return (
@@ -70,7 +71,6 @@ function HomePageCard({
   queriesInnerStyle,
   queriesMainContainerStyle,
 }) {
-
   const history = useHistory();
   const [UpvotesHandle, setUpvotesHandle] = useState(Upvotes);
   const [UpvoteActive, setUpvoteActive] = useState(false);
@@ -190,9 +190,7 @@ function HomePageCard({
     }
   }, [userDetails]);
 
-  useEffect(() => {
-
-  }, [userDetails])
+  useEffect(() => {}, [userDetails]);
 
   function handleDisplay(elementId) {
     document.getElementById(elementId).classList.toggle("hidden");
@@ -265,7 +263,16 @@ function HomePageCard({
                 />
                 <form
                   action=""
-                  onSubmit={(e) => addDiscussion(userDetails, history, inputDiscussionReply.content, inputDiscussionReply.postId, inputDiscussionReply.reference, setInputDiscussionReply)(e)}
+                  onSubmit={(e) =>
+                    addDiscussion(
+                      userDetails,
+                      history,
+                      inputDiscussionReply.content,
+                      inputDiscussionReply.postId,
+                      inputDiscussionReply.reference,
+                      setInputDiscussionReply
+                    )(e)
+                  }
                   className="w-full mr-2"
                 >
                   <div>
@@ -292,6 +299,11 @@ function HomePageCard({
     return DiscussionDataList;
   }
 
+  async function discussionButtonClickHandler() {
+    setIsDiscussion(!isDiscussion);
+    const discussions = await fetchDiscussions(history, discussionsIds);
+    setDiscussionData(discussions);
+  }
   return (
     <div className="HomePageCard" style={queriesMainContainerStyle}>
       <div id="HomePageCardLeftContainer">
@@ -306,9 +318,35 @@ function HomePageCard({
           }}
           styleImgContainer={{ margin: "0", width: "2vw", height: "2vw" }}
           onClickFunction={() => {
-            isDiscussionQueries ?
-              updateUpvotes(userDetails, history, dispatch, PostId, UpvoteActive, DownvoteActive, setUpvoteActive, setDownvoteActive, UpvotesHandle, setUpvotesHandle, true, "question") :
-              updateUpvotes(userDetails, history, dispatch, PostId, UpvoteActive, DownvoteActive, setUpvoteActive, setDownvoteActive, UpvotesHandle, setUpvotesHandle, true, "post");
+            isDiscussionQueries
+              ? updateUpvotes(
+                  userDetails,
+                  history,
+                  dispatch,
+                  PostId,
+                  UpvoteActive,
+                  DownvoteActive,
+                  setUpvoteActive,
+                  setDownvoteActive,
+                  UpvotesHandle,
+                  setUpvotesHandle,
+                  true,
+                  "question"
+                )
+              : updateUpvotes(
+                  userDetails,
+                  history,
+                  dispatch,
+                  PostId,
+                  UpvoteActive,
+                  DownvoteActive,
+                  setUpvoteActive,
+                  setDownvoteActive,
+                  UpvotesHandle,
+                  setUpvotesHandle,
+                  true,
+                  "post"
+                );
           }}
           isActive={UpvoteActive}
         />
@@ -324,15 +362,42 @@ function HomePageCard({
           }}
           styleImgContainer={{ margin: "0", width: "2vw", height: "2vw" }}
           onClickFunction={() => {
-            isDiscussionQueries ?
-              updateUpvotes(userDetails, history, dispatch, PostId, UpvoteActive, DownvoteActive, setUpvoteActive, setDownvoteActive, UpvotesHandle, setUpvotesHandle, false, "question") :
-              updateUpvotes(userDetails, history, dispatch, PostId, UpvoteActive, DownvoteActive, setUpvoteActive, setDownvoteActive, UpvotesHandle, setUpvotesHandle, false, "post");
+            isDiscussionQueries
+              ? updateUpvotes(
+                  userDetails,
+                  history,
+                  dispatch,
+                  PostId,
+                  UpvoteActive,
+                  DownvoteActive,
+                  setUpvoteActive,
+                  setDownvoteActive,
+                  UpvotesHandle,
+                  setUpvotesHandle,
+                  false,
+                  "question"
+                )
+              : updateUpvotes(
+                  userDetails,
+                  history,
+                  dispatch,
+                  PostId,
+                  UpvoteActive,
+                  DownvoteActive,
+                  setUpvoteActive,
+                  setDownvoteActive,
+                  UpvotesHandle,
+                  setUpvotesHandle,
+                  false,
+                  "post"
+                );
           }}
           isActive={DownvoteActive}
         />
       </div>
       <div id="HomePageCardRightContainer">
-        <div onClick={isDiscussionQueries ? onQuestionClick : null}
+        <div
+          onClick={isDiscussionQueries ? onQuestionClick : null}
           style={{
             paddingLeft: "1.5vw",
             paddingRight: "1.5vw",
@@ -360,7 +425,9 @@ function HomePageCard({
                   color: "#FF6969",
                   backgroundColor: "#FFEDED",
                 }}
-                onClickFunction={(e) => handleDeletePost(userDetails, PostId, history)(e)}
+                onClickFunction={(e) =>
+                  handleDeletePost(userDetails, PostId, history)(e)
+                }
               />
             </div>
             <img
@@ -433,20 +500,18 @@ function HomePageCard({
           className="flex"
           style={{
             borderTop: "2px solid #bdbfc4",
+            alignItems: "center",
+            paddingLeft: "1.5vw",
           }}
         >
           {isDiscussionQueries ? null : (
-            <div
-              className="HomeCardDiscussion"
-              onClick={async () => {
-                setIsDiscussion(!isDiscussion);
-                const discussions = await fetchDiscussions(history, discussionsIds);
-                setDiscussionData(discussions);
-              }}
-            >
-              <TextDiscussion className="mr-2 textDiscussion" />
-              Discussion
-            </div>
+            <PostCardBottomButtonComp
+              onClickFunction={discussionButtonClickHandler}
+              isActive={isDiscussion}
+              svgComponent={discussionButtonCompData.svgComponent}
+              buttonName={discussionButtonCompData.buttonName}
+              colorsSet={discussionButtonCompData.colorsSet}
+            />
           )}
           <div
             className="HomeCardDiscussion"
@@ -476,7 +541,20 @@ function HomePageCard({
                   alt="userprofile"
                   className="object-cover w-10 h-10 mx-5 rounded-full"
                 />
-                <form action="" onSubmit={(e) => addDiscussion(userDetails, history, DiscussionReply.content, DiscussionReply.postId, DiscussionReply.reference, setDiscussionReply)(e)} className="w-full mr-2">
+                <form
+                  action=""
+                  onSubmit={(e) =>
+                    addDiscussion(
+                      userDetails,
+                      history,
+                      DiscussionReply.content,
+                      DiscussionReply.postId,
+                      DiscussionReply.reference,
+                      setDiscussionReply
+                    )(e)
+                  }
+                  className="w-full mr-2"
+                >
                   <div className="h-28">
                     <textarea
                       type="text"
