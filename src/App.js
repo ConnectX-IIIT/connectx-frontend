@@ -49,6 +49,11 @@ function App() {
     fetchData();
   }, []);
 
+  const [isLoading, setIsLoading] = React.useState(true);
+
+  const toggleIsLoading = () => {
+    setIsLoading(!isLoading);
+  };
   return (
     <Router>
       <Switch>
@@ -65,7 +70,18 @@ function App() {
         <Route
           exact
           path="/123"
-          component={PostCardBottomButtonComp}
+          component={() => {
+            return (
+              <div>
+                <PostCardBottomButtonComp
+                  isActive={isLoading}
+                  onClickFunction={toggleIsLoading}
+                />
+                <PostCardBottomButtonComp isActive={false} />
+                <PostCardBottomButtonComp isActive={false} />
+              </div>
+            );
+          }}
         />
       </Switch>
     </Router>
