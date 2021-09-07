@@ -18,8 +18,12 @@ export const addDiscussion = (userDetails, history, content, postId, reference, 
         return alert("Your verification is under process!");
     }
 
-    if (!content || !content.replace(/\s/g, "").length) {
+    if (!content) {
         return alert("You can't post empty comment!");
+    }
+
+    if (!content.replace(/\s/g, "").length) {
+        return alert("You can't post comment with only spaces!");
     }
 
     try {
