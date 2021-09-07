@@ -14,6 +14,7 @@ import { useStateValue } from "./helper/state_provider";
 import ResetPassword from "./components/ResetPassword";
 import Admin from "./components/Admin";
 import CreatePostImagesPreviewTempCompPrimary from "./components/CreatePost/CreatePostImagesPreviewTempCompPrimary";
+import PostCardBottomButtonComp from "./components/_general/post_card_button/PostCardBottomButtonComp";
 
 function App() {
   const [{ userDetails }, dispatch] = useStateValue();
@@ -64,7 +65,7 @@ function App() {
         <Route
           exact
           path="/123"
-          component={CreatePostImagesPreviewTempCompPrimary}
+          component={PostCardBottomButtonComp}
         />
       </Switch>
     </Router>
