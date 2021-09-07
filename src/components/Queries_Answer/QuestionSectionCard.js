@@ -12,11 +12,19 @@ import { useHistory } from "react-router";
 import { fetchComments } from "./helper/fetch_comments";
 import QuestionSectionInput from "./QuestionSectionInput";
 import { useStateValue } from "../../helper/state_provider";
+import { addComment } from "./helper/add_comment";
 
 function QuestionSectionCard({ answer }) {
+
   const history = useHistory();
-  const [comments, setComments] = useState([]);
   const [{ userDetails }] = useStateValue();
+  const [comments, setComments] = useState([]);
+  const [commentContent, setCommentContent] = useState("");
+
+  const handleInput = (e) => {
+    let value = e.target.value;
+    setCommentContent(value);
+  };
 
   useEffect(() => {
     fetchComments(history, answer.comments, setComments);
@@ -27,6 +35,7 @@ function QuestionSectionCard({ answer }) {
       <QuestionSectionDiscussionSection
         comment={item.comment}
         replies={item.reply}
+        answerId={answer._id}
       />
     );
   });
@@ -79,11 +88,11 @@ function QuestionSectionCard({ answer }) {
             />
             <div>
               <QuestionSectionInput
-                InputName="answer"
-                // InputValue={inputValue.answer}
+                InputName="content"
+                InputValue={commentContent}
                 PlaceholderContent="Add Something To Comments"
-                // OnChangeFunction={handleInput}
-                // OnSubmitFunction={handleSubmit}
+                OnChangeFunction={handleInput}
+                OnSubmitFunction={(e) => addComment(userDetails, history, commentContent, answer._id, "", setCommentContent)(e)}
               />
             </div>
           </div>
