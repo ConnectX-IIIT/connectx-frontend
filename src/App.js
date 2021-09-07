@@ -65,7 +65,15 @@ function App() {
         <Route
           exact
           path="/123"
-          component={PostCardBottomButtonComp}
+          component={() => {
+            return (
+              <div>
+                <PostCardBottomButtonComp isActive={false} />
+                <PostCardBottomButtonComp isActive={false} />
+                <PostCardBottomButtonComp isActive={false} />
+              </div>
+            );
+          }}
         />
       </Switch>
     </Router>
