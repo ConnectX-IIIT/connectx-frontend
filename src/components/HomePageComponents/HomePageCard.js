@@ -18,6 +18,7 @@ import "../../styles/HomePage/HomeMainContainer/HomePageCard.css";
 import ButtonHome from "./ButtonHome";
 
 import discussionButtonCompData from "./helper/bottom_buttons_data/postDiscussionButtonData";
+import shareButtonCompData from "./helper/bottom_buttons_data/postShareButtonData";
 
 import { ReactComponent as ShareIcon } from "../../assets/home/post/bottom/ic_share.svg";
 import { useHistory } from "react-router-dom";
@@ -75,13 +76,16 @@ function HomePageCard({
   const [UpvotesHandle, setUpvotesHandle] = useState(Upvotes);
   const [UpvoteActive, setUpvoteActive] = useState(false);
   const [DownvoteActive, setDownvoteActive] = useState(false);
-  const [isDiscussion, setIsDiscussion] = useState(false);
+
+  const [isDiscussionOpen, setIsDiscussionOpen] = useState(false);
   const [DiscussionData, setDiscussionData] = useState([]);
   const [DiscussionReply, setDiscussionReply] = useState({
     content: "",
     postId: PostId,
     reference: "",
   });
+
+  const [isShareButtonActive, setIsShareButtonActive] = useState(false);
 
   function isJob(jobLink) {
     if (UserId === userDetails._id) {
@@ -300,9 +304,16 @@ function HomePageCard({
   }
 
   async function discussionButtonClickHandler() {
-    setIsDiscussion(!isDiscussion);
+    setIsDiscussionOpen(!isDiscussionOpen);
     const discussions = await fetchDiscussions(history, discussionsIds);
     setDiscussionData(discussions);
+  }
+
+  async function shareButtonClickHandler() {
+    setIsShareButtonActive(true);
+    setTimeout(() => {
+      setIsShareButtonActive(false);
+    }, 100);
   }
   return (
     <div className="HomePageCard" style={queriesMainContainerStyle}>
@@ -502,33 +513,45 @@ function HomePageCard({
             borderTop: "2px solid #bdbfc4",
             alignItems: "center",
             paddingLeft: "1.5vw",
+            paddingTop: "0.5vw",
+            paddingBottom: "0.5vw",
           }}
         >
           {isDiscussionQueries ? null : (
             <PostCardBottomButtonComp
               onClickFunction={discussionButtonClickHandler}
-              isActive={isDiscussion}
+              isActive={isDiscussionOpen}
               svgComponent={discussionButtonCompData.svgComponent}
               buttonName={discussionButtonCompData.buttonName}
               colorsSet={discussionButtonCompData.colorsSet}
+              extraStylesForWrapper={
+                discussionButtonCompData.extraStylesForWrapper
+              }
             />
           )}
-          <div
+          <PostCardBottomButtonComp
+            onClickFunction={shareButtonClickHandler}
+            isActive={isShareButtonActive}
+            svgComponent={shareButtonCompData.svgComponent}
+            buttonName={shareButtonCompData.buttonName}
+            colorsSet={shareButtonCompData.colorsSet}
+          />
+          {/* <div
             className="HomeCardDiscussion"
             style={{
               backgroundColor: "#E5F5FF",
               width: "9vw",
             }}
             onClick={() => {
-              setIsDiscussion(!isDiscussion);
+              setIsDiscussionOpen(!isDiscussionOpen);
             }}
           >
             <ShareIcon className="mr-2 textDiscussion" />
             Share
-          </div>
+          </div> */}
         </div>
 
-        {isDiscussion ? (
+        {isDiscussionOpen ? (
           <div
             style={{
               borderTop: "2px solid rgb(189, 191, 196)",
