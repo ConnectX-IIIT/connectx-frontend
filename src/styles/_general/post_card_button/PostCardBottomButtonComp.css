@@ -13,6 +13,7 @@
   border-radius: 1.2vw;
   transition: background-color 0.2s ease-out;
   margin-right: 0.7vw;
+  cursor: pointer;
 }
 
 .post-card-bottom-button-comp-primary-svg-wrapper {
