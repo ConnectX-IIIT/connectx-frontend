@@ -21,7 +21,6 @@ function PostCardBottomButtonComp({
   const svgContaineDiv = useRef(123456);
 
   useEffect(() => {
-    console.log(reactDom.findDOMNode(svgContaineDiv.current).childNodes[0]);
     updatedSVGComponentPathFill(
       reactDom.findDOMNode(svgContaineDiv.current).childNodes[0],
       currentColors.primary
