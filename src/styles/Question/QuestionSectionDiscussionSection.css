@@ -1,3 +1,8 @@
+.question-discussion-section-answer-input-main-wrapper {
+  border-top: 1px solid #bdbfc4;
+  padding-top: 1vw;
+}
+
 .question-discussion-section-answer-input-wrapper,
 .question-discussion-section-discussion-wrapper {
   @apply grid mx-auto;
