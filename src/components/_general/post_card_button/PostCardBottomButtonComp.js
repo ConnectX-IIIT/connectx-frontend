@@ -30,7 +30,7 @@ function PostCardBottomButtonComp({
       reactDom.findDOMNode(svgContaineDiv.current).childNodes[0],
       currentColors.primary
     );
-  }, [currentColors]);
+  }, [currentColors, colorsSet]);
 
   useEffect(() => {
     setButtonColorsHook(currentButtonColorsState, colorsSet, setCurrentColors);
