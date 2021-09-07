@@ -18,6 +18,10 @@ export const addAnswer = (userDetails, history, answer, questionId, setInputValu
         return alert("You can't post empty answer!");
     }
 
+    if (!answer.replace(/\s/g, "").length) {
+        return alert("You can't post answer with only spaces!");
+    }
+
     try {
         await instance.post(
             `/question/addanswer/${questionId}`,

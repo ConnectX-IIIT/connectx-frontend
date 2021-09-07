@@ -1,7 +1,7 @@
 import Cookies from "js-cookie";
 import instance from "../../../helper/axios";
 
-export const addDiscussion = (userDetails, history, content, postId, reference, setDiscussionReply) => async (e) => {
+export const addComment = (userDetails, history, content, answerId, reference, setCommentContent) => async (e) => {
     e.preventDefault();
 
     const token = Cookies.get("token");
@@ -28,10 +28,10 @@ export const addDiscussion = (userDetails, history, content, postId, reference, 
 
     try {
         await instance.post(
-            `/post/adddiscussion`,
+            `/answer/addcomment`,
             {
                 content,
-                postId,
+                answerId,
                 reference,
             },
             {
@@ -41,18 +41,14 @@ export const addDiscussion = (userDetails, history, content, postId, reference, 
             }
         );
 
-        setDiscussionReply({
-            content: "",
-            postId: postId,
-            reference: "",
-        });
+        setCommentContent("")
 
     } catch (error) {
         if (error.response.status === 500) {
             return alert(`Server error occured!`);
         }
         if (error.response.status === 400) {
-            return alert(`You can't post empty post!`);
+            return alert(`You can't answer empty answer!`);
         }
         if (error.response.status === 408) {
             return alert(`Your verification is under process!`);

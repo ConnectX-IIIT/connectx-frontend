@@ -30,16 +30,16 @@ export const addPost = (userDetails, history, postDetails) => async (e) => {
         postData.append("attachedImgs", file);
     }
 
-    if (!postDetails.postDescription || !postDetails.typeOfPost) {
+    if (!postDetails.postDescription || !postDetails.typeOfPost || !postDetails.postDescription.replace(/\s/g, "").length) {
         return alert("Please fill all the details properly!");
     }
 
-    if (!postDetails.postTitle && postDetails.typeOfPost !== "Blog") {
+    if ((!postDetails.postTitle || !postDetails.postTitle.replace(/\s/g, "").length) && postDetails.typeOfPost !== "Blog") {
         return alert("Please add post title!");
     }
 
-    if (!postDetails.jobLink && postDetails.typeOfPost === "Job") {
-        return alert("Please add joblink!");
+    if (!(new RegExp("([a-zA-Z0-9]+://)?([a-zA-Z0-9_]+:[a-zA-Z0-9_]+@)?([a-zA-Z0-9.-]+\\.[A-Za-z]{2,4})(:[0-9]+)?(/.*)?").test(postDetails.jobLink)) && postDetails.typeOfPost === "Job") {
+        return alert("Please add a valid joblink!");
     }
 
     if (!userDetails.isVerified) {
