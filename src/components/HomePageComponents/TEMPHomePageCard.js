@@ -20,7 +20,6 @@ import ButtonHome from "./ButtonHome";
 import discussionButtonCompData from "./helper/bottom_buttons_data/postDiscussionButtonData";
 import shareButtonCompData from "./helper/bottom_buttons_data/postShareButtonData";
 
-import { ReactComponent as ShareIcon } from "../../assets/home/post/bottom/ic_share.svg";
 import { useHistory } from "react-router-dom";
 import { useStateValue } from "../../helper/state_provider";
 
@@ -70,7 +69,7 @@ function HomePageCard({
   isDiscussionQueries,
   onQuestionClick,
   queriesInnerStyle,
-  queriesMainContainerStyle,
+  queriesMainContainerStyle: primaryWrapperStyling,
 }) {
   const history = useHistory();
   const [UpvotesHandle, setUpvotesHandle] = useState(Upvotes);
@@ -316,7 +315,7 @@ function HomePageCard({
     }, 100);
   }
   return (
-    <div className="HomePageCard" style={queriesMainContainerStyle}>
+    <div className="HomePageCard" style={primaryWrapperStyling}>
       <div id="HomePageCardLeftContainer">
         <ImgStackHome
           normalImageSrc={homeUpvoteIcon}
@@ -536,19 +535,6 @@ function HomePageCard({
             buttonName={shareButtonCompData.buttonName}
             colorsSet={shareButtonCompData.colorsSet}
           />
-          {/* <div
-            className="HomeCardDiscussion"
-            style={{
-              backgroundColor: "#E5F5FF",
-              width: "9vw",
-            }}
-            onClick={() => {
-              setIsDiscussionOpen(!isDiscussionOpen);
-            }}
-          >
-            <ShareIcon className="mr-2 textDiscussion" />
-            Share
-          </div> */}
         </div>
 
         {isDiscussionOpen ? (
