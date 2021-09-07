@@ -2,11 +2,12 @@
   background-color: var(--secondary-color);
   border-radius: 5px;
   width: fit-content;
+  height: fit-content;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-left: 1.5vw;
-  padding-right: 1.5vw;
+  padding-left: 1.3vw;
+  padding-right: 1vw;
   padding-top: 0.5vw;
   padding-bottom: 0.5vw;
   border-radius: 1.2vw;
@@ -33,6 +34,5 @@
   padding-right: 5px;
   font-size: 1vw;
   margin-left: 0.7vw;
-  margin-top: -2%;
   transition: color 0.1s ease-out;
 }
