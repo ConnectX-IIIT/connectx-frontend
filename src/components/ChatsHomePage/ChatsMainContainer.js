@@ -33,9 +33,7 @@ function MessageMainContainer(props) {
   const [isGroupsSectionOpen, setIsGroupsSectionOpen] = useState(false);
 
   useEffect(() => {
-    console.log(props.match.params.chatId);
     if (props.match.params.chatId) {
-      console.log("hehee");
       const chatId = props.match.params.chatId;
       const conversation = conversations.find(
         (conversation) => conversation._id === chatId
@@ -48,7 +46,7 @@ function MessageMainContainer(props) {
     } else {
       setCurrentChat(null);
     }
-  }, [props.match.params.chatId]);
+  }, [props.match.params.chatId , []]);
 
   const handleInput = (e) => {
     const name = e.target.name;

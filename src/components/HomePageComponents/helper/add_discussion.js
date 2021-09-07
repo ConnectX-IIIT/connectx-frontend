@@ -1,7 +1,7 @@
 import Cookies from "js-cookie";
 import instance from "../../../helper/axios";
 
-export const addDiscussion = (userDetails, history, content, postId, reference) => async (e) => {
+export const addDiscussion = (userDetails, history, content, postId, reference, setDiscussionReply) => async (e) => {
     e.preventDefault();
 
     const token = Cookies.get("token");
@@ -18,7 +18,7 @@ export const addDiscussion = (userDetails, history, content, postId, reference) 
         return alert("Your verification is under process!");
     }
 
-    if (reference || !content) {
+    if (!content || !content.replace(/\s/g, "").length) {
         return alert("You can't post empty comment!");
     }
 
@@ -36,6 +36,12 @@ export const addDiscussion = (userDetails, history, content, postId, reference) 
                 },
             }
         );
+
+        setDiscussionReply({
+            content: "",
+            postId: postId,
+            reference: "",
+        });
 
     } catch (error) {
         if (error.response.status === 500) {

@@ -1,0 +1,38 @@
+.post-card-bottom-button-comp-primary-wrapper {
+  background-color: var(--secondary-color);
+  border-radius: 5px;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 1.5vw;
+  padding-right: 1.5vw;
+  padding-top: 0.5vw;
+  padding-bottom: 0.5vw;
+  border-radius: 1.2vw;
+  transition: background-color 0.2s ease-out;
+}
+
+.post-card-bottom-button-comp-primary-svg-wrapper {
+  pointer-events: none;
+}
+
+.post-card-bottom-button-comp-primary-svg-wrapper svg {
+  height: 1.3vw;
+  width: auto;
+}
+
+.post-card-bottom-button-comp-primary-svg-wrapper svg path {
+  transition: fill 0.1s ease-out;
+}
+
+.post-card-bottom-button-comp-primary-text-wrapper {
+  pointer-events: none;
+  font-weight: 600;
+  font-family: "Manrope";
+  padding-right: 5px;
+  font-size: 1vw;
+  margin-left: 0.7vw;
+  margin-top: -2%;
+  transition: color 0.1s ease-out;
+}

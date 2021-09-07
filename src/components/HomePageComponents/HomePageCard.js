@@ -265,7 +265,7 @@ function HomePageCard({
                 />
                 <form
                   action=""
-                  onSubmit={(e) => addDiscussion(userDetails, history, inputDiscussionReply.content, inputDiscussionReply.postId, inputDiscussionReply.reference)(e)}
+                  onSubmit={(e) => addDiscussion(userDetails, history, inputDiscussionReply.content, inputDiscussionReply.postId, inputDiscussionReply.reference, setInputDiscussionReply)(e)}
                   className="w-full mr-2"
                 >
                   <div>
@@ -476,7 +476,7 @@ function HomePageCard({
                   alt="userprofile"
                   className="object-cover w-10 h-10 mx-5 rounded-full"
                 />
-                <form action="" onSubmit={(e) => addDiscussion(userDetails, history, DiscussionReply.content, DiscussionReply.postId, DiscussionReply.reference)(e)} className="w-full mr-2">
+                <form action="" onSubmit={(e) => addDiscussion(userDetails, history, DiscussionReply.content, DiscussionReply.postId, DiscussionReply.reference, setDiscussionReply)(e)} className="w-full mr-2">
                   <div className="h-28">
                     <textarea
                       type="text"
