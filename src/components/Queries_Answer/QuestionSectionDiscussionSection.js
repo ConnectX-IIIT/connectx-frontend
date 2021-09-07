@@ -41,24 +41,33 @@ function QuestionSectionDiscussionSection({ comment, replies }) {
         </div>
 
         <div className="question-discussion-section-reply">
-          <p className="question-discussion-section-reply-para">Reply</p>
-          <div className="question-discussion-section-answer-input-wrapper">
-            <img
-              src={handlePhoto(userDetails.profilePicture, 1)}
-              alt="default"
-            />
-            <div>
-              <QuestionSectionInput
-                InputName="answer"
-                // InputValue={inputValue.answer}
-                PlaceholderContent="Add Something To Reply"
-                // OnChangeFunction={handleInput}
-                // OnSubmitFunction={handleSubmit}
+          <p
+            className="question-discussion-section-reply-para"
+            onClick={() => {
+              document.getElementById(comment._id).classList.toggle("hidden");
+            }}
+          >
+            Reply
+          </p>
+          <div id={comment._id} className="hidden">
+            <div className="question-discussion-section-answer-input-wrapper">
+              <img
+                src={handlePhoto(userDetails.profilePicture, 1)}
+                alt="default"
               />
+              <div>
+                <QuestionSectionInput
+                  InputName="answer"
+                  // InputValue={inputValue.answer}
+                  PlaceholderContent="Add Something To Reply"
+                  // OnChangeFunction={handleInput}
+                  // OnSubmitFunction={handleSubmit}
+                />
+              </div>
             </div>
-          </div>
-          <div className="question-discussion-section-discussion-wrapper ">
-            {CommentReplyList}
+            <div className="question-discussion-section-discussion-wrapper ">
+              {CommentReplyList}
+            </div>
           </div>
         </div>
       </div>

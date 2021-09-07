@@ -27,7 +27,7 @@
   padding-left: 5.2vw;
 }
 .question-discussion-section-reply-para {
-  @apply font-manrope font-semibold;
+  @apply font-manrope font-semibold cursor-pointer;
   font-size: 1.1vw;
   color: #444444;
   margin-top: 0.5vw;
