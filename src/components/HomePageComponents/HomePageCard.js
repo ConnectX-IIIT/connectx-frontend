@@ -26,6 +26,7 @@ import { useStateValue } from "../../helper/state_provider";
 
 import EditButtomImage from "../../assets/home/post/menu/ic_edit_post.svg";
 import DeleteButtomImage from "../../assets/home/post/menu/ic_delete_post.svg";
+import ReportButtomImage from "../../assets/home/post/menu/ic_report_post.svg";
 import { convertTimestamp } from "./helper/convert_timestamp";
 import { handlePhoto } from "./helper/handle_photo";
 import { handleDeletePost } from "./helper/delete_post";
@@ -194,7 +195,7 @@ function HomePageCard({
     }
   }, [userDetails]);
 
-  useEffect(() => {}, [userDetails]);
+  useEffect(() => { }, [userDetails]);
 
   function handleDisplay(elementId) {
     document.getElementById(elementId).classList.toggle("hidden");
@@ -331,33 +332,33 @@ function HomePageCard({
           onClickFunction={() => {
             isDiscussionQueries
               ? updateUpvotes(
-                  userDetails,
-                  history,
-                  dispatch,
-                  PostId,
-                  UpvoteActive,
-                  DownvoteActive,
-                  setUpvoteActive,
-                  setDownvoteActive,
-                  UpvotesHandle,
-                  setUpvotesHandle,
-                  true,
-                  "question"
-                )
+                userDetails,
+                history,
+                dispatch,
+                PostId,
+                UpvoteActive,
+                DownvoteActive,
+                setUpvoteActive,
+                setDownvoteActive,
+                UpvotesHandle,
+                setUpvotesHandle,
+                true,
+                "question"
+              )
               : updateUpvotes(
-                  userDetails,
-                  history,
-                  dispatch,
-                  PostId,
-                  UpvoteActive,
-                  DownvoteActive,
-                  setUpvoteActive,
-                  setDownvoteActive,
-                  UpvotesHandle,
-                  setUpvotesHandle,
-                  true,
-                  "post"
-                );
+                userDetails,
+                history,
+                dispatch,
+                PostId,
+                UpvoteActive,
+                DownvoteActive,
+                setUpvoteActive,
+                setDownvoteActive,
+                UpvotesHandle,
+                setUpvotesHandle,
+                true,
+                "post"
+              );
           }}
           isActive={UpvoteActive}
         />
@@ -375,33 +376,33 @@ function HomePageCard({
           onClickFunction={() => {
             isDiscussionQueries
               ? updateUpvotes(
-                  userDetails,
-                  history,
-                  dispatch,
-                  PostId,
-                  UpvoteActive,
-                  DownvoteActive,
-                  setUpvoteActive,
-                  setDownvoteActive,
-                  UpvotesHandle,
-                  setUpvotesHandle,
-                  false,
-                  "question"
-                )
+                userDetails,
+                history,
+                dispatch,
+                PostId,
+                UpvoteActive,
+                DownvoteActive,
+                setUpvoteActive,
+                setDownvoteActive,
+                UpvotesHandle,
+                setUpvotesHandle,
+                false,
+                "question"
+              )
               : updateUpvotes(
-                  userDetails,
-                  history,
-                  dispatch,
-                  PostId,
-                  UpvoteActive,
-                  DownvoteActive,
-                  setUpvoteActive,
-                  setDownvoteActive,
-                  UpvotesHandle,
-                  setUpvotesHandle,
-                  false,
-                  "post"
-                );
+                userDetails,
+                history,
+                dispatch,
+                PostId,
+                UpvoteActive,
+                DownvoteActive,
+                setUpvoteActive,
+                setDownvoteActive,
+                UpvotesHandle,
+                setUpvotesHandle,
+                false,
+                "post"
+              );
           }}
           isActive={DownvoteActive}
         />
@@ -420,26 +421,39 @@ function HomePageCard({
               id={`${PostId}` + "MoreOption"}
               style={{ right: "0", top: "2.5vw", width: "7.34vw" }}
             >
-              <MoreOptionHomePageCard
-                Image={EditButtomImage}
-                content="Edit"
-                style={{
-                  color: "#38ABF0",
-                  backgroundColor: "#DDF2FF",
-                }}
-                onClickFunction={handleEditPost}
-              />
-              <MoreOptionHomePageCard
-                Image={DeleteButtomImage}
-                content="Delete"
-                style={{
-                  color: "#FF6969",
-                  backgroundColor: "#FFEDED",
-                }}
-                onClickFunction={(e) =>
-                  handleDeletePost(userDetails, PostId, history)(e)
-                }
-              />
+              {UserId === userDetails?._id ?
+                <>
+                  <MoreOptionHomePageCard
+                    Image={EditButtomImage}
+                    content="Edit"
+                    style={{
+                      color: "#38ABF0",
+                      backgroundColor: "#DDF2FF",
+                    }}
+                    onClickFunction={handleEditPost}
+                  />
+                  <MoreOptionHomePageCard
+                    Image={DeleteButtomImage}
+                    content="Delete"
+                    style={{
+                      color: "#FF6969",
+                      backgroundColor: "#FFEDED",
+                    }}
+                    onClickFunction={(e) =>
+                      handleDeletePost(userDetails, PostId, history)(e)
+                    }
+                  />
+                </>
+                : <MoreOptionHomePageCard
+                  Image={ReportButtomImage}
+                  content="Report"
+                  style={{
+                    color: "#FFA800",
+                    backgroundColor: "#FEF5E5",
+                  }}
+                  onClickFunction={handleEditPost}
+                />
+              }
             </div>
             <img
               src={handlePhoto(UserProfilePhoto, 1)}
