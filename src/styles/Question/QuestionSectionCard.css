@@ -25,10 +25,13 @@
 }
 .question-section-card-bottom-wrapper {
   @apply flex;
-  border-bottom: 1px solid #bdbfc4;
-  padding: 1vw 0 1vw 0;
+  padding: 1vw 0 0 0;
 }
 .question-section-card-bottom-wrapper div:first-child {
   margin-left: 1.3vw;
   margin-right: 1vw;
+}
+.question-discussion-section-answer-input-wrapper-wrapper {
+  border-top: 1px solid #bdbfc4;
+  margin-top: 1vw;
 }
