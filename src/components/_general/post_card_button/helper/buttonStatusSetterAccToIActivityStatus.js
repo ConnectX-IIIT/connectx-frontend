@@ -1,4 +1,17 @@
-function setStatusAccToIActivityStatus(iActive, setCurrentButtonColorsState) {
+function setStatusAccToIActivityStatus(iActive, isBeingHovered, setCurrentButtonColorsState) {
+  if (iActive) {
+    setCurrentButtonColorsState("ACTIVE");
+  } else if (isBeingHovered) {
+    setCurrentButtonColorsState("HOVER");
+  } else {
+    setCurrentButtonColorsState("INACTIVE");
+  }
+}
+
+function setStatusAccToIActivityStatusForMouseLeave(
+  iActive,
+  setCurrentButtonColorsState
+) {
   if (iActive) {
     setCurrentButtonColorsState("ACTIVE");
   } else {
@@ -6,4 +19,7 @@ function setStatusAccToIActivityStatus(iActive, setCurrentButtonColorsState) {
   }
 }
 
-export default setStatusAccToIActivityStatus;
+export {
+  setStatusAccToIActivityStatus,
+  setStatusAccToIActivityStatusForMouseLeave,
+};
