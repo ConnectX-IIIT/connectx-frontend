@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { ReactComponent as DefaultSVGComp } from "../../../assets/home/post/bottom/ic_dicussion.svg";
+import { ReactComponent as DefaultSVGComp } from "../../../assets/home/post/bottom/ic_discussion.svg";
 import "../.././../styles/_general/post_card_button/PostCardBottomButtonComp.css";
 import setButtonColorsHook from "./helper/colorSetter";
 import {

@@ -1,4 +1,4 @@
-import { ReactComponent as DefaultSVGComp } from "../../../../assets/home/post/bottom/ic_dicussion.svg";
+import { ReactComponent as DefaultSVGComp } from "../../../../assets/home/post/bottom/ic_discussion.svg";
 
 let discussionButtonCompData = {
   svgComponent: <DefaultSVGComp />,
