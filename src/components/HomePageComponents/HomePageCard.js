@@ -408,7 +408,6 @@ function HomePageCard({
       </div>
       <div id="HomePageCardRightContainer">
         <div
-          onClick={isDiscussionQueries ? onQuestionClick : null}
           style={{
             paddingLeft: "1.5vw",
             paddingRight: "1.5vw",
@@ -509,10 +508,13 @@ function HomePageCard({
           <div className="font-manrope font-medium text-xl my-3">
             {PostTitle}
           </div>
-          <HomeCardInnerContent
-            InnerContent={PostContent}
-            styleInnerContent={queriesInnerStyle}
-          />
+          <div
+            onClick={isDiscussionQueries ? onQuestionClick : null}>
+            <HomeCardInnerContent
+              InnerContent={PostContent}
+              styleInnerContent={queriesInnerStyle}
+            />
+          </div>
           {PostImageUrls.length > 0 ? (
             <CarouselHome CarouselImgs={PostImageUrls} />
           ) : null}
