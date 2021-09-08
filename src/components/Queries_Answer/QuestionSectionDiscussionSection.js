@@ -1,15 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "../../styles/Question/QuestionSectionDiscussionSection.css";
 import QuestionSectionInput from "./QuestionSectionInput";
 
-import DefaultProfile from "../../assets/_rough/achi photo part 2.jpg";
 import QuestionSectionDiscussionCard from "./QuestionSectionDiscussionCard";
 import { handlePhoto } from "../HomePageComponents/helper/handle_photo";
 import { useStateValue } from "../../helper/state_provider";
+import { addComment } from "./helper/add_comment";
+import { useHistory } from "react-router";
 
-function QuestionSectionDiscussionSection({ comment, replies }) {
+function QuestionSectionDiscussionSection({ comment, replies, answerId }) {
+
+  const history = useHistory();
   const [{ userDetails }] = useStateValue();
+  const [commentContent, setCommentContent] = useState("");
+
+  const handleInput = (e) => {
+    let value = e.target.value;
+    setCommentContent(value);
+  };
 
   const CommentReplyList = replies.map((reply, index) => {
     return (
@@ -49,19 +58,19 @@ function QuestionSectionDiscussionSection({ comment, replies }) {
           >
             Reply
           </p>
-          <div id={comment._id} className="hidden">
-            <div className="question-discussion-section-answer-input-wrapper">
+          <div>
+            <div className="question-discussion-section-answer-input-wrapper hidden" id={comment._id} >
               <img
                 src={handlePhoto(userDetails.profilePicture, 1)}
                 alt="default"
               />
               <div>
                 <QuestionSectionInput
-                  InputName="answer"
-                  // InputValue={inputValue.answer}
+                  InputName="content"
+                  InputValue={commentContent}
                   PlaceholderContent="Add Something To Reply"
-                  // OnChangeFunction={handleInput}
-                  // OnSubmitFunction={handleSubmit}
+                  OnChangeFunction={handleInput}
+                  OnSubmitFunction={(e) => addComment(userDetails, history, commentContent, answerId, comment._id, setCommentContent)(e)}
                 />
               </div>
             </div>

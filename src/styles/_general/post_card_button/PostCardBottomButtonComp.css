@@ -13,6 +13,7 @@
   border-radius: 1.2vw;
   transition: background-color 0.2s ease-out;
   margin-right: 0.7vw;
+  cursor: pointer;
 }
 
 .post-card-bottom-button-comp-primary-svg-wrapper {
@@ -20,8 +21,8 @@
 }
 
 .post-card-bottom-button-comp-primary-svg-wrapper svg {
-  height: 1.3vw;
-  width: auto;
+  width: 1.3vw;
+  height: auto;
 }
 
 .post-card-bottom-button-comp-primary-svg-wrapper svg path {

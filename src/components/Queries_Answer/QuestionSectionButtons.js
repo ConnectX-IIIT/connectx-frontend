@@ -1,7 +1,7 @@
 import React from "react";
 import "../../styles/Question/QuestionSectionButtons.css";
 import shareIcon from "../../assets/home/post/bottom/ic_share.svg";
-import commentIcon from "../../assets/home/post/bottom/ic_comment.svg";
+import commentIcon from "../../assets/home/post/bottom/ic_discussion.svg";
 
 const shareStyle = {
   backgroundColor: "#E5F5FF",
