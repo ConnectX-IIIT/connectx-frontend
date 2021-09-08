@@ -41,6 +41,7 @@ function QueriesQuestionContainer() {
           PostImageUrls={[]}
           Upvotes={item.upvotes}
           PostId={item._id}
+          UserId={item.user}
           isDiscussionQueries={true}
           onQuestionClick={handleQuestionClick(item)}
           queriesInnerStyle={{ fontWeight: "600", fontFamily: "manrope", cursor: "pointer" }}
