@@ -79,6 +79,7 @@ function QueriesQuestionContainer() {
               height: "3vw",
               margin: "0",
               backgroundColor: "#ffffff",
+              cursor: "pointer"
             }}
           />
         </div>

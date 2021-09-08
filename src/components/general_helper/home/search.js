@@ -1,7 +1,7 @@
 import Cookies from "js-cookie";
 import instance from "../../../helper/axios";
 
-export const handleInputSearch = (history, userInput, setUserInput, setPopoutPeople, setPopoutQueries) => async (e) => {
+export const handleInputSearch = (history, userInput, setUserInput, setPopoutQueries, setPopoutPeople) => async (e) => {
 
     const token = Cookies.get("token");
 
@@ -26,7 +26,9 @@ export const handleInputSearch = (history, userInput, setUserInput, setPopoutPeo
 
         const userData = await getSearchRes.data.userData;
         const queriesData = await getSearchRes.data.questionData;
-        setPopoutPeople(userData);
+        if (setPopoutPeople) {
+            setPopoutPeople(userData);
+        }
         setPopoutQueries(queriesData);
 
     } catch (error) {
