@@ -1,0 +1,9 @@
+.admin-pannel-report-main-container{
+    width:100%;
+    padding-left: 6vw;
+    padding-right: 6vw;
+    display: grid;
+    grid-template-columns: 14.2% 30.7% 1fr;
+    grid-gap: 1.5vw ;
+    padding-top:3.15vw;
+}
