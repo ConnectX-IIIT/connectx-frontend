@@ -92,7 +92,7 @@ function Navbar({
             normalImageSrc={queriesImage}
             hoverImageSrc={hoverQueriesImage}
             activeImageSrc={activeQueriesImage}
-            isActive={navLocation === "/home/queries" ? true : false}
+            isActive={navLocation.startsWith("/home/qu") ? true : false}
           />
         </NavLink>
         <NavLink to={`${url}/connection`}>
@@ -100,7 +100,7 @@ function Navbar({
             normalImageSrc={connectionImage}
             hoverImageSrc={hoverConnectionImage}
             activeImageSrc={activeConnectionImage}
-            isActive={navLocation === "/home/connection" ? true : false}
+            isActive={navLocation.startsWith("/home/connection") ? true : false}
           />
         </NavLink>
         <NavLink to={`${url}/message`}>
@@ -108,17 +108,7 @@ function Navbar({
             normalImageSrc={messageImage}
             hoverImageSrc={hoverMessageImage}
             activeImageSrc={activeMessageImage}
-            isActive={
-              navLocation === "/home"
-                ? false
-                : navLocation === "/home/connection"
-                ? false
-                : navLocation === "/home/queries"
-                ? false
-                : navLocation === "/home/userprofile"
-                ? false
-                : true
-            }
+            isActive={navLocation.startsWith("/home/message") ? true : false}
           />
         </NavLink>
 
