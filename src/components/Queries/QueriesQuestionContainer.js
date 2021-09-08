@@ -43,7 +43,7 @@ function QueriesQuestionContainer() {
           PostId={item._id}
           isDiscussionQueries={true}
           onQuestionClick={handleQuestionClick(item)}
-          queriesInnerStyle={{ fontWeight: "600", fontFamily: "manrope" }}
+          queriesInnerStyle={{ fontWeight: "600", fontFamily: "manrope", cursor: "pointer" }}
           queriesMainContainerStyle={{ marginLeft: "0" }}
         />
       </div>
