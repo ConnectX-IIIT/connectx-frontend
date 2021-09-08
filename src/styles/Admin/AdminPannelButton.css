@@ -1,0 +1,6 @@
+.admin-pannel-bottom-button {
+  @apply rounded-md font-manrope font-medium;
+  padding-top: 0.35vw;
+  padding-bottom: 0.35vw;
+  font-size: 1.1vw;
+}
