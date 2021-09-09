@@ -124,7 +124,7 @@ export const Home = () => {
             path="/home/message/:chatId"
             component={ChatsMainContainer}
           />
-          <Route exact path="/home/userprofile" component={ProfilePage} />
+          <Route exact path="/home/userprofile/:userId" component={ProfilePage} />
           <Route
             exact
             path="/home/question/:questionId"

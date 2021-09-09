@@ -2,16 +2,16 @@ import React from "react";
 import { useStateValue } from "../../helper/state_provider";
 import "../../styles/HomePage/HomeMainContainer/ButtonHome.css";
 import { useHistory } from "react-router-dom";
-import { fetchUserDetails } from "./helper/fetch_user_details";
 import { handleMessage } from "../ConnectionsHomePage/helper/handle_message";
+import { fetchUserDetails } from "../ProfilePage/helper/get_user_details";
 
 function ButtonHome({ content, styleButton, jobLink, filter, postUserId }) {
 
   const history = useHistory();
+
   const [{ userDetails, postFilter }, dispatch] = useStateValue();
 
   const handleSubmit = async (e) => {
-
     if (jobLink) {
       e.preventDefault();
       window.open(jobLink, '_blank');
@@ -26,7 +26,10 @@ function ButtonHome({ content, styleButton, jobLink, filter, postUserId }) {
     }
 
     if (postUserId) {
-      const userData = await fetchUserDetails(userDetails, history, postUserId);
+      if (!userDetails.isVerified) {
+        return alert(`Your verification is under process!`);
+      }
+      const userData = await fetchUserDetails(history, null, postUserId);
       if (userData) {
         handleMessage(userData, userDetails, dispatch, history)(e);
       }

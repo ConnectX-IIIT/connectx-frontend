@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import ProfilePageImageContainer from "./ProfilePageImageContainer";
@@ -10,9 +10,26 @@ import ProfilePagePost from "./ProfilePagePost";
 import ProfilePageQuestion from "./ProfilePageQuestion";
 import ProfilePageAnswer from "./ProfilePageAnswer";
 import ProfileEditPage from "./ProfileEditPage";
+import { useHistory } from "react-router-dom";
+import { useStateValue } from "../../helper/state_provider";
+import { fetchUserDetails } from "./helper/get_user_details";
 
-function ProfilePage() {
+function ProfilePage(props) {
+
+  const history = useHistory();
+  const [{ userDetails }] = useStateValue();
+  const [userData, setUserData] = useState({});
   const [isYourProfile, setIsYourProfile] = useState(true);
+
+  useEffect(() => {
+    const userId = props.match.params.userId;
+    if (userId === userDetails._id) {
+      setUserData(userDetails);
+    } else {
+      fetchUserDetails(history, null, userId, setUserData);
+      setIsYourProfile(false);
+    }
+  }, []);
 
   return (
     <div className="relative">
@@ -21,11 +38,11 @@ function ProfilePage() {
       </div>
 
       <div className="profile-page-wrapper">
-        <ProfilePageImageContainer isYourProfile={isYourProfile} />
-        <ProfilePageInformationContainer isYourProfile={isYourProfile} />
+        <ProfilePageImageContainer isYourProfile={isYourProfile} userDetails={userData} />
+        <ProfilePageInformationContainer isYourProfile={isYourProfile} userDetails={userData} />
 
         <Router>
-          <ProfilePageNavbar isYourProfile={isYourProfile} />
+          <ProfilePageNavbar isYourProfile={isYourProfile} userData={userData} />
           <Switch>
             <Route path="/home/userprofile/post" component={ProfilePagePost} />
             <Route

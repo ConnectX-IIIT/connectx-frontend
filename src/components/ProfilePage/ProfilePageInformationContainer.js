@@ -1,11 +1,9 @@
 import React from "react";
-import { useStateValue } from "../../helper/state_provider";
 
 import "../../styles/ProfilePage/ProfilePageInformationContainer.css";
 import penIcon from "../../assets/profile/pen.svg";
 
-function ProfilePageInformationContainer({ isYourProfile }) {
-  const [{ userDetails }, dispatch] = useStateValue();
+function ProfilePageInformationContainer({ isYourProfile, userDetails }) {
 
   return (
     <div className="profile-page-information-container-wrapper">

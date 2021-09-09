@@ -5,9 +5,12 @@ import {
   Route,
   NavLink,
 } from "react-router-dom";
+import { useStateValue } from "../../helper/state_provider";
 
+import { useHistory } from "react-router-dom";
 import "../../styles/ProfilePage/ProfilePageNavbar.css";
 import ProfilePageLogOut from "./ProfilePageLogOut";
+import { handleMessage } from "../ConnectionsHomePage/helper/handle_message";
 
 const ProfilePageNavbarName = ["Post", "Question", "Answer"];
 
@@ -31,7 +34,11 @@ const NavbarRoutersNameList = ProfilePageNavbarName.map((router, index) => {
   );
 });
 
-function ProfilePageMessageBttn() {
+function ProfilePageMessageBtn({ userData }) {
+
+  const history = useHistory();
+  const [{ userDetails }, dispatch] = useStateValue();
+
   return (
     <div>
       <button
@@ -46,22 +53,23 @@ function ProfilePageMessageBttn() {
           style={{
             color: "#1792DD",
           }}
+          onClick={(e) => handleMessage(userData, userDetails, dispatch, history)(e)}
         >
           Message
         </div>
-      </button>
-    </div>
+      </button >
+    </div >
   );
 }
 
-function ProfilePageNavbar({ isYourProfile }) {
+function ProfilePageNavbar({ isYourProfile, userData }) {
   return (
     <div className="profile-page-navbar-wrapper">
       <div className="profile-page-navbar-left-wrapper">
         {NavbarRoutersNameList}
       </div>
       <div className="profile-page-navbar-right-wrapper">
-        {!isYourProfile ? <ProfilePageMessageBttn /> : <ProfilePageLogOut />}
+        {!isYourProfile ? <ProfilePageMessageBtn userData={userData} /> : <ProfilePageLogOut />}
       </div>
     </div>
   );

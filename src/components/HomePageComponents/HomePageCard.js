@@ -315,6 +315,7 @@ function HomePageCard({
       setIsShareButtonActive(false);
     }, 100);
   }
+
   return (
     <div className="HomePageCard" style={queriesMainContainerStyle}>
       <div id="HomePageCardLeftContainer">
@@ -467,7 +468,7 @@ function HomePageCard({
             />
             <div id="PostDetailsContainerTitle">
               <div>
-                <div
+                <div onClick={() => history.push(`/home/userProfile/${UserId}`)}
                   style={{
                     display: "inline",
                     width: "20%",
@@ -475,6 +476,7 @@ function HomePageCard({
                     fontWeight: "500",
                     fontSize: "1.2vw",
                     marginRight: "10px",
+                    cursor: "pointer"
                   }}
                 >
                   {PostUserName}
@@ -613,7 +615,7 @@ function HomePageCard({
           </div>
         ) : null}
       </div>
-    </div>
+    </div >
   );
 }
 
