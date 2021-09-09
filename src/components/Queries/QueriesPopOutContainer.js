@@ -5,6 +5,7 @@ import "../../styles/Question/QueriesPopOutContainer.css"
 import { useStateValue } from "../../helper/state_provider";
 import { useHistory } from "react-router-dom";
 import { addQuestion } from "./helper/add_question";
+import { handleInputSearch } from "../general_helper/home/search";
 
 function QuestionSuggestion({ QuestionInnerContent }) {
   return (
@@ -21,18 +22,19 @@ function QuestionSuggestion({ QuestionInnerContent }) {
 }
 
 function QueriesPopOutContainer() {
+
   const [{ userDetails }, dispatch] = useStateValue(false);
   const history = useHistory();
-
+  const [popoutQueries, setPopoutQueries] = useState([]);
   const [UserQueries, setUserQueries] = useState({
     askedQuestion: "",
   });
 
-  const handleInput = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setUserQueries({ ...UserQueries, [name]: value });
-  };
+  const PopoutQueriesList = popoutQueries.map((item, index) => {
+    return (
+      <QuestionSuggestion QuestionInnerContent={item.question} />
+    );
+  });
 
   return (
     <div className="PostMainContainer rounded-md mt-24">
@@ -60,15 +62,18 @@ function QueriesPopOutContainer() {
           inputType="text"
           inputName="askedQuestion"
           inputValue={UserQueries.askedQuestion}
-          onChangeFunction={handleInput}
+          onChangeFunction={(e) => handleInputSearch(
+            history,
+            UserQueries,
+            setUserQueries,
+            setPopoutQueries
+          )(e)}
           labelContent="Ask Something"
           isInput={true}
           style={{ width: "100%", marginBottom: "0" }}
         />
       </form>
-      <QuestionSuggestion QuestionInnerContent="lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem lorem ipsum  " />
-      <QuestionSuggestion QuestionInnerContent="lorem ipsum" />
-      <QuestionSuggestion QuestionInnerContent="lorem ipsum" />
+      {PopoutQueriesList}
 
       <div className="flex">
         <button

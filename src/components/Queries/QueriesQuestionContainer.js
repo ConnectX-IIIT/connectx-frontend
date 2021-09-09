@@ -41,9 +41,10 @@ function QueriesQuestionContainer() {
           PostImageUrls={[]}
           Upvotes={item.upvotes}
           PostId={item._id}
+          UserId={item.user}
           isDiscussionQueries={true}
           onQuestionClick={handleQuestionClick(item)}
-          queriesInnerStyle={{ fontWeight: "600", fontFamily: "manrope" }}
+          queriesInnerStyle={{ fontWeight: "600", fontFamily: "manrope", cursor: "pointer" }}
           queriesMainContainerStyle={{ marginLeft: "0" }}
         />
       </div>
@@ -78,6 +79,7 @@ function QueriesQuestionContainer() {
               height: "3vw",
               margin: "0",
               backgroundColor: "#ffffff",
+              cursor: "pointer"
             }}
           />
         </div>

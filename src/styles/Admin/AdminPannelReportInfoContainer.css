@@ -1,0 +1,99 @@
+.admin-pannel-report-info-container {
+  border: 1px solid #444444;
+  height: 36vw;
+  border-radius: 6px;
+}
+.admin-pannel-report-info-heading {
+  @apply font-manrope;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 0.9vw;
+
+  color: #444444;
+  padding-left: 2.4vw;
+  padding-top: 1.3vw;
+}
+.admin-pannel-report-image-wrapper {
+  width: 30.5vw;
+  height: 14.2vw;
+  background-color:#FAFAFA;
+  /* padding-left: 6.9vw;
+  padding-top: 0.3vw; */
+}
+.admin-pannel-report-image-wrapper-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  margin-left: 6.9vw;
+  margin-top: 0.3vw;
+}
+.admin-pannel-report-user-profile-image-wrapper-img {
+    width: 4.45vw;
+    height: 4.4vw;
+  border: 0.341216px solid #444444;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.admin-pannel-report-user-profile {
+  padding-left: 2.5vw;
+ 
+}
+.admin-pannel-report-user-data{
+    display: flex;
+}
+.user-profile-report-info-wrapper {
+  @apply font-manrope;
+  justify-content: space-evenly;
+  align-items: center;
+  
+  padding-left: 2.2vw;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 0.7vw;
+
+  color: #222222;
+}
+.user-profile-report-user-contact{
+    display: flex;
+    
+}
+.user-profile-report-email{
+    padding-left:0.5vw;
+}
+.admin-pannel-report-take-action-wrapper{
+    @apply font-manrope;
+font-style: normal;
+font-weight: 500;
+font-size: 0.8VW;
+
+text-align: center;
+ padding-top: 5.2vw;
+color: #888888;
+border-bottom:  1px solid #888888;;
+}
+.admin-pannel-report-content-wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.admin-pannel-report-ignore-wrapper{
+ @apply font-manrope;
+font-style: normal;
+font-weight: 500;
+font-size: 1vw;
+padding-top: 0.9vw;
+padding-right: 1.25vw;
+padding-left: 3vw;
+color: #444444;
+}
+.admin-pannel-report-button{
+  border: 1px solid #1792DD;
+  width:8.75vw;
+  height: 2vw;
+  color:  #1792DD;
+  @apply font-manrope;
+  font-size: 1vw;
+}
+.admin-pannel-report-button-wrapper{
+  padding-top: 0.9vw;
+}

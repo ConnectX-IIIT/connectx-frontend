@@ -60,8 +60,8 @@ export const Home = () => {
             history,
             userInput,
             setUserInput,
-            setPopoutPeople,
-            setPopoutQueries
+            setPopoutQueries,
+            setPopoutPeople
           )(e);
         }}
         searchBarClosingFun={closeSearchBar}
@@ -73,19 +73,19 @@ export const Home = () => {
         style={
           isSearchBarOpen
             ? {
-                opacity: "1",
-                zIndex: "2",
-                height: "100vh",
-                top: "0px",
-                paddingTop: "81px",
-              }
+              opacity: "1",
+              zIndex: "2",
+              height: "100vh",
+              top: "0px",
+              paddingTop: "81px",
+            }
             : {
-                opacity: "0",
-                zIndex: "1",
-                height: "0",
-                top: "0px",
-                paddingTop: "20px",
-              }
+              opacity: "0",
+              zIndex: "1",
+              height: "0",
+              top: "0px",
+              paddingTop: "20px",
+            }
         }
         onClick={() => closeSearchBar()}
       >
@@ -95,8 +95,8 @@ export const Home = () => {
             isSearchBarOpen
               ? { display: "block", opacity: "1" }
               : {
-                  opacity: "0.5",
-                }
+                opacity: "0.5",
+              }
           }
         >
           <div className="Queries">

@@ -1,0 +1,18 @@
+.admin-pannel-report-listing-container{
+    border: 1px solid #444444;
+  height: 36vw;
+  border-radius: 6px;
+}
+.admin-pannel-report-listing-individual-wrapper {
+    @apply font-manrope;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1vw;
+    
+    color: #444444;
+    padding-top: 0.75vw;
+    padding-bottom: 0.44vw;
+    padding-left:1.5vw ;
+    border-bottom: 1px solid #444444;
+  }
+  
