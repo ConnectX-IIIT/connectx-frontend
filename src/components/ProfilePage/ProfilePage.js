@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import ProfilePageImageContainer from "./ProfilePageImageContainer";
@@ -12,6 +12,8 @@ import ProfilePageAnswer from "./ProfilePageAnswer";
 import ProfileEditPage from "./ProfileEditPage";
 
 function ProfilePage() {
+  const [isYourProfile, setIsYourProfile] = useState(false);
+
   return (
     <div className="relative">
       <div id="ProfilePageEditProfile" className="hidden">
@@ -19,11 +21,11 @@ function ProfilePage() {
       </div>
 
       <div className="profile-page-wrapper">
-        <ProfilePageImageContainer />
-        <ProfilePageInformationContainer />
+        <ProfilePageImageContainer isYourProfile={isYourProfile} />
+        <ProfilePageInformationContainer isYourProfile={isYourProfile} />
 
         <Router>
-          <ProfilePageNavbar />
+          <ProfilePageNavbar isYourProfile={isYourProfile} />
           <Switch>
             <Route path="/home/userprofile/post" component={ProfilePagePost} />
             <Route
