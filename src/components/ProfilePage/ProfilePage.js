@@ -12,7 +12,7 @@ import ProfilePageAnswer from "./ProfilePageAnswer";
 import ProfileEditPage from "./ProfileEditPage";
 
 function ProfilePage() {
-  const [isYourProfile, setIsYourProfile] = useState(false);
+  const [isYourProfile, setIsYourProfile] = useState(true);
 
   return (
     <div className="relative">
