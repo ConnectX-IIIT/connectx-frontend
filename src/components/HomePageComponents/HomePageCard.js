@@ -468,7 +468,7 @@ function HomePageCard({
             />
             <div id="PostDetailsContainerTitle">
               <div>
-                <div onClick={() => history.push(`/home/userProfile/${UserId}`)}
+                <div onClick={() => history.push(`/home/user/${UserId}`)}
                   style={{
                     display: "inline",
                     width: "20%",

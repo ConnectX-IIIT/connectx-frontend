@@ -3,14 +3,12 @@ import { Link } from "react-router-dom";
 import TrendingIcon from "../../assets/home/left_container/ic_trending.svg";
 import filterIcon from "../../assets/home/left_container/ic_filter.svg";
 import "../../styles/HomePage/HomeMainContainer/HomeUserDetails.css";
-import { useHistory } from "react-router-dom";
 import ButtonHome from "../../components/HomePageComponents/ButtonHome";
 import { useStateValue } from "../../helper/state_provider";
 import { handlePhoto } from "./helper/handle_photo";
 
 function HomeUserDetails() {
 
-  const history = useHistory();
   const [{ userDetails, postFilter }, dispatch] = useStateValue();
   const [filter, setFilter] = useState({
     jobs: false,
@@ -39,9 +37,7 @@ function HomeUserDetails() {
         <p>
           {userDetails.description}
         </p>
-        <div onClick={() => {
-          history.push(`/home/userprofile/${userDetails._id}`);
-        }}>View Profile</div>
+        <Link to={`/home/user/${userDetails._id}`}>View Profile</Link>
       </div>
       <div className="ProfileOptions">
         <img src={TrendingIcon} alt="trending" />

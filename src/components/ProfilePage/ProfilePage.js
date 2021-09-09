@@ -20,9 +20,9 @@ function ProfilePage(props) {
   const [{ userDetails }] = useStateValue();
   const [userData, setUserData] = useState({});
   const [isYourProfile, setIsYourProfile] = useState(true);
+  const userId = props.match.params.userId;
 
   useEffect(() => {
-    const userId = props.match.params.userId;
     if (userId === userDetails._id) {
       setUserData(userDetails);
     } else {
@@ -44,13 +44,13 @@ function ProfilePage(props) {
         <Router>
           <ProfilePageNavbar isYourProfile={isYourProfile} userData={userData} />
           <Switch>
-            <Route path="/home/userprofile/post" component={ProfilePagePost} />
+            <Route path="/home/user/:userId" component={ProfilePagePost} />
             <Route
-              path="/home/userprofile/question"
+              path="/home/user/:userId/question"
               component={ProfilePageQuestion}
             />
             <Route
-              path="/home/userprofile/answer"
+              path="/home/user/:userId/answer"
               component={ProfilePageAnswer}
             />
           </Switch>

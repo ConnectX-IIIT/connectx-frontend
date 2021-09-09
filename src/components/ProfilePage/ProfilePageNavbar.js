@@ -12,28 +12,6 @@ import "../../styles/ProfilePage/ProfilePageNavbar.css";
 import ProfilePageLogOut from "./ProfilePageLogOut";
 import { handleMessage } from "../ConnectionsHomePage/helper/handle_message";
 
-const ProfilePageNavbarName = ["Post", "Question", "Answer"];
-
-const ProfilePageNavbarRouter = [
-  "/home/userprofile/post",
-  "/home/userprofile/question",
-  "/home/userprofile/answer",
-];
-
-const NavbarRoutersNameList = ProfilePageNavbarName.map((router, index) => {
-  return (
-    <NavLink
-      exact
-      to={ProfilePageNavbarRouter[index]}
-      key={index}
-      activeClassName="profile-page-active-class"
-      className="profile-page-link"
-    >
-      {router}
-    </NavLink>
-  );
-});
-
 function ProfilePageMessageBtn({ userData }) {
 
   const history = useHistory();
@@ -66,7 +44,33 @@ function ProfilePageNavbar({ isYourProfile, userData }) {
   return (
     <div className="profile-page-navbar-wrapper">
       <div className="profile-page-navbar-left-wrapper">
-        {NavbarRoutersNameList}
+        <NavLink
+          exact
+          to={"/home/user/" + userData._id}
+          key={0}
+          activeClassName="profile-page-active-class"
+          className="profile-page-link"
+        >
+          Post
+        </NavLink>
+        <NavLink
+          exact
+          to={"/home/user/" + userData._id + "/question"}
+          key={1}
+          activeClassName="profile-page-active-class"
+          className="profile-page-link"
+        >
+          Question
+        </NavLink>
+        <NavLink
+          exact
+          to={"/home/user/" + userData._id + "/answer"}
+          key={2}
+          activeClassName="profile-page-active-class"
+          className="profile-page-link"
+        >
+          Answer
+        </NavLink>
       </div>
       <div className="profile-page-navbar-right-wrapper">
         {!isYourProfile ? <ProfilePageMessageBtn userData={userData} /> : <ProfilePageLogOut />}
