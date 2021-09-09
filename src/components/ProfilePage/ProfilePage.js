@@ -44,7 +44,7 @@ function ProfilePage(props) {
         <Router>
           <ProfilePageNavbar isYourProfile={isYourProfile} userData={userData} />
           <Switch>
-            <Route path="/home/user/:userId" component={ProfilePagePost} />
+            <Route exact path="/home/user/:userId" component={ProfilePagePost} />
             <Route
               path="/home/user/:userId/question"
               component={ProfilePageQuestion}
