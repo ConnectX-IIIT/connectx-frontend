@@ -4,8 +4,7 @@ import { useStateValue } from "../../helper/state_provider";
 import "../../styles/ProfilePage/ProfilePageInformationContainer.css";
 import penIcon from "../../assets/profile/pen.svg";
 
-function ProfilePageInformationContainer() {
-
+function ProfilePageInformationContainer({ isYourProfile }) {
   const [{ userDetails }, dispatch] = useStateValue();
 
   return (
@@ -20,6 +19,7 @@ function ProfilePageInformationContainer() {
         </div>
         <button
           className="profile-page-edit-button"
+          style={isYourProfile ? { display: "flex" } : { display: "none" }}
           onClick={() => {
             document
               .getElementById("ProfilePageEditProfile")
