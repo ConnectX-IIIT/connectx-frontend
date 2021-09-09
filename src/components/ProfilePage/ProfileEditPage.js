@@ -7,7 +7,6 @@ import { updateUserDetails } from "./helper/update_user_details";
 import { useHistory } from "react-router-dom";
 
 function ProfileEditPage() {
-
   const history = useHistory();
   const [{ userDetails }, dispatch] = useStateValue();
   const [userData, setUserData] = useState({
@@ -26,7 +25,7 @@ function ProfileEditPage() {
         description: userDetails.description,
       });
     }
-  }, [userDetails])
+  }, [userDetails]);
 
   const handleInput = (e) => {
     const name = e.target.name;
@@ -54,7 +53,9 @@ function ProfileEditPage() {
       </div>
       <form
         action=""
-        onSubmit={(e) => updateUserDetails(userDetails, history, userData, dispatch)(e)}
+        onSubmit={(e) =>
+          updateUserDetails(userDetails, history, userData, dispatch)(e)
+        }
         encType="multipart/form-data"
         method="post"
         className="flex flex-col"
