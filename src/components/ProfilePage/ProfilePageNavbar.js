@@ -31,14 +31,37 @@ const NavbarRoutersNameList = ProfilePageNavbarName.map((router, index) => {
   );
 });
 
-function ProfilePageNavbar() {
+function ProfilePageMessageBttn() {
+  return (
+    <div>
+      <button
+        className="logOutBttn"
+        style={{
+          color: "#1792DD",
+          borderColor: "#1792DD",
+        }}
+      >
+        <div
+          className="logOut"
+          style={{
+            color: "#1792DD",
+          }}
+        >
+          Message
+        </div>
+      </button>
+    </div>
+  );
+}
+
+function ProfilePageNavbar({ isYourProfile }) {
   return (
     <div className="profile-page-navbar-wrapper">
       <div className="profile-page-navbar-left-wrapper">
         {NavbarRoutersNameList}
       </div>
       <div className="profile-page-navbar-right-wrapper">
-        <ProfilePageLogOut />
+        {!isYourProfile ? <ProfilePageMessageBttn /> : <ProfilePageLogOut />}
       </div>
     </div>
   );
