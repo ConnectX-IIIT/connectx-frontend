@@ -10,8 +10,7 @@ import Cookies from "js-cookie";
 import { uploadProfilePic } from "../general_helper/photo_upload/upload_profile_picture";
 import { uploadBackgroundPic } from "../general_helper/photo_upload/upload_background_picture";
 
-function ProfilePageImageContainer() {
-
+function ProfilePageImageContainer({ isYourProfile }) {
   const history = useHistory();
   const [{ userDetails }, dispatch] = useStateValue();
   const [updatedDetails, setUpdatedDetails] = useState({
@@ -21,17 +20,19 @@ function ProfilePageImageContainer() {
   });
 
   useEffect(() => {
-    if ((updatedDetails.coverPhoto || updatedDetails.profilePhoto) && (updatedDetails.photoIndex === 0 || updatedDetails.photoIndex === 1)) {
+    if (
+      (updatedDetails.coverPhoto || updatedDetails.profilePhoto) &&
+      (updatedDetails.photoIndex === 0 || updatedDetails.photoIndex === 1)
+    ) {
       uploadPhoto(updatedDetails.photoIndex);
     }
   }, [updatedDetails]);
 
   const uploadPhoto = async (index) => {
-
     const token = Cookies.get("token");
 
     if (!token) {
-      history.push('/signin');
+      history.push("/signin");
     }
 
     if (!updatedDetails.profilePhoto && !updatedDetails.coverPhoto) {
@@ -39,8 +40,12 @@ function ProfilePageImageContainer() {
     }
 
     let pictureURL;
-    const photoHeight = document.getElementsByClassName("profile-page-images")[index].naturalHeight;
-    const photoWidth = document.getElementsByClassName("profile-page-images")[index].naturalWidth;
+    const photoHeight = document.getElementsByClassName("profile-page-images")[
+      index
+    ].naturalHeight;
+    const photoWidth = document.getElementsByClassName("profile-page-images")[
+      index
+    ].naturalWidth;
     const formData = new FormData();
     formData.append("height", photoHeight);
     formData.append("width", photoWidth);
@@ -50,7 +55,6 @@ function ProfilePageImageContainer() {
       formData.append("type", true);
 
       pictureURL = await uploadProfilePic(userDetails, token, formData);
-
     } else {
       formData.append("photo", updatedDetails.coverPhoto);
       formData.append("type", false);
@@ -73,15 +77,16 @@ function ProfilePageImageContainer() {
     setUpdatedDetails({
       coverPhoto: "",
       profilePhoto: "",
-      photoIndex: null
+      photoIndex: null,
     });
-
   };
 
   const previewFile = (index) => (e) => {
     let preview = document.getElementsByClassName("profile-page-images")[index];
 
-    let file = document.getElementsByClassName("profile-page-photo-input")[index].files[0];
+    let file = document.getElementsByClassName("profile-page-photo-input")[
+      index
+    ].files[0];
     let reader = new FileReader();
 
     reader.onloadend = function () {
@@ -97,7 +102,6 @@ function ProfilePageImageContainer() {
     } else {
       preview.src = "";
     }
-
   };
 
   return (
@@ -116,6 +120,7 @@ function ProfilePageImageContainer() {
       />
       <div
         className="profile-page-upload-photo"
+        style={isYourProfile ? { display: "flex" } : { display: "none" }}
         onClick={() => {
           document
             .getElementsByClassName("profile-page-photo-input")[0]
@@ -145,9 +150,33 @@ function ProfilePageImageContainer() {
           className="profile-page-photo-input"
           accept=".png , .jpg , .jpeg "
         />
-        <div className="profile-page-profile-photo-edit">
+        <div
+          className="profile-page-profile-photo-edit"
+          style={isYourProfile ? { display: "flex" } : { display: "none" }}
+        >
           <img src={photoIconWhite} alt="photo" />
         </div>
+      </div>
+      <div style={!isYourProfile ? { display: "block" } : { display: "none" }}>
+        <button
+          className="logOutBttn"
+          style={{
+            color: "#C9031B",
+            borderColor: "#C9031B",
+            marginLeft: "auto",
+            display: "block",
+            marginTop: "1vw",
+          }}
+        >
+          <div
+            className="logOut"
+            style={{
+              color: "#C9031B",
+            }}
+          >
+            Report User
+          </div>
+        </button>
       </div>
     </div>
   );
