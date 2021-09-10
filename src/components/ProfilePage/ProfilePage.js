@@ -23,13 +23,16 @@ function ProfilePage(props) {
   const userId = props.match.params.userId;
 
   useEffect(() => {
-    if (userId === userDetails._id) {
-      setUserData(userDetails);
-    } else {
-      fetchUserDetails(history, null, userId, setUserData);
-      setIsYourProfile(false);
+    if (userDetails._id) {
+      if (userId === userDetails._id) {
+        setUserData(userDetails);
+        setIsYourProfile(true);
+      } else {
+        fetchUserDetails(history, null, userId, setUserData);
+        setIsYourProfile(false);
+      }
     }
-  }, []);
+  }, [userDetails]);
 
   return (
     <div className="relative">

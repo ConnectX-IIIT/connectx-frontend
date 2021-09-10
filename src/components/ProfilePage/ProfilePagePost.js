@@ -12,10 +12,8 @@ function ProfilePagePost(props) {
   const userId = props.match.params.userId;
 
   useEffect(() => {
-    if (!postData.user) {
-      fetchPosts(history, userId, setPostData);
-    }
-  }, [postData]);
+    fetchPosts(history, userId, setPostData);
+  }, []);
 
   const postList = postData.map((item, index) => {
     return (

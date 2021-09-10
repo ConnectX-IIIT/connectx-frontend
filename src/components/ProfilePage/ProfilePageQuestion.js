@@ -12,10 +12,8 @@ function ProfilePageQuestion(props) {
   const userId = props.match.params.userId;
 
   useEffect(() => {
-    if (!questionData.user) {
-      fetchQuestion(history, false, false, userId, setQuestionData);
-    }
-  }, [questionData]);
+    fetchQuestion(history, false, false, userId, setQuestionData);
+  }, []);
 
   const handleQuestionClick = (question) => async (e) => {
     e.preventDefault();

@@ -12,10 +12,8 @@ function ProfilePageAnswer(props) {
   const userId = props.match.params.userId;
 
   useEffect(() => {
-    if (!answerData.user) {
-      fetchAnswers(history, setAnswerData, false, userId);
-    }
-  }, [answerData]);
+    fetchAnswers(history, setAnswerData, false, userId);
+  }, []);
 
   const answersList = answerData.map((item, index) => {
     return (
