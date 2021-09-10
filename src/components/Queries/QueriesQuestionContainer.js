@@ -7,6 +7,7 @@ import { useHistory } from "react-router-dom";
 import { useStateValue } from "../../helper/state_provider";
 import { handlePhoto } from "../HomePageComponents/helper/handle_photo";
 import { fetchQuestions } from "./helper/fetch_questions";
+import { handleQuestionClick } from "./helper/handle_question_click";
 
 function QueriesQuestionContainer() {
   const history = useHistory();
@@ -19,16 +20,6 @@ function QueriesQuestionContainer() {
   useEffect(() => {
     fetchQuestions(history, setQuestionData);
   }, []);
-
-  const handleQuestionClick = (question) => async (e) => {
-    e.preventDefault();
-
-    await dispatch({
-      type: "SET_CURRENT_QUESTION",
-      question,
-    });
-    history.push(`/home/question/${question._id}`);
-  };
 
   const HomePageQuestionsList = questionData.map((item, index) => {
     return (
@@ -43,7 +34,7 @@ function QueriesQuestionContainer() {
           PostId={item._id}
           UserId={item.user}
           isDiscussionQueries={true}
-          onQuestionClick={handleQuestionClick(item)}
+          onQuestionClick={handleQuestionClick(dispatch, history, item)}
           queriesInnerStyle={{ fontWeight: "600", fontFamily: "manrope", cursor: "pointer" }}
           queriesMainContainerStyle={{ marginLeft: "0" }}
         />
