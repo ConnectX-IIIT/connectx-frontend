@@ -53,7 +53,7 @@ function HomeMainContainer() {
         id="HomeContainerCreatePost"
         style={{ backgroundColor: "rgb(0, 19, 36 , 0.6)" }}
       >
-        <CreatePost />
+        <CreatePost postData={postData} setPostData={setPostData} />
       </div>
 
       <HomeUserDetails />

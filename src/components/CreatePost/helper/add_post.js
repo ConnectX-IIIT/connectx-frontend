@@ -1,7 +1,7 @@
 import Cookies from "js-cookie";
 import instance from "../../../helper/axios";
 
-export const addPost = (userDetails, history, postDetails) => async (e) => {
+export const addPost = (userDetails, history, dispatch, postDetails, postData, setPostData) => async (e) => {
     e.preventDefault();
 
     const token = Cookies.get("token");
@@ -13,21 +13,19 @@ export const addPost = (userDetails, history, postDetails) => async (e) => {
     const attachedImgs = postDetails.attachedImgs;
     let isProject = false;
 
-    console.log(attachedImgs);
-
     if (postDetails.typeOfPost === "Project") {
         isProject = true;
     }
 
-    const postData = new FormData();
-    postData.append("title", postDetails.postTitle);
-    postData.append("description", postDetails.postDescription);
-    postData.append("jobLink", postDetails.jobLink);
-    postData.append("attachedImgDimensions", JSON.stringify(postDetails.attachedImgDimensions));
-    postData.append("isProject", isProject);
+    const postFormData = new FormData();
+    postFormData.append("title", postDetails.postTitle);
+    postFormData.append("description", postDetails.postDescription);
+    postFormData.append("jobLink", postDetails.jobLink);
+    postFormData.append("attachedImgDimensions", JSON.stringify(postDetails.attachedImgDimensions));
+    postFormData.append("isProject", isProject);
 
     for (let file of attachedImgs) {
-        postData.append("attachedImgs", file);
+        postFormData.append("attachedImgs", file);
     }
 
     if (!postDetails.postDescription || !postDetails.typeOfPost || !postDetails.postDescription.replace(/\s/g, "").length) {
@@ -47,18 +45,25 @@ export const addPost = (userDetails, history, postDetails) => async (e) => {
     }
 
     try {
-        const addPostRes = await instance.post(`/home/addpost`, postData, {
+        const addPostRes = await instance.post(`/home/addpost`, postFormData, {
             headers: {
                 Authorization: `${token}`,
             },
         });
 
-        if (addPostRes.status === 200) {
-            history.replace("/home");
-            document
-                .getElementById("HomeContainerCreatePost")
-                .classList.toggle("hidden");
-        }
+        const post = await addPostRes.data.post;
+        document
+            .getElementById("HomeContainerCreatePost")
+            .classList.toggle("hidden");
+
+        await setPostData([
+            post, ...postData
+        ]);
+
+        await dispatch({
+            type: "UPDATE_POSTS",
+            id: post._id
+        })
 
     } catch (error) {
         if (error.response.status === 500) {
