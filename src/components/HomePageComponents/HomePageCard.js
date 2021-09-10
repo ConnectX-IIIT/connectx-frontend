@@ -62,6 +62,8 @@ function HomePageCard({
   PostImageUrls,
   Upvotes,
   PostTitle,
+  postData,
+  setPostData,
   jobLink,
   PostId,
   isPostProject,
@@ -439,7 +441,7 @@ function HomePageCard({
                       backgroundColor: "#FFEDED",
                     }}
                     onClickFunction={(e) =>
-                      handleDeletePost(userDetails, PostId, history)(e)
+                      handleDeletePost(userDetails, PostId, history, postData, setPostData)(e)
                     }
                   />
                 </>

@@ -40,6 +40,8 @@ function HomeMainContainer() {
         PostTitle={item.title}
         isPostProject={item.isProject}
         discussionsIds={item.discussions}
+        postData={postData}
+        setPostData={setPostData}
       />
     );
   });
