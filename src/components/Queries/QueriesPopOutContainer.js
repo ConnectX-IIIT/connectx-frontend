@@ -26,7 +26,7 @@ function QuestionSuggestion({ question }) {
   );
 }
 
-function QueriesPopOutContainer() {
+function QueriesPopOutContainer({ questionData, setQuestionData }) {
 
   const [{ userDetails }, dispatch] = useStateValue(false);
   const history = useHistory();
@@ -82,7 +82,7 @@ function QueriesPopOutContainer() {
 
       <div className="flex">
         <button
-          onClick={(e) => addQuestion(userDetails, history, UserQueries)(e)}
+          onClick={(e) => addQuestion(userDetails, history, dispatch, UserQueries, questionData, setQuestionData)(e)}
           className="w-28 rounded h-9 font-manrope font-semibold text-white transition-colors duration-200 hover:bg-blue-500 my-8 mx-auto"
           style={{ backgroundColor: "#C4C4C4" }}
         >

@@ -6,20 +6,14 @@ import HomePageCard from "./../HomePageComponents/HomePageCard";
 import { useHistory } from "react-router-dom";
 import { useStateValue } from "../../helper/state_provider";
 import { handlePhoto } from "../HomePageComponents/helper/handle_photo";
-import { fetchQuestions } from "./helper/fetch_questions";
 import { handleQuestionClick } from "./helper/handle_question_click";
 
-function QueriesQuestionContainer() {
+function QueriesQuestionContainer({ questionData, setQuestionData }) {
   const history = useHistory();
   const [{ userDetails }, dispatch] = useStateValue();
-  const [questionData, setQuestionData] = useState([]);
   const [UserQueries, setUserQueries] = useState({
     askedQuestion: "",
   });
-
-  useEffect(() => {
-    fetchQuestions(history, setQuestionData);
-  }, []);
 
   const HomePageQuestionsList = questionData.map((item, index) => {
     return (
@@ -34,6 +28,8 @@ function QueriesQuestionContainer() {
           PostId={item._id}
           UserId={item.user}
           isDiscussionQueries={true}
+          questionData={questionData}
+          setQuestionData={setQuestionData}
           onQuestionClick={handleQuestionClick(dispatch, history, item)}
           queriesInnerStyle={{ fontWeight: "600", fontFamily: "manrope", cursor: "pointer" }}
           queriesMainContainerStyle={{ marginLeft: "0" }}

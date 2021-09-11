@@ -1,8 +1,7 @@
 import Cookies from "js-cookie";
 import instance from "../../../helper/axios";
 
-export const handleDeletePost = (userDetails, PostId, history, postData, setPostData) => async (e) => {
-    e.preventDefault();
+export const handleDeletePost = async (userDetails, PostId, history, postData, setPostData, type) => {
 
     const token = Cookies.get("token");
 
@@ -16,12 +15,16 @@ export const handleDeletePost = (userDetails, PostId, history, postData, setPost
     if (!userDetails.isVerified) {
         return alert("Your verification is under process!");
     }
-    if (!userDetails.posts.includes(PostId)) {
+    if (type === "post" && !userDetails.posts.includes(PostId)) {
+        return alert("You can't remove this post!");
+    }
+
+    if (type === "question" && !userDetails.questions.includes(PostId)) {
         return alert("You can't remove this post!");
     }
 
     try {
-        await instance.get(`/post/remove/${PostId}`, {
+        await instance.get(`/${type}/remove/${PostId}`, {
             headers: {
                 Authorization: `${token}`,
             },

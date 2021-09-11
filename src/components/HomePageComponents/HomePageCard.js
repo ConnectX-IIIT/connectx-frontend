@@ -64,6 +64,8 @@ function HomePageCard({
   PostTitle,
   postData,
   setPostData,
+  questionData,
+  setQuestionData,
   jobLink,
   PostId,
   isPostProject,
@@ -75,6 +77,7 @@ function HomePageCard({
   queriesMainContainerStyle,
 }) {
   const history = useHistory();
+  const [{ userDetails }, dispatch] = useStateValue();
   const [UpvotesHandle, setUpvotesHandle] = useState(Upvotes);
   const [UpvoteActive, setUpvoteActive] = useState(false);
   const [DownvoteActive, setDownvoteActive] = useState(false);
@@ -149,6 +152,14 @@ function HomePageCard({
     );
   }
 
+  const deleteCard = () => {
+    if (isDiscussionQueries) {
+      return handleDeletePost(userDetails, PostId, history, questionData, setQuestionData, "question");
+    } else {
+      return handleDeletePost(userDetails, PostId, history, postData, setPostData, "post");
+    }
+  }
+
   async function handleEditPost() {
     console.log(PostId);
   }
@@ -158,8 +169,6 @@ function HomePageCard({
     const value = e.target.value;
     setDiscussionReply({ ...DiscussionReply, [name]: value });
   };
-
-  const [{ userDetails }, dispatch] = useStateValue(false);
 
   const is_Job = jobLink;
   const is_Project = isPostProject;
@@ -440,9 +449,7 @@ function HomePageCard({
                       color: "#FF6969",
                       backgroundColor: "#FFEDED",
                     }}
-                    onClickFunction={(e) =>
-                      handleDeletePost(userDetails, PostId, history, postData, setPostData)(e)
-                    }
+                    onClickFunction={deleteCard}
                   />
                 </>
                 : <MoreOptionHomePageCard
