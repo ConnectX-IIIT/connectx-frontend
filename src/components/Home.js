@@ -13,6 +13,7 @@ import QuestionSectionMainContainer from "./Queries_Answer/QuestionSectionMainCo
 import SearchBarPopOutPeople from "./HomePageComponents/SearchBarPopOutPeople";
 import SearchBarPopOutQueries from "./HomePageComponents/SearchBarPopOutQueries";
 import { handleInputSearch } from "./general_helper/home/search";
+import ReportMainContainer from "./Report/ReportMainContainer";
 
 export const Home = () => {
   const history = useHistory();
@@ -73,19 +74,19 @@ export const Home = () => {
         style={
           isSearchBarOpen
             ? {
-              opacity: "1",
-              zIndex: "2",
-              height: "100vh",
-              top: "0px",
-              paddingTop: "81px",
-            }
+                opacity: "1",
+                zIndex: "2",
+                height: "100vh",
+                top: "0px",
+                paddingTop: "81px",
+              }
             : {
-              opacity: "0",
-              zIndex: "1",
-              height: "0",
-              top: "0px",
-              paddingTop: "20px",
-            }
+                opacity: "0",
+                zIndex: "1",
+                height: "0",
+                top: "0px",
+                paddingTop: "20px",
+              }
         }
         onClick={() => closeSearchBar()}
       >
@@ -95,8 +96,8 @@ export const Home = () => {
             isSearchBarOpen
               ? { display: "block", opacity: "1" }
               : {
-                opacity: "0.5",
-              }
+                  opacity: "0.5",
+                }
           }
         >
           <div className="Queries">
@@ -109,7 +110,10 @@ export const Home = () => {
           </div>
         </div>
       </div>
-      <div>
+      <div className="home-main-container-wrapper-wrapper ">
+        <div className="home-main-report-wrapper hidden">
+          <ReportMainContainer />
+        </div>
         <Switch>
           <Route exact path="/home" component={HomeMainContainer} style />
           <Route exact path="/home/queries" component={QueriesMainConatiner} />
