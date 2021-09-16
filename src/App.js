@@ -17,7 +17,6 @@ import PostCardBottomButtonComp from "./components/_general/post_card_button/Pos
 import { fetchUserDetails } from "./components/ProfilePage/helper/get_user_details";
 
 function App() {
-
   const history = useHistory();
   const [{ userDetails }, dispatch] = useStateValue();
   const [isLoading, setIsLoading] = React.useState(true);
@@ -25,7 +24,6 @@ function App() {
   useEffect(() => {
     fetchUserDetails(history, dispatch, false);
   }, []);
-
 
   const toggleIsLoading = () => {
     setIsLoading(!isLoading);
@@ -42,7 +40,7 @@ function App() {
         <Route exact path="/about" component={About} />
         <Route path="/home" component={Home} />
         <Route exact path="/photoupload" component={PhotoUpload} />
-        <Route exact path="/admin" component={Admin} />
+        <Route path="/admin" component={Admin} />
         <Route
           exact
           path="/123"
