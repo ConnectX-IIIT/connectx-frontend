@@ -11,7 +11,6 @@ import { uploadBackgroundPic } from "../general_helper/photo_upload/upload_backg
 import { useStateValue } from "../../helper/state_provider";
 
 function ProfilePageImageContainer({ isYourProfile, userDetails }) {
-
   const history = useHistory();
   const [{ postFilter }, dispatch] = useStateValue();
   const [updatedDetails, setUpdatedDetails] = useState({
@@ -173,6 +172,11 @@ function ProfilePageImageContainer({ isYourProfile, userDetails }) {
             className="logOut"
             style={{
               color: "#C9031B",
+            }}
+            onClick={() => {
+              document
+                .getElementsByClassName("home-main-report-wrapper")[0]
+                .classList.toggle("hidden");
             }}
           >
             Report User
