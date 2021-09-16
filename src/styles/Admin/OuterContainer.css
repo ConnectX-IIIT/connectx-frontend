@@ -1,32 +1,29 @@
-.admin-pannel-header{
-    border-bottom: 1px solid #1792DD;
-    
+.admin-pannel-header {
+  border-bottom: 1px solid #1792dd;
 }
 
-
-
-
-.admin-pannel-connectx-logo{
-    display: flex;
-    justify-content: center;
-    width:9.5vw;
-    height:2.2vw;
-    margin-top: 1.14vw;
-    margin-left: auto;
-    margin-right: auto;
+.admin-pannel-connectx-logo {
+  display: flex;
+  justify-content: center;
+  width: 9.5vw;
+  height: 2.2vw;
+  margin-top: 1.14vw;
+  margin-left: auto;
+  margin-right: auto;
 }
-.admin-pannel-heading{
-    display:flex;
-    font-size: 1.25vw;
-    margin-top: 1.82vw;
-    justify-content: center;
-    align-items: center;
-    font-family: Manrope;
-    font-weight:500;
+.admin-pannel-heading {
+  display: flex;
+  font-size: 1.25vw;
+  margin-top: 1.82vw;
+  justify-content: center;
+  align-items: center;
+  font-family: Manrope;
+  font-weight: 500;
 }
-#admin-pannel-verification-wrapper{
-    color: #1792DD;
-   }
-#admin-pannel-report-wrapper{
-    margin-left: 1.2vw;
+.report-section-active-class {
+  color: #1792dd;
+  border-bottom: 3px solid #1792dd;
+}
+#admin-pannel-report-wrapper {
+  margin-left: 1.2vw;
 }
