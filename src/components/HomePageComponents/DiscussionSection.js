@@ -13,6 +13,30 @@ import { useHistory } from "react-router-dom";
 import { useStateValue } from "../../helper/state_provider";
 import { handlePhoto } from "./helper/handle_photo";
 import { updateUpvotes } from "./helper/update_upvotes";
+import DotImageHome from "../../assets/home/post/body/info/ic_info_dots.svg";
+import EditButtomImage from "../../assets/home/post/menu/ic_edit_post.svg";
+import DeleteButtomImage from "../../assets/home/post/menu/ic_delete_post.svg";
+import ReportButtomImage from "../../assets/home/post/menu/ic_report_post.svg";
+
+function MoreOptionHomePageCard({ Image, content, style, onClickFunction }) {
+  return (
+    <div
+      className="flex items-center pl-2 rounded-md mb-2 cursor-pointer"
+      style={style}
+      onClick={onClickFunction}
+    >
+      <img src={Image} alt="MoreOption" className="w-6 object-contain mr-1" />
+      <p
+        className="font-manrope font-semibold"
+        style={{
+          fontSize: "1.25vw",
+        }}
+      >
+        {content}
+      </p>
+    </div>
+  );
+}
 
 function DiscussionSection({
   InnerContentDiscussion,
@@ -121,21 +145,85 @@ function DiscussionSection({
           style={{
             paddingLeft: "1vw",
             paddingRight: "1vw",
+            position: "relative",
           }}
         >
-          <div className="mt-4 mb-2">
-            <h2 className="font-manrope font-medium inline text-lg mr-3">
-              {UserName}
-            </h2>
-            <p
-              className="font-manrope inline text-xs font-semibold"
+          {" "}
+          <div
+            className="absolute hidden"
+            id={`${discussionId}` + "MoreOption"}
+            style={{ right: "0", top: "2.5vw", width: "7.34vw" }}
+          >
+            {discussionId === userDetails?._id ? (
+              <>
+                <MoreOptionHomePageCard
+                  Image={EditButtomImage}
+                  content="Edit"
+                  style={{
+                    color: "#38ABF0",
+                    backgroundColor: "#DDF2FF",
+                  }}
+                />
+                <MoreOptionHomePageCard
+                  Image={DeleteButtomImage}
+                  content="Delete"
+                  style={{
+                    color: "#FF6969",
+                    backgroundColor: "#FFEDED",
+                  }}
+                />
+              </>
+            ) : (
+              <MoreOptionHomePageCard
+                Image={ReportButtomImage}
+                content="Report"
+                style={{
+                  color: "#FFA800",
+                  backgroundColor: "#FEF5E5",
+                }}
+                onClickFunction={() => {
+                  document
+                    .getElementsByClassName("home-main-report-wrapper")[0]
+                    .classList.toggle("hidden");
+                }}
+              />
+            )}
+          </div>
+          <div
+            className="mt-4 mb-2"
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <div style={{ width: "96%" }}>
+              <h2 className="font-manrope font-medium inline text-lg mr-3">
+                {UserName}
+              </h2>
+              <p
+                className="font-manrope inline text-xs font-semibold"
+                style={{
+                  color: "#999999",
+                }}
+              >
+                {timestamp}
+              </p>
+            </div>
+            <img
+              src={DotImageHome}
+              alt="dot"
               style={{
-                color: "#999999",
+                margin: "auto",
               }}
-            >
-              {timestamp}
-            </p>
-            {/* <div>hello</div> */}
+              className="cursor-pointer"
+              onClick={() => {
+                var element = document.getElementById(
+                  `${discussionId}` + "MoreOption"
+                );
+                element.classList.toggle("hidden");
+              }}
+            />
           </div>
           <HomeCardInnerContent
             InnerContent={InnerContentDiscussion}
