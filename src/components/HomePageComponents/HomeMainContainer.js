@@ -40,6 +40,8 @@ function HomeMainContainer() {
         PostTitle={item.title}
         isPostProject={item.isProject}
         discussionsIds={item.discussions}
+        postData={postData}
+        setPostData={setPostData}
       />
     );
   });
@@ -51,7 +53,7 @@ function HomeMainContainer() {
         id="HomeContainerCreatePost"
         style={{ backgroundColor: "rgb(0, 19, 36 , 0.6)" }}
       >
-        <CreatePost />
+        <CreatePost postData={postData} setPostData={setPostData} />
       </div>
 
       <HomeUserDetails />

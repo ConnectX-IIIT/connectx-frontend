@@ -6,22 +6,27 @@ import { useStateValue } from "../../helper/state_provider";
 import { useHistory } from "react-router-dom";
 import { addQuestion } from "./helper/add_question";
 import { handleInputSearch } from "../general_helper/home/search";
+import { handleQuestionClick } from "./helper/handle_question_click";
 
-function QuestionSuggestion({ QuestionInnerContent }) {
+function QuestionSuggestion({ question }) {
+
+  const history = useHistory();
+  const [{ userDetails }, dispatch] = useStateValue();
+
   return (
-    <div
+    <div onClick={(e) => handleQuestionClick(dispatch, history, question)(e)}
       className="pl-6 border-2 border-t-0 mx-1.5 font-manrope font-semibold py-1.5 text-lg truncate cursor-pointer"
       style={{
         borderColor: "#959595",
         width: "37.219vw",
       }}
     >
-      {QuestionInnerContent}
+      {question.question}
     </div>
   );
 }
 
-function QueriesPopOutContainer() {
+function QueriesPopOutContainer({ questionData, setQuestionData }) {
 
   const [{ userDetails }, dispatch] = useStateValue(false);
   const history = useHistory();
@@ -32,7 +37,7 @@ function QueriesPopOutContainer() {
 
   const PopoutQueriesList = popoutQueries.map((item, index) => {
     return (
-      <QuestionSuggestion QuestionInnerContent={item.question} />
+      <QuestionSuggestion question={item} />
     );
   });
 
@@ -77,7 +82,7 @@ function QueriesPopOutContainer() {
 
       <div className="flex">
         <button
-          onClick={(e) => addQuestion(userDetails, history, UserQueries)(e)}
+          onClick={(e) => addQuestion(userDetails, history, dispatch, UserQueries, questionData, setQuestionData)(e)}
           className="w-28 rounded h-9 font-manrope font-semibold text-white transition-colors duration-200 hover:bg-blue-500 my-8 mx-auto"
           style={{ backgroundColor: "#C4C4C4" }}
         >

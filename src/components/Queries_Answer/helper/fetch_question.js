@@ -1,7 +1,7 @@
 import Cookies from "js-cookie";
 import instance from "../../../helper/axios";
 
-export const fetchQuestion = async (history, dispatch, questionId) => {
+export const fetchQuestion = async (history, dispatch, questionId, userId, setQuestionData) => {
 
     const token = Cookies.get("token");
 
@@ -10,9 +10,11 @@ export const fetchQuestion = async (history, dispatch, questionId) => {
     }
 
     try {
+
         const getQuestionRes = await instance.post(`/question/getquestions`,
             {
-                questionId
+                questionId,
+                userId
             },
             {
                 headers: {
@@ -21,10 +23,15 @@ export const fetchQuestion = async (history, dispatch, questionId) => {
             });
 
         const question = getQuestionRes.data.questions;
-        await dispatch({
-            type: "SET_CURRENT_QUESTION",
-            question,
-        });
+
+        if (questionId) {
+            await dispatch({
+                type: "SET_CURRENT_QUESTION",
+                question,
+            });
+        } else {
+            setQuestionData(question);
+        }
 
     } catch (error) {
         if (error.response.status === 500) {

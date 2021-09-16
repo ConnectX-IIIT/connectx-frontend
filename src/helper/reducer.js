@@ -58,6 +58,30 @@ const reducer = (state, action) => {
                 }
             };
 
+        case 'UPDATE_POSTS':
+            return {
+                ...state,
+                userDetails: {
+                    ...state.userDetails,
+                    posts: [
+                        ...state.userDetails.posts,
+                        action.id
+                    ]
+                }
+            };
+
+        case 'UPDATE_QUESTIONS':
+            return {
+                ...state,
+                userDetails: {
+                    ...state.userDetails,
+                    questions: [
+                        ...state.userDetails.questions,
+                        action.id
+                    ]
+                }
+            };
+
         case 'UPDATE_UPVOTED_POSTS':
             return {
                 ...state,

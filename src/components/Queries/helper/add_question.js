@@ -1,7 +1,7 @@
 import Cookies from "js-cookie";
 import instance from "../../../helper/axios";
 
-export const addQuestion = (userDetails, history, UserQueries) => async (e) => {
+export const addQuestion = (userDetails, history, dispatch, UserQueries, questionData, setQuestionData) => async (e) => {
     e.preventDefault();
 
     const token = Cookies.get("token");
@@ -21,7 +21,7 @@ export const addQuestion = (userDetails, history, UserQueries) => async (e) => {
     }
 
     try {
-        await instance.post(
+        const addQuestionRes = await instance.post(
             `/home/addquestion`,
             {
                 question,
@@ -32,9 +32,20 @@ export const addQuestion = (userDetails, history, UserQueries) => async (e) => {
                 },
             }
         );
+
+        const newQuestion = await addQuestionRes.data.question;
         document
             .getElementById("QueriesAskQuestionContainer")
             .classList.toggle("hidden");
+
+        await setQuestionData([
+            newQuestion, ...questionData
+        ]);
+
+        await dispatch({
+            type: "UPDATE_QUESTIONS",
+            id: newQuestion._id
+        });
 
     } catch (error) {
         if (error.response.status === 500) {

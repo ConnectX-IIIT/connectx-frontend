@@ -1,7 +1,7 @@
 import Cookies from "js-cookie";
 import instance from "../../../helper/axios";
 
-export const fetchAnswers = async (history, setAnswers, questionId) => {
+export const fetchAnswers = async (history, setAnswers, questionId, userId) => {
 
     const token = Cookies.get("token");
 
@@ -13,6 +13,7 @@ export const fetchAnswers = async (history, setAnswers, questionId) => {
         const getAnswersRes = await instance.post(`/answer/getanswers`,
             {
                 questionId,
+                userId
             },
             {
                 headers: {

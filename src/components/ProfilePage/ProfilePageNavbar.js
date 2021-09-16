@@ -5,33 +5,18 @@ import {
   Route,
   NavLink,
 } from "react-router-dom";
+import { useStateValue } from "../../helper/state_provider";
 
+import { useHistory } from "react-router-dom";
 import "../../styles/ProfilePage/ProfilePageNavbar.css";
 import ProfilePageLogOut from "./ProfilePageLogOut";
+import { handleMessage } from "../ConnectionsHomePage/helper/handle_message";
 
-const ProfilePageNavbarName = ["Post", "Question", "Answer"];
+function ProfilePageMessageBtn({ userData }) {
 
-const ProfilePageNavbarRouter = [
-  "/home/userprofile/post",
-  "/home/userprofile/question",
-  "/home/userprofile/answer",
-];
+  const history = useHistory();
+  const [{ userDetails }, dispatch] = useStateValue();
 
-const NavbarRoutersNameList = ProfilePageNavbarName.map((router, index) => {
-  return (
-    <NavLink
-      exact
-      to={ProfilePageNavbarRouter[index]}
-      key={index}
-      activeClassName="profile-page-active-class"
-      className="profile-page-link"
-    >
-      {router}
-    </NavLink>
-  );
-});
-
-function ProfilePageMessageBttn() {
   return (
     <div>
       <button
@@ -46,22 +31,49 @@ function ProfilePageMessageBttn() {
           style={{
             color: "#1792DD",
           }}
+          onClick={(e) => handleMessage(userData, userDetails, dispatch, history)(e)}
         >
           Message
         </div>
-      </button>
-    </div>
+      </button >
+    </div >
   );
 }
 
-function ProfilePageNavbar({ isYourProfile }) {
+function ProfilePageNavbar({ isYourProfile, userData }) {
   return (
     <div className="profile-page-navbar-wrapper">
       <div className="profile-page-navbar-left-wrapper">
-        {NavbarRoutersNameList}
+        <NavLink
+          exact
+          to={"/home/user/" + userData._id}
+          key={0}
+          activeClassName="profile-page-active-class"
+          className="profile-page-link"
+        >
+          Post
+        </NavLink>
+        <NavLink
+          exact
+          to={"/home/user/" + userData._id + "/question"}
+          key={1}
+          activeClassName="profile-page-active-class"
+          className="profile-page-link"
+        >
+          Question
+        </NavLink>
+        <NavLink
+          exact
+          to={"/home/user/" + userData._id + "/answer"}
+          key={2}
+          activeClassName="profile-page-active-class"
+          className="profile-page-link"
+        >
+          Answer
+        </NavLink>
       </div>
       <div className="profile-page-navbar-right-wrapper">
-        {!isYourProfile ? <ProfilePageMessageBttn /> : <ProfilePageLogOut />}
+        {!isYourProfile ? <ProfilePageMessageBtn userData={userData} /> : <ProfilePageLogOut />}
       </div>
     </div>
   );

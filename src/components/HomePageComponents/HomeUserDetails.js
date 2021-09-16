@@ -37,7 +37,7 @@ function HomeUserDetails() {
         <p>
           {userDetails.description}
         </p>
-        <Link to="/home/userprofile">View Profile</Link>
+        <Link to={`/home/user/${userDetails._id}`}>View Profile</Link>
       </div>
       <div className="ProfileOptions">
         <img src={TrendingIcon} alt="trending" />

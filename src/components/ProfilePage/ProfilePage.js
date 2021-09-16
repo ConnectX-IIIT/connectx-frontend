@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import ProfilePageImageContainer from "./ProfilePageImageContainer";
@@ -10,9 +10,29 @@ import ProfilePagePost from "./ProfilePagePost";
 import ProfilePageQuestion from "./ProfilePageQuestion";
 import ProfilePageAnswer from "./ProfilePageAnswer";
 import ProfileEditPage from "./ProfileEditPage";
+import { useHistory } from "react-router-dom";
+import { useStateValue } from "../../helper/state_provider";
+import { fetchUserDetails } from "./helper/get_user_details";
 
-function ProfilePage() {
+function ProfilePage(props) {
+
+  const history = useHistory();
+  const [{ userDetails }] = useStateValue();
+  const [userData, setUserData] = useState({});
   const [isYourProfile, setIsYourProfile] = useState(true);
+  const userId = props.match.params.userId;
+
+  useEffect(() => {
+    if (userDetails._id) {
+      if (userId === userDetails._id) {
+        setUserData(userDetails);
+        setIsYourProfile(true);
+      } else {
+        fetchUserDetails(history, null, userId, setUserData);
+        setIsYourProfile(false);
+      }
+    }
+  }, [userDetails]);
 
   return (
     <div className="relative">
@@ -21,19 +41,19 @@ function ProfilePage() {
       </div>
 
       <div className="profile-page-wrapper">
-        <ProfilePageImageContainer isYourProfile={isYourProfile} />
-        <ProfilePageInformationContainer isYourProfile={isYourProfile} />
+        <ProfilePageImageContainer isYourProfile={isYourProfile} userDetails={userData} />
+        <ProfilePageInformationContainer isYourProfile={isYourProfile} userDetails={userData} />
 
         <Router>
-          <ProfilePageNavbar isYourProfile={isYourProfile} />
+          <ProfilePageNavbar isYourProfile={isYourProfile} userData={userData} />
           <Switch>
-            <Route path="/home/userprofile/post" component={ProfilePagePost} />
+            <Route exact path="/home/user/:userId" component={ProfilePagePost} />
             <Route
-              path="/home/userprofile/question"
+              path="/home/user/:userId/question"
               component={ProfilePageQuestion}
             />
             <Route
-              path="/home/userprofile/answer"
+              path="/home/user/:userId/answer"
               component={ProfilePageAnswer}
             />
           </Switch>

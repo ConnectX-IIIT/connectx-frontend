@@ -8,7 +8,7 @@ import { useStateValue } from "../../helper/state_provider";
 import { addPost } from "./helper/add_post";
 import CreatePostImagesPreviewTempCompPrimary from "./CreatePostImagesPreviewTempCompPrimary";
 
-function CreatePost() {
+function CreatePost({ postData, setPostData }) {
   const history = useHistory();
   const TypeOfPostArr = ["Job", "Project", "Blog"];
 
@@ -75,7 +75,7 @@ function CreatePost() {
       </div>
       <form
         action=""
-        onSubmit={(e) => addPost(userDetails, history, postDetails)(e)}
+        onSubmit={(e) => addPost(userDetails, history, dispatch, postDetails, postData, setPostData)(e)}
         encType="multipart/form-data"
         method="post"
         className="flex flex-col"

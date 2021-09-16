@@ -62,6 +62,10 @@ function HomePageCard({
   PostImageUrls,
   Upvotes,
   PostTitle,
+  postData,
+  setPostData,
+  questionData,
+  setQuestionData,
   jobLink,
   PostId,
   isPostProject,
@@ -73,6 +77,7 @@ function HomePageCard({
   queriesMainContainerStyle,
 }) {
   const history = useHistory();
+  const [{ userDetails }, dispatch] = useStateValue();
   const [UpvotesHandle, setUpvotesHandle] = useState(Upvotes);
   const [UpvoteActive, setUpvoteActive] = useState(false);
   const [DownvoteActive, setDownvoteActive] = useState(false);
@@ -147,6 +152,14 @@ function HomePageCard({
     );
   }
 
+  const deleteCard = () => {
+    if (isDiscussionQueries) {
+      return handleDeletePost(userDetails, PostId, history, questionData, setQuestionData, "question");
+    } else {
+      return handleDeletePost(userDetails, PostId, history, postData, setPostData, "post");
+    }
+  }
+
   async function handleEditPost() {
     console.log(PostId);
   }
@@ -156,8 +169,6 @@ function HomePageCard({
     const value = e.target.value;
     setDiscussionReply({ ...DiscussionReply, [name]: value });
   };
-
-  const [{ userDetails }, dispatch] = useStateValue(false);
 
   const is_Job = jobLink;
   const is_Project = isPostProject;
@@ -315,6 +326,7 @@ function HomePageCard({
       setIsShareButtonActive(false);
     }, 100);
   }
+
   return (
     <div className="HomePageCard" style={queriesMainContainerStyle}>
       <div id="HomePageCardLeftContainer">
@@ -437,9 +449,7 @@ function HomePageCard({
                       color: "#FF6969",
                       backgroundColor: "#FFEDED",
                     }}
-                    onClickFunction={(e) =>
-                      handleDeletePost(userDetails, PostId, history)(e)
-                    }
+                    onClickFunction={deleteCard}
                   />
                 </>
               ) : (
@@ -473,7 +483,7 @@ function HomePageCard({
             />
             <div id="PostDetailsContainerTitle">
               <div>
-                <div
+                <div onClick={() => history.push(`/home/user/${UserId}`)}
                   style={{
                     display: "inline",
                     width: "20%",
@@ -481,6 +491,7 @@ function HomePageCard({
                     fontWeight: "500",
                     fontSize: "1.2vw",
                     marginRight: "10px",
+                    cursor: "pointer"
                   }}
                 >
                   {PostUserName}
@@ -618,7 +629,7 @@ function HomePageCard({
           </div>
         ) : null}
       </div>
-    </div>
+    </div >
   );
 }
 

@@ -1,8 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import QueriesQuestionContainer from "./QueriesQuestionContainer";
 import QueriesPopOutContainer from "./QueriesPopOutContainer";
+import { useHistory } from "react-router";
+import { useStateValue } from "../../helper/state_provider";
+import { fetchQuestions } from "./helper/fetch_questions";
 
 function QueriesMainConatiner() {
+
+  const history = useHistory();
+  const [questionData, setQuestionData] = useState([]);
+
+  useEffect(() => {
+    fetchQuestions(history, setQuestionData);
+  }, []);
+
   return (
     <>
       <div
@@ -14,13 +25,13 @@ function QueriesMainConatiner() {
           height: "calc(100% + 1.2vw)",
         }}
       >
-        <QueriesPopOutContainer />
+        <QueriesPopOutContainer questionData={questionData} setQuestionData={setQuestionData} />
       </div>
       <div
         className="flex flex-col max-w-screen-lg font-manrope mx-auto relative"
         style={{ marginTop: "calc(81px + 1.2vw)", width: "50vw" }}
       >
-        <QueriesQuestionContainer />
+        <QueriesQuestionContainer questionData={questionData} setQuestionData={setQuestionData} />
       </div>
     </>
   );

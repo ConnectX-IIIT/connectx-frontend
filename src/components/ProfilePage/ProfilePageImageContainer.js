@@ -3,16 +3,17 @@ import React, { useEffect, useState } from "react";
 import "../../styles/ProfilePage/ProfilePageImageContainer.css";
 import photoIcon from "../../assets/profile_page/ic_camera.svg";
 import photoIconWhite from "../../assets/profile_page/ic_camera_white.svg";
-import { useStateValue } from "../../helper/state_provider";
 import { handlePhoto } from "../HomePageComponents/helper/handle_photo";
 import { useHistory } from "react-router-dom";
 import Cookies from "js-cookie";
 import { uploadProfilePic } from "../general_helper/photo_upload/upload_profile_picture";
 import { uploadBackgroundPic } from "../general_helper/photo_upload/upload_background_picture";
+import { useStateValue } from "../../helper/state_provider";
 
-function ProfilePageImageContainer({ isYourProfile }) {
+function ProfilePageImageContainer({ isYourProfile, userDetails }) {
+
   const history = useHistory();
-  const [{ userDetails }, dispatch] = useStateValue();
+  const [{ postFilter }, dispatch] = useStateValue();
   const [updatedDetails, setUpdatedDetails] = useState({
     photoIndex: null,
     coverPhoto: "",

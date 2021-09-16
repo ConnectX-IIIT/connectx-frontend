@@ -118,7 +118,7 @@ function Navbar({
             alt="user profile icon"
             className="NavbarUserProfile object-cover"
             onClick={() => {
-              history.push("/home/userprofile");
+              history.push(`/home/user/${userDetails._id}`);
             }}
           />
         </div>

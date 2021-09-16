@@ -10,6 +10,12 @@ export const updateUserDetails = (userDetails, history, userData, dispatch) => a
     let mobile = userData.mobile;
     let description = userData.description;
 
+    const token = Cookies.get("token");
+
+    if (!token) {
+        history.replace("/signin");
+    }
+
     if (!name || !email || !mobile || !description) {
         return alert("Please fill all the details!");
     }
@@ -25,37 +31,29 @@ export const updateUserDetails = (userDetails, history, userData, dispatch) => a
         return alert("Enter a valid email");
     }
 
-    const token = Cookies.get("token");
-
     try {
-        if (token) {
-
-            const updateDetailsRes = await instance.post(`/user/updatedetails`,
-                { userName: name, userEmail: email, mobile, description },
-                {
-                    headers: {
-                        Authorization: `${token}`,
-                    },
-                }
-            )
-
-            if (updateDetailsRes.status === 201) {
-                Cookies.set("token", updateDetailsRes.data.token, { expires: 30, secure: true });
+        const updateDetailsRes = await instance.post(`/user/updatedetails`,
+            { userName: name, userEmail: email, mobile, description },
+            {
+                headers: {
+                    Authorization: `${token}`,
+                },
             }
+        )
 
-            dispatch({
-                type: 'UPDATE_USER_DETAILS',
-                name,
-                email,
-                mobile,
-                description
-            });
-
-            document.getElementById("ProfilePageEditProfile").classList.toggle("hidden");
-
-        } else {
-            history.push('/signin');
+        if (updateDetailsRes.status === 201) {
+            Cookies.set("token", updateDetailsRes.data.token, { expires: 30, secure: true });
         }
+
+        dispatch({
+            type: 'UPDATE_USER_DETAILS',
+            name,
+            email,
+            mobile,
+            description
+        });
+
+        document.getElementById("ProfilePageEditProfile").classList.toggle("hidden");
 
     } catch (error) {
         if (error.response.status === 500) {
