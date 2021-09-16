@@ -1,15 +1,25 @@
-import React from 'react'
-import AdminPannelHeaderContainer from "./Admin_Components/AdminPannelHeaderContainer"
-import VerificationMainContainer from './Admin_Components/VerificationMainContainer'
-import ReportMainContainer from "./Admin_Components/ReportMainContainer" 
-const Admin = () => {
-    return (
-        <div>
-            <AdminPannelHeaderContainer />
-            {/* <VerificationMainContainer/> */}
-            <ReportMainContainer/>
-        </div>
-    )
-}
+import React from "react";
+import { Switch, Route, useHistory } from "react-router-dom";
 
-export default Admin
+import AdminPannelHeaderContainer from "./Admin_Components/AdminPannelHeaderContainer";
+import VerificationMainContainer from "./Admin_Components/VerificationMainContainer";
+import ReportMainContainer from "./Admin_Components/ReportMainContainer";
+const Admin = () => {
+  return (
+    <div>
+      <AdminPannelHeaderContainer />
+      <Switch>
+        <Route
+          exact
+          path="/admin/verification"
+          component={VerificationMainContainer}
+        />
+        <Route exact path="/admin/reports" component={ReportMainContainer} />
+      </Switch>
+      {/* <VerificationMainContainer/> */}
+      {/* <ReportMainContainer/> */}
+    </div>
+  );
+};
+
+export default Admin;
