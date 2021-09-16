@@ -1,0 +1,36 @@
+.home-page-report-main-wrapper-wrapper {
+  width: 40%;
+  background-color: #ffffff;
+  height: 16.5vw;
+  @apply rounded font-manrope;
+}
+.home-page-report-main-wrapper-wrapper form {
+  @apply flex flex-col justify-between items-center h-3/6 w-full;
+}
+.report-main-container-text-area {
+  width: 80%;
+  @apply mx-auto block outline-none rounded font-medium;
+  border: 1px solid #222222;
+  padding: 0.5vw 1vw;
+  font-size: 1.1vw;
+}
+.home-page-report-main-wrapper-form-button {
+  width: 7.5vw;
+  font-size: 1.1vw;
+  padding: 0.25vw 0;
+  @apply font-semibold mx-auto block rounded transition-colors;
+  background-color: #c4c4c4;
+  color: #ffffff;
+}
+.home-page-report-main-wrapper-form-button:hover {
+  @apply bg-blue-500;
+}
+.home-page-report-main-wrapper {
+  @apply flex justify-between items-center font-semibold;
+  padding: 0.7vw 1.5vw 0 1.5vw;
+  font-size: 1.2vw;
+  margin-bottom: 2vw;
+}
+.home-page-report-main-wrapper img {
+  cursor: pointer;
+}
