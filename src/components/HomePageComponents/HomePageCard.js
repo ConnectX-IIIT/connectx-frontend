@@ -205,8 +205,6 @@ function HomePageCard({
     }
   }, [userDetails]);
 
-  useEffect(() => {}, [userDetails]);
-
   function handleDisplay(elementId) {
     document.getElementById(elementId).classList.toggle("hidden");
   }
@@ -343,33 +341,33 @@ function HomePageCard({
           onClickFunction={() => {
             isDiscussionQueries
               ? updateUpvotes(
-                  userDetails,
-                  history,
-                  dispatch,
-                  PostId,
-                  UpvoteActive,
-                  DownvoteActive,
-                  setUpvoteActive,
-                  setDownvoteActive,
-                  UpvotesHandle,
-                  setUpvotesHandle,
-                  true,
-                  "question"
-                )
+                userDetails,
+                history,
+                dispatch,
+                PostId,
+                UpvoteActive,
+                DownvoteActive,
+                setUpvoteActive,
+                setDownvoteActive,
+                UpvotesHandle,
+                setUpvotesHandle,
+                true,
+                "question"
+              )
               : updateUpvotes(
-                  userDetails,
-                  history,
-                  dispatch,
-                  PostId,
-                  UpvoteActive,
-                  DownvoteActive,
-                  setUpvoteActive,
-                  setDownvoteActive,
-                  UpvotesHandle,
-                  setUpvotesHandle,
-                  true,
-                  "post"
-                );
+                userDetails,
+                history,
+                dispatch,
+                PostId,
+                UpvoteActive,
+                DownvoteActive,
+                setUpvoteActive,
+                setDownvoteActive,
+                UpvotesHandle,
+                setUpvotesHandle,
+                true,
+                "post"
+              );
           }}
           isActive={UpvoteActive}
         />
@@ -387,33 +385,33 @@ function HomePageCard({
           onClickFunction={() => {
             isDiscussionQueries
               ? updateUpvotes(
-                  userDetails,
-                  history,
-                  dispatch,
-                  PostId,
-                  UpvoteActive,
-                  DownvoteActive,
-                  setUpvoteActive,
-                  setDownvoteActive,
-                  UpvotesHandle,
-                  setUpvotesHandle,
-                  false,
-                  "question"
-                )
+                userDetails,
+                history,
+                dispatch,
+                PostId,
+                UpvoteActive,
+                DownvoteActive,
+                setUpvoteActive,
+                setDownvoteActive,
+                UpvotesHandle,
+                setUpvotesHandle,
+                false,
+                "question"
+              )
               : updateUpvotes(
-                  userDetails,
-                  history,
-                  dispatch,
-                  PostId,
-                  UpvoteActive,
-                  DownvoteActive,
-                  setUpvoteActive,
-                  setDownvoteActive,
-                  UpvotesHandle,
-                  setUpvotesHandle,
-                  false,
-                  "post"
-                );
+                userDetails,
+                history,
+                dispatch,
+                PostId,
+                UpvoteActive,
+                DownvoteActive,
+                setUpvoteActive,
+                setDownvoteActive,
+                UpvotesHandle,
+                setUpvotesHandle,
+                false,
+                "post"
+              );
           }}
           isActive={DownvoteActive}
         />
