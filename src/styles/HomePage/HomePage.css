@@ -25,3 +25,14 @@
   padding-left: 1.5vw;
   padding-bottom: 0.5vw;
 }
+.home-main-container-wrapper-wrapper {
+  @apply relative;
+}
+.home-main-report-wrapper {
+  @apply fixed top-0 left-0 w-full h-screen z-50;
+  background-color: rgba(0, 19, 36, 0.6);
+}
+.home-main-report-wrapper {
+  padding-top: 81px;
+  @apply flex justify-center items-center;
+}
