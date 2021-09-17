@@ -14,10 +14,6 @@ export const addComment = (userDetails, history, content, answerId, reference, s
         return alert("Please verify your mail!");
     }
 
-    if (!userDetails.isVerified) {
-        return alert("Your verification is under process!");
-    }
-
     if (!content) {
         return alert("You can't post empty comment!");
     }
@@ -51,7 +47,7 @@ export const addComment = (userDetails, history, content, answerId, reference, s
             return alert(`You can't answer empty answer!`);
         }
         if (error.response.status === 408) {
-            return alert(`Your verification is under process!`);
+            return alert(`Please verify your mail!`);
         }
         return alert(`Your session has expired, please login again!`);
     }

@@ -14,8 +14,8 @@ export const addMessage = (userDetails, history, newMessage, currentChat, socket
         return;
     }
 
-    if (!userDetails.isVerified) {
-        return alert("Your verification is under process!");
+    if (!userDetails.isMailVerified) {
+        return alert("Please verify your mail!");
     }
 
     let receiverId = "";
@@ -68,7 +68,7 @@ export const addMessage = (userDetails, history, newMessage, currentChat, socket
             return alert(`You can't send empty message!`);
         }
         if (error.response.status === 408) {
-            return alert(`Your verification is under process!`);
+            return alert(`Please verify your mail!`);
         }
         return alert(`Your session has expired, please login again!`);
     }

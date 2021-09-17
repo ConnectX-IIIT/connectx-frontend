@@ -9,8 +9,8 @@ export const upvote = async (userDetails, history, dispatch, id, typeOfElement, 
         history.replace("/signin");
     }
 
-    if (!userDetails.isVerified) {
-        return alert("Your verification is under process!");
+    if (!userDetails.isMailVerified) {
+        return alert("Please verify your mail!");
     }
 
     try {
@@ -128,7 +128,7 @@ export const upvote = async (userDetails, history, dispatch, id, typeOfElement, 
             return alert(`Server error occured!`);
         }
         if (error.response.status === 408) {
-            return alert(`Your verification is under process!`);
+            return alert(`Please verify your mail!`);
         }
         if (error.response.status === 401) {
             return;

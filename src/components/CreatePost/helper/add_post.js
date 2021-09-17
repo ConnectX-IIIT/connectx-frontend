@@ -10,6 +10,10 @@ export const addPost = (userDetails, history, dispatch, postDetails, postData, s
         history.replace("/signin");
     }
 
+    if (!userDetails.isMailVerified) {
+        return alert("Please verify your mail!");
+    }
+
     const attachedImgs = postDetails.attachedImgs;
     let isProject = false;
 
@@ -40,10 +44,6 @@ export const addPost = (userDetails, history, dispatch, postDetails, postData, s
         return alert("Please add a valid joblink!");
     }
 
-    if (!userDetails.isVerified) {
-        return alert("Your verification is under process!");
-    }
-
     try {
         const addPostRes = await instance.post(`/home/addpost`, postFormData, {
             headers: {
@@ -70,7 +70,7 @@ export const addPost = (userDetails, history, dispatch, postDetails, postData, s
             return alert(`Server error occured!`);
         }
         if (error.response.status === 408) {
-            return alert(`Your verification is under process!`);
+            return alert(`Please verify your mail!`);
         }
         return alert(`Your session has expired, please login again!`);
     }

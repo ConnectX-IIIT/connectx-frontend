@@ -10,8 +10,8 @@ export const addAnswer = (userDetails, history, answer, questionId, setInputValu
         history.replace("/signin");
     }
 
-    if (!userDetails.isVerified) {
-        return alert("Your verification is under process!");
+    if (!userDetails.isMailVerified) {
+        return alert("Please verify your mail!");
     }
 
     if (!answer) {
@@ -47,7 +47,7 @@ export const addAnswer = (userDetails, history, answer, questionId, setInputValu
             return alert(`You can't post empty answer!`);
         }
         if (error.response.status === 408) {
-            return alert(`Your verification is under process!`);
+            return alert(`Please verify your mail!`);
         }
         return alert(`Your session has expired, please login again!`);
     }

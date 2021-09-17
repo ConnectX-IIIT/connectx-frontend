@@ -17,6 +17,7 @@ import DotImageHome from "../../assets/home/post/body/info/ic_info_dots.svg";
 import EditButtomImage from "../../assets/home/post/menu/ic_edit_post.svg";
 import DeleteButtomImage from "../../assets/home/post/menu/ic_delete_post.svg";
 import ReportButtomImage from "../../assets/home/post/menu/ic_report_post.svg";
+import { handleDeletePost } from "./helper/delete_post";
 
 function MoreOptionHomePageCard({ Image, content, style, onClickFunction }) {
   return (
@@ -45,6 +46,11 @@ function DiscussionSection({
   timestamp,
   discussionId,
   upvotes,
+  userId,
+  key,
+  isDiscussion,
+  discussionData,
+  setDiscussionData
 }) {
   const history = useHistory();
   const [{ userDetails }, dispatch] = useStateValue();
@@ -154,7 +160,7 @@ function DiscussionSection({
             id={`${discussionId}` + "MoreOption"}
             style={{ right: "0", top: "2.5vw", width: "7.34vw" }}
           >
-            {discussionId === userDetails?._id ? (
+            {userId === userDetails?._id ? (
               <>
                 <MoreOptionHomePageCard
                   Image={EditButtomImage}
@@ -171,6 +177,7 @@ function DiscussionSection({
                     color: "#FF6969",
                     backgroundColor: "#FFEDED",
                   }}
+                  onClickFunction={() => handleDeletePost(userDetails, discussionId, history, discussionData, setDiscussionData, "discussion", isDiscussion, key)}
                 />
               </>
             ) : (

@@ -9,8 +9,8 @@ export const fetchMessages = async (userDetails, history, currentChat, setMessag
         return;
     }
 
-    if (!userDetails.isVerified) {
-        return alert("Your verification is under process!");
+    if (!userDetails.isMailVerified) {
+        return alert("Please verify your mail!");
     }
 
     if (!token) {
@@ -35,7 +35,7 @@ export const fetchMessages = async (userDetails, history, currentChat, setMessag
             return alert(`Server error occured!`);
         }
         if (error.response.status === 408) {
-            return alert(`Your verification is under process!`);
+            return alert(`Please verify your mail!`);
         }
         return alert(`Your session has expired, please login again!`);
     }

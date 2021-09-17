@@ -235,6 +235,10 @@ function HomePageCard({
             timestamp={convertTimestamp(item.reply[index].timestamp)}
             discussionId={item.reply[index]._id}
             upvotes={item.reply[index].reactions}
+            userId={item.reply[index].user}
+            isDiscussion={false}
+            discussionData={DiscussionData}
+            setDiscussionData={setDiscussionData}
           />
         );
       });
@@ -247,8 +251,12 @@ function HomePageCard({
             userProfile={item.discussion.userProfile}
             timestamp={convertTimestamp(item.discussion.timestamp)}
             key={index}
+            isDiscussion={true}
             discussionId={item.discussion._id}
             upvotes={item.discussion.reactions}
+            userId={item.discussion.user}
+            discussionData={DiscussionData}
+            setDiscussionData={setDiscussionData}
           />
           <div style={{ marginLeft: "4vw" }}>
             <p
