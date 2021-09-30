@@ -10,9 +10,8 @@ import { handleSignIn } from "./general_helper/signin/signin";
 import { handleForgotPassword } from "./general_helper/signin/forgot_password";
 
 function SignIn() {
-
   const history = useHistory();
-  const [{ userDetails }, dispatch] = useStateValue();
+  const [, dispatch] = useStateValue();
   const [userRegistration, setUserRegistration] = useState({
     email: "",
     password: "",
@@ -26,7 +25,11 @@ function SignIn() {
 
   return (
     <div className="SignInMainPage">
-      <form action="" onSubmit={(e) => handleSignIn(history, dispatch, userRegistration)(e)} className="SignInPageForm">
+      <form
+        action=""
+        onSubmit={(e) => handleSignIn(history, dispatch, userRegistration)(e)}
+        className="SignInPageForm"
+      >
         <p id="signinpagepara">Sign In</p>
         <FormInput
           inputType="email"
@@ -44,7 +47,11 @@ function SignIn() {
         />
         <Button />
         <SignUpFormBottom />
-        <Link to='/signin' onClick={(e) => handleForgotPassword(userRegistration)(e)} id="SignUpformBottomAnchor">
+        <Link
+          to="/signin"
+          onClick={(e) => handleForgotPassword(userRegistration)(e)}
+          id="SignUpformBottomAnchor"
+        >
           Forgot Password?
         </Link>
       </form>
