@@ -18,7 +18,6 @@ import { fetchUserDetails } from "./components/ProfilePage/helper/get_user_detai
 function App() {
   const history = useHistory();
   const [, dispatch] = useStateValue();
-  console.log(dispatch);
   const [isLoading, setIsLoading] = React.useState(true);
 
   useEffect(() => {
