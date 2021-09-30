@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { useStateValue } from "../../helper/state_provider";
 import "../../styles/Chats/ChatIndividual.css";
 import { format } from "timeago.js";
