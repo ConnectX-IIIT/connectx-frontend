@@ -9,7 +9,7 @@ function ButtonHome({ content, styleButton, jobLink, filter, postUserId }) {
 
   const history = useHistory();
 
-  const [{ userDetails, postFilter }, dispatch] = useStateValue();
+  const [{ userDetails }, dispatch] = useStateValue();
 
   const handleSubmit = async (e) => {
     if (jobLink) {
