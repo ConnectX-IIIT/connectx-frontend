@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import { useRouteMatch, NavLink } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  useRouteMatch,
+  NavLink,
+} from "react-router-dom";
 import { useHistory } from "react-router";
 import "../../styles/HomePage/Navbar.css";
 
