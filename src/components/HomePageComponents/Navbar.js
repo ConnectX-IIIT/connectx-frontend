@@ -36,7 +36,7 @@ function Navbar({
 }) {
   let { url } = useRouteMatch();
   const history = useHistory();
-  const [{ userDetails }, dispatch] = useStateValue();
+  const [{ userDetails }] = useStateValue();
 
   const [navLocation, setNavLocation] = useState("home");
 
