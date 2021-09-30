@@ -72,7 +72,7 @@ function DiscussionSection({
     ) {
       setDownvoteActive(true);
     }
-  }, [userDetails]);
+  }, [userDetails]);  // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="flex pt-4">
@@ -154,10 +154,9 @@ function DiscussionSection({
             position: "relative",
           }}
         >
-          {" "}
           <div
             className="absolute hidden"
-            id={`${discussionId}` + "MoreOption"}
+            id={`${discussionId}MoreOption`}
             style={{ right: "0", top: "2.5vw", width: "7.34vw" }}
           >
             {userId === userDetails?._id ? (
@@ -226,7 +225,7 @@ function DiscussionSection({
               className="cursor-pointer"
               onClick={() => {
                 var element = document.getElementById(
-                  `${discussionId}` + "MoreOption"
+                  `${discussionId}MoreOption`
                 );
                 element.classList.toggle("hidden");
               }}
