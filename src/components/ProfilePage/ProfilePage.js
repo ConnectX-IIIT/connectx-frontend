@@ -32,7 +32,7 @@ function ProfilePage(props) {
         setIsYourProfile(false);
       }
     }
-  }, [userDetails]);
+  }, [userDetails]);  // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="relative">
