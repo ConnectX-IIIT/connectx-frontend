@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  NavLink,
-} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useStateValue } from "../../helper/state_provider";
 
 import { useHistory } from "react-router-dom";
@@ -13,7 +8,6 @@ import ProfilePageLogOut from "./ProfilePageLogOut";
 import { handleMessage } from "../ConnectionsHomePage/helper/handle_message";
 
 function ProfilePageMessageBtn({ userData }) {
-
   const history = useHistory();
   const [{ userDetails }, dispatch] = useStateValue();
 
@@ -31,12 +25,14 @@ function ProfilePageMessageBtn({ userData }) {
           style={{
             color: "#1792DD",
           }}
-          onClick={(e) => handleMessage(userData, userDetails, dispatch, history)(e)}
+          onClick={(e) =>
+            handleMessage(userData, userDetails, dispatch, history)(e)
+          }
         >
           Message
         </div>
-      </button >
-    </div >
+      </button>
+    </div>
   );
 }
 
@@ -73,7 +69,11 @@ function ProfilePageNavbar({ isYourProfile, userData }) {
         </NavLink>
       </div>
       <div className="profile-page-navbar-right-wrapper">
-        {!isYourProfile ? <ProfilePageMessageBtn userData={userData} /> : <ProfilePageLogOut />}
+        {!isYourProfile ? (
+          <ProfilePageMessageBtn userData={userData} />
+        ) : (
+          <ProfilePageLogOut />
+        )}
       </div>
     </div>
   );
