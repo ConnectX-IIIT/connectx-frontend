@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import HomeUserDetails from "./HomeUserDetails";
-import { Link } from "react-router-dom";
 import HomePageCard from "./HomePageCard";
 import addImage from "../../assets/home/post/add_post/ic_add_post.svg";
 import "../../styles/HomePage/HomeMainContainer/HomeMainContainer.css";
@@ -12,7 +11,7 @@ import { updateFilter } from "./helper/update_filter";
 
 function HomeMainContainer() {
   const history = useHistory();
-  const [{ userDetails, postFilter }, dispatch] = useStateValue();
+  const [{ postFilter }, dispatch] = useStateValue();
   const [index, setIndex] = useState(1);
   const [postData, setPostData] = useState([]);
 
@@ -22,7 +21,7 @@ function HomeMainContainer() {
 
   useEffect(() => {
     fetchPosts(history, index, setPostData);
-  }, [index]);
+  }, [index]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const HomePageCardDetailsList = postData.map((item, index) => {
     return (
