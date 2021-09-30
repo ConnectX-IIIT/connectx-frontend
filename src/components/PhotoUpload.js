@@ -124,7 +124,7 @@ function PhotoUpload() {
           />
           <img
             src={DefaultUserCover}
-            alt="Image preview"
+            alt="User Profile"
             className="UserProfileImage"
             id="UserProfileCover"
           />
@@ -163,7 +163,7 @@ function PhotoUpload() {
           />
           <img
             src={DefaultUserProfile}
-            alt="Image preview"
+            alt="User Profile"
             className="UserProfileImage"
             id="UserProfilePhoto"
           />
