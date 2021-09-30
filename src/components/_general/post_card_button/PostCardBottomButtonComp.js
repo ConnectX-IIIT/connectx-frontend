@@ -33,7 +33,7 @@ function PostCardBottomButtonComp({
 
   useEffect(() => {
     setButtonColorsHook(currentButtonColorsState, colorsSet, setCurrentColors);
-  }, [currentButtonColorsState]);
+  }, [currentButtonColorsState]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     setStatusAccToIActivityStatus(
@@ -41,7 +41,7 @@ function PostCardBottomButtonComp({
       isBeingHovered,
       setCurrentButtonColorsState
     );
-  }, [isActive]);
+  }, [isActive]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const updatedSVGComponentPathFill = (svgNode, colorHashCode) => {
     let svgPahts = svgNode.childNodes;
