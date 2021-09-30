@@ -17,12 +17,14 @@ import { fetchUserDetails } from "./components/ProfilePage/helper/get_user_detai
 
 function App() {
   const history = useHistory();
+  /* eslint-disable no-unused-vars */
   const [{ userDetails }, dispatch] = useStateValue();
+  /* eslint-enable no-unused-vars */
   const [isLoading, setIsLoading] = React.useState(true);
 
   useEffect(() => {
     fetchUserDetails(history, dispatch, false);
-  }, []);// eslint-disable-line react-hooks/exhaustive-deps
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const toggleIsLoading = () => {
     setIsLoading(!isLoading);
