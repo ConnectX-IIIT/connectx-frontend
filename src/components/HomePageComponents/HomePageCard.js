@@ -203,7 +203,7 @@ function HomePageCard({
         setDownvoteActive(true);
       }
     }
-  }, [userDetails]);
+  }, [userDetails]);  // eslint-disable-line react-hooks/exhaustive-deps
 
   function handleDisplay(elementId) {
     document.getElementById(elementId).classList.toggle("hidden");
@@ -434,7 +434,7 @@ function HomePageCard({
           <div id="PostDetailsContainer" className="relative">
             <div
               className="absolute hidden"
-              id={`${PostId}` + "MoreOption"}
+              id={`${PostId}MoreOption`}
               style={{ right: "0", top: "2.5vw", width: "7.34vw" }}
             >
               {UserId === userDetails?._id ? (
@@ -522,7 +522,7 @@ function HomePageCard({
               className="cursor-pointer"
               onClick={() => {
                 var element = document.getElementById(
-                  `${PostId}` + "MoreOption"
+                  `${PostId}MoreOption`
                 );
                 element.classList.toggle("hidden");
               }}
