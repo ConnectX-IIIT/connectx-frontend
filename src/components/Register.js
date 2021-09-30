@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Button from "./signUpCompontents/Button";
 import FooterCopyRight from "./signUpCompontents/FooterCopyRight";
 import "../styles/Register/Register.css";
-import { useStateValue } from "../helper/state_provider";
 import { useHistory } from "react-router-dom";
 import { addExtraDetails } from "./general_helper/register/add_extra_details";
 
@@ -43,7 +42,6 @@ const joiningyearList = joiningYear.map((year) => {
 function Register() {
 
   const history = useHistory();
-  const [{ userDetails }] = useStateValue();
 
   const currentrole = ["Student", "Alumni"];
   const gender = ["Male", "Female", "Other"];
