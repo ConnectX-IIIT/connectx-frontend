@@ -21,7 +21,8 @@ function ChatGroupInformation({ closingFunction, closingState, groupDetails }) {
     if (updateGroupDetails.groupPhoto) {
       updateGroupProfilePicture(updateGroupDetails, history);
     }
-  }, [updateGroupDetails])
+  }, [updateGroupDetails]) // eslint-disable-line react-hooks/exhaustive-deps
+
 
   const previewFile = (index) => (e) => {
     let preview = document.getElementsByClassName("chat-group-image")[index];
