@@ -11,7 +11,7 @@ import { updateFilter } from "./helper/update_filter";
 
 function HomeMainContainer() {
   const history = useHistory();
-  const [{ postFilter }, dispatch] = useStateValue();
+  const [{ postFilter }, ] = useStateValue();
   const [index, setIndex] = useState(1);
   const [postData, setPostData] = useState([]);
 
