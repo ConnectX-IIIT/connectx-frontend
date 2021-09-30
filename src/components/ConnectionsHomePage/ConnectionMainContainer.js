@@ -11,7 +11,7 @@ function ConnectionMainContainer() {
 
   useEffect(() => {
     fetchUsers(history, setUserData);
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="ConnectionMainContainer">
