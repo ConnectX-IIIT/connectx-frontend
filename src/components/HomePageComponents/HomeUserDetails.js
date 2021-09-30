@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import TrendingIcon from "../../assets/home/left_container/ic_trending.svg";
 import filterIcon from "../../assets/home/left_container/ic_filter.svg";
@@ -8,13 +8,12 @@ import { useStateValue } from "../../helper/state_provider";
 import { handlePhoto } from "./helper/handle_photo";
 
 function HomeUserDetails() {
-
-  const [{ userDetails, postFilter }, dispatch] = useStateValue();
+  const [{ userDetails }, dispatch] = useStateValue();
   const [filter, setFilter] = useState({
     jobs: false,
     projects: false,
-    blogs: false
-  })
+    blogs: false,
+  });
 
   const handleInput = (e) => {
     const name = e.target.name;
@@ -34,9 +33,7 @@ function HomeUserDetails() {
       </div>
       <div id="UserDetailsContent">
         <h2>{userDetails.name}</h2>
-        <p>
-          {userDetails.description}
-        </p>
+        <p>{userDetails.description}</p>
         <Link to={`/home/user/${userDetails._id}`}>View Profile</Link>
       </div>
       <div className="ProfileOptions">
@@ -50,15 +47,33 @@ function HomeUserDetails() {
       <div>
         <form action="">
           <div className="form-group">
-            <input type="checkbox" name="jobs" value={filter.jobs} onChange={handleInput} id="jobs" />
+            <input
+              type="checkbox"
+              name="jobs"
+              value={filter.jobs}
+              onChange={handleInput}
+              id="jobs"
+            />
             <label htmlFor="jobs">Jobs</label>
           </div>
           <div className="form-group">
-            <input type="checkbox" name="projects" value={filter.projects} onChange={handleInput} id="projects" />
+            <input
+              type="checkbox"
+              name="projects"
+              value={filter.projects}
+              onChange={handleInput}
+              id="projects"
+            />
             <label htmlFor="projects">Projects</label>
           </div>
           <div className="form-group">
-            <input type="checkbox" name="blogs" value={filter.blogs} onChange={handleInput} id="blogs" />
+            <input
+              type="checkbox"
+              name="blogs"
+              value={filter.blogs}
+              onChange={handleInput}
+              id="blogs"
+            />
             <label htmlFor="blogs">Blogs</label>
           </div>
           <ButtonHome
