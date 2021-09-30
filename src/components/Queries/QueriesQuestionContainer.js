@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "../../styles/Question/QuestionsPrimarySec.css";
 import CreatePostInput from "./../CreatePost/CreatePostInput";
 import SortComponent from "./SortComponent";
@@ -11,7 +11,7 @@ import { handleQuestionClick } from "./helper/handle_question_click";
 function QueriesQuestionContainer({ questionData, setQuestionData }) {
   const history = useHistory();
   const [{ userDetails }, dispatch] = useStateValue();
-  const [UserQueries, setUserQueries] = useState({
+  const [UserQueries] = useState({
     askedQuestion: "",
   });
 
@@ -31,7 +31,11 @@ function QueriesQuestionContainer({ questionData, setQuestionData }) {
           questionData={questionData}
           setQuestionData={setQuestionData}
           onQuestionClick={handleQuestionClick(dispatch, history, item)}
-          queriesInnerStyle={{ fontWeight: "600", fontFamily: "manrope", cursor: "pointer" }}
+          queriesInnerStyle={{
+            fontWeight: "600",
+            fontFamily: "manrope",
+            cursor: "pointer",
+          }}
           queriesMainContainerStyle={{ marginLeft: "0" }}
         />
       </div>
@@ -66,7 +70,7 @@ function QueriesQuestionContainer({ questionData, setQuestionData }) {
               height: "3vw",
               margin: "0",
               backgroundColor: "#ffffff",
-              cursor: "pointer"
+              cursor: "pointer",
             }}
           />
         </div>
