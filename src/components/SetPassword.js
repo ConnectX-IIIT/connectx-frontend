@@ -4,9 +4,6 @@ import Button from "./signUpCompontents/Button";
 import FormInput from "./signUpCompontents/FormInput";
 import FooterCopyRight from "./signUpCompontents/FooterCopyRight";
 import "../styles/SetPassword/SetPassword.css";
-import { passwordValidate } from "../helper/password_validator";
-import Cookies from "js-cookie";
-import instance from "../helper/axios";
 import { setPassword } from "./general_helper/set_password/set_password";
 
 function SetPassword() {
