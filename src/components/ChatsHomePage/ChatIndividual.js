@@ -5,7 +5,9 @@ import { format } from "timeago.js";
 import { handlePhoto } from "../HomePageComponents/helper/handle_photo";
 
 function ChatIndividual({ conversation, isGroup, isActive = false }) {
+  /* eslint-disable no-unused-vars */
   const [{ userDetails }, dispatch] = useStateValue();
+  /* eslint-enable no-unused-vars */
   const [friendName, setFriendName] = useState("");
   const [friendProfile, setFriendProfile] = useState("");
   const [isBeingHovered, setIsBeingHovered] = useState("");
@@ -17,8 +19,8 @@ function ChatIndividual({ conversation, isGroup, isActive = false }) {
     const profile = isGroup
       ? conversation.profilePicture
       : conversation.userProfiles.find(
-        (profile) => profile !== userDetails.profilePicture
-      );
+          (profile) => profile !== userDetails.profilePicture
+        );
     setFriendName(name);
     setFriendProfile(profile);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -39,11 +41,11 @@ function ChatIndividual({ conversation, isGroup, isActive = false }) {
       style={
         isBeingHovered
           ? {
-            backgroundColor: "rgb(240, 240, 240)",
-          }
+              backgroundColor: "rgb(240, 240, 240)",
+            }
           : {
-            backgroundColor: "rgb(255, 255, 255)",
-          }
+              backgroundColor: "rgb(255, 255, 255)",
+            }
       }
     >
       <div
@@ -51,8 +53,8 @@ function ChatIndividual({ conversation, isGroup, isActive = false }) {
         style={
           isActive
             ? {
-              backgroundColor: "rgb(220, 220, 220)",
-            }
+                backgroundColor: "rgb(220, 220, 220)",
+              }
             : {}
         }
       >
