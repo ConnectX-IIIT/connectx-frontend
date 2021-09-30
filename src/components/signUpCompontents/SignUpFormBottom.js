@@ -1,7 +1,7 @@
 import Cookies from "js-cookie";
 import React from "react";
 import GoogleLogin from "react-google-login";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import instance from "../../helper/axios";
 import { useStateValue } from "../../helper/state_provider";
 import GoogleIcon from "../../assets/signinup_page/ic_google.svg";
@@ -9,7 +9,7 @@ import "../../styles/Signup/SignUpFormBottom.css";
 
 function SignUpFormBottom() {
   const history = useHistory();
-  const [{ userDetails }, dispatch] = useStateValue();
+  const [, dispatch] = useStateValue();
 
   const responseSuccessGoogle = async (response) => {
     let pageType = window.location.pathname.split("/")[1];
@@ -85,7 +85,7 @@ function SignUpFormBottom() {
           style={{}}
         />
       </div>
-    </div >
+    </div>
   );
 }
 
