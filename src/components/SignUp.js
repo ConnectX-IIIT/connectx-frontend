@@ -9,14 +9,13 @@ import { useStateValue } from "../helper/state_provider";
 import { handleSignUp } from "./general_helper/signup/signup";
 
 function SignUp() {
-
   const history = useHistory();
-  const [{ userDetails }, dispatch] = useStateValue();
+  const [, dispatch] = useStateValue();
   const [userRegistration, setUserRegistration] = useState({
     name: "",
     email: "",
     password: "",
-    cPassword: ""
+    cPassword: "",
   });
 
   const handleInput = (e) => {
@@ -27,7 +26,11 @@ function SignUp() {
 
   return (
     <div className="SignUpMainPage">
-      <form action="" onSubmit={(e) => handleSignUp(history, dispatch, userRegistration)(e)} className="SignupPageForm">
+      <form
+        action=""
+        onSubmit={(e) => handleSignUp(history, dispatch, userRegistration)(e)}
+        className="SignupPageForm"
+      >
         <p>Sign Up</p>
         <FormInput
           inputType="text"
