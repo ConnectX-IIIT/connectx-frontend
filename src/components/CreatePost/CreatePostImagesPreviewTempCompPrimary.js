@@ -20,18 +20,18 @@ function CreatePostImagesPreviewTempCompPrimary({
   );
 
   useEffect(() => {
-    if (inputImagesSrcList.length == 0) {
+    if (inputImagesSrcList.length === 0) {
       setInputImagesDimensionsList([]);
     }
   }, [inputImagesSrcList]);
 
   useEffect(() => {
     attachedImagesDetailsUpdater(inputImagesFilesList);
-  }, [inputImagesFilesList]);
+  }, [inputImagesFilesList]);   // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     attachedImagesDimensionsDetailsUpdater(inputImagesDimensionsList);
-  }, [inputImagesDimensionsList]);
+  }, [inputImagesDimensionsList]);  // eslint-disable-line react-hooks/exhaustive-deps
 
   function setInputImageDimensionsList(filePositionIndex, width, height) {
     setInputImageDimensions(
