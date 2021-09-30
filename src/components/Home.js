@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Switch, Route, useHistory } from "react-router-dom";
 import Navbar from "./HomePageComponents/Navbar";
 import HomeMainContainer from "../components/HomePageComponents/HomeMainContainer";
