@@ -21,7 +21,7 @@ function ChatIndividual({ conversation, isGroup, isActive = false }) {
       );
     setFriendName(name);
     setFriendProfile(profile);
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   function setHovering(e) {
     setIsBeingHovered(true);
