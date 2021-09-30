@@ -12,7 +12,7 @@ import { useStateValue } from "../../helper/state_provider";
 
 function ProfilePageImageContainer({ isYourProfile, userDetails }) {
   const history = useHistory();
-  const [{ postFilter }, dispatch] = useStateValue();
+  const [, dispatch] = useStateValue();
   const [updatedDetails, setUpdatedDetails] = useState({
     photoIndex: null,
     coverPhoto: "",
@@ -26,7 +26,7 @@ function ProfilePageImageContainer({ isYourProfile, userDetails }) {
     ) {
       uploadPhoto(updatedDetails.photoIndex);
     }
-  }, [updatedDetails]);
+  }, [updatedDetails]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const uploadPhoto = async (index) => {
     const token = Cookies.get("token");
@@ -127,7 +127,7 @@ function ProfilePageImageContainer({ isYourProfile, userDetails }) {
             .click();
         }}
       >
-        <img src={photoIcon} alt="photo" />
+        <img src={photoIcon} alt="edit profile" />
         <div>Update cover photo</div>
       </div>
       <div
@@ -154,7 +154,7 @@ function ProfilePageImageContainer({ isYourProfile, userDetails }) {
           className="profile-page-profile-photo-edit"
           style={isYourProfile ? { display: "flex" } : { display: "none" }}
         >
-          <img src={photoIconWhite} alt="photo" />
+          <img src={photoIconWhite} alt="edit profile" />
         </div>
       </div>
       <div style={!isYourProfile ? { display: "block" } : { display: "none" }}>
