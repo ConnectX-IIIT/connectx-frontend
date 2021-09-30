@@ -18,7 +18,9 @@ function MessageMainContainer(props) {
   const history = useHistory();
   const scrollRef = useRef();
   const socket = useRef();
+  /* eslint-disable no-unused-vars */
   const [{ userDetails }, dispatch] = useStateValue();
+  /* eslint-enable no-unused-vars */
   const [conversations, setConversations] = useState([]);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
@@ -46,7 +48,7 @@ function MessageMainContainer(props) {
     } else {
       setCurrentChat(null);
     }
-  }, [props.match.params.chatId]);  // eslint-disable-line react-hooks/exhaustive-deps
+  }, [props.match.params.chatId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleInput = (e) => {
     const name = e.target.name;
@@ -112,7 +114,7 @@ function MessageMainContainer(props) {
     ) {
       setMessages([...messages, arrivalMessage]);
     }
-  }, [arrivalMessage, currentChat]);  // eslint-disable-line react-hooks/exhaustive-deps
+  }, [arrivalMessage, currentChat]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     socket.current.emit(
@@ -130,7 +132,7 @@ function MessageMainContainer(props) {
     if (userDetails.name) {
       fetchConversations(userDetails, history, setConversations);
     }
-  }, [userDetails]);   // eslint-disable-line react-hooks/exhaustive-deps
+  }, [userDetails]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (conversations.length > 0) {
@@ -142,7 +144,7 @@ function MessageMainContainer(props) {
       }
       setCurrentActiveStates(tempArr);
     }
-  }, [conversations]);  // eslint-disable-line react-hooks/exhaustive-deps
+  }, [conversations]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     fetchMessages(userDetails, history, currentChat, setMessages);
