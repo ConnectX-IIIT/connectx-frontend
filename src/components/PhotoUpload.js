@@ -12,7 +12,7 @@ import { uploadBackgroundPic } from "./general_helper/photo_upload/upload_backgr
 
 function PhotoUpload() {
   const history = useHistory();
-  const [{ userDetails }, dispatch] = useStateValue();
+  const [{ userDetails }] = useStateValue();
 
   const [userRegistration, setUserRegistration] = useState({
     photo: "",
@@ -54,9 +54,10 @@ function PhotoUpload() {
     }
 
     if (userRegistration.photo) {
-
-      const photoHeight = document.getElementsByClassName("UserProfileImage")[1].naturalHeight;
-      const photoWidth = document.getElementsByClassName("UserProfileImage")[1].naturalWidth;
+      const photoHeight =
+        document.getElementsByClassName("UserProfileImage")[1].naturalHeight;
+      const photoWidth =
+        document.getElementsByClassName("UserProfileImage")[1].naturalWidth;
       const formDataForProfile = new FormData();
       formDataForProfile.append("photo", userRegistration.photo);
       formDataForProfile.append("height", photoHeight);
@@ -67,9 +68,10 @@ function PhotoUpload() {
     }
 
     if (userRegistration.coverPhoto) {
-
-      const coverPhotoHeight = document.getElementsByClassName("UserProfileImage")[0].naturalHeight;
-      const coverPhotoWidth = document.getElementsByClassName("UserProfileImage")[0].naturalWidth;
+      const coverPhotoHeight =
+        document.getElementsByClassName("UserProfileImage")[0].naturalHeight;
+      const coverPhotoWidth =
+        document.getElementsByClassName("UserProfileImage")[0].naturalWidth;
       const formDataForCover = new FormData();
       formDataForCover.append("photo", userRegistration.coverPhoto);
       formDataForCover.append("height", coverPhotoHeight);
