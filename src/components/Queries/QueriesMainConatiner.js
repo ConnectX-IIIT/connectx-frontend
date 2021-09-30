@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import QueriesQuestionContainer from "./QueriesQuestionContainer";
 import QueriesPopOutContainer from "./QueriesPopOutContainer";
 import { useHistory } from "react-router";
-import { useStateValue } from "../../helper/state_provider";
 import { fetchQuestions } from "./helper/fetch_questions";
 
 function QueriesMainConatiner() {
@@ -12,7 +11,7 @@ function QueriesMainConatiner() {
 
   useEffect(() => {
     fetchQuestions(history, setQuestionData);
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>
