@@ -15,7 +15,6 @@ import { useStateValue } from "../../helper/state_provider";
 import { addComment } from "./helper/add_comment";
 
 function QuestionSectionCard({ answer }) {
-
   const history = useHistory();
   const [{ userDetails }] = useStateValue();
   const [comments, setComments] = useState([]);
@@ -28,7 +27,7 @@ function QuestionSectionCard({ answer }) {
 
   useEffect(() => {
     fetchComments(history, answer.comments, setComments);
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const CommentList = comments.map((item, index) => {
     return (
@@ -92,7 +91,16 @@ function QuestionSectionCard({ answer }) {
                 InputValue={commentContent}
                 PlaceholderContent="Add Something To Comments"
                 OnChangeFunction={handleInput}
-                OnSubmitFunction={(e) => addComment(userDetails, history, commentContent, answer._id, "", setCommentContent)(e)}
+                OnSubmitFunction={(e) =>
+                  addComment(
+                    userDetails,
+                    history,
+                    commentContent,
+                    answer._id,
+                    "",
+                    setCommentContent
+                  )(e)
+                }
               />
             </div>
           </div>
