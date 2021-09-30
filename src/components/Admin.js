@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, useHistory } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 
 import AdminPannelHeaderContainer from "./Admin_Components/AdminPannelHeaderContainer";
 import VerificationMainContainer from "./Admin_Components/VerificationMainContainer";
