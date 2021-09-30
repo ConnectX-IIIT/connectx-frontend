@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "../../styles/CreatePost/CreatePost.css";
 import CreatePostInput from "./CreatePostInput";
 import CreatePostRadio from "./CreatePostRadio";
