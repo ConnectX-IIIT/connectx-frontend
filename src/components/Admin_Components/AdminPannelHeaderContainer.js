@@ -2,8 +2,6 @@ import React from "react";
 import ConnectxLogo from "../../assets/_logo/svg/logo_2.0.svg";
 
 import {
-  BrowserRouter as Router,
-  useRouteMatch,
   NavLink,
 } from "react-router-dom";
 
