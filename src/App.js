@@ -12,7 +12,6 @@ import PhotoUpload from "./components/PhotoUpload";
 import { useStateValue } from "./helper/state_provider";
 import ResetPassword from "./components/ResetPassword";
 import Admin from "./components/Admin";
-import CreatePostImagesPreviewTempCompPrimary from "./components/CreatePost/CreatePostImagesPreviewTempCompPrimary";
 import PostCardBottomButtonComp from "./components/_general/post_card_button/PostCardBottomButtonComp";
 import { fetchUserDetails } from "./components/ProfilePage/helper/get_user_details";
 
