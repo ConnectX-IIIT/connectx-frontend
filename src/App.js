@@ -22,7 +22,7 @@ function App() {
 
   useEffect(() => {
     fetchUserDetails(history, dispatch, false);
-  }, []);
+  }, []);// eslint-disable-line react-hooks/exhaustive-deps
 
   const toggleIsLoading = () => {
     setIsLoading(!isLoading);
