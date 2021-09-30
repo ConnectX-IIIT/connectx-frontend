@@ -8,7 +8,7 @@ import { useStateValue } from "../../helper/state_provider";
 import { handlePhoto } from "./helper/handle_photo";
 
 function HomeUserDetails() {
-  const [{ userDetails }, dispatch] = useStateValue();
+  const [{ userDetails }] = useStateValue();
   const [filter, setFilter] = useState({
     jobs: false,
     projects: false,
