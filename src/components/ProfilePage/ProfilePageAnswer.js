@@ -5,7 +5,9 @@ import { fetchAnswers } from "../Queries_Answer/helper/fetch_answers";
 import QuestionSectionCard from "../Queries_Answer/QuestionSectionCard";
 
 function ProfilePageAnswer(props) {
+
   const history = useHistory();
+  const [{ userDetails }, dispatch] = useStateValue();
   const [answerData, setAnswerData] = useState([]);
   const userId = props.match.params.userId;
 
@@ -13,8 +15,10 @@ function ProfilePageAnswer(props) {
     fetchAnswers(history, setAnswerData, false, userId);
   }, []);
 
-  const answersList = answerData.map((item) => {
-    return <QuestionSectionCard answer={item} />;
+  const answersList = answerData.map((item, index) => {
+    return (
+      <QuestionSectionCard answer={item} />
+    );
   });
 
   return <div>{answersList}</div>;
