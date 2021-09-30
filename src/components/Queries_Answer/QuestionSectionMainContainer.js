@@ -56,13 +56,13 @@ function QuestionSectionMainContainer(props) {
     if (!currentQuestion.user) {
       fetchQuestion(history, dispatch, questionId);
     }
-  }, [currentQuestion]);
+  }, [currentQuestion]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (!answers.user) {
       fetchAnswers(history, setAnswers, questionId);
     }
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="question-section-main-container">
