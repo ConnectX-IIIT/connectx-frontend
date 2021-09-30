@@ -5,14 +5,15 @@ import HomePageCard from "../HomePageComponents/HomePageCard";
 import { fetchQuestion } from "../Queries_Answer/helper/fetch_question";
 
 function ProfilePageQuestion(props) {
+
   const history = useHistory();
-  const [, dispatch] = useStateValue();
+  const [{ userDetails }, dispatch] = useStateValue();
   const [questionData, setQuestionData] = useState([]);
   const userId = props.match.params.userId;
 
   useEffect(() => {
     fetchQuestion(history, false, false, userId, setQuestionData);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleQuestionClick = (question) => async (e) => {
     e.preventDefault();
@@ -38,11 +39,7 @@ function ProfilePageQuestion(props) {
           UserId={item.user}
           isDiscussionQueries={true}
           onQuestionClick={handleQuestionClick(item)}
-          queriesInnerStyle={{
-            fontWeight: "600",
-            fontFamily: "manrope",
-            cursor: "pointer",
-          }}
+          queriesInnerStyle={{ fontWeight: "600", fontFamily: "manrope", cursor: "pointer" }}
           queriesMainContainerStyle={{ marginLeft: "0" }}
         />
       </div>
