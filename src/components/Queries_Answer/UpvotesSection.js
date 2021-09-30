@@ -69,7 +69,7 @@ function UpvotesSection({ upvotes, Id, type }) {
         setDownvoteActive(true);
       }
     }
-  }, [userDetails]);
+  }, [userDetails]);  // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="upvote-section-main-container">
