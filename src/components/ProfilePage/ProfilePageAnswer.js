@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
-import { useStateValue } from "../../helper/state_provider";
 import { fetchAnswers } from "../Queries_Answer/helper/fetch_answers";
 import QuestionSectionCard from "../Queries_Answer/QuestionSectionCard";
 
@@ -11,7 +10,7 @@ function ProfilePageAnswer(props) {
 
   useEffect(() => {
     fetchAnswers(history, setAnswerData, false, userId);
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const answersList = answerData.map((item) => {
     return <QuestionSectionCard answer={item} />;
