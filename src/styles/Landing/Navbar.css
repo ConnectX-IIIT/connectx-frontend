@@ -10,6 +10,7 @@
 .connectxlogo {
   object-fit: contain;
   width: 11vw;
+  cursor: pointer;
 }
 .navbar_buttons {
   width: 15.5vw;
@@ -26,17 +27,19 @@
   background-color: transparent;
   border: 0;
   cursor: pointer;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 .NavbarLink {
   display: flex;
   text-decoration: none;
 }
 .login_button {
-  transition: transform 0.15s ease-in-out, opacity 0.15s ease-in-out;
+  transition: transform 0.1s ease-out;
 }
 .login_button:hover {
-  transform: scale(1.05);
-  opacity: 0.8;
+  transform: scale(1.02);
 }
 .sign_up_button {
   background-color: #121e35;
@@ -44,11 +47,10 @@
   width: 10.15vw;
   height: 100%;
   color: #fff7f7;
-  transition: transform 0.15s ease-in-out, background-color 0.15s ease-in-out,
+  transition: transform 0.1s ease-out, background-color 0.1s ease-out,
     color 0.15s ease-in-out;
 }
 .sign_up_button:hover {
   transform: scale(1.02);
-  background-color: #26364d;
-  color: #ffebeb;
+  background-color: #0e182e;
 }
