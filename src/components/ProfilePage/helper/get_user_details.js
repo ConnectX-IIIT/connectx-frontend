@@ -6,7 +6,7 @@ export const fetchUserDetails = async (history, dispatch, userId, setUserData) =
     const token = Cookies.get("token");
 
     if (!token) {
-        history.replace("/signin");
+        return;
     }
 
     try {
