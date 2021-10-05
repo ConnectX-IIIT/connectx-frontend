@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Switch, Route, useHistory } from "react-router-dom";
 import Navbar from "./HomePageComponents/Navbar";
 import HomeMainContainer from "../components/HomePageComponents/HomeMainContainer";
@@ -14,9 +14,13 @@ import SearchBarPopOutPeople from "./HomePageComponents/SearchBarPopOutPeople";
 import SearchBarPopOutQueries from "./HomePageComponents/SearchBarPopOutQueries";
 import { handleInputSearch } from "./general_helper/home/search";
 import ReportMainContainer from "./Report/ReportMainContainer";
+import { fetchUserDetails } from './ProfilePage/helper/get_user_details';
+import { useStateValue } from './../helper/state_provider';
 
 export const Home = () => {
   const history = useHistory();
+  const [{ userDetails }, dispatch] = useStateValue();
+
   const [popoutPeople, setPopoutPeople] = useState([]);
   const [popoutQueries, setPopoutQueries] = useState([]);
 
@@ -50,6 +54,12 @@ export const Home = () => {
   function closeSearchBar() {
     if (isSearchBarOpen) setIsSearchBarClicked(false);
   }
+
+  useEffect(() => {
+    if (!userDetails._id) {
+      fetchUserDetails(history, dispatch, false);
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div>
