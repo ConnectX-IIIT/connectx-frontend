@@ -30,7 +30,6 @@
   width: fit-content;
   height: 100%;
   margin-bottom: 1vw;
-  padding-left: 1vw;
   font-family: "Manrope", sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -39,6 +38,8 @@
   color: #3b3a3a;
   outline: none;
   background-color: #fcfdff;
+  padding: 0.6vw;
+  padding-left: 1.2vw;
 }
 .RegisterFormLabel {
   position: absolute;
