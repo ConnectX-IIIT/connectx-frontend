@@ -10,6 +10,7 @@ const ProfilePageLogOut = () => {
         e.preventDefault();
         Cookies.remove('token');
         history.replace('/');
+        window.location.reload();
     }
 
     return (
