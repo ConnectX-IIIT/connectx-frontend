@@ -11,22 +11,19 @@ import Home from "./components/Home";
 import PhotoUpload from "./components/PhotoUpload";
 import { useStateValue } from "./helper/state_provider";
 import ResetPassword from "./components/ResetPassword";
-import Admin from "./components/Admin";
-import PostCardBottomButtonComp from "./components/_general/post_card_button/PostCardBottomButtonComp";
 import { fetchUserDetails } from "./components/ProfilePage/helper/get_user_details";
+import PrivateRoute from "./helper/PrivateRoute";
 
 function App() {
   const history = useHistory();
-  const [, dispatch] = useStateValue();
-  const [isLoading, setIsLoading] = React.useState(true);
+  const [{ userDetails }, dispatch] = useStateValue();
 
   useEffect(() => {
-    fetchUserDetails(history, dispatch, false);
+    if (!userDetails._id) {
+      fetchUserDetails(history, dispatch, false);
+    }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const toggleIsLoading = () => {
-    setIsLoading(!isLoading);
-  };
   return (
     <Router>
       <Switch>
@@ -34,28 +31,15 @@ function App() {
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/signin" component={SignIn} />
         <Route exact path="/setpassword" component={SetPassword} />
-        <Route exact path="/resetpassword/:key" component={ResetPassword} />
-        <Route exact path="/register" component={Register} />
-        <Route exact path="/about" component={About} />
-        <Route path="/home" component={Home} />
-        <Route exact path="/photoupload" component={PhotoUpload} />
-        <Route path="/admin" component={Admin} />
-        <Route
+        <PrivateRoute
           exact
-          path="/123"
-          component={() => {
-            return (
-              <div>
-                <PostCardBottomButtonComp
-                  isActive={isLoading}
-                  onClickFunction={toggleIsLoading}
-                />
-                <PostCardBottomButtonComp isActive={false} />
-                <PostCardBottomButtonComp isActive={false} />
-              </div>
-            );
-          }}
+          path="/resetpassword/:key"
+          component={ResetPassword}
         />
+        <PrivateRoute exact path="/register" component={Register} />
+        <PrivateRoute exact path="/about" component={About} />
+        <PrivateRoute path="/home" component={Home} />
+        <PrivateRoute exact path="/photoupload" component={PhotoUpload} />
       </Switch>
     </Router>
   );
