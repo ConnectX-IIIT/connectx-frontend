@@ -6,11 +6,14 @@ import ConnectxLogo from "../../assets/_logo/svg/logo_2.0.svg";
 function Navbar() {
   return (
     <div className="navbar">
-      <img
-        src={`${ConnectxLogo}`}
-        className="connectxlogo"
-        alt="Connectx_logo"
-      />
+      <a href="/">
+        <img
+          src={`${ConnectxLogo}`}
+          className="connectxlogo"
+          alt="Connectx_logo"
+        />
+      </a>
+
       <div className="navbar_buttons">
         <Link to="/signin" className="NavbarLink">
           <button className="login_button"> Login </button>
