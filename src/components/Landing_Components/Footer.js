@@ -67,7 +67,9 @@ function Footer() {
             <ul>{SupportList}</ul>
           </div>
         </div>
-        <img src={Connectxlogo} alt="ConnectxLogo" />
+        <a href="/">
+          <img src={Connectxlogo} alt="ConnectxLogo" />
+        </a>
       </div>
 
       <div className="footerLowerContainer">
