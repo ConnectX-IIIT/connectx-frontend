@@ -47,7 +47,12 @@
 .selectChat {
   font-weight: 600 !important;
   font-family: Manrope, sans-serif !important;
-  margin-left: 26.041666666666668vw;
+  height: calc(100% - 4vw);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #222222;
 }
 .MessageMainContainerForm {
   position: absolute;
