@@ -20,7 +20,5 @@
 }
 .Join_us_button:hover {
   background-color: #0e182e;
-  color: #faf3fd;
   transform: scale(1.02);
-
 }
