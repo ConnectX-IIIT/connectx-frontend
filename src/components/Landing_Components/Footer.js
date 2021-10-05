@@ -10,8 +10,10 @@ import githubIconHover from "../../assets/footer/h_ic_github.svg";
 import mailIcon from "../../assets/footer/ic_mail.svg";
 import mailIconHover from "../../assets/footer/h_ic_mail.svg";
 import "../../styles/Landing/Footer.css";
+import SignUp from "./../SignUp";
 
-const General = ["Login", "Sign-Up", "About", "Home", "Admin"];
+const General = ["Login", "Sign Up", "About", "Home", "Admin"];
+const GeneralRoutes = ["signin", "signup", "about", "signin", "signin"];
 const Browse = [
   "Projects",
   "Jobs",
@@ -26,14 +28,14 @@ const Support = ["help.connectx@gmail.com", "(+91) 9113742865"];
 const GeneralList = General.map((General, index) => {
   return (
     <li key={index}>
-      <Link to={`${General}`}>{General}</Link>
+      <Link to={`${GeneralRoutes[index]}`}>{General}</Link>
     </li>
   );
 });
 const BrowseList = Browse.map((Browse, index) => {
   return (
     <li key={index}>
-      <Link to="/">{Browse}</Link>
+      <Link to="/signin">{Browse}</Link>
     </li>
   );
 });
