@@ -28,7 +28,7 @@
   @apply text-center mt-1;
 }
 .ConnectionIndividualComponentButton {
-  @apply capitalize border border-black block font-medium font-manrope transition hover:bg-blue-500 hover:text-white;
+  @apply capitalize border border-black block font-medium font-manrope transition hover:bg-blue-500 hover:text-white hover:border-blue-500;
   margin: 0.781vw auto;
   padding: 0.31vw 2.96vw;
   font-size: 1.14vw;
