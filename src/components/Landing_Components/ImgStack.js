@@ -2,19 +2,19 @@ import React, { useState } from "react";
 import "../../styles/Landing/ImgStack.css";
 
 function ImgStack(props) {
-  const [displayClass, setDisplayClass] = useState("normalDisplay commonImg");
-  const [hoverClass, setHoverClass] = useState("hoverDisplay commonImg");
+  const [displayClass, setDisplayClass] = useState("normalDisplay commonImgHome");
+  const [hoverClass, setHoverClass] = useState("hoverDisplay commonImgHome");
 
   return (
     <div
       className="imgStackContainer"
       onMouseOver={() => {
-        setDisplayClass("hoverDisplay commonImg");
-        setHoverClass("normalDisplay commonImg");
+        setDisplayClass("hoverDisplay commonImgHome");
+        setHoverClass("normalDisplay commonImgHome");
       }}
       onMouseOut={() => {
-        setHoverClass("hoverDisplay commonImg");
-        setDisplayClass("normalDisplay commonImg");
+        setHoverClass("hoverDisplay commonImgHome");
+        setDisplayClass("normalDisplay commonImgHome");
       }}
     >
       <img
