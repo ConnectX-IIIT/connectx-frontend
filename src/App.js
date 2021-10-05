@@ -1,6 +1,11 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import Landing from "./components/Landing";
 import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
@@ -31,15 +36,16 @@ function App() {
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/signin" component={SignIn} />
         <Route exact path="/setpassword" component={SetPassword} />
+        <Route exact path="/about" component={About} />
         <PrivateRoute
           exact
           path="/resetpassword/:key"
           component={ResetPassword}
         />
         <PrivateRoute exact path="/register" component={Register} />
-        <PrivateRoute exact path="/about" component={About} />
         <PrivateRoute path="/home" component={Home} />
         <PrivateRoute exact path="/photoupload" component={PhotoUpload} />
+        <Route render={() => <Redirect to={{ pathname: "/" }} />} />
       </Switch>
     </Router>
   );
