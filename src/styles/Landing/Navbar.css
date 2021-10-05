@@ -4,15 +4,15 @@
   top: 0;
   display: flex;
   justify-content: space-between;
-  padding: 3vw 6vw;
+  padding: 1.5vw 6vw;
   padding-bottom: 0;
 }
 .connectxlogo {
   object-fit: contain;
-  width: 13vw;
+  width: 11vw;
 }
 .navbar_buttons {
-  width: 17vw;
+  width: 15.5vw;
   display: flex;
   justify-content: space-between;
 }
@@ -21,7 +21,7 @@
   font-family: "Manrope", sans-serif;
   font-style: normal;
   font-weight: 600;
-  font-size: 1.56vw;
+  font-size: 1.3vw;
   line-height: 2.13vw;
   background-color: transparent;
   border: 0;
@@ -41,7 +41,7 @@
 .sign_up_button {
   background-color: #121e35;
   border-radius: 1.87vw;
-  width: 10.88vw;
+  width: 10.15vw;
   height: 100%;
   color: #fff7f7;
   transition: transform 0.15s ease-in-out, background-color 0.15s ease-in-out,
