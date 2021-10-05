@@ -15,11 +15,12 @@
   margin-right: auto;
   border: none;
   cursor: pointer;
-  transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out,
+  transition: transform 0.1s ease-in-out, background-color 0.1s ease-in-out,
     color 0.2s ease-in-out;
 }
 .Join_us_button:hover {
-  background-color: #3b4355;
+  background-color: #0e182e;
   color: #faf3fd;
   transform: scale(1.02);
+
 }
